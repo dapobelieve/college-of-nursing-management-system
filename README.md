@@ -1,6 +1,6 @@
 # College of Nursing & Midwifery Management System
 
-This is the Laravel app for the Oyo state College of Nursing & Midwifery
+This is the Laravel app for the Oyo state College of Nursing & Midwifery Student Management System
 
 ## Setup
 - Clone the repository
