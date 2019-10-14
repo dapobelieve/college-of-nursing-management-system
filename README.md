@@ -21,8 +21,8 @@ xcopy .env.example .env
 - Setup your Databse credentials 
 - Run migration
 `php artisan migrate`
-- Run the databse seeder for the roles
-`php artisan make:seeder RoleTableSeeder`
+- Run the databse seeder
+`php artisan db:seed
 
 
 
