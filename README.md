@@ -22,7 +22,7 @@ xcopy .env.example .env
 - Run migration
 `php artisan migrate`
 - Run the databse seeder
-`php artisan db:seed
+`php artisan db:seed`
 
 
 
