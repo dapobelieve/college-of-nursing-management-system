@@ -14,8 +14,8 @@ class AddLocationConstraints extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreign('state_id')->references('id')->on('states');
-            $table->foreign('location_id')->references('id')->on('locations');
+            $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade');
+            $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
         });
     }
 
@@ -27,7 +27,8 @@ class AddLocationConstraints extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropForeign('users_location_id_foreign');
+            $table->dropForeign('users_state_id_foreign');
         });
     }
 }
