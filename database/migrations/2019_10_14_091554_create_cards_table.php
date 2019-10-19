@@ -14,7 +14,10 @@ class CreateCardsTable extends Migration
     public function up()
     {
         Schema::create('cards', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->string('pin');
+            $table->string('serial_no');
+            $table->enum('status', ['USED', 'NOT USED'])->default('NOT USED');
             $table->timestamps();
         });
     }

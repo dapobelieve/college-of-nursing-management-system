@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Card;
+use App\Models\State;
+use App\Models\Location;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -52,6 +55,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'pin' => ['required', 'string', 'min:12']
         ]);
     }
 
@@ -63,10 +67,30 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        $insertedId = $user->id;
+        Card::all()->where('pin', $data['pin'])->update(['check_used' => 'used', 'user_id' => $insertedId]);
+        return $user;
     }
+
+    public function showRegistrationForm()
+    {
+      $state = State::all();
+      //dd(State::find(1)->location);
+      return view('auth/register')->with('states', $state);
+
+    }
+    public function recieve($id)
+    {
+       $lga = State::find($id)->location;
+      dd($id);
+      $result= json_encode($lga);
+      $arraydata = json_decode($result);
+
+    }
+
 }
