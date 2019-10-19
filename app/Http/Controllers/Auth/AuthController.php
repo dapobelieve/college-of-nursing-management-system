@@ -7,13 +7,13 @@ use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
-    public function login()
+    public function login(Request $request)
     {
-        //
+        dd($request->all());
     }
 
-    public function register()
+    public function register(Request $request)
     {
-        //
+        dd($request->all());
     }
 }
