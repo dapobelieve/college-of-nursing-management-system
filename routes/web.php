@@ -11,25 +11,44 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'Frontpages\WelcomeController@index')->name('welcome');
+
+Route::get('about', 'Frontpages\AboutController@index')->name('about');
+
+Route::get('portal/home', 'HomeController@index')->name('portal.home');
+
+Route::post('portal/store', 'HomeController@store')->name('portal.biodata');
+
+Route::get('portal/coursereg', 'CourseController@index')->name('portal.coursereg');
+
+Route::post('portal/coursereg', 'CourseController@store')->name('portal.coursereg');
+
+Route::get('portal/dashboard', 'DashboardController@index')->name('portal.dashboard');
+
+Route::get('portal/coursereg/{id}/{dept}', 'CourseController@recieveAjax');
+
+Route::get('portal/reghistory', 'RegHistoryController@index')->name('portal.reghistory');
+
+Route::get('portal/downloadPDF/{id}/{sem}/{date}','RegHistoryController@downloadPDF')->name('portal.showhistory');
 
 Route::get('/guide',function () {
 return view('applicationguide');
 });
 
 Route::post('/register', [
-'uses' => 'Auth\RegisterController@register'
-])->middleware('check');
+'uses' => 'Auth\RegisterController@register',
+'as' => 'register.store'
+]);
+//->middleware('check');
 
-Route::put('/register/{$id}', [
-'uses' => 'Auth\RegisterController@recieve',
-'as' => 'auth.registered'
+
+
+Route::get('/registerSearch/{id}', [
+'uses' => 'StateController@recieve'
 ]);
 
 Route::get('/events',[

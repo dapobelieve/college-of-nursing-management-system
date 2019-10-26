@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Login - OYSCONME</title>
+    <title>@yield('title')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -77,45 +77,35 @@
             @yield('content')
         </main>
     </div>
+  <script src="{{ asset('js/jquery.min.js') }}"></script>
+  <script src="{{ asset('js/toastr.min.js') }}"></script>
+  <script>
+  @if(Session::has('message'))
+    var type = "{{ Session::get('alert-type', 'info') }}";
+    switch(type){
+        case 'info':
+            toastr.info("{{ Session::get('message') }}");
+            break;
 
-    <script src="{{ asset('js/toastr.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script>
-        @if(Session::has('status'))
+        case 'warning':
+            toastr.warning("{{ Session::get('message') }}");
+            break;
 
-        toastr.success("{{Session::get('status')}}")
+        case 'success':
+            toastr.success("{{ Session::get('message') }}");
+            break;
 
-        @endif
+        case 'error':
+            toastr.error("{{ Session::get('message') }}");
+            break;
+    }
+  @endif
 
-        $(document).ready(function(e){
-          var url = "{{ URL::action('Auth\RegisterController@recieve', ['id'=>'id'])}}";
-
-
-            $('#state').change(function(){
-            valueD = $('#state').val();
-            alert(valueD);
-                  $.ajax({
-                    type:"PUT",
-                    dataType: 'json',
-                    url: url.replace("id", valueD),
-                    success: function(html){
-                    if(html==0){
-                      return false;
-                      //alert('i nedvjvbkvdsh');
-                      }else{
-                        //alert('ijhflkagjgfjaglkjgfkljakldgwakljhh');
-                        $('#state').empty(html)
-                        $('#state').append(html)
-
-                      }
-                  }
-                });
+  
 
 
-              });
+  @yield('script')
+  </script>
 
-              });
-
-    </script>
 </body>
 </html>

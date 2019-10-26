@@ -1,15 +1,22 @@
 @extends('layouts.app')
 
+@section('title')
+  Register - Portal
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
 
         <div class="col-md-12">
+            @if(Session::has('status'))
+            <div>{{Session::get('status')}}</div>
+            @endif
             <div class="card">
-                <div class="card-header">{{ __('Student Portal Registration') }}</div>
+                <div class="card-header text-center bg-dark text-white">{{ __('Student Portal Registration') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POsT" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                         <div class="col-md-6">
@@ -18,7 +25,7 @@
                               <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Surname') }}</label>
 
                               <div class="col-md-6">
-                                  <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}" required autocomplete="name">
+                                  <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}" required autocomplete="name" autofocus>
 
                                   @error('lastname')
                                       <span class="invalid-feedback" role="alert">
@@ -32,7 +39,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" value="{{ old('firstname') }}" required autocomplete="name" autofocus>
+                                <input id="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" value="{{ old('firstname') }}" required autocomplete="name" >
 
                                 @error('firstname')
                                     <span class="invalid-feedback" role="alert">
@@ -46,7 +53,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Middle Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="middlename" type="text" class="form-control @error('middlewarename') is-invalid @enderror" name="middlename" value="{{ old('middlename') }}" required autocomplete="name">
+                                <input id="middlename" type="text" class="form-control @error('middlename') is-invalid @enderror" name="middlename" value="{{ old('middlename') }}" required autocomplete="name">
 
                                 @error('middlename')
                                     <span class="invalid-feedback" role="alert">
@@ -140,7 +147,21 @@
                       <div class="col-md-6">
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="Phone" type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required>
+
+                                @error('phone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-4 col-form-label text-md-right">{{ __('Permanent Address') }}</label>
                               <div class="col-md-6">
                                 <textarea id="address" rows="2" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address"></textarea>
                                 @error('address')
@@ -152,11 +173,39 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('State') }}</label>
+                            <label for="name" class="col-sm-4 col-form-label text-md-right">{{ __('Address') }}</label>
+                              <div class="col-md-6">
+                                <textarea id="address" rows="2" class="form-control " name="notneccessary" value="" placeholder="optional"></textarea>
+                                @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-                            <div class="col-xs-3">
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('City') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required>
+
+                                @error('city')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('State of Origin') }}</label>
+
+                            <div class="col-md-3">
                               <select class="form-control" id="state" name="state" required>
                                 <option value=""> </option>
+                                <?php use App\Models\State;
+                                $states = State::all();?>
                                 @foreach ($states as $state => $value)
                                   <option value="{{$value->id}}"> {{$value->name}}</option>
 
@@ -165,30 +214,35 @@
                               </select>
                             </div>
 
-                            <label for="name" class="col-md-0 col-form-label text-md-right">{{ __('Lga') }}</label>
+                            <label for="name" class="col-md-2 col-form-label text-md-right">{{ __('LGA') }}</label>
 
-                            <div class="col-xs-2">
-                              <select class="form-control" id="state" name="state" required>
-                                <option value=""> </option>
-                              
-
+                            <div class="col-md-3">
+                              <select class='form-control' id='lga1' name='lga' required>
 
                               </select>
                             </div>
+
+
+
                         </div>
 
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group row mb-0">
-                          <div class="col-md-6 offset-md-4">
-                              <button type="submit" class="btn btn-primary">
-                                  {{ __('Register') }}
-                              </button>
-                            </div>
-                          </div>
+                      <div class="col-md-6">
+
                       </div>
+                      <div class="col-md-6">
+                        <div class="form-group row mb-0">
+                        <div class="col-md-12 offset-md-4">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Portal Registration') }}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      </div>
+                      <div id="use">
                       </div>
                     </form>
                 </div>
@@ -196,4 +250,41 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+<script>
+    @if(Session::has('status'))
+
+    toastr.success("the need to be the best")
+
+    @endif
+
+    $(document).ready(function(e){
+      var url = "{{ URL::action('StateController@recieve', ['id'=>'id'])}}";
+
+
+        $('#state').change(function(){
+        valueD = $('#state').val();
+              $.ajax({
+                type:"GET",
+                dataType: 'json',
+                url: url.replace("id", valueD),
+                success: function(result){
+                  var output ="<option value=''></option>";
+                  for (var i in result) {
+                    var u = i+1;
+                    output += "<option value="+result[i].id+">"+result[i].lga+"</option>";
+                  }
+                  output += "</select>";
+
+                  $('#lga1').html(output);
+              }
+            });
+
+
+          });
+
+          });
+
+</script>
 @endsection

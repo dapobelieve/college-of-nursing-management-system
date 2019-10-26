@@ -22,7 +22,7 @@ class CheckCard
       if ($card == null) {
         Session::flash('status','the card not recognized!!');
         return redirect('register');
-      }else if($card->check_used == 'not used'){
+      }else if($card->status == 'NOT USED'){
         return $next($request);
       }
       else{
@@ -30,5 +30,6 @@ class CheckCard
         return redirect('register');
       }
     }
+
 
 }

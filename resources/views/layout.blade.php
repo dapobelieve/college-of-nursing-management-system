@@ -9,19 +9,19 @@
       @yield('title')
     </title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
     <!-- Simple Line Font -->
-    <link rel="stylesheet" href="css/simple-line-icons.css">
+    <link rel="stylesheet" href="{{asset('css/simple-line-icons.css')}}">
     <!-- Calendar Css -->
-    <link rel="stylesheet" href="css/fullcalendar.min.css" />
+    <link rel="stylesheet" href="{{asset('css/fullcalendar.min.css')}}" />
     <!-- Owl Carousel -->
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
     <!-- Main CSS -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{{asset('css/style.css')}}" rel="stylesheet">
 </head>
 
 <body>
@@ -127,7 +127,7 @@
                     <a href="index.html">
                         <img src="images/footer-logo.png" class="img-fluid" alt="footer_logo">
                     </a>
-                    <p>2016 © copyright
+                    <p>2019 © copyright
                         <br> All rights reserved.</p>
                     </div>
                 </div>
@@ -138,14 +138,14 @@
                             <li><a href="about.html">About</a></li>
                             <li><a href="admission-form.html">Admissions </a></li>
                             <li><a href="admission.html">Academics</a></li>
-                            <li><a href="research.html">Research</a></li>
+                            <li><a href="research.html">Student's Portal</a></li>
                             <li><a href="contact.html">Contact</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="tweet_box">
-                        <h3>Tweets</h3>
+                      
                         <div class="tweet-wrap">
                             <div class="tweet"></div>
                             <!-- // end .tweet -->
@@ -155,9 +155,9 @@
                 <div class="col-md-3">
                     <div class="address">
                         <h3>Contact us</h3>
-                        <p><span>Address: </span> Unisco university Albany, NY, USA. 11001</p>
-                        <p>Email : info@unisco.com
-                            <br> Phone : +91 555 668 986</p>
+                        <p><span>Address: </span> College of Nursing Eleyele, Ibadan. Oyo State</p>
+                        <p>Email : info@oysconme.edu.ng
+                            <br> Phone : +2348160126553</p>
                             <ul class="footer-social-icons">
                                 <li><a href="#"><i class="fa fa-facebook fa-fb" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fa fa-linkedin fa-in" aria-hidden="true"></i></a></li>
@@ -170,20 +170,20 @@
         </footer>
         <!--//END FOOTER -->
         <!-- jQuery, Bootstrap JS. -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/tether.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script src="{{asset('js/jquery.min.js')}}"></script>
+        <script src="{{asset('js/tether.min.js')}}"></script>
+        <script src="{{asset('js/bootstrap.min.js')}}"></script>
         <!-- Plugins -->
-        <script src="js/moment.min.js"></script>
-        <script src="js/fullcalendar.min.js"></script>
-        <script src="js/instafeed.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/validate.js"></script>
-        <script src="js/tweetie.min.js"></script>
+        <script src="{{asset('js/moment.min.js')}}"></script>
+        <script src="{{asset('js/fullcalendar.min.js')}}"></script>
+        <script src="{{asset('js/instafeed.min.js')}}"></script>
+        <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+        <script src="{{asset('js/validate.js')}}"></script>
+        <script src="{{asset('js/tweetie.min.js')}}"></script>
         <!-- Subscribe -->
-        <script src="js/subscribe.js"></script>
+        <script src="{{asset('js/subscribe.js')}}"></script>
         <!-- Script JS -->
-        <script src="js/script.js"></script>
+        <script src="{{asset('js/script.js')}}"></script>
     </body>
 
     </html>

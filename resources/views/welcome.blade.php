@@ -7,20 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>OYSCONME - Oyo State College of Nursing and Midwifery</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
     <!-- Simple Line Font -->
-    <link rel="stylesheet" href="css/simple-line-icons.css">
+    <link rel="stylesheet" href="{{asset('css/simple-line-icons.css')}}">
     <!-- Slider / Carousel -->
-    <link rel="stylesheet" href="css/slick.css">
-    <link rel="stylesheet" href="css/slick-theme.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="{{asset('css/slick.css')}}">
+    <link rel="stylesheet" href="{{asset('css/slick-theme.css')}}">
+    <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
     <!-- Main CSS -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/larastyle.css" rel="stylesheet">
+    <link href="{{asset('css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('css/larastyle.css')}}" rel="stylesheet">
 </head>
 
 <body>
@@ -74,7 +74,7 @@
             </div>
         </div>
     </div>
-    <div data-toggle="affix" id="scroll">
+    <div data-toggle="affix" >
     <div class="container nav-menu2">
             <div class="row">
                 <div class="col-md-12">
@@ -181,75 +181,6 @@
 </div>
 </div>
 
-        <div class="container nav-menu" id="scroll2">
-            <div class="row">
-                <div class="col-md-12">
-                    <a href="index.html"><img src="images/responsive-logo.png" class="responsive-logo img-fluid" alt="responsive-logo"></a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-                        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown">
-                            <span class="icon-menu"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="about.html">About<span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="admission-form.html">Admissions</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="academics.html">Academics</a>
-                                </li>
-                                <li class="nav-logo">
-                                    <a href="#" class="navbar-brand"><img src="images/Oysconmelogo.png" class="img-fluid" alt="logo"></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="research.html">Portal</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Pages
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                     <li><a class="dropdown-item" href="index-2.html">Home Style Two</a></li>
-                                            <li><a class="dropdown-item" href="index-video.html">Home Video</a></li>
-                                        <li><a class="dropdown-item" href="blog.html">Blog</a></li>
-                                        <li><a class="dropdown-item" href="blog-post.html">Blog Post</a></li>
-                                        <li><a class="dropdown-item" href="index-landing-page.html">Landing Page</a></li>
-                                        <li><a class="dropdown-item" href="events.html">Events</a></li>
-                                        <li><a class="dropdown-item" href="course-detail.html">Course Details</a></li>
-                                        <li><a class="dropdown-item" href="campus-life.html">Campus Life</a></li>
-                                        <li><a class="dropdown-item" href="our-teachers.html">Our Teachers</a></li>
-                                        <li><a class="dropdown-item" href="teachers-single.html">Teachers Single</a></li>
-                                        <li><a class="dropdown-item" href="gallery.html">Gallery</a></li>
-                                        <li><a class="dropdown-item" href="shortcodes.html">Shortcodes</a></li>
-                                        <li class="dropdown">
-                                          <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Others Pages</a>
-                                          <ul class="dropdown-menu dropdown-menu1">
-                                            <li><a class="dropdown-item" href="notice-board.html">Notice Board</a></li>
-                                            <li><a class="dropdown-item" href="chairman-speech.html">Chairman Speech</a></li>
-                                            <li><a class="dropdown-item" href="sample-page.html">Sample Page</a></li>
-                                            <li><a class="dropdown-item" href="faq.html">FAQ</a></li>
-                                            <li><a class="dropdown-item" href="login.html">Login</a></li>
-                                            <li><a class="dropdown-item" href="sign-up.html">Sign Up</a></li>
-                                            <li><a class="dropdown-item" href="coming-soon.html">Coming Soon</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </div>
     <div class="slider_img">
         <div id="carousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -288,7 +219,7 @@
                     <img class="d-block" src="images/slider-3.jpg" alt="Third slide">
                     <div class="carousel-caption d-md-block">
                         <div class="slider_title">
-                            <h1>Campus life @ Unisco</h1>
+                            <h1>Campus life @ OYSCONME</h1>
                             <h4>Proactively utilize open-source users for process-centric total linkage.<br> Energistically reinvent web-enabled initiatives with premium <br>processes. Proactively drive.</h4>
                             <div class="slider-btn">
                                 <a href="campus-life.html" class="btn btn-default">Campus Life</a>
@@ -310,23 +241,24 @@
 </header>
 <!--//END HEADER -->
 <!--============================= ABOUT =============================-->
-<section class="clearfix about">
+<section class="clearfix about about-style2">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <h2>Welcome</h2>
+            <div class="col-md-8">
+               <h2>Welcome</h2>
+               <p>It is my privilege to welcome the aspiring and returning students to Oyo State College of Nursing and Midwifery, Eleyele, Ibadan,
+                 Nigeria which has created its own fame during the last 7 decades. Oyo State College of Nursing and Midwifery Eleyele, Ibadan
+                 ensures high quality professional education through various innovative programmes keeping ‘A’ grade in position among other
+                 colleges of Nursing in Nigeria. The College has a long history of providing quality nursing education fostered by visionary and
+                 committed leadership. I feel honoured to be given the opportunity to lead the College in this phase of its development.</p>
+                <a href="adelion.com"><button type="button" class="btn btn-outline-dark">Read More</button></a>
+            </div>
+            <div class="col-md-4">
+                <img src="images/campus/campus-img_05.jpg" class="img-fluid about-img" alt="#">
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                    <br>standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-                    <br> type specimen book. It has survived not only five centuries</p>
-                    <img src="images/welcom_sign.png" class="img-fluid" alt="welcom-img">
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
+</section>
     <!--//END ABOUT -->
     <!--============================= OUR COURSES =============================-->
     <section class="our_courses">
