@@ -2,7 +2,7 @@
 @section('admin-content')
 
     <div id="content">
-        <div id="content-header" class="mini">
+        <div id="content-header">
             <h1>Roles</h1>
         </div>
         <div id="breadcrumb">
