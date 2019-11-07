@@ -71,6 +71,19 @@ Portal - Biodata
                                 </select>
                               </div>
                           </div>
+                          <div class="form-group row">
+                              <label for="dob" class="col-md-4 col-form-label text-md-right">{{ __('Passport Upload') }}</label>
+
+                              <div class="col-md-6">
+                                  <input id="pport_upload" type="file" class="form-control @error('pport_upload') is-invalid @enderror" name="pport_upload" value="{{ old('pport_upload') }}" required>
+
+                                  @error('pport_upload')
+                                      <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                      </span>
+                                  @enderror
+                              </div>
+                          </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group row">

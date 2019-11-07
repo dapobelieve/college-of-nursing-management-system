@@ -82,60 +82,42 @@
                         <button class="navbar-toggler navbar-toggler2 navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown">
                             <span class="icon-menu"></span>
                         </button>
-                        <a href="index.html" class="navbar-brand nav-brand2"><h3><b>OYSCONME</b></h3></a>
+                        <a href="index.html" class="navbar-brand nav-brand2"><img class="d-block" src="images/oysconmelogo2.png" alt="School logo"></a>
                         <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                             <ul class="navbar-nav">
+                                <li class="nav-item dropdown">
+                                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">
+                                        About<span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{{route('about')}}">About Us</a></li>
+                                        <li><a class="dropdown-item" href="{{url('/our-team')}}">College Officers</a></li>
+                                    </ul>
+                                  </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about.html">About<span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="admission-form.html">Admissions</a>
+                                    <a class="nav-link" href="#">Admission</a>
                                 </li>
                                 <li class="js-navbar-collapse">
                                   <ul class="nav navbar-nav">
                                     <li class="dropdown mega-dropdown">
                                         <a href="academics.html" class="dropdown-toggle nav-link" data-toggle="dropdown">Academics <span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
                                         <ul class="dropdown-menu mega-dropdown-menu row">
-                                          <li class="col-lg-3">
-                                           <img src="images/courses_4.jpg" class="img-fluid dropdown-header" alt="#">
+                                          <li class="col">
+                                           <img src="images/courses_1.jpg" class="img-fluid dropdown-header" alt="#">
                                        </li>
-                                       <li class="col-lg-3">
+                                       <li class="col">
                                           <ul>
-                                            <li class="dropdown-header">Science &amp; Technology</li>
-                                            <li><a href="course-detail.html">Mechanical Engineering</a></li>
-                                            <li><a href="course-detail.html">Computer Science</a></li>
-                                            <li><a href="course-detail.html">Electrical Engineering</a></li>
-                                            <li><a href="course-detail.html">Civil Engineering</a></li>
-                                            <li><a href="course-detail.html">Finance</a></li>
+                                            <li class="dropdown-header">Departments</li>
+                                            @foreach ($department as $key => $value)
+                                              <li class="text-white"><a href="course-detail.html">{{$value}}</a></li>
+                                            @endforeach
                                             <li class="divider"></li>
                                         </ul>
                                     </li>
-                                    <li class="col-lg-3">
-                                      <ul>
-                                      <li class="dropdown-header">Management Studies</li>
-                                         <li><a href="course-detail.html">Human Resource Management</a></li>
-                                         <li><a href="course-detail.html">Communication Engineering</a></li>
-                                         <li><a href="course-detail.html">Sales and Marketing</a></li>
-                                         <li><a href="course-detail.html">Operations Management</a></li>
-                                         <li><a href="course-detail.html">Information Technology</a></li>
-                                         <li class="divider"></li>
-                                     </ul>
-                                 </li>
-                                 <li class="col-lg-3">
-                                   <ul>
-                                   <li class="dropdown-header">Engineering</li>
-                                    <li><a href="course-detail.html">Automobile Engineering</a></li>
-                                    <li><a href="course-detail.html">Banking and Finance</a></li>
-                                    <li><a href="course-detail.html">Anatomy</a></li>
-                                    <li><a href="course-detail.html">Architecture Engineering</a></li>
-                                    <li><a href="course-detail.html">Mechatronics Engineering</a></li>
-                                    <li class="divider"></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
+                                  </ul>
+                              </li>
+                            </ul>
+                        </li>
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">
                     Pages<span class="glyphicon glyphicon-chevron-down pull-right"></span>
@@ -171,7 +153,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
+            <a class="nav-link" href="{{url('/contact')}}">Contact Us</a>
         </li>
     </ul>
 </div>
@@ -190,7 +172,7 @@
             </ol>
             <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
-                    <img class="d-block" src="images/slider.jpg" alt="First slide">
+                    <img class="d-block" src="images/slider-13.jpg" alt="First slide">
                     <div class="carousel-caption d-md-block">
                         <div class="slider_title">
                             <h1>Creative Thinking &amp; Innovation</h1>
@@ -203,7 +185,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block" src="images/slider-2.jpg" alt="Second slide">
+                    <img class="d-block" src="images/slider-13.jpg" alt="Second slide">
                     <div class="carousel-caption d-md-block">
                         <div class="slider_title">
                             <h1>We foster wisdom</h1>
@@ -216,7 +198,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block" src="images/slider-3.jpg" alt="Third slide">
+                    <img class="d-block" src="images/slider-13.jpg" alt="Third slide">
                     <div class="carousel-caption d-md-block">
                         <div class="slider_title">
                             <h1>Campus life @ OYSCONME</h1>
@@ -251,10 +233,10 @@
                  ensures high quality professional education through various innovative programmes keeping ‘A’ grade in position among other
                  colleges of Nursing in Nigeria. The College has a long history of providing quality nursing education fostered by visionary and
                  committed leadership. I feel honoured to be given the opportunity to lead the College in this phase of its development.</p>
-                <a href="adelion.com"><button type="button" class="btn btn-outline-dark">Read More</button></a>
+                <a href="{{ url('/provost-statement') }}"><button type="button" class="btn btn-outline-dark">Read More</button></a>
             </div>
             <div class="col-md-4">
-                <img src="images/campus/campus-img_05.jpg" class="img-fluid about-img" alt="#">
+                <img src="images/provost1.jpg" class="img-fluid about-img" alt="#">
             </div>
         </div>
     </div>
@@ -269,14 +251,16 @@
                 </div>
             </div>
             <div class="row">
+              @foreach ($department as $key => $value)
+
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                     <div class="courses_box mb-5">
                         <div class="course-img-wrap">
                             <img src="images/courses_1.jpg" class="img-fluid" alt="courses-img">
                             <div class="courses_box-img">
                                 <div class="courses-link-wrap">
-                                    <a href="course-detail.html" class="course-link"><span>course Details </span></a>
-                                    <a href="admission-form.html" class="course-link"><span>Join today </span></a>
+                                    <a href="#" class="course-link"><span>course Details </span></a>
+                                    <a href="#" class="course-link"><span>Join today </span></a>
                                 </div>
                                 <!-- // end .courses-link-wrap -->
                             </div>
@@ -286,77 +270,13 @@
                             <img src="images/plus-icon.png" class="img-fluid close-icon" alt="plus-icon">
                         </div>
                         <a href="course-detail.html" class="course-box-content">
-                            <h3>Biochemistry</h3>
-                            <p>When an unknown printer took a galley...</p>
+                            <h3>{{$value}}</h3>
+                            <p>Know more about our {{$value}} department</p>
                         </a>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                    <div class="courses_box mb-5">
-                        <div class="course-img-wrap">
-                            <img src="images/courses_2.jpg" class="img-fluid" alt="courses-img">
-                            <div class="courses_box-img">
-                                <div class="courses-link-wrap">
-                                    <a href="course-detail.html" class="course-link"><span>course Details </span></a>
-                                    <a href="admission-form.html" class="course-link"><span>Join today </span></a>
-                                </div>
-                                <!-- // end .courses-link-wrap -->
-                            </div>
-                        </div>
-                        <!-- // end .course-img-wrap -->
-                        <div class="courses_icon">
-                            <img src="images/plus-icon.png" class="img-fluid close-icon" alt="plus-icon">
-                        </div>
-                        <a href="course-detail.html" class="course-box-content">
-                            <h3>History</h3>
-                            <p>When an unknown printer took a galley...</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                    <div class="courses_box mb-5">
-                        <div class="course-img-wrap">
-                            <img src="images/courses_3.jpg" class="img-fluid" alt="courses-img">
-                            <div class="courses_box-img">
-                                <div class="courses-link-wrap">
-                                    <a href="course-detail.html" class="course-link"><span>course Details </span></a>
-                                    <a href="admission-form.html" class="course-link"><span>Join today </span></a>
-                                </div>
-                                <!-- // end .courses-link-wrap -->
-                            </div>
-                        </div>
-                        <!-- // end .course-img-wrap -->
-                        <div class="courses_icon">
-                            <img src="images/plus-icon.png" class="img-fluid close-icon" alt="plus-icon">
-                        </div>
-                        <a href="course-detail.html" class="course-box-content">
-                            <h3>Human Sciences</h3>
-                            <p>When an unknown printer took a galley...</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                    <div class="courses_box mb-5">
-                        <div class="course-img-wrap">
-                            <img src="images/courses_4.jpg" class="img-fluid" alt="courses-img">
-                            <div class="courses_box-img">
-                                <div class="courses-link-wrap">
-                                    <a href="course-detail.html" class="course-link"><span>course Details </span></a>
-                                    <a href="admission-form.html" class="course-link"><span>Join today </span></a>
-                                </div>
-                                <!-- // end .courses-link-wrap -->
-                            </div>
-                        </div>
-                        <!-- // end .course-img-wrap -->
-                        <div class="courses_icon">
-                            <img src="images/plus-icon.png" class="img-fluid close-icon" alt="plus-icon">
-                        </div>
-                        <a href="course-detail.html" class="course-box-content">
-                            <h3>Earth Sciences</h3>
-                            <p>When an unknown printer took a galley...</p>
-                        </a>
-                    </div>
-                </div>
+                @endforeach
+
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">
@@ -370,95 +290,71 @@
     <section class="event">
         <div class="container">
             <div class="row">
+              @if(!$UpcomingEvent)
+              <div class="col-lg-6">
+                <h2>No upcoming event</h2>
+              </div>
+              @else
                 <div class="col-lg-6">
                     <h2>Upcoming Events</h2>
                     <div class="event-img">
-                        <span class="event-img_date">06-Nov-17</span>
+                        <span class="event-img_date">{{date("d-m-y",strtotime($UpcomingEvent->expiry_date))}}</span>
                         <img src="images/upcoming-event-img.jpg" class="img-fluid" alt="event-img">
                         <div class="event-img_title">
-                            <h3>Event Heading</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the ...</p>
+                            <h3>{{$UpcomingEvent->title}}</h3>
+                            <p>{{$UpcomingEvent->details}}</p>
                         </div>
                     </div>
                 </div>
+                @endif
                 <div class="col-lg-6">
-                    <h2>Important Dates</h2>
+                    <h2>COLLEGE NEWS</h2>
                     <div class="event-date-slide">
+                      @if($latestNews->isEmpty())
+                      <h3>No news available at the moment</h3>
+                      @else
+                      <?php $j = 1;
+                      $k =0;
+                      $leng = (count($latestNews));
+                      $length = ceil((count($latestNews))/2);?>
+                      @for($i = 0; $i < $length; $i++)
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="event_date">
                                     <div class="event-date-wrap">
-                                        <p>06</p>
-                                        <span>Nov.17</span>
+                                        <p></p>
+                                        <span>NEWS</span>
                                     </div>
                                 </div>
                                 <div class="date-description">
-                                    <h3>Eestibulum sodales metus.</h3>
-                                    <p>When an unknown printer took a galley of type and scrambled it to make a type specimen book ...</p>
+                                    <h3>{{$latestNews[$i + $k]->title}}</h3>
+                                    <p>{{substr($latestNews[$i + $k]->details,0,100)}}..</p>
+                                    <a href="{{route('latestNews', ['id'=>$latestNews[$i + $k]->id, 'info'=>$latestNews[$i + $k]->title])}}">Read More</a>
                                     <hr class="event_line">
                                 </div>
+                              @if(($i+$j) < $leng)
                                 <div class="event_date">
                                     <div class="event-date-wrap">
-                                        <p>10</p>
-                                        <span>Nov.17</span>
+                                        <p></p>
+                                        <span>NEWS</span>
                                     </div>
                                 </div>
-                                <div class="date-description">
-                                    <h3>Integer faucibus nulla a ligula.</h3>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever...</p>
+                               <div class="date-description">
+                                  <h3>{{$latestNews[$i + $j]->title}}</h3>
+                                  <p>{{substr($latestNews[$i + $j]->details,0,100)}}..</p>
+                                  <a href="{{route('latestNews', ['id'=>$latestNews[$i + $j]->id, 'info'=>$latestNews[$i + $j]->title])}}">Read More</a>
                                 </div>
+                                @endif
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="event_date">
-                                    <div class="event-date-wrap">
-                                        <p>05</p>
-                                        <span>Oct.17</span>
-                                    </div>
-                                </div>
-                                <div class="date-description">
-                                    <h3>Eestibulum sodales metus.</h3>
-                                    <p>When an unknown printer took a galley of type and scrambled it to make a type specimen book ...</p>
-                                    <hr class="event_line">
-                                </div>
-                                <div class="event_date">
-                                    <div class="event-date-wrap">
-                                        <p>06</p>
-                                        <span>Nov.17</span>
-                                    </div>
-                                </div>
-                                <div class="date-description">
-                                    <h3>Integer faucibus nulla a ligula.</h3>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever...</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="event_date">
-                                    <div class="event-date-wrap">
-                                        <p>06</p>
-                                        <span>Sep.18</span>
-                                    </div>
-                                </div>
-                                <div class="date-description">
-                                    <h3>Eestibulum sodales metus.</h3>
-                                    <p>When an unknown printer took a galley of type and scrambled it to make a type specimen book ...</p>
-                                    <hr class="event_line">
-                                </div>
-                                <div class="event_date">
-                                    <div class="event-date-wrap">
-                                        <p>06</p>
-                                        <span>Mar.17</span>
-                                    </div>
-                                </div>
-                                <div class="date-description">
-                                    <h3>Integer faucibus nulla a ligula.</h3>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever...</p>
-                                </div>
-                            </div>
-                        </div>
+                        <?php
+                                $j++;
+                                $k++;
+                         ?>
+                        @endfor
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -508,103 +404,7 @@
         </div>
     </div>
     <!--//END DETAILED CHART -->
-    <!--============================= OUR BLOG =============================-->
-    <section class="blog">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Our Blog</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8">
-                    <a href="blog-post.html" class="home_blog_link">
-                        <div class="blog-img_box">
-                            <img src="images/blog-img_1.jpg" class="img-fluid blog_display" alt="blog-img">
-                            <div class="blogtitle">
-                                <h3>Eestibulum sodales</h3>
-                                <i class="icon-user fa-common" aria-hidden="true"></i>
-                                <p>by: admin</p>
-                                <i class="icon-speedometer fa-common" aria-hidden="true"></i>
-                                <p>9- Nov-2016</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="blog-post.html" class="home_blog_link">
-                        <div class="blog-img_box">
-                            <img src="images/blog-img_2.jpg" class="img-fluid blog_display" alt="blog-img">
-                            <div class="blogtitle">
-                                <h3>Variations of passages</h3>
-                                <i class="icon-user fa-common" aria-hidden="true"></i>
-                                <p>by: admin</p>
-                                <i class="icon-speedometer fa-common" aria-hidden="true"></i>
-                                <p>9- Nov-2016</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <a href="blog-post.html" class="home_blog_link">
-                        <div class="blog-img_box">
-                            <img src="images/blog-img_3.jpg" class="img-fluid blog_display" alt="blog-img">
-                            <div class="blogtitle">
-                                <h3>Lorem Ipsum passage</h3>
-                                <i class="icon-user fa-common" aria-hidden="true"></i>
-                                <p>by: admin</p>
-                                <i class="icon-speedometer fa-common" aria-hidden="true"></i>
-                                <p>9- Nov-2016</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="blog-post.html" class="home_blog_link">
-                        <div class="blog_hide">
-                            <i class="icon-link" aria-hidden="true"></i>
-                            <p class="m-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been dummy...</p>
-                            <div class="blogtitle-link">
-                                <i class="icon-user fa-common" aria-hidden="true"></i>
-                                <p>by: admin</p>
-                                <i class="icon-speedometer fa-common" aria-hidden="true"></i>
-                                <p>9- Nov-2016</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="blog-post.html" class="home_blog_link">
-                        <div class="blog-img_box">
-                            <div class="blog-video">
-                                <div class="blog-play_btn"> <img src="images/play-btn.png" alt="play-btn"> </div>
-                                <img src="images/blog-img_4.jpg" class="img-fluid blog_display" alt="blog-img">
-                            </div>
-                            <!-- // end .blog-video -->
-                            <div class="blogtitle">
-                                <h3>Nam libero tempore</h3>
-                                <i class="icon-user fa-common" aria-hidden="true"></i>
-                                <p>by: admin</p>
-                                <i class="icon-speedometer fa-common" aria-hidden="true"></i>
-                                <p>9- Nov-2016</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <a href="#" class="btn btn-default btn-courses">VIEW ALL BLOG</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--//END OUR BLOG -->
-    <!--============================= Instagram Feed =============================-->
-    <div id="instafeed"></div>
-    <!--//END Instagram feed JS -->
+
     <!--============================= FOOTER =============================-->
     <footer>
         <div class="container">

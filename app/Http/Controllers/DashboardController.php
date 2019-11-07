@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use App\User;
 use App\Models\Student;
 use App\Models\Department;
+use App\Models\Currentsession;
 use App\Models\State;
 use Auth;
+use DateTime;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -26,11 +28,31 @@ class DashboardController extends Controller
     {
        $student = Student::where('user_id', Auth::id())->first();
        $user = User::find(Auth::id());
-       //dd(Student::find($student->id)->department);
+       session()->put('st_id', $student->id);
+       session()->put('dept_id', $student->department_id);
+       $sess = Currentsession::all()->first();
+       $latedate = date("Y-m-d", strtotime(Carbon::parse($sess->expiry_date)->addDays(30)));
+       //for late registration Status
+       $n = date("Y/m/d");
+       $date1 = new DateTime($n);
+       $date2 = new DateTime($sess->expiry_date);
+       $interval = $date1->diff($date2);
+       $Ma = $interval->format('%R%a');
+       if ($Ma < 0) {
+         $late ="Late";
+       }else if($Ma < -30){
+         $late = "Closed";
+       }else {
+         $late = "Open";
+       }
+
         return view('portal.dashboard')->with('user', $user)
                                        ->with('student', $student)
                                        ->with('department', Department::find($student->department_id))
-                                       ->with('state', State::find($user->state_id));
+                                       ->with('state', State::find($user->state_id))
+                                       ->with('sess', $sess)
+                                       ->with('latedate', $latedate)
+                                       ->with('late', $late);
     }
 
     /**

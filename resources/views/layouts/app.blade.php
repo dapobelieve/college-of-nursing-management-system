@@ -25,7 +25,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    OYSCONME
+                    <img src="{{asset('images/oysconmelogo2.png')}}" alt="logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -74,14 +74,14 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+          @yield('content')
         </main>
     </div>
   <script src="{{ asset('js/jquery.min.js') }}"></script>
   <script src="{{ asset('js/toastr.min.js') }}"></script>
   <script>
   @if(Session::has('message'))
-    var type = "{{ Session::get('alert-type', 'info') }}";
+    var type = "{{ Session::get('alert-type') }}";
     switch(type){
         case 'info':
             toastr.info("{{ Session::get('message') }}");
@@ -101,7 +101,7 @@
     }
   @endif
 
-  
+
 
 
   @yield('script')

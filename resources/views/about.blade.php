@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-Event / OYSCONME
+About Us / OYSCONME
 @stop
 
 @section('pagename')

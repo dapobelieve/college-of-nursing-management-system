@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Session;
 use Closure;
 use DB;
-class CheckCard
+class CheckCard;
 {
     /**
      * Handle an incoming request.
@@ -19,17 +19,27 @@ class CheckCard
     public function handle($request, Closure $next)
     {
       $card = DB::table('cards')->where('pin', $request->pin)->first();
+      //dd($card);
       if ($card == null) {
-        Session::flash('status','the card not recognized!!');
-        return redirect('register');
+        $notification = $this->alertMe('the card is not available!!', 'info');
+        return redirect('register')->with($notification);
       }else if($card->status == 'NOT USED'){
         return $next($request);
       }
       else{
-        Session::flash('status','the card has been used');
-        return redirect('register');
+        $notification = $this->alertMe('the card has been used!!', 'warning');
+        return redirect('register')->with($notification);
       }
     }
+
+    public function alertMe($message, $alertType)
+    {
+      return array(
+                      'message' => $message,
+                      'alert-type' => $alertType
+                    );
+    }
+
 
 
 }

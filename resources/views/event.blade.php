@@ -35,6 +35,9 @@ Events
            <!-- Tab panes -->
            <div class="tab-content">
              <div class="tab-pane active" id="upcoming-events" role="tabpanel">
+               @if($UpcomingEvent->isEmpty())
+               <p class="text-justify">No event available!!!</p>
+               @endif
              @foreach($UpcomingEvent as $event => $value)
               <?php $num = $event +1; ?>
 

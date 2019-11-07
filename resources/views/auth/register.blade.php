@@ -16,7 +16,7 @@
                 <div class="card-header text-center bg-dark text-white">{{ __('Student Portal Registration') }}</div>
 
                 <div class="card-body">
-                    <form method="POsT" action="{{ route('register') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                         <div class="col-md-6">
@@ -252,7 +252,6 @@
 </div>
 @endsection
 @section('script')
-<script>
     @if(Session::has('status'))
 
     toastr.success("the need to be the best")
@@ -286,5 +285,4 @@
 
           });
 
-</script>
 @endsection

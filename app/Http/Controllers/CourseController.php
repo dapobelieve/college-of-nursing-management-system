@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use Auth;
 use Session;
+use App\Alert;
 use App\User;
 use App\Models\Course;
 use App\Models\Student;
@@ -25,14 +26,7 @@ class CourseController extends Controller
           $this->middleware('auth');
       }
 
-      // to display alert
-     public function alertMe($message, $alertType)
-     {
-       return array(
-                       'message' => $message,
-                       'alert-type' => $alertType
-                     );
-     }
+
 
 
     public function index()
@@ -76,14 +70,16 @@ class CourseController extends Controller
     public function store(Request $request)
     {
             //to know if the course has been register
-            $cours =DB::table('course_student')->where('student_id','=',$request->hidst)->where('course_id','=', $request->cou_reg[0])->first();
+
+            $studentID = session()->get('st_id');
+            $cours =DB::table('course_student')->where('student_id','=',$studentID)->where('course_id','=', $request->cou_reg[0])->first();
             if(!$cours){
-              $student = Student::find($request->hidst);
+              $student = Student::find($studentID);
               $student->courses()->attach($request->cou_reg);
-              $notification = $this->alertMe('Course Registered!!!', 'success');
+              $notification = Alert::alertMe('Course Registered!!!', 'success');
               return redirect()->back()->with($notification);
             }else {
-              $notification = $this->alertMe('Course already registered!!!', 'info');
+              $notification = Alert::alertMe('Course already registered!!!', 'info');
               return redirect()->back()->with($notification);
             }
 

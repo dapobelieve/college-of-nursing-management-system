@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Portal - Course Registration
+Portal - Payment History
 @endsection
 @section('content')
 <div class="container">
@@ -12,8 +12,8 @@ Portal - Course Registration
           <a class="list-group-item list-group-item-action" id="list-home-list"  href="{{route('portal.dashboard')}}" role="tab" aria-controls="home">Home</a>
           <a class="list-group-item list-group-item-action" id="list-profile-list"  href="{{route('portal.tuition')}}" role="tab" aria-controls="profile">Pay Tuition</a>
           <a class="list-group-item list-group-item-action" id="list-messages-list"  href="{{route('portal.coursereg')}}" role="tab" aria-controls="messages">Course Registration</a>
-          <a class="list-group-item list-group-item-action" id="list-settings-list"  href="{{route('portal.payHistory')}}" role="tab" aria-controls="settings">Payment History</a>
-          <a class="list-group-item list-group-item-action active" id="list-settings-list"  href="{{route('portal.reghistory')}}" role="tab" aria-controls="settings">Registration History</a>
+          <a class="list-group-item list-group-item-action active" id="list-settings-list"  href="{{route('portal.payHistory')}}" role="tab" aria-controls="settings">Payment History</a>
+          <a class="list-group-item list-group-item-action" id="list-settings-list"  href="{{route('portal.reghistory')}}" role="tab" aria-controls="settings">Registration History</a>
         </div>
       </div>
       <div class="col-md-9">
@@ -39,10 +39,10 @@ Portal - Course Registration
                           <thead>
                           <tr>
                             <th>S/N</th>
-                            <th>department</th>
+                            <th>reference</th>
                             <th>Level</th>
-                            <th>Enrolled Courses</th>
-                            <th>Total Unit</th>
+                            <th>Amount</th>
+                            <th>Approved</th>
                             <th>Date</th>
                             <th>Print</th>
                           </tr>

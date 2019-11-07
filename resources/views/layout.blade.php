@@ -51,7 +51,7 @@
                                     <a class="nav-link" href="academics.html">Academics</a>
                                 </li>
                                 <li class="nav-logo">
-                                    <a href="index.html" class="navbar-brand"><img src="images/logo.png" class="img-fluid" alt="logo"></a>
+                                    <a href="index.html" class="navbar-brand"><img src="images/oysconmelogo3.png" class="img-fluid" alt="logo"></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="research.html">Portal</a>
@@ -145,7 +145,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="tweet_box">
-                      
+
                         <div class="tweet-wrap">
                             <div class="tweet"></div>
                             <!-- // end .tweet -->
