@@ -58,11 +58,14 @@ Route::get('/events',[
 
 
 // The admin panel routes
-Route::group(['prefix' => '/admin'], function () {
-    Route::view('', '/admin.home', ['section' => 'dashboard']);
-    Route::view('roles', '/admin.roles', ['section' => 'roles']);
-    Route::view('admins', '/admin.admins', ['section' => 'admins']);
-    Route::view('students', '/admin.students', ['section' => 'students']);
-    Route::view('news', '/admin.news', ['section' => 'news']);
-    Route::view('system-settings', '/admin.system_settings', ['section' => 'settings']);
+Route::group(['prefix' => '/admin', 'namespace' => 'Admin'], function () {
+  Route::get('', 'DashboardController@index');
+  
+  // News section
+  Route::get('news', 'NewsController@index');
+
+  Route::view('roles', '/admin.roles', ['section' => 'roles']);
+  Route::view('admins', '/admin.admins', ['section' => 'admins']);
+  Route::view('students', '/admin.students', ['section' => 'students']);
+  Route::view('system-settings', '/admin.system_settings', ['section' => 'settings']);
 });
