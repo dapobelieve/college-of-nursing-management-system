@@ -5,7 +5,7 @@
         <div id="content-header">
             <h1>News</h1>
             <div class="btn-group">
-                <a class="btn btn-large" title="Create Post"><i class="fa fa-pencil"></i></a>
+                <a href="/admin/create-post" class="btn btn-large" title="Create Post"><i class="fa fa-pencil"></i></a>
             </div>
         </div>
         <div id="breadcrumb">
@@ -26,26 +26,37 @@
                             <h5>News</h5>
                         </div>
                         <div class="widget-content nopadding">
-                            <table class="table table-bordered table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Date Posted</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($posts as $post)
+                            @if ($posts->total() > 0)
+                                <table class="table table-bordered table-striped table-hover">
+                                    <thead>
                                         <tr>
-                                            <td>{{ ' ' }}</td>
-                                            <td class="text-center">{{ ' ' }}</td>
-                                            <td class="text-center">
-                                                <a href="/admin/edit-post/{{ ' ' }}" class="btn btn-default btn-sm">Edit</button>
-                                            </td>
+                                            <th>Title</th>
+                                            <th>Author</th>
+                                            <th>Date Posted</th>
+                                            <th>Actions</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($posts as $post)
+                                            <tr>
+                                                <td>{{ $post->title }}</td>
+                                                <td>{{ @$post->author->first_name }}</td>
+                                                <td class="text-center">{{ $post->created_at->format('M d, Y') }}</td>
+                                                <td class="text-center">
+                                                    <a href="/admin/edit-post/{{ $post->id }}" class="btn btn-default btn-sm">Edit</a>
+                                                    <button class="btn @if ($post->status == 'active') btn-danger @else btn-success @endif btn-sm">@if ($post->status == 'active') Mute @else Unmute @endif</button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+
+                                {{ $posts->links() }}
+                            @else
+                                <div class="p-5 text-center">
+                                    <p class="lead">0 posts found!</p>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
