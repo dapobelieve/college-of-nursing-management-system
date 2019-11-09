@@ -1,4 +1,9 @@
 @extends('admin.layout.template')
+
+@section('admin-title')
+    System Settings
+@endsection
+
 @section('admin-content')
 
     <div id="content">

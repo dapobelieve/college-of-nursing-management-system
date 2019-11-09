@@ -42,7 +42,7 @@
                                             <td>{{ $role->name }}</td>
                                             <td class="text-center">{{ $role->users()->count() }}</td>
                                             <td class="text-center">
-                                            <a href="/admin/edit-role/{{$role->id}}" class="btn btn-default btn-sm">Permissions</button>
+                                                <a href="/admin/edit-role/{{$role->id}}" class="btn btn-default btn-sm">Permissions</button>
                                             </td>
                                         </tr>
                                     @endforeach
