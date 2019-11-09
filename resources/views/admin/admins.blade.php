@@ -1,4 +1,9 @@
 @extends('admin.layout.template')
+
+@section('admin-title')
+    Admins    
+@endsection
+
 @section('admin-content')
 
     <div id="content">
@@ -23,23 +28,32 @@
                             <h5>Admins</h5>
                         </div>
                         <div class="widget-content nopadding">
-                            <table class="table table-bordered table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($admins as $admin)
+                            @if ($admins->total() > 0)
+                                <table class="table table-bordered table-striped table-hover">
+                                    <thead>
                                         <tr>
-                                            <td>{{ $admin->user->name }}</td>
-                                            <td class="text-center">
-                                            </td>
+                                            <th>Name</th>
+                                            <th>Actions</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($admins as $admin)
+                                            <tr>
+                                                <td>{{ $admin->user->name }}</td>
+                                                <td class="text-center">
+                                                    <a href="/admin/view-admin/{{ $admin->id }}" class="btn btn-default btn-sm">Details</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+
+                                {{ $admins->links() }}
+                            @else
+                                <div class="p-5 text-center">
+                                    <p class="lead">0 admins found!</p>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

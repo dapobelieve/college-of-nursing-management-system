@@ -68,7 +68,9 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin'], function () {
   // Students section
   Route::get('students', 'StudentController@index');
 
+  // Admins section
+  Route::get('admins', 'AdminController@index');
+
   Route::view('roles', '/admin.roles', ['section' => 'roles']);
-  Route::view('admins', '/admin.admins', ['section' => 'admins']);
   Route::view('system-settings', '/admin.system_settings', ['section' => 'settings']);
 });
