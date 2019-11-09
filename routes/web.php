@@ -71,6 +71,8 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin'], function () {
   // Admins section
   Route::get('admins', 'AdminController@index');
 
-  Route::view('roles', '/admin.roles', ['section' => 'roles']);
+  // Roles section
+  Route::get('roles', 'RoleController@index');
+
   Route::view('system-settings', '/admin.system_settings', ['section' => 'settings']);
 });
