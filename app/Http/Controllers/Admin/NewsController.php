@@ -21,7 +21,7 @@ class NewsController extends Controller
             ->orderBy('updated_at', 'DESC')
             ->paginate(10);
 
-        return View('admin.news.index', ['section' => 'news', 'posts' => $posts]);
+        return View('admin.news.index', ['section' => 'news', 'sub_section' => 'all', 'posts' => $posts]);
     }
 
     /**
@@ -31,7 +31,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return View('admin.news.create', ['section' => 'news']);
+        return View('admin.news.create', ['section' => 'news', 'sub_section' => 'create']);
     }
 
     /**
