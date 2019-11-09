@@ -6,11 +6,17 @@
         </button>
     </div> --}}  
     <ul>
+        @php
+            if (!isset($section)) $section = '';
+            if (!isset($sub_section)) $sub_section = '';
+        @endphp
+
         <li @if ($section == 'dashboard') class="active" @endif><a href="/admin">
             <i class="fa fa-home"></i> <span>Dashboard</span></a>
         </li>
 
-        <li class="submenu @if ($section == 'news') active open @endif">
+        <!-- News section -->
+        <li class="submenu @if ($section == 'news') active @endif @if (collect(['all', 'create'])->contains($sub_section)) open @endif">
             <a href="#"><i class="fa fa-bullhorn"></i> <span>News</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
                 <li @if ($sub_section == 'all') class="active" @endif><a href="/admin/news">All Posts</a></li>
