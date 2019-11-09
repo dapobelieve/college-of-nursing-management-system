@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Models\Posts;
+use App\Models\Post;
 use App\Http\Controllers\Controller;
 
 class NewsController extends Controller
@@ -16,7 +16,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $posts = Posts::where('status', 'active')
+        $posts = Post::where('status', 'active')
             ->orderBy('created_at', 'DESC')
             ->orderBy('updated_at', 'DESC')
             ->paginate(10);

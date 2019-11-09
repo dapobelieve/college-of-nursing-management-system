@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Abstracts blog posts/news
  */
-class Posts extends Model
+class Post extends Model
 {
     // Set the model to use soft deletes
     use SoftDeletes;
