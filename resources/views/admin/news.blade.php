@@ -1,4 +1,9 @@
 @extends('admin.layout.template')
+
+@section('admin-title')
+    News
+@endsection
+
 @section('admin-content')
 
     <div id="content">

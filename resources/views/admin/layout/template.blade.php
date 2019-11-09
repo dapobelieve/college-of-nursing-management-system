@@ -17,7 +17,6 @@
 
             @yield('admin-content')
             
-
             @include('admin.layout.footer')
         </div>
 
