@@ -31,24 +31,24 @@ var forms = (function () {
             contentType: false,
             cache: false,
             processData: false,
-            complete: function (reponse, status) {
+            complete: function (response, status) {
                 if (status == 'success') {
-                    var obj = JSON.parse(reponse);
-                    if (obj.ok == true) {
-                        notify(obj.message, 'Success');
+                    response = JSON.parse(response.responseText);
+                    if (response.ok == true) {
+                        notify(response.message, 'Success');
                         setTimeout(function () {
-                            if (obj.data.redirect == true) {
-                                window.location = redirect;
+                            if (response.data.redirect != null) {
+                                window.location = response.data.redirect;
                             } else if (form.data('redirect') != null) {
-                                window.location = obj.data.redirect;
-                            } else if (obj.data.reload == true) {
+                                window.location = form.data('redirect');
+                            } else if (response.data.reload == true) {
                                 window.location.reload();
-                            } else if (form.data('reload') != null) {
+                            } else if (form.data('reload') == 'true') {
                                 window.location.reload();
                             }
                         }, 1000);
                     } else {
-                        notify(obj.message, 'This is bad');
+                        notify(response.message, 'This is bad');
                     }
                 } else {
                     notify('An error occured while submitting the form!', 'This is bad');
