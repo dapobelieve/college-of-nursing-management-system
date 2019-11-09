@@ -31,7 +31,6 @@ class NewsController extends Controller
      */
     public function create()
     {
-
         return View('admin.news.create', ['section' => 'news']);
     }
 
@@ -52,7 +51,7 @@ class NewsController extends Controller
      */
     public function edit(Post $post)
     {
-
+        return View('admin.news.edit', ['section' => 'news', 'post' => $post]);
     }
 
     /**
