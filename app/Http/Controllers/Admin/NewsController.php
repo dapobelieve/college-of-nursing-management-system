@@ -23,4 +23,45 @@ class NewsController extends Controller
 
         return View('admin.news.index', ['section' => 'news', 'posts' => $posts]);
     }
+
+    /**
+     * Shows the create post page
+     * 
+     * @return View
+     */
+    public function create()
+    {
+
+        return View('admin.news.create', ['section' => 'news']);
+    }
+
+    /**
+     * Handles post creation ajax call
+     * 
+     * @return array
+     */
+    public function handleCreate(Request $request)
+    {
+
+    }
+
+    /**
+     * Shows the edit post page
+     * 
+     * @return View
+     */
+    public function edit(Post $post)
+    {
+
+    }
+
+    /**
+     * Handles post editing ajax call
+     * 
+     * @return array
+     */
+    public function handleEdit(Post $post)
+    {
+
+    }
 }
