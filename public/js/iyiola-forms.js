@@ -37,11 +37,11 @@ var forms = (function () {
                     if (obj.ok == true) {
                         notify(obj.message, 'Success');
                         setTimeout(function () {
-                            if (obj.data.redirect != null) {
+                            if (obj.data.redirect == true) {
                                 window.location = redirect;
                             } else if (form.data('redirect') != null) {
                                 window.location = obj.data.redirect;
-                            } else if (obj.data.reload != null) {
+                            } else if (obj.data.reload == true) {
                                 window.location.reload();
                             } else if (form.data('reload') != null) {
                                 window.location.reload();
