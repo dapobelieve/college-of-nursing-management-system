@@ -94,8 +94,27 @@ class NewsController extends Controller
      * 
      * @return array
      */
-    public function handleEdit(Post $post)
+    public function handleEdit(Request $request, Post $post)
     {
+        try {
+            // Validate request
+            $this->validate($request, [
+                'title' => "required|max:255",
+                'content' => 'required',
+            ]);
 
+            // Update the post
+            $post->title = $request->input('title');
+            $post->content = $request->input('content');
+            $post->save();
+
+            $this->response['ok'] = true;
+            $this->response['message'] = 'Post updated!';
+        } catch (ValidationException $e) {
+            $this->response['message'] = $e->errors()[0];
+        }
+
+        // Response
+        return $this->response;
     }
 }

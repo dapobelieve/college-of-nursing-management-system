@@ -32,7 +32,10 @@
                             <h5>Edit Post</h5>
                         </div>
                         <div class="widget-content">
-                            <form class="form-horizontal" action="/admin/edit-post/{{$post->id}}" method="post">
+                            <form class="form-horizontal ajax-form" action="/admin/edit-post/{{$post->id}}" method="post">
+                                {{ csrf_field() }}
+                                {{ method_field('PUT') }}
+
                                 <div class="form-group">
                                     <input type="text" name="title" class="form-control" placeholder="Post Title" value="{{$post->title}}" required>
                                 </div>
@@ -42,7 +45,7 @@
                                 </div>
 
                                 <div class="form-actions">
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
                             </form>
                         </div>
