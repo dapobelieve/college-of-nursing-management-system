@@ -4,23 +4,22 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Models\Posts;
 use App\Http\Controllers\Controller;
+use App\Models\Student;
 
-class NewsController extends Controller
+class StudentController extends Controller
 {
     /**
-     * Shows all blog posts
+     * Shows all students
      * 
      * @return View
      */
     public function index()
     {
-        $posts = Posts::where('status', 'active')
-            ->orderBy('created_at', 'DESC')
+        $students = Student::orderBy('created_at', 'DESC')
             ->orderBy('updated_at', 'DESC')
             ->paginate(10);
 
-        return View('admin.news', ['section' => 'news', 'posts' => $posts]);
+        return View('admin.students', ['section' => 'students', 'students' => $students]);
     }
 }

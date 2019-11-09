@@ -59,13 +59,16 @@ Route::get('/events',[
 
 // The admin panel routes
 Route::group(['prefix' => '/admin', 'namespace' => 'Admin'], function () {
+  // Dashboard
   Route::get('', 'DashboardController@index');
   
   // News section
   Route::get('news', 'NewsController@index');
 
+  // Students section
+  Route::get('students', 'StudentController@index');
+
   Route::view('roles', '/admin.roles', ['section' => 'roles']);
   Route::view('admins', '/admin.admins', ['section' => 'admins']);
-  Route::view('students', '/admin.students', ['section' => 'students']);
   Route::view('system-settings', '/admin.system_settings', ['section' => 'settings']);
 });

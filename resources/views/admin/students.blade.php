@@ -23,25 +23,36 @@
                             <h5>Students</h5>
                         </div>
                         <div class="widget-content nopadding">
-                            <table class="table table-bordered table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Matric.No</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($students as $student)
+                            @if ($students->total() > 0)
+                                <table class="table table-bordered table-striped table-hover">
+                                    <thead>
                                         <tr>
-                                            <td>{{ $student->user->name }}</td>
-                                            <td>{{ $student->matric_no }}</td>
-                                            <td class="text-center">
-                                            </td>
+                                            <th>Name</th>
+                                            <th>Matric.No</th>
+                                            <th>Department</th>
+                                            <th>Actions</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($students as $student)
+                                            <tr>
+                                                <td>{{ $student->user->name }}</td>
+                                                <td>{{ $student->matric_no }}</td>
+                                                <td>{{ $student->department->name }}</td>
+                                                <td class="text-center">
+                                                    <a href="/admin/view-student/{{ $student->id }}" class="btn btn-default btn-sm">Details</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+
+                                {{ $students->links() }}
+                            @else
+                                <div class="p-5 text-center">
+                                    <p class="lead">0 students found!</p>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
