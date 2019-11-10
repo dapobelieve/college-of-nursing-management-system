@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Role;
+use App\Models\State;
 
 class User extends Authenticatable
 {
@@ -17,7 +18,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'middle_name', 'last_name', 'sex', 'dob', 'email', 'password',
+        'phone', 'address', 'city', 'state_id', 'location_id'
     ];
 
     /**
@@ -54,5 +56,13 @@ class User extends Authenticatable
                 return true;
         }
         return false;
+    }
+
+    /**
+    * State relationship
+    */
+    public function state()
+    {
+        return $this->belongsTo(State::class);
     }
 }
