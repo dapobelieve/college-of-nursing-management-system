@@ -14,7 +14,7 @@ class CreateLocationsTable extends Migration
     public function up()
     {
         Schema::create('locations', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->integer('state_id')->unsigned();
             $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade');
             $table->string('lga');
