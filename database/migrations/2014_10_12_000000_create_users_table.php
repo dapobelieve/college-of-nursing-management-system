@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('address')->nullable();
             $table->string('city')->nullable();
+            $table->enum('is_active', ['ACTIVE', 'INACTIVE', 'DISABLED']);
             $table->rememberToken();
             $table->timestamps();
         });
@@ -40,5 +41,6 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
+
     }
 }
