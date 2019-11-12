@@ -1,18 +1,4 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
-
 Auth::routes();
 
 Route::get('/', 'Frontpages\WelcomeController@index')->name('welcome');
@@ -43,6 +29,7 @@ Route::post('/register', [
 'uses' => 'Auth\RegisterController@register',
 'as' => 'register.store'
 ]);
+
 //->middleware('check');
 
 
@@ -50,6 +37,8 @@ Route::post('/register', [
 Route::get('/registerSearch/{id}', [
 'uses' => 'StateController@recieve'
 ]);
+
+Route::get('get-location/{state}', 'StateController@getLocations');
 
 Route::get('/events',[
   'uses' => 'EventController@index',
@@ -61,7 +50,7 @@ Route::get('/events',[
 Route::group(['prefix' => '/admin', 'namespace' => 'Admin'], function () {
   // Dashboard
   Route::get('', 'DashboardController@index');
-  
+
   // News section
   Route::get('news', 'NewsController@index');
   Route::get('create-post', 'NewsController@create');

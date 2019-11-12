@@ -202,30 +202,36 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('State of Origin') }}</label>
 
                             <div class="col-md-3">
-                              <select class="form-control" id="state" name="state" required>
-                                <option value=""> </option>
-                                <?php use App\Models\State;
-                                $states = State::all();?>
+                              <select class="form-control" onchange="getLga(event)" id="state" name="state" required>
+                                <option selected value="">Select</option>
                                 @foreach ($states as $state => $value)
                                   <option value="{{$value->id}}"> {{$value->name}}</option>
-
                                 @endforeach
-
                               </select>
                             </div>
+                            <script>
+                                function getLga(event)
+                                {
+                                    event.preventDefault();
+                                    let stateId = event.target.value;
+                                    fetch(`api/get-location/${stateId}`)
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            console.log(data)
+                                        })
+                                        .catch(error => {
+
+                                        });
+                                }
+                            </script>
 
                             <label for="name" class="col-md-2 col-form-label text-md-right">{{ __('LGA') }}</label>
 
                             <div class="col-md-3">
                               <select class='form-control' id='lga1' name='lga' required>
-
                               </select>
                             </div>
-
-
-
                         </div>
-
                       </div>
                     </div>
                     <div class="row">
@@ -254,37 +260,34 @@
 @section('script')
 <script>
     @if(Session::has('status'))
-
-    toastr.success("the need to be the best")
-
+        toastr.success("the need to be the best");
     @endif
 
-    $(document).ready(function(e){
-      var url = "{{ URL::action('StateController@recieve', ['id'=>'id'])}}";
+
+    {{--$(document).ready(function(e){--}}
+    {{--  var url = "{{ URL::action('StateController@recieve', ['id'=>'id'])}}";--}}
+    {{--    --}}
+    {{--    $('#state').change(function(){--}}
+    {{--    valueD = $('#state').val();--}}
+    {{--          $.ajax({--}}
+    {{--            type:"GET",--}}
+    {{--            dataType: 'json',--}}
+    {{--            url: url.replace("id", valueD),--}}
+    {{--            success: function(result){--}}
+    {{--              var output ="<option value=''></option>";--}}
+    {{--              for (var i in result) {--}}
+    {{--                var u = i+1;--}}
+    {{--                output += "<option value="+result[i].id+">"+result[i].lga+"</option>";--}}
+    {{--              }--}}
+    {{--              output += "</select>";--}}
+
+    {{--              $('#lga1').html(output);--}}
+    {{--          }--}}
+    {{--        });--}}
 
 
-        $('#state').change(function(){
-        valueD = $('#state').val();
-              $.ajax({
-                type:"GET",
-                dataType: 'json',
-                url: url.replace("id", valueD),
-                success: function(result){
-                  var output ="<option value=''></option>";
-                  for (var i in result) {
-                    var u = i+1;
-                    output += "<option value="+result[i].id+">"+result[i].lga+"</option>";
-                  }
-                  output += "</select>";
+    {{--      });--}}
 
-                  $('#lga1').html(output);
-              }
-            });
-
-
-          });
-
-          });
-
+    {{--      });--}}
 </script>
 @endsection

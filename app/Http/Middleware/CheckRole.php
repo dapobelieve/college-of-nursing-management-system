@@ -24,7 +24,7 @@ class CheckRole
             }
             return $next($request);
         }
-        // return redirect()->route('site.home');
+         return redirect()->route('welcome');
         // depending on the name of the route use this accordingly
     }
 }
