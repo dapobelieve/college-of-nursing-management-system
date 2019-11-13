@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Unicorn Admin</title>
+    <title>Login</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/dashboard/css/bootstrap.min.css" />
@@ -12,10 +12,9 @@
 <body>
     <div id="container">
     <div id="logo">
-{{--        <img src="img/logo.png" alt="" />--}}
     </div>
     <div id="loginbox">
-        <form method="post"  action="{{ route('login') }}">
+        <form method="post"  action="{{ route('dashboard.login') }}">
             <p>Login</p>
             <div class="input-group input-sm">
                 <span class="input-group-addon">
@@ -38,30 +37,6 @@
                 <input type="submit" class="btn btn-block btn-primary btn-default" value="Login" />
             </div>
             {{csrf_field()}}
-        </form>
-        <form id="registerform" action="#">
-            <p>Enter information required to register:</p>
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user"></i></span><input class="form-control" type="text" placeholder="Enter Username" />
-            </div>
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span><input class="form-control" type="password" placeholder="Choose Password" />
-            </div>
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span><input class="form-control" type="password" placeholder="Confirm password" />
-            </div>
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-envelope"></i></span><input class="form-control" type="text" placeholder="Enter E-mail address" />
-            </div>
-            <div class="form-actions clearfix">
-                <div class="pull-left">
-                    <a href="#loginform" class="grey flip-link to-login">Click to login</a>
-                </div>
-                <div class="pull-right">
-                    <a href="#recoverform" class="grey flip-link to-recover">Lost password?</a>
-                </div>
-                <input type="submit" class="btn btn-block btn-success" value="Register" />
-            </div>
         </form>
     </div>
 </div>

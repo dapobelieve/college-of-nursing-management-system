@@ -229,6 +229,7 @@
                                       .then(response => response.json())
                                       .then(data => {
                                           let select = document.getElementById('lga1');
+                                          select.innerHTML = "";
                                           data.forEach((ele) => {
                                               let op = document.createElement('option');
                                               op.appendChild(document.createTextNode(ele.lga));

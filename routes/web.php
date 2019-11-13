@@ -1,6 +1,8 @@
 <?php
 Auth::routes();
 
+Route::post('/signin', 'Auth\AuthController@login')->name('dashboard.login');
+
 Route::get('/', 'Frontpages\WelcomeController@index')->name('welcome');
 
 Route::get('about', 'Frontpages\AboutController@index')->name('about');
@@ -49,7 +51,7 @@ Route::get('/events',[
 // The admin panel routes
 Route::group(['prefix' => '/admin', 'namespace' => 'Admin'], function () {
   // Dashboard
-  Route::get('', 'DashboardController@index');
+  Route::get('', 'DashboardController@index')->name('dashboard.home');
 
   // News section
   Route::get('news', 'NewsController@index');

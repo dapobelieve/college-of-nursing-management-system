@@ -15,9 +15,6 @@
             <a href="/admin/students" class="current">Students</a>
         </div>
         <div class="container-fluid">
-            {{-- @include('admin.layout.stats') --}}
-            <br />
-
             <div class="row">
                 <div class="col-xs-12">
                     <div class="widget-box">
