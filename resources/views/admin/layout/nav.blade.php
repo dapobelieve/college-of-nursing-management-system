@@ -17,6 +17,16 @@
                 <li @if ($sub_section == 'create') class="active" @endif><a href="/admin/create-post">Create New Post</a></li>
             </ul>
         </li>
+        <li ><a href="{{route('courses.index')}}">
+                <i class="fa fa-group"></i> <span>Courses</span></a>
+        </li>
+        <li class="submenu">
+            <a href="#"><i class="fa fa-book"></i> <span>Departments</span> <i class="arrow fa fa-chevron-right"></i></a>
+            <ul>
+                <li><a href="{{route('departments.index')}}">All Departments</a></li>
+                <li><a href="{{route('departments.create')}}">Add Department</a></li>
+            </ul>
+        </li>
 
         <li @if ($section == 'students') class="active" @endif><a href="/admin/students">
             <i class="fa fa-group"></i> <span>Students</span></a>

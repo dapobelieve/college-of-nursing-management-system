@@ -49,9 +49,16 @@ Route::get('/events',[
 
 
 // The admin panel routes
-Route::group(['prefix' => '/admin', 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'role:ADMIN'], function () {
   // Dashboard
   Route::get('', 'DashboardController@index')->name('dashboard.home');
+
+  //Courses
+  Route::resource('courses', 'CourseController');
+
+  // Departments
+  Route::resource('departments', 'DepartmentController');
+
 
   // News section
   Route::get('news', 'NewsController@index');
