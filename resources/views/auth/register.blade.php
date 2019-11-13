@@ -209,23 +209,7 @@
                                 @endforeach
                               </select>
                             </div>
-                            <script>
-                                function getLga(event)
-                                {
-                                    event.preventDefault();
-                                    let stateId = event.target.value;
-                                    fetch(`api/get-location/${stateId}`, {
-                                        method: 'GET'
-                                    })
-                                        .then(response => response.json())
-                                        .then(data => {
-                                            console.log(data)
-                                        })
-                                        .catch(error => {
 
-                                        });
-                                }
-                            </script>
 
                             <label for="name" class="col-md-2 col-form-label text-md-right">{{ __('LGA') }}</label>
 
@@ -234,6 +218,26 @@
                               </select>
                             </div>
                         </div>
+                          <script>
+                              function getLga(event)
+                              {
+                                  event.preventDefault();
+                                  let stateId = event.target.value;
+                                  fetch(`api/get-location/${stateId}`, {
+                                      method: 'GET'
+                                  })
+                                      .then(response => response.json())
+                                      .then(data => {
+                                          let select = document.getElementById('lga1');
+                                          data.forEach((ele) => {
+                                              let op = document.createElement('option');
+                                              op.appendChild(document.createTextNode(ele.lga));
+                                              op.setAttribute('value', ele.id);
+                                              select.appendChild(op);
+                                          })
+                                      });
+                              }
+                          </script>
                       </div>
                     </div>
                     <div class="row">
@@ -265,31 +269,5 @@
         toastr.success("the need to be the best");
     @endif
 
-
-    {{--$(document).ready(function(e){--}}
-    {{--  var url = "{{ URL::action('StateController@recieve', ['id'=>'id'])}}";--}}
-    {{--    --}}
-    {{--    $('#state').change(function(){--}}
-    {{--    valueD = $('#state').val();--}}
-    {{--          $.ajax({--}}
-    {{--            type:"GET",--}}
-    {{--            dataType: 'json',--}}
-    {{--            url: url.replace("id", valueD),--}}
-    {{--            success: function(result){--}}
-    {{--              var output ="<option value=''></option>";--}}
-    {{--              for (var i in result) {--}}
-    {{--                var u = i+1;--}}
-    {{--                output += "<option value="+result[i].id+">"+result[i].lga+"</option>";--}}
-    {{--              }--}}
-    {{--              output += "</select>";--}}
-
-    {{--              $('#lga1').html(output);--}}
-    {{--          }--}}
-    {{--        });--}}
-
-
-    {{--      });--}}
-
-    {{--      });--}}
 </script>
 @endsection
