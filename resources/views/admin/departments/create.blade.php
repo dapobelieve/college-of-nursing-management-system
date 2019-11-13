@@ -17,7 +17,6 @@
                         <div class="col-xs-12">
                             <div class="widget-box">
                                 <div style="display: flex;  align-items: center" class="widget-title">
-                                    <h5>Send</h5>
                                 </div>
                                 <div class="widget-content">
                                     <span>
@@ -32,7 +31,7 @@
                                         @if(Session::has('success'))
                                             <strong style="color: green">* {{ Session::get('success') }}</strong>
                                         @endif
-                                        <form method="post" action="#" class="form-horizontal">
+                                        <form method="post" action="{{route('departments.store')}}" class="form-horizontal">
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Name:</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
