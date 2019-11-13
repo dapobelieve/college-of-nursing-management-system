@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Models\State;
 class RegisterController extends Controller
 {
     /*
@@ -66,6 +67,12 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
+
+    public function getRegister(Request $request)
+    {
+        $states = State::all();
+        return view('auth.register')->with('states', $states);
+    }
     protected function create(array $data)
     {
         $user = User::create([

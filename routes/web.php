@@ -1,19 +1,7 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
-
 Auth::routes();
+
+Route::post('/signin', 'Auth\AuthController@login')->name('dashboard.login');
 
 Route::get('/', 'Frontpages\WelcomeController@index')->name('welcome');
 
@@ -43,6 +31,7 @@ Route::post('/register', [
 'uses' => 'Auth\RegisterController@register',
 'as' => 'register.store'
 ]);
+
 //->middleware('check');
 
 
@@ -51,6 +40,8 @@ Route::get('/registerSearch/{id}', [
 'uses' => 'StateController@recieve'
 ]);
 
+Route::get('get-location/{state}', 'StateController@getLocations');
+
 Route::get('/events',[
   'uses' => 'EventController@index',
   'as' => 'events'
@@ -58,10 +49,17 @@ Route::get('/events',[
 
 
 // The admin panel routes
-Route::group(['prefix' => '/admin', 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'role:ADMIN'], function () {
   // Dashboard
-  Route::get('', 'DashboardController@index');
-  
+  Route::get('', 'DashboardController@index')->name('dashboard.home');
+
+  //Courses
+  Route::resource('courses', 'CourseController');
+
+  // Departments
+  Route::resource('departments', 'DepartmentController');
+
+
   // News section
   Route::get('news', 'NewsController@index');
   Route::get('create-post', 'NewsController@create');

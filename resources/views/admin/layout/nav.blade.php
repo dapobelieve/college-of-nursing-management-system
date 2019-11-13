@@ -1,10 +1,4 @@
 <div id="sidebar">
-    {{-- <div id="search">
-        <input type="text" placeholder="Search here..."/>
-        <button type="submit" class="tip-right" title="Search">
-            <i class="fa fa-search"></i>
-        </button>
-    </div> --}}  
     <ul>
         @php
             if (!isset($section)) $section = '';
@@ -23,6 +17,16 @@
                 <li @if ($sub_section == 'create') class="active" @endif><a href="/admin/create-post">Create New Post</a></li>
             </ul>
         </li>
+        <li ><a href="{{route('courses.index')}}">
+                <i class="fa fa-group"></i> <span>Courses</span></a>
+        </li>
+        <li class="submenu">
+            <a href="#"><i class="fa fa-book"></i> <span>Departments</span> <i class="arrow fa fa-chevron-right"></i></a>
+            <ul>
+                <li><a href="{{route('departments.index')}}">All Departments</a></li>
+                <li><a href="{{route('departments.create')}}">Add Department</a></li>
+            </ul>
+        </li>
 
         <li @if ($section == 'students') class="active" @endif><a href="/admin/students">
             <i class="fa fa-group"></i> <span>Students</span></a>
@@ -39,17 +43,5 @@
         <li @if ($section == 'settings') class="active" @endif><a href="/admin/settings">
             <i class="fa fa-cog"></i> <span>System Settings</span></a>
         </li>
-
-        {{-- <li class="submenu">
-            <a href="#"><i class="fa fa-flask"></i> <span>UI Lab</span> <i class="arrow fa fa-chevron-right"></i></a>
-            <ul>
-                <li><a href="interface.html">Interface Elements</a></li>
-                <li><a href="jquery-ui.html">jQuery UI</a></li>
-                <li><a href="buttons.html">Buttons &amp; icons</a></li>
-            </ul>
-        </li> --}}
-
-        {{-- <li><a href="tables.html"><i class="fa fa-th"></i> <span>Tables</span></a></li>
-        <li><a href="grid.html"><i class="fa fa-th-list"></i> <span>Grid Layout</span></a></li> --}}
     </ul>
 </div>

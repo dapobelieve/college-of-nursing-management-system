@@ -18,13 +18,14 @@ class CheckRole
      */
     public function handle($request, Closure $next, ...$roles)
     {
+//        dd($roles);
         if (Auth::check()) {
             if (!$request->user()->hasRole($roles)) {
                 abort(404);
             }
             return $next($request);
         }
-        // return redirect()->route('site.home');
+         return redirect()->route('welcome');
         // depending on the name of the route use this accordingly
     }
 }
