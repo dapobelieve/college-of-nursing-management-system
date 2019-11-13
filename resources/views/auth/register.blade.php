@@ -214,7 +214,9 @@
                                 {
                                     event.preventDefault();
                                     let stateId = event.target.value;
-                                    fetch(`api/get-location/${stateId}`)
+                                    fetch(`api/get-location/${stateId}`, {
+                                        method: 'GET'
+                                    })
                                         .then(response => response.json())
                                         .then(data => {
                                             console.log(data)
