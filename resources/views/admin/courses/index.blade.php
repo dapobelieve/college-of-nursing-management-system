@@ -52,7 +52,7 @@
                                             {{csrf_field()}}
                                         </form>
                                         <a onclick="event.preventDefault();
-                                            if (confirm('Are you sure you want to delete this record?')) document.getElementById('department-{{$data->id}}').submit()" href="{{route('courses.destroy', ['courses' => $data->id])}}">Delete</a>
+                                            if (confirm('Are you sure you want to delete this record?')) document.getElementById('courses-{{$data->id}}').submit()" href="{{route('courses.destroy', ['courses' => $data->id])}}">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
