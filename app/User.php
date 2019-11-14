@@ -75,6 +75,22 @@ class User extends Authenticatable
      */
     public function userable()
     {
-        $this->morphTo();
+        return $this->morphTo();
+    }
+
+    /**
+     * Get a concatenation of the user's first and last names
+     */
+    public function name()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
+    /**
+     * Get a user's full name
+     */
+    public function full_name()
+    {
+        return $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name;
     }
 }
