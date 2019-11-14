@@ -31,21 +31,22 @@
                                         @if(Session::has('success'))
                                             <strong style="color: green">* {{ Session::get('success') }}</strong>
                                         @endif
-                                        <form method="post" action="{{route('departments.store')}}" class="form-horizontal">
+                                        <form method="post" action="{{route('departments.update', ['department' => $department->id])}}" class="form-horizontal">
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Name:</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
-                                                    <input id="name" value="{{ old('name') }}" type="text" placeholder="Department Name" name="name" class="form-control input-sm" />
+                                                    <input id="name" value="{{ $department->name }}" type="text" placeholder="Department Name" name="name" class="form-control input-sm" />
                                                 </div>
                                             </div>
+                                            <input type="hidden" name="_method" value="PUT">
                                             <div class="form-group">
                                                 <label for="hod" class="col-sm-3 col-md-3 col-lg-2 control-label">Hod</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
-                                                    <input value="{{ old('hod') }}" id="amount" name="hod" placeholder="Head of Department" type="name" class="form-control input-sm" />
+                                                    <input value="{{ $department->hod }}" id="amount" name="hod" placeholder="Head of Department" type="text" class="form-control input-sm" />
                                                 </div>
                                             </div>
                                             <div class="form-actions">
-                                                <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                                                <button type="submit" class="btn btn-primary btn-sm">Update</button>
                                             </div>
                                             {{ csrf_field() }}
                                         </form>
@@ -54,8 +55,8 @@
                             </div>
 
                         </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 
 @stop

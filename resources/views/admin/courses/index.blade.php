@@ -13,26 +13,54 @@
             <br />
             <div class="row">
                 <div class="col-xs-12">
-{{--                    @if($transactions->count())--}}
+                    @if(Session::has('success'))
+                        <div class="alert alert-info">
+                            {{Session::get('success')}}
+                            <a href="#" data-dismiss="alert" class="close">×</a>
+                        </div>
+                    @endif
+                    @if($courses->count())
                         <table class="table table-bordered table-striped table-hover data-table">
                             <thead>
                             <tr>
                                 <th></th>
-                                <th>from</th>
-                                <th>to</th>
-                                <th>amount</th>
-                                <th>status</th>
+                                <th>Title</th>
+                                <th>Code</th>
+                                <th>Units</th>
+                                <th>Level</th>
+                                <th>Semester</th>
+                                <th>Department</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
-{{--                            @foreach($transactions as $data)--}}
-
-{{--                            @endforeach--}}
+                            @foreach($courses as $data)
+                                <tr>
+                                    <td>{{$loop->index + 1}}</td>
+                                    <td>{{$data->title}}</td>
+                                    <td>{{$data->code}}</td>
+                                    <td>{{$data->units}}</td>
+                                    <td>{{$data->level}}</td>
+                                    <td>{{$data->semester}}</td>
+                                    <td>{{$data->department->name}}</td>
+                                    <td>
+                                        <a href="{{route('courses.edit', ['courses' => $data->id])}}">Edit</a> |
+                                        <form style="display: inline" id="courses-{{$data->id}}"
+                                              method="post"
+                                              action="{{route('courses.destroy', ['courses' => $data->id])}}">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            {{csrf_field()}}
+                                        </form>
+                                        <a onclick="event.preventDefault();
+                                            if (confirm('Are you sure you want to delete this record?')) document.getElementById('department-{{$data->id}}').submit()" href="{{route('courses.destroy', ['courses' => $data->id])}}">Delete</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
-{{--                    @else--}}
-                        <p>No Transactions for this wallet yet</p>
-{{--                    @endif--}}
+                    @else
+                        <p>No Courses yet</p>
+                    @endif
                 </div>
             </div>
         </div>
