@@ -18,13 +18,14 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(User::class, function (Faker $faker) {
-    $state = State::all()>random();
-    $location = Location::all()>random();
+    $sex = $faker->randomElement(['MALE', 'FEMALE']);
+    $state = State::all()->random();
+    $location = Location::all()->random();
     return [
-        'first_name' => $faker->name,
-        'middle_name' => $faker->name,
-        'last_name' => $faker->name,
-        'sex' => $faker->randomElement(['MALE', 'FEMALE']),
+        'first_name' => $faker->firstName(strtolower($sex)),
+        'middle_name' => $faker->name(strtolower($sex)),
+        'last_name' => $faker->lastName,
+        'sex' => $sex,
         'phone' => $faker->phoneNumber,
         'dob' => $faker->dateTimeBetween(),
         'state_id' => $state->id,
