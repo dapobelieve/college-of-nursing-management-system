@@ -9,6 +9,9 @@ class Lecturer extends Model
 {
     use SoftDeletes;
 
+    // Columns to be mutated to dates
+    protected $dates = ['deleted_at'];
+
     /**
      * Get the user model related with the lecturer
      */
