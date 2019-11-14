@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
-use App\Models\Student;
+use App\Models\Admin;
 
 class AdminController extends Controller
 {
@@ -16,7 +16,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admins = Student::paginate(10); // Stub
+        $admins = Admin::paginate(10);
+
         return View('admin.admins', ['section' => 'admins', 'admins' => $admins]);
     }
 }

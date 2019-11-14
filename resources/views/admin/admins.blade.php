@@ -33,13 +33,15 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
+                                            <th>Email</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($admins as $admin)
                                             <tr>
-                                                <td>{{ $admin->user->name }}</td>
+                                                <td>{{ $admin->user->full_name }}</td>
+                                                <td>{{ $admin->user->email }}</td>
                                                 <td class="text-center">
                                                     <a href="/admin/view-admin/{{ $admin->id }}" class="btn btn-default btn-sm">Details</a>
                                                 </td>
