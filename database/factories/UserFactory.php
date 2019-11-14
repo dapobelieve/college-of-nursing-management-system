@@ -23,10 +23,10 @@ $factory->define(User::class, function (Faker $faker) {
     $location = Location::all()->random();
     return [
         'first_name' => $faker->firstName(strtolower($sex)),
-        'middle_name' => $faker->name(strtolower($sex)),
+        'middle_name' => $faker->firstName(strtolower($sex)),
         'last_name' => $faker->lastName,
         'sex' => $sex,
-        'phone' => $faker->phoneNumber,
+        'phone' => '1-00-11',
         'dob' => $faker->dateTimeBetween(),
         'state_id' => $state->id,
         'location_id' => $location->id,
@@ -36,5 +36,7 @@ $factory->define(User::class, function (Faker $faker) {
         'city' => $faker->city,
         'is_active' => 'ACTIVE',
         'remember_token' => Str::random(10),
+        'userable_id' => 0,
+        'userable_type' => 0
     ];
 });
