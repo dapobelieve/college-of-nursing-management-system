@@ -53,12 +53,11 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   // Dashboard
   Route::get('', 'DashboardController@index')->name('dashboard.home');
 
-  //Courses
+  // Courses
   Route::resource('courses', 'CourseController');
 
   // Departments
   Route::resource('departments', 'DepartmentController');
-
 
   // News section
   Route::get('news', 'NewsController@index');
