@@ -26,7 +26,7 @@ $factory->define(User::class, function (Faker $faker) {
         'middle_name' => $faker->firstName(strtolower($sex)),
         'last_name' => $faker->lastName,
         'sex' => $sex,
-        'phone' => '1-00-11',
+        'phone' => $faker->randomNumber(),
         'dob' => $faker->dateTimeBetween(),
         'state_id' => $state->id,
         'location_id' => $location->id,
