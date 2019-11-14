@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Validation\ValidationException;
@@ -71,7 +72,7 @@ class NewsController extends Controller
             $post = new Post();
             $post->title = $request->input('title');
             $post->content = $request->input('content');
-            $post->author_id = 0; // Stub
+            $post->author_id = Auth::user()->id; // Stub
             $post->save();
 
             $this->response['ok'] = true;
