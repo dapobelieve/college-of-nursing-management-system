@@ -59,7 +59,7 @@ class NewsController extends Controller
      * @param Request $request The HTTP request instance
      * @return array
      */
-    public function handleCreate(Request $request)
+    public function store(Request $request)
     {
         try {
             // Validate request
@@ -104,7 +104,7 @@ class NewsController extends Controller
      * @param Post $post The post to be edited
      * @return array
      */
-    public function handleEdit(Request $request, Post $post)
+    public function update(Request $request, Post $post)
     {
         try {
             // Validate request

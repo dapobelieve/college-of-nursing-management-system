@@ -60,11 +60,14 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   Route::resource('departments', 'DepartmentController');
 
   // News section
-  Route::get('news', 'NewsController@index');
-  Route::get('create-post', 'NewsController@create');
-  Route::post('create-post', 'NewsController@handleCreate');
-  Route::get('edit-post/{post}', 'NewsController@edit');
-  Route::put('edit-post/{post}', 'NewsController@handleEdit');
+  Route::resource('news', 'NewsController',  [
+    'only' => [
+      'index', 'create', 'store', 'edit', 'update'
+    ],
+    'parameters' => [
+      'news' => 'post'
+    ]
+  ]);
 
   // Students section
   Route::get('students', 'StudentController@index');

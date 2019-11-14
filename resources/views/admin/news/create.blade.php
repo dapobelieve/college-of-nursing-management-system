@@ -16,7 +16,7 @@
         <div id="breadcrumb">
             <a href="/admin" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i> Home</a>
             <a href="/admin/news" title="Go to News" class="tip-bottom">News</a>
-            <a href="/admin/create-post" class="current">Create Post</a>
+            <a href="/admin/news/create" class="current">Create Post</a>
         </div>
         <div class="container-fluid">
             {{-- @include('admin.layout.stats') --}}
@@ -32,7 +32,7 @@
                             <h5>Create New Post</h5>
                         </div>
                         <div class="widget-content">
-                            <form class="form-horizontal ajax-form" action="/admin/create-post" method="post">
+                            <form class="form-horizontal ajax-form" action="/admin/news/create" method="post">
                                 {{ csrf_field() }}
                                 {{ method_field('POST') }}
 
