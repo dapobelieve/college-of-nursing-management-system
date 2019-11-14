@@ -45,7 +45,7 @@
                                         @foreach ($posts as $post)
                                             <tr>
                                                 <td>{{ $post->title }}</td>
-                                                <td>{{ @$post->author->first_name }}</td>
+                                                <td>{{ $post->author->name }}</td>
                                                 <td class="text-center">{{ $post->created_at->format('M d, Y') }}</td>
                                                 <td class="text-center">
                                                     <a href="/admin/edit-post/{{ $post->id }}" class="btn btn-default btn-sm">Edit</a>
