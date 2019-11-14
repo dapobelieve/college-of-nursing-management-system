@@ -15,8 +15,8 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $depts = Department::all();
-        return view('admin.departments.index');
+        $depts = Department::latest()->get();
+        return view('admin.departments.index')->with('departments', $depts);
     }
 
     /**
@@ -37,7 +37,14 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:departments,name',
+            'hod' => 'required'
+        ]);
+
+        Department::create($request->only(['name', 'hod']));
+
+        return redirect()->route('departments.index')->with('success', 'Department created');
     }
 
     /**
@@ -57,9 +64,9 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Department $department)
     {
-        //
+        return view('admin.departments.edit')->with('department', $department);
     }
 
     /**
@@ -69,9 +76,16 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Department $department)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:departments,name,'.$department->id,
+            'hod' => 'required'
+        ]);
+
+        $department->update($request->only(['name', 'hod']));
+
+        return redirect()->route('departments.index')->with('success', 'Department updated');
     }
 
     /**
@@ -80,8 +94,9 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Department $department)
     {
-        //
+        $department->delete();
+        return redirect()->route('departments.index')->with('success', 'Department deleted');
     }
 }

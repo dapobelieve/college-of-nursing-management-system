@@ -12,27 +12,50 @@
         <div class="container-fluid">
             <br />
             <div class="row">
+
                 <div class="col-xs-12">
-                    {{--                    @if($transactions->count())--}}
+                    @if(Session::has('success'))
+                        <div class="alert alert-info">
+                            {{Session::get('success')}}
+                            <a href="#" data-dismiss="alert" class="close">×</a>
+                        </div>
+                    @endif
+                    @if($departments->count())
                     <table class="table table-bordered table-striped table-hover data-table">
                         <thead>
                         <tr>
                             <th></th>
-                            <th>from</th>
-                            <th>to</th>
-                            <th>amount</th>
-                            <th>status</th>
+                            <th>Department</th>
+                            <th>HOD</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {{--                            @foreach($transactions as $data)--}}
-
-                        {{--                            @endforeach--}}
+                            @foreach($departments as $data)
+                                <tr>
+                                    <td>{{$loop->index + 1}}</td>
+                                    <td>{{$data->name}}</td>
+                                    <td>{{$data->hod}}</td>
+                                    <td>
+                                        <a href="{{route('departments.edit', ['department' => $data->id])}}">Edit</a> |
+                                        <form style="display: inline" id="department-{{$data->id}}"
+                                              method="post"
+                                              action="{{route('departments.destroy', ['department' => $data->id])}}">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            {{csrf_field()}}
+                                        </form>
+                                        <a onclick="event.preventDefault();
+if (confirm('Are you sure you want to delete this record?')) document.getElementById('department-{{$data->id}}').submit()" href="{{route('departments.destroy', ['department' => $data->id])}}">Delete</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
-                    {{--                    @else--}}
-                    <p>No Transactions for this wallet yet</p>
-                    {{--                    @endif--}}
+                    @else
+                        <div class="p-5 text-center">
+                            <p class="lead">No Departments!</p>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

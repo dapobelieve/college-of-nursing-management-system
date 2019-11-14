@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Department;
 use DemeterChain\C;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,7 +17,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::all();
+        $courses = Course::with('department:id,name')->orderBy('title')->get();
         return view('admin.courses.index')->with('courses', $courses);
     }
 
@@ -27,7 +28,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        $departments = Department::all();
+        return view('admin.courses.create')->with('departments', $departments);
     }
 
     /**
@@ -38,7 +40,20 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|unique:courses,title',
+            'code' => 'required|unique:courses,code',
+            'units' => 'required|numeric',
+            'semester' => 'required',
+            'level' => 'required|numeric',
+            'department_id' => 'required'
+        ],[
+            'department_id.required' => 'Select a department'
+        ]);
+
+        Course::firstOrCreate($request->except('_token'));
+        return redirect()->route('courses.index')->with('success', 'Course created');
+
     }
 
     /**
@@ -58,9 +73,13 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Course $course)
     {
-        //
+        $departments = Department::all();
+//        $course = $
+        return view('admin.courses.edit')
+            ->with('course', $course->load('department'))
+            ->with('departments', $departments);
     }
 
     /**
@@ -70,9 +89,21 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Course $course)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|unique:courses,title,'.$course->id,
+            'code' => 'required|unique:courses,code,'.$course->id,
+            'units' => 'required|numeric',
+            'semester' => 'required',
+            'level' => 'required|numeric',
+            'department_id' => 'required'
+        ],[
+            'department_id.required' => 'Select a department'
+        ]);
+
+        $course->update($request->except('_token'));
+        return redirect()->route('courses.index')->with('success', 'Course updated');
     }
 
     /**
@@ -81,8 +112,9 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Course $course)
     {
-        //
+        $course->delete();
+        return redirect()->route('courses.index')->with('success', 'Course deleted');
     }
 }
