@@ -9,10 +9,15 @@ use Illuminate\Validation\ValidationException;
 use App\Models\Post;
 use App\Http\Controllers\Controller;
 
+/**
+ * Handles the news section of the admin panel
+ */
 class NewsController extends Controller
 {
     /**
-     * @var array $response Template for json response to be returned to the user for an ajax call */
+     * Template for json response to be returned to the user for an ajax call
+     * @var array $response
+     */
     protected $response = [
         'ok' => false,
         'message' => '',
@@ -50,6 +55,7 @@ class NewsController extends Controller
     /**
      * Handles post creation ajax call
      * 
+     * @param Request $request The HTTP request instance
      * @return array
      */
     public function handleCreate(Request $request)
@@ -82,6 +88,7 @@ class NewsController extends Controller
     /**
      * Shows the edit post page
      * 
+     * @param Post $post The post to be edited
      * @return View
      */
     public function edit(Post $post)
@@ -92,6 +99,8 @@ class NewsController extends Controller
     /**
      * Handles post editing ajax call
      * 
+     * @param Request $request The HTTP request instance
+     * @param Post $post The post to be edited
      * @return array
      */
     public function handleEdit(Request $request, Post $post)
