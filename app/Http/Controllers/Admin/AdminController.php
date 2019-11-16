@@ -20,6 +20,46 @@ class AdminController extends Controller
             ->orderBy('updated_at', 'DESC')
             ->paginate(10);
 
-        return View('admin.admins', ['section' => 'admins', 'admins' => $admins]);
+        return View('admin.admins.index', ['section' => 'admins', 'sub_section' => 'all', 'admins' => $admins]);
+    }
+
+    /**
+     * Shows the create admin page
+     * 
+     * @return View
+     */
+    public function create()
+    {
+    }
+
+    /**
+     * Handles admin creation ajax call
+     * 
+     * @param Request $request The HTTP request instance
+     * @return array
+     */
+    public function store(Request $request)
+    {
+    }
+
+    /**
+     * Shows the edit admin page
+     * 
+     * @param Admin $admin The admin to be edited
+     * @return View
+     */
+    public function edit(Admin $admin)
+    {
+    }
+
+    /**
+     * Handles admin editing ajax call
+     * 
+     * @param Request $request The HTTP request instance
+     * @param Admin $admin The admin to be edited
+     * @return array
+     */
+    public function update(Request $request, Admin $admin)
+    {
     }
 }

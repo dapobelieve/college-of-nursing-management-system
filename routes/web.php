@@ -73,7 +73,14 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   Route::get('students', 'StudentController@index');
 
   // Admins section
-  Route::get('admins', 'AdminController@index');
+  Route::resource('admins', 'AdminController',  [
+    'only' => [
+      'index', 'create', 'store', 'edit', 'update'
+    ],
+    'parameters' => [
+      'admins' => 'admin'
+    ]
+  ]);
 
   // Roles section
   Route::get('roles', 'RoleController@index');
