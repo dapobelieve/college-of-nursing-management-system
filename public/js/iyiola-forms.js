@@ -17,7 +17,12 @@ var forms = (function () {
 
     $('form.ajax-form').on('submit', function (e) {
         e.preventDefault();
-        notify('Submitting form...', 'Please wait');
+        let notifyMsg = $(this).data('notifymsg');
+        if (notifyMsg == null) {
+            notify('Submitting form...', 'Please wait');
+        } else {
+            notify(notifyMsg, 'Please wait');
+        }
 
         let data = new FormData(this);
         let form = $(this);
