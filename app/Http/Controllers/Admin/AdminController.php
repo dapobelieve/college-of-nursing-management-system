@@ -30,6 +30,7 @@ class AdminController extends Controller
      */
     public function create()
     {
+        return View('admin.admins.create', ['section' => 'admins', 'sub_section' => 'create']);
     }
 
     /**
