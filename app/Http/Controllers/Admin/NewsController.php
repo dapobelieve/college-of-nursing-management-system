@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Validation\ValidationException;
 
 use App\Models\Post;
 use App\Http\Controllers\Controller;
@@ -61,25 +61,24 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            // Validate request
-            $this->validate($request, [
-                'title' => 'required|unique:news,title|max:255',
-                'content' => 'required',
-            ]);
+        // validate input
+        $validator = Validator::make($request->input(), [
+            'title' => 'required|unique:news,title|max:255',
+            'content' => 'required',
+        ]);
 
-            // Create the post
+        if ($validator->fails()) { // If validation fails
+            $this->response['message'] = $validator->messages()->first();
+        } else { // If validation is successful
             $post = new Post();
             $post->title = $request->input('title');
             $post->content = $request->input('content');
-            $post->author_id = Auth::user()->id; // Stub
+            $post->author_id = Auth::user()->id;
             $post->save();
 
             $this->response['ok'] = true;
             $this->response['message'] = 'Post created!';
             $this->response['data']['redirect'] = '/admin/news';
-        } catch (ValidationException $e) {
-            $this->response['message'] = $e->errors()[0];
         }
 
         // Response
@@ -106,22 +105,21 @@ class NewsController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        try {
-            // Validate request
-            $this->validate($request, [
-                'title' => "required|max:255",
-                'content' => 'required',
-            ]);
+        // validate input
+        $validator = Validator::make($request->input(), [
+            'title' => "required|unique:news,title,$post->id|max:255",
+            'content' => 'required',
+        ]);
 
-            // Update the post
+        if ($validator->fails()) { // If validation fails
+            $this->response['message'] = $validator->messages()->first();
+        } else { // If validation is successful
             $post->title = $request->input('title');
             $post->content = $request->input('content');
             $post->save();
 
             $this->response['ok'] = true;
             $this->response['message'] = 'Post updated!';
-        } catch (ValidationException $e) {
-            $this->response['message'] = $e->errors()[0];
         }
 
         // Response
