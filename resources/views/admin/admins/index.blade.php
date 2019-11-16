@@ -46,7 +46,8 @@
                                                 <td>{{ $admin->user->full_name }}</td>
                                                 <td>{{ $admin->user->email }}</td>
                                                 <td class="text-center">
-                                                    <a href="/admin/view-admin/{{ $admin->id }}" class="btn btn-default btn-sm">Details</a>
+                                                    <a href="{{route('admins.edit', ['admins' => $admin->id])}}" class="btn btn-default btn-sm">Edit</a>
+                                                    <a href="{{route('admins.show', ['admins' => $admin->id])}}" class="btn btn-default btn-sm">Details</a>
                                                 </td>
                                             </tr>
                                         @endforeach

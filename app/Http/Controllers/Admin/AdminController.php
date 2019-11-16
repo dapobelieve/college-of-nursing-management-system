@@ -10,6 +10,19 @@ use App\Models\Admin;
 class AdminController extends Controller
 {
     /**
+     * Template for json response to be returned to the user for an ajax call
+     * @var array $response
+     */
+    protected $response = [
+        'ok' => false,
+        'message' => '',
+        'data' => [
+            'reload' => false,
+            'redirect' => null
+        ]
+    ];
+
+    /**
      * Shows admins in the system
      * 
      * @return View
@@ -21,6 +34,16 @@ class AdminController extends Controller
             ->paginate(10);
 
         return View('admin.admins.index', ['section' => 'admins', 'sub_section' => 'all', 'admins' => $admins]);
+    }
+
+    /**
+     * Shows an admin's details
+     * 
+     * @return View
+     */
+    public function show(Admin $admin)
+    {
+        //return View('admin.admins.show', ['section' => 'admins', 'admin' => $admin]);
     }
 
     /**

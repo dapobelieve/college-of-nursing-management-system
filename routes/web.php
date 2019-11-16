@@ -75,7 +75,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   // Admins section
   Route::resource('admins', 'AdminController',  [
     'only' => [
-      'index', 'create', 'store', 'edit', 'update'
+      'index', 'create', 'store', 'edit', 'update', 'show'
     ],
     'parameters' => [
       'admins' => 'admin'
