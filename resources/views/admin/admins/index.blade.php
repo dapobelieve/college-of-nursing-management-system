@@ -9,6 +9,9 @@
     <div id="content">
         <div id="content-header">
             <h1>Admins</h1>
+            <div class="btn-group">
+                <a href="{{route('admins.create')}}" class="btn btn-large" title="Create Admin"><i class="fa fa-plus"></i></a>
+            </div>
         </div>
         <div id="breadcrumb">
             <a href="/admin" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i> Home</a>

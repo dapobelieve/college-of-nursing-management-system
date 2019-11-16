@@ -10,7 +10,7 @@
         <div id="content-header">
             <h1>News</h1>
             <div class="btn-group">
-                <a href="/admin/news/create" class="btn btn-large" title="Create Post"><i class="fa fa-pencil"></i></a>
+                <a href="{{route('news.create')}}" class="btn btn-large" title="Create Post"><i class="fa fa-pencil"></i></a>
             </div>
         </div>
         <div id="breadcrumb">
