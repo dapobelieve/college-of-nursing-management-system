@@ -11,6 +11,7 @@
 @section('admin-content')
 
     <div id="content">
+
         <div id="content-header">
             <h1>Create Post</h1>
             <div class="btn-group">
@@ -25,7 +26,6 @@
         <div class="container-fluid">
             {{-- @include('admin.layout.stats') --}}
             <br />
-
             <div class="row">
                 <div class="col-xs-12">
                     <div class="widget-box">
@@ -40,18 +40,16 @@
                                 {{ csrf_field() }}
                                 {{ method_field('POST') }}
 
-
                                 <div class="form-group">
                                     <input type="text" name="title" class="form-control" placeholder="Post Title" required>
                                 </div>
-
+                                <input type="hidden" name="postBody">
                                 <div class="form-group">
                                     <div id="toolbar-container"></div>
                                     <div style="height: 200px" id="smseditor"></div>
                                 </div>
-
                                 <div>
-                                    <button  onclick="event.preventDefault(); showHtml()" type="submit" class="btn btn-primary">Save</button>
+                                    <button  type="submit" class="btn btn-primary">Save</button>
                                 </div>
                             </form>
                         </div>
@@ -67,23 +65,49 @@
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script>
 
-        let options = [
+        let toolbarOptions = [
             ['bold', 'italic', 'blockquote', 'underline', 'link', 'image'],
-            [{'header': 1}, {'header': 1}],
+            [{'header': 1}, {'header': 2}],
             [{ 'list': 'ordered'}, { 'list': 'bullet' }],
         ];
 
+        //initialize editor
         var quill = new Quill('#smseditor', {
             theme: 'snow',
             modules: {
-                toolbar: options
+                toolbar: toolbarOptions
             },
             placeholder: "Write a story..."
         });
 
-        function showHtml()
+        // fix pasting issues
+        quill.clipboard.addMatcher (Node.ELEMENT_NODE, function (node, delta) {
+            var plaintext = node.innerText;
+            var Delta = Quill.import('delta');
+            return new Delta().insert(plaintext);
+        });
+
+
+        let form = document.querySelector('form');
+        form.addEventListener('submit', showHtml);
+        function showHtml(event)
         {
-            console.log(quill.root.innerHTML)
+            event.preventDefault();
+            let title = document.querySelector('input[name=title]').value;
+            let body = quill.root.innerText;
+            let richBody = quill.root.innerHTML;
+
+            fetch(`admin/news/create`, {
+                method: 'GET'
+            })
+
+            let post = document.querySelector('input[name=postBody]');
+            post.value = JSON.stringify(quill.getContents());
+            console.log("Submitted", form.serialize(), form.serializeArray());
+
+            // console.log(quill.root.innerHTML);
+            // console.log(quill.root.innerText);
+            // console.log(quill.getContents())
         }
     </script>
     <!-- Initialize Quill editor -->
