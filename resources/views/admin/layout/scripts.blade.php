@@ -13,3 +13,4 @@
 <script src="/dashboard/js/jquery.gritter.min.js"></script>
 
 <script src="/js/iyiola-forms.js"></script>
+@yield('admin.scripts')

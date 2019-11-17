@@ -1,5 +1,9 @@
 @extends('admin.layout.template')
 
+@section('admin.styles')
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+@stop
+
 @section('admin-title')
     Create Post
 @endsection
@@ -16,7 +20,7 @@
         <div id="breadcrumb">
             <a href="/admin" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i> Home</a>
             <a href="/admin/news" title="Go to News" class="tip-bottom">News</a>
-            <a href="/admin/create-post" class="current">Create Post</a>
+            <a href="#" class="current">Create Post</a>
         </div>
         <div class="container-fluid">
             {{-- @include('admin.layout.stats') --}}
@@ -36,16 +40,18 @@
                                 {{ csrf_field() }}
                                 {{ method_field('POST') }}
 
+
                                 <div class="form-group">
                                     <input type="text" name="title" class="form-control" placeholder="Post Title" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <textarea name="content" rows="10" class="form-control" placeholder="Post Content" required></textarea>
+                                    <div id="toolbar-container"></div>
+                                    <div style="height: 200px" id="smseditor"></div>
                                 </div>
 
-                                <div class="form-actions">
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                <div>
+                                    <button  onclick="event.preventDefault(); showHtml()" type="submit" class="btn btn-primary">Save</button>
                                 </div>
                             </form>
                         </div>
@@ -55,4 +61,30 @@
         </div>
     </div>
 
+@stop
+
+@section('admin.scripts')
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+
+        let options = [
+            ['bold', 'italic', 'blockquote', 'underline', 'link', 'image'],
+            [{'header': 1}, {'header': 1}],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        ];
+
+        var quill = new Quill('#smseditor', {
+            theme: 'snow',
+            modules: {
+                toolbar: options
+            },
+            placeholder: "Write a story..."
+        });
+
+        function showHtml()
+        {
+            console.log(quill.root.innerHTML)
+        }
+    </script>
+    <!-- Initialize Quill editor -->
 @stop

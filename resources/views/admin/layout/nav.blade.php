@@ -13,8 +13,8 @@
         <li class="submenu @if ($section == 'news') active @endif @if (collect(['all', 'create'])->contains($sub_section)) open @endif">
             <a href="#"><i class="fa fa-bullhorn"></i> <span>News</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
-                <li @if ($sub_section == 'all') class="active" @endif><a href="/admin/news">All Posts</a></li>
-                <li @if ($sub_section == 'create') class="active" @endif><a href="/admin/create-post">Create New Post</a></li>
+                <li @if ($sub_section == 'all') class="active" @endif><a href="{{route('news.index')}}">All Posts</a></li>
+                <li @if ($sub_section == 'create') class="active" @endif><a href="{{route('news.create')}}">Create New Post</a></li>
             </ul>
         </li>
         <li class="submenu">
