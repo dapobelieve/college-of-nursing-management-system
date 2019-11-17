@@ -3,9 +3,12 @@
 namespace App\Http\Middleware;
 
 use Session;
+use App\Alert;
 use Closure;
+use App\Models\Student;
 use DB;
-class CheckCard;
+use Auth;
+class CheckCard
 {
     /**
      * Handle an incoming request.
@@ -18,28 +21,20 @@ class CheckCard;
 
     public function handle($request, Closure $next)
     {
-      $card = DB::table('cards')->where('pin', $request->pin)->first();
-      //dd($card);
-      if ($card == null) {
-        $notification = $this->alertMe('the card is not available!!', 'info');
-        return redirect('register')->with($notification);
-      }else if($card->status == 'NOT USED'){
-        return $next($request);
-      }
-      else{
-        $notification = $this->alertMe('the card has been used!!', 'warning');
-        return redirect('register')->with($notification);
-      }
+      //check whether student session id has been set
+      if(null === session()->get('st_id'))
+          {
+          $student = Student::where('user_id', Auth::id())->select('id')->first();
+          session()->put('st_id', $student->id);
+          }
+          //check card to know if student has registered with a scratch card
+      $card = DB::table('cards')->where('student_id', session()->get('st_id'))->first();
+        if ($card == null)
+            {
+              $notification = Alert::alertMe('you need to get a scratch card to access your portal!!!', 'info');
+              return redirect('portal/checkpage')->with($notification);
+            }
+            return $next($request);
     }
-
-    public function alertMe($message, $alertType)
-    {
-      return array(
-                      'message' => $message,
-                      'alert-type' => $alertType
-                    );
-    }
-
-
 
 }

@@ -12,7 +12,7 @@ Portal - Payment History
           <a class="list-group-item list-group-item-action" id="list-home-list"  href="{{route('portal.dashboard')}}" role="tab" aria-controls="home">Home</a>
           <a class="list-group-item list-group-item-action" id="list-profile-list"  href="{{route('portal.tuition')}}" role="tab" aria-controls="profile">Pay Tuition</a>
           <a class="list-group-item list-group-item-action" id="list-messages-list"  href="{{route('portal.coursereg')}}" role="tab" aria-controls="messages">Course Registration</a>
-          <a class="list-group-item list-group-item-action active" id="list-settings-list"  href="{{route('portal.payHistory')}}" role="tab" aria-controls="settings">Payment History</a>
+          <a class="list-group-item list-group-item-action active" id="list-settings-list"  href="{{route('portal.tuitionhistory')}}" role="tab" aria-controls="settings">Payment History</a>
           <a class="list-group-item list-group-item-action" id="list-settings-list"  href="{{route('portal.reghistory')}}" role="tab" aria-controls="settings">Registration History</a>
         </div>
       </div>
@@ -52,10 +52,10 @@ Portal - Payment History
                             <?php $no = $key +1; ?>
                               <tr>
                                 <td>{{$no}}</td>
-                                <td>{{$department->name}}</td>
-                                <td>{{$value->level." ".$value->semester}}</td>
-                                <td class="text-center">{{$value->total}}</td>
-                                <td class="text-center">{{$value->sum}}</td>
+                                <td>{{$value->reference}}</td>
+                                <td>{{$no."00"}}</td>
+                                <td class="text-center">{{$value->amount}}</td>
+                                <td class="text-center">{{$value->status}}</td>
                                 <td>{{date("d-m-y",strtotime($value->created_at))}}</td>
                                 <td><a href="{{action('RegHistoryController@downloadPDF', [$value->level." ".$value->semester, date("d-m-y",strtotime($value->created_at))])}}"><button type="button" class="btn btn-outline-info btn-sm">PRINT</button></a></td>
                               </tr>

@@ -135,7 +135,7 @@ About US
                 </div>
                 <div class="col-md-3">
                   <!-- image of the school-->
-                    <img src="images/welcome-img.jpg" class="img-fluid" alt="#">
+                    <img src="images/aboutpix.jpg" class="img-fluid" alt="#">
                 </div>
             </div>
         </div>

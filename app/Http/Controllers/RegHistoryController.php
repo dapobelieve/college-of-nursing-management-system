@@ -31,9 +31,10 @@ class RegHistoryController extends Controller
       }
 
       //get level and semester with distinct
-      $getLS = DB::table('courses')->select('level', 'semester')->groupBy('level','semester')->get();
        $arraydata = [];
-
+       $getLS = DB::select('SELECT `courses`.`level`, `courses`.`semester` FROM `course_student`
+                              INNER JOIN `courses` ON `course_student`.`course_id` = `courses`.`id`
+                               WHERE `student_id` = "'.$studentID.'" GROUP BY `courses`.`level`, `courses`.`semester`');
 
         foreach ($getLS as $key => $value)
         {

@@ -12,7 +12,7 @@ Portal - Course Registration
           <a class="list-group-item list-group-item-action" id="list-home-list"  href="{{route('portal.dashboard')}}" role="tab" aria-controls="home">Home</a>
           <a class="list-group-item list-group-item-action" id="list-profile-list"  href="{{route('portal.tuition')}}" role="tab" aria-controls="profile">Pay Tuition</a>
           <a class="list-group-item list-group-item-action active" id="list-messages-list"  href="{{route('portal.coursereg')}}" role="tab" aria-controls="messages">Course Registration</a>
-          <a class="list-group-item list-group-item-action" id="list-settings-list"  href="{{route('portal.payHistory')}}" role="tab" aria-controls="settings">Payment History</a>
+          <a class="list-group-item list-group-item-action" id="list-settings-list"  href="{{route('portal.tuitionhistory')}}" role="tab" aria-controls="settings">Payment History</a>
           <a class="list-group-item list-group-item-action" id="list-settings-list"  href="{{route('portal.reghistory')}}" role="tab" aria-controls="settings">Registration History</a>
         </div>
       </div>
@@ -27,17 +27,13 @@ Portal - Course Registration
                   </div>
                   <div class="col">
                     <div class="form-group row">
-                      <label for="department" class="col-md-8 col-form-label text-md-right">{{ __('Select Registration Session') }}</label>
+                      <label for="department" class="col-md-8 col-form-label text-md-right">{{ __('Select session paid for') }}</label>
                       <input type="hidden" name="hidde" id="hidde" value='{{$department->id}}'>
                         <div class="col-md-4">
                           <select class="form-control" id="reg_session" name="reg_session" required>
                             <option value=""> </option>
-                            <option value="100 first">100/First</option>
-                            <option value="100 second">100/Second</option>
-                            <option value="200 first">200/First</option>
-                            <option value="200 second">200/Second</option>
-                            <option value="300 first">300/First</option>
-                            <option value="300 second">300/Second</option>
+                            <option value="{{$level}} first">{{$level}}/First</option>
+                            <option value="{{$level}} second">{{$level}}/Second</option>
                           </select>
                         </div>
                       </div>

@@ -9,6 +9,7 @@ use App\Alert;
 use App\User;
 use App\Models\Course;
 use App\Models\Student;
+use App\Models\Payment;
 use App\Models\Department;
 use Illuminate\Http\Request;
 
@@ -31,13 +32,23 @@ class CourseController extends Controller
 
     public function index()
     {
+      // check the session the student has paid and only allow him to register courses for the session
+        $payment = new Payment;
+        $payment = $payment->where('student_id',session()->get('st_id'))->orderBy('created_at', 'DESC')->select('reference')->first();
 
+          if ($payment == null) {
+            $notification = Alert::alertMe('Pay your tuition before you can access!!!', 'info');
+            return redirect()->back()->with($notification);
+          }
+    //get the level from the reference added in payment
+          $lvl = substr($payment->reference,0,3);
         $user = User::find(Auth::id());
         $student = Student::where('user_id', Auth::id())->first();
 
         return view('portal.coursereg')->with('user', $user)
                                       ->with('department', Department::find($student->department_id))
-                                      ->with('student', $student);
+                                      ->with('student', $student)
+                                      ->with('level', $lvl);
     }
 //to recieve data for course registration through ajax
     public function recieveAjax($id, $dept)

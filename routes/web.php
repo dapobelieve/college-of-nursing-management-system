@@ -27,27 +27,40 @@ Route::get('/contact',function () {return view('contact');});
 
 Route::get('/our-team',function () {return view('college-officers');});
 
-Route::get('portal/home', 'HomeController@index')->name('portal.home');
+Route::group(['middleware' => 'check'], function(){
 
-Route::post('portal/store', 'HomeController@store')->name('portal.biodata');
+      Route::get('portal/home', 'HomeController@index')->name('portal.home');
 
-Route::get('portal/coursereg', 'CourseController@index')->name('portal.coursereg');
+      Route::post('portal/store', 'HomeController@store')->name('portal.biodata');
 
-Route::post('portal/coursereg', 'CourseController@store')->name('portal.coursereg');
+      Route::get('portal/coursereg', 'CourseController@index')->name('portal.coursereg');
 
-Route::get('portal/dashboard', 'DashboardController@index')->name('portal.dashboard');
+      Route::post('portal/coursereg', 'CourseController@store')->name('portal.coursereg');
 
-Route::get('portal/coursereg/{id}/{dept}', 'CourseController@recieveAjax');
+      Route::get('portal/dashboard', 'DashboardController@index')->name('portal.dashboard');
 
-Route::get('portal/reghistory', 'RegHistoryController@index')->name('portal.reghistory');
+      Route::get('portal/coursereg/{id}/{dept}', 'CourseController@recieveAjax');
 
-Route::get('portal/paytuition', 'PayTuitionController@index')->name('portal.tuition');
+      Route::get('portal/reghistory', 'RegHistoryController@index')->name('portal.reghistory');
 
-Route::get('portal/tuitionhistory', 'PayTuitionController@index4History')->name('portal.payHistory');
+      Route::get('portal/paytuition', 'PayTuitionController@index')->name('portal.tuition');
 
-Route::get('portal/paytuition/{lvl}', 'PayTuitionController@payAjax')->name('portal.getamount');
+      Route::get('portal/tuitionhistory', 'PayTuitionController@index4History')->name('portal.tuitionhistory');
 
-Route::get('portal/downloadPDF/{sem}/{date}','RegHistoryController@downloadPDF')->name('portal.showhistory');
+      Route::get('portal/paytuition/{lvl}', 'PayTuitionController@payAjax')->name('portal.getamount');
+
+      Route::get('portal/downloadPDF/{sem}/{date}','RegHistoryController@downloadPDF')->name('portal.showhistory');
+
+});
+
+Route::get('portal/checkpage', 'CheckpageController@index')->name('portal.checkpage');
+
+Route::post('portal/checkpage', 'CheckpageController@store')->name('portal.check2store');
+
+Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
+
+Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
+
 
 Route::get('/guide',function () {
 return view('applicationguide');

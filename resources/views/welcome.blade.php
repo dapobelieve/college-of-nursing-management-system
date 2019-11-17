@@ -172,7 +172,7 @@
             </ol>
             <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
-                    <img class="d-block" src="images/slider-13.jpg" alt="First slide">
+                    <img class="d-block" src="images/slider12.jpg" alt="First slide">
                     <div class="carousel-caption d-md-block">
                         <div class="slider_title">
                             <h1>Creative Thinking &amp; Innovation</h1>

@@ -15,6 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+      $this->middleware('check',['only' =>['index']]);
         $this->middleware('auth');
     }
 

@@ -26,7 +26,7 @@ Provost's Speach
                         <img src="images/welcom_sign.png" class="img-fluid" alt="welcom-img">
                     </div>
                     <div class="col-md-4">
-                       <img src="images/admission-detail/instruction-img.jpg" class="img-fluid" alt="#">
+                       <img src="images/provost1.jpg" class="img-fluid ml-5" alt="#">
                        <p class="text-center"><strong>Gbonjubola Owolabi</strong>
                             <br>
                             <span>Provost, OYSCONME</span></p>

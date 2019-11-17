@@ -15,7 +15,8 @@
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "nesbot/carbon": "^2.25",
-        "symfony/console": "4.3.4"
+        "symfony/console": "4.3.4",
+        "unicodeveloper/laravel-paystack": "^1.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
