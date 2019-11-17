@@ -36,12 +36,11 @@
                             <h5>Create New Post</h5>
                         </div>
                         <div class="widget-content">
-                            <form class="form-horizontal ajax-form" action="/admin/create-post" method="post">
+                            <form class="form-horizontal" action="/admin/create-post" method="post">
                                 {{ csrf_field() }}
                                 {{ method_field('POST') }}
-
                                 <div class="form-group">
-                                    <input type="text" name="title" class="form-control" placeholder="Post Title" required>
+                                    <input type="text" autofocus name="title" class="form-control" placeholder="Post Title" required>
                                 </div>
                                 <input type="hidden" name="postBody">
                                 <div class="form-group">
@@ -63,6 +62,7 @@
 
 @section('admin.scripts')
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
     <script>
 
         let toolbarOptions = [
@@ -97,17 +97,21 @@
             let body = quill.root.innerText;
             let richBody = quill.root.innerHTML;
 
-            fetch(`admin/news/create`, {
-                method: 'GET'
+            // let post = document.querySelector('input[name=postBody]');
+            // post.value = JSON.stringify(quill.getContents());
+            // console.log("Submitted", form.serialize(), form.serializeArray());
+
+            axios.post('/admin/news', {
+                title,
+                body,
+                richBody
             })
-
-            let post = document.querySelector('input[name=postBody]');
-            post.value = JSON.stringify(quill.getContents());
-            console.log("Submitted", form.serialize(), form.serializeArray());
-
-            // console.log(quill.root.innerHTML);
-            // console.log(quill.root.innerText);
-            // console.log(quill.getContents())
+                .then(response => {
+                    console.log(response.data)
+                })
+                .catch(error => {
+                    console.log(error.response)
+                })
         }
     </script>
     <!-- Initialize Quill editor -->

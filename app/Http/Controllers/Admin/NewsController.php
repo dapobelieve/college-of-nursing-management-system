@@ -24,7 +24,7 @@ class NewsController extends Controller
 
     /**
      * Shows all blog posts
-     * 
+     *
      * @return View
      */
     public function index()
@@ -39,7 +39,7 @@ class NewsController extends Controller
 
     /**
      * Shows the create post page
-     * 
+     *
      * @return View
      */
     public function create()
@@ -49,22 +49,22 @@ class NewsController extends Controller
 
     /**
      * Handles post creation ajax call
-     * 
+     *
      * @return array
      */
-    public function handleCreate(Request $request)
+    public function store(Request $request)
     {
         try {
             // Validate request
             $this->validate($request, [
                 'title' => 'required|unique:news,title|max:255',
-                'content' => 'required',
+                ' body' => 'required',
             ]);
 
             // Create the post
             $post = new Post();
-            $post->title = $request->input('title');
-            $post->content = $request->input('content');
+            $post->title = $request->input->title;
+            $post->content = $request->input->body;
             $post->author_id = 0; // Stub
             $post->save();
 
@@ -72,7 +72,7 @@ class NewsController extends Controller
             $this->response['message'] = 'Post created!';
             $this->response['data']['redirect'] = '/admin/news';
         } catch (ValidationException $e) {
-            $this->response['message'] = $e->errors()[0];
+            $this->response['message'] = $e->errors();
         }
 
         // Response
@@ -81,7 +81,7 @@ class NewsController extends Controller
 
     /**
      * Shows the edit post page
-     * 
+     *
      * @return View
      */
     public function edit(Post $post)
@@ -91,7 +91,7 @@ class NewsController extends Controller
 
     /**
      * Handles post editing ajax call
-     * 
+     *
      * @return array
      */
     public function handleEdit(Request $request, Post $post)
