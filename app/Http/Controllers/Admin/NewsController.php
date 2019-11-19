@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Validation\ValidationException;
 
 use App\Models\Post;
 use App\Http\Controllers\Controller;
 
+/**
+ * Handles the news section of the admin panel
+ */
 class NewsController extends Controller
 {
     /**
-     * @var array $response Template for json response to be returned to the user for an ajax call */
+     * Template for json response to be returned to the user for an ajax call
+     * @var array $response
+     */
     protected $response = [
         'ok' => false,
         'message' => '',
@@ -50,29 +56,29 @@ class NewsController extends Controller
     /**
      * Handles post creation ajax call
      * 
+     * @param Request $request The HTTP request instance
      * @return array
      */
-    public function handleCreate(Request $request)
+    public function store(Request $request)
     {
-        try {
-            // Validate request
-            $this->validate($request, [
-                'title' => 'required|unique:news,title|max:255',
-                'content' => 'required',
-            ]);
+        // validate input
+        $validator = Validator::make($request->input(), [
+            'title' => 'required|unique:news,title|max:255',
+            'content' => 'required',
+        ]);
 
-            // Create the post
+        if ($validator->fails()) { // If validation fails
+            $this->response['message'] = $validator->messages()->first();
+        } else { // If validation is successful
             $post = new Post();
             $post->title = $request->input('title');
             $post->content = $request->input('content');
-            $post->author_id = 0; // Stub
+            $post->author_id = Auth::user()->id;
             $post->save();
 
             $this->response['ok'] = true;
             $this->response['message'] = 'Post created!';
             $this->response['data']['redirect'] = '/admin/news';
-        } catch (ValidationException $e) {
-            $this->response['message'] = $e->errors()[0];
         }
 
         // Response
@@ -82,6 +88,7 @@ class NewsController extends Controller
     /**
      * Shows the edit post page
      * 
+     * @param Post $post The post to be edited
      * @return View
      */
     public function edit(Post $post)
@@ -92,26 +99,27 @@ class NewsController extends Controller
     /**
      * Handles post editing ajax call
      * 
+     * @param Request $request The HTTP request instance
+     * @param Post $post The post to be edited
      * @return array
      */
-    public function handleEdit(Request $request, Post $post)
+    public function update(Request $request, Post $post)
     {
-        try {
-            // Validate request
-            $this->validate($request, [
-                'title' => "required|max:255",
-                'content' => 'required',
-            ]);
+        // validate input
+        $validator = Validator::make($request->input(), [
+            'title' => "required|unique:news,title,$post->id|max:255",
+            'content' => 'required',
+        ]);
 
-            // Update the post
+        if ($validator->fails()) { // If validation fails
+            $this->response['message'] = $validator->messages()->first();
+        } else { // If validation is successful
             $post->title = $request->input('title');
             $post->content = $request->input('content');
             $post->save();
 
             $this->response['ok'] = true;
             $this->response['message'] = 'Post updated!';
-        } catch (ValidationException $e) {
-            $this->response['message'] = $e->errors()[0];
         }
 
         // Response

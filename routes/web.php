@@ -53,25 +53,34 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   // Dashboard
   Route::get('', 'DashboardController@index')->name('dashboard.home');
 
-  //Courses
+  // Courses
   Route::resource('courses', 'CourseController');
 
   // Departments
   Route::resource('departments', 'DepartmentController');
 
-
   // News section
-  Route::get('news', 'NewsController@index');
-  Route::get('create-post', 'NewsController@create');
-  Route::post('create-post', 'NewsController@handleCreate');
-  Route::get('edit-post/{post}', 'NewsController@edit');
-  Route::put('edit-post/{post}', 'NewsController@handleEdit');
+  Route::resource('news', 'NewsController',  [
+    'only' => [
+      'index', 'create', 'store', 'edit', 'update'
+    ],
+    'parameters' => [
+      'news' => 'post'
+    ]
+  ]);
 
   // Students section
   Route::get('students', 'StudentController@index');
 
   // Admins section
-  Route::get('admins', 'AdminController@index');
+  Route::resource('admins', 'AdminController',  [
+    'only' => [
+      'index', 'create', 'store', 'edit', 'update', 'show'
+    ],
+    'parameters' => [
+      'admins' => 'admin'
+    ]
+  ]);
 
   // Roles section
   Route::get('roles', 'RoleController@index');

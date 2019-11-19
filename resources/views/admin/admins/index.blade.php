@@ -9,6 +9,9 @@
     <div id="content">
         <div id="content-header">
             <h1>Admins</h1>
+            <div class="btn-group">
+                <a href="{{route('admins.create')}}" class="btn btn-large" title="Create Admin"><i class="fa fa-plus"></i></a>
+            </div>
         </div>
         <div id="breadcrumb">
             <a href="/admin" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i> Home</a>
@@ -33,15 +36,18 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
+                                            <th>Email</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($admins as $admin)
                                             <tr>
-                                                <td>{{ $admin->user->name }}</td>
+                                                <td>{{ $admin->user->full_name }}</td>
+                                                <td>{{ $admin->user->email }}</td>
                                                 <td class="text-center">
-                                                    <a href="/admin/view-admin/{{ $admin->id }}" class="btn btn-default btn-sm">Details</a>
+                                                    <a href="{{route('admins.edit', ['admins' => $admin->id])}}" class="btn btn-default btn-sm">Edit</a>
+                                                    <a href="{{route('admins.show', ['admins' => $admin->id])}}" class="btn btn-default btn-sm">Details</a>
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -10,13 +10,14 @@
         </li>
 
         <!-- News section -->
-        <li class="submenu @if ($section == 'news') active @endif @if (collect(['all', 'create'])->contains($sub_section)) open @endif">
+        <li class="submenu @if ($section == 'news') active @endif @if (collect(['all', 'create'])->contains($sub_section) & $section == 'news') open @endif">
             <a href="#"><i class="fa fa-bullhorn"></i> <span>News</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
-                <li @if ($sub_section == 'all') class="active" @endif><a href="/admin/news">All Posts</a></li>
-                <li @if ($sub_section == 'create') class="active" @endif><a href="/admin/create-post">Create New Post</a></li>
+                <li @if ($sub_section == 'all' & $section == 'news') class="active" @endif><a href="{{route('news.index')}}">All Posts</a></li>
+                <li @if ($sub_section == 'create' & $section == 'news') class="active" @endif><a href="{{route('news.create')}}">Create New Post</a></li>
             </ul>
         </li>
+
         <li class="submenu">
             <a href="#"><i class="fa fa-book"></i> <span>Courses</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
@@ -36,8 +37,13 @@
             <i class="fa fa-group"></i> <span>Students</span></a>
         </li>
 
-        <li @if ($section == 'admins') class="active" @endif><a href="/admin/admins">
-            <i class="fa fa-group"></i> <span>Admins</span></a>
+        <!-- Admins section -->
+        <li class="submenu @if ($section == 'admins') active @endif @if (collect(['all', 'create'])->contains($sub_section) & $section == 'admins') open @endif">
+            <a href="#"><i class="fa fa-group"></i> <span>Admins</span> <i class="arrow fa fa-chevron-right"></i></a>
+            <ul>
+                <li @if ($sub_section == 'all' & $section == 'admins') class="active" @endif><a href="{{route('admins.index')}}">All Admins</a></li>
+                <li @if ($sub_section == 'create' & $section == 'admins') class="active" @endif><a href="{{route('admins.create')}}">Create New Admin</a></li>
+            </ul>
         </li>
 
         <li @if ($section == 'roles') class="active" @endif><a href="/admin/roles">

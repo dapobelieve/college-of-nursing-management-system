@@ -43,26 +43,54 @@ class User extends Authenticatable
     /**
      * The role relationship
      */
-
     public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
 
+    /**
+     * Checks if a user has a role(s)
+     */
     public function hasRole($roles)
     {
-        foreach($roles as $key => $role) {
-            if ($this->roles->contains('name', ucfirst(strtolower($role))))
+        foreach ($roles as $role) {
+            if ($this->roles()->where('name', ucfirst(strtolower($role)))->count() == 1) {
                 return true;
+            }
         }
+
         return false;
     }
 
     /**
-    * State relationship
-    */
+     * State relationship
+     */
     public function state()
     {
         return $this->belongsTo(State::class);
+    }
+
+    /**
+     * Get the model that owns this user
+     */
+    public function userable()
+    {
+        return $this->morphTo();
+    }
+
+    /**
+     * Get a concatenation of the user's first and last names
+     */
+    public function getNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
+    /**
+     * Get a user's full name
+     */
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name;
     }
 }

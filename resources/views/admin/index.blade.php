@@ -20,10 +20,6 @@
 
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="alert alert-info">
-                        Welcome in the <strong>Unicorn Admin Theme</strong>. Don't forget to check all the pages!
-                        <a href="#" data-dismiss="alert" class="close">×</a>
-                    </div>
                     <div class="widget-box">
                         <div class="widget-title">
                             <span class="icon"><i class="fa fa-signal"></i></span>
@@ -36,16 +32,17 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-4">
                                     <ul class="site-stats">
-                                        <li><div class="cc"><i class="fa fa-user"></i> <strong>1433</strong> <small>Total Users</small></div></li>
-                                        <li><div class="cc"><i class="fa fa-arrow-right"></i> <strong>16</strong> <small>New Users (last week)</small></div></li>
+                                        <li><div class="cc"><i class="fa fa-group"></i> <strong>{{ $users->count() }}</strong> <small>Total Users</small></div></li>
                                         <li class="divider"></li>
-                                        <li><div class="cc"><i class="fa fa-shopping-cart"></i> <strong>259</strong> <small>Total Shop Items</small></div></li>
-                                        <li><div class="cc"><i class="fa fa-tag"></i> <strong>8650</strong> <small>Total Orders</small></div></li>
-                                        <li><div class="cc"><i class="fa fa-repeat"></i> <strong>29</strong> <small>Pending Orders</small></div></li>
+                                        <li><div class="cc"><i class="fa fa-group"></i> <strong>{{ $students->count() }}</strong> <small>Total Students</small></div></li>
+                                        <li><div class="cc"><i class="fa fa-group"></i> <strong>{{ $lecturers->count() }}</strong> <small>Total Lecturers</small></div></li>
+                                        <li><div class="cc"><i class="fa fa-group"></i> <strong>{{ $admins->count() }}</strong> <small>Total Admins</small></div></li>
+                                        <li class="divider"></li>
+                                        <li><div class="cc"><i class="fa fa-bullhorn"></i> <strong>{{ $posts->count() }}</strong> <small>Total Posts</small></div></li>
                                     </ul>
                                 </div>
                                 <div class="col-xs-12 col-sm-8">
-                                    <div class="chart"></div>
+                                    
                                 </div>
                             </div>
                         </div>

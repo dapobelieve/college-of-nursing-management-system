@@ -1,4 +1,9 @@
 @extends('admin.layout.template')
+
+@section('admin-title')
+    Create Department
+@endsection
+
 @section('admin-content')
 
     <div id="content">
