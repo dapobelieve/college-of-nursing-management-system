@@ -18,7 +18,7 @@ Portal - Course Registration
       </div>
         <div class="col-md-9">
             <div class="card">
-              <div class="card-header">Dashboard - Course Registration ({{$user->last_name." ".$user->first_name}})</div>
+              <div class="card-header bg-success text-center">Dashboard - Course Registration <span class="text-uppercase"> ({{$user->last_name." ".$user->first_name}})</span></div>
               <form method="POST" action="{{ route('portal.coursereg') }}" enctype="multipart/form-data">
                   @csrf
                 <div class="row">

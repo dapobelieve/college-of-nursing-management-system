@@ -41,7 +41,7 @@ Portal - Dashboard
                       <strong>Fullname : <label class="col-md-8 col-form-label text-md-left  text-primary ml-5">{{ $user->last_name.", ".$user->first_name." ".$user->middle_name }}</label></strong>
                     </div>
                     <div class="col-md-10">
-                      <strong>Current Level : <label class="col-md-8 col-form-label text-md-left  text-primary ml-3">{{ $user->last_name.", ".$user->first_name." ".$user->middle_name }}</label></strong>
+                      <strong>Current Level : <label class="col-md-8 col-form-label text-md-left  text-primary ml-3">100</label></strong>
                     </div>
                     <div class="col-md-10">
                       <strong>Department : <label class="col-md-8 col-form-label text-md-left  text-primary ml-4">{{ $department->name }}</label></strong>

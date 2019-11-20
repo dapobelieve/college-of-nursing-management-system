@@ -26,13 +26,15 @@ class PayTuitionController extends Controller
     public function index()
     {
       //redirect to dashboard if payment is closed
-      if(session()->has('closed')){
+      if(session()->has('closed'))
+      {
         $notification = Alert::alertMe('Registration Closed!!!','info');
-        return redirect()->route('portal.dashboard')->($notification);
+        return redirect()->route('portal.dashboard')->with($notification);
       }
       //check to know what level has been paid through reference field in payment model
       $payment = Payment::where('student_id', session()->get('st_id'))->latest('created_at')->select('reference')->first();
-      if ($payment->reference !== null) {
+        $lvl = 100;
+      if ($payment !== null) {
         $lvl = substr($payment->reference,0,3);
         $lvl = $lvl + 100;
         if ($lvl > 300) {
@@ -89,7 +91,7 @@ class PayTuitionController extends Controller
         $payment = $payment->where('student_id',$studentID)->get();
         //dd($payment);
         if ($payment == null) {
-          $notification = Alert::alertMe('No Payment History available!!!','info');
+          $notification = Alert::alertMe('No payment history available!!!','info');
           return redirect()->route('portal.dashboard')->with($notification);
         }
         return view('portal.tuitionhistory')->with('user', User::find(Auth::id()))

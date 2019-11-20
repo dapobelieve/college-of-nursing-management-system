@@ -42,13 +42,13 @@ class PaymentController extends Controller
             'amount' => $paymentDetails['data']['amount']/100, //getting exact amount from paystack
             'created_at' => $paymentDetails['data']['createdAt'],
           ]);
-          //$payment->save();
           $notification = Alert::alertMe('Payment successful!!!', 'success');
           return redirect('/portal/dashboard')->with($notification);
          break;
 
        default:
-         // code...
+       $notification = Alert::alertMe('something went wrong!', 'warning');
+       return redirect('/portal/dashboard')->with($notification);
          break;
      }
 

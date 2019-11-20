@@ -51,7 +51,7 @@
                                     <a class="nav-link" href="academics.html">Academics</a>
                                 </li>
                                 <li class="nav-logo">
-                                    <a href="index.html" class="navbar-brand"><img src="images/oysconmelogo3.png" class="img-fluid" alt="logo"></a>
+                                    <a href="index.html" class="navbar-brand"><img src="images/Oysconmetrans.png" class="img-fluid" alt="logo"></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="research.html">Portal</a>
@@ -125,7 +125,7 @@
             <div class="col-md-3">
                 <div class="foot-logo">
                     <a href="index.html">
-                        <img src="images/footer-logo.png" class="img-fluid" alt="footer_logo">
+                        <img src="images/Oysconmetrans.png" class="img-fluid" alt="footer_logo">
                     </a>
                     <p>2019 © copyright
                         <br> All rights reserved.</p>

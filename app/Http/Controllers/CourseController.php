@@ -37,7 +37,7 @@ class CourseController extends Controller
         $payment = $payment->where('student_id',session()->get('st_id'))->orderBy('created_at', 'DESC')->select('reference')->first();
 
           if ($payment == null) {
-            $notification = Alert::alertMe('Pay your tuition before you can access!!!', 'info');
+            $notification = Alert::alertMe('Pay your tuition fee first!!!', 'info');
             return redirect()->back()->with($notification);
           }
     //get the level from the reference added in payment

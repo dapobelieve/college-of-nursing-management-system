@@ -47,11 +47,7 @@
                               @auth
                                   <a href="{{ url('/home') }}">Home</a>
                               @else
-                                  <a href="{{ route('login') }}">Login</a>/
-
-                                  @if (Route::has('register'))
-                                      <a href="{{ route('register') }}">Register</a>
-                                  @endif
+                                  <a href="{{ route('login') }}">Login</a>
                               @endauth
                       @endif
                     </div>
@@ -62,11 +58,7 @@
                               @auth
                                   <a href="{{ url('/home') }}">Home</a>
                               @else
-                                  <a href="{{ route('login') }}">Login</a>/
-
-                                  @if (Route::has('register'))
-                                      <a href="{{ route('register') }}">Register</a>
-                                  @endif
+                                  <a href="{{ route('login') }}">Login</a>
                               @endauth
                       @endif
                     </div>
@@ -82,7 +74,7 @@
                         <button class="navbar-toggler navbar-toggler2 navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown">
                             <span class="icon-menu"></span>
                         </button>
-                        <a href="index.html" class="navbar-brand nav-brand2"><img class="d-block" src="images/oysconmelogo2.png" alt="School logo"></a>
+                        <a href="{{asset('/')}}" class="navbar-brand nav-brand2"><img class="d-block" src="images/oysconmelogo2.png" alt="School logo"></a>
                         <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
@@ -103,7 +95,7 @@
                                         <a href="academics.html" class="dropdown-toggle nav-link" data-toggle="dropdown">Academics <span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
                                         <ul class="dropdown-menu mega-dropdown-menu row">
                                           <li class="col">
-                                           <img src="images/courses_1.jpg" class="img-fluid dropdown-header" alt="#">
+                                           <img src="images/departments.jpg" class="img-fluid dropdown-header" alt="#">
                                        </li>
                                        <li class="col">
                                           <ul>
@@ -123,33 +115,17 @@
                     Pages<span class="glyphicon glyphicon-chevron-down pull-right"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="blog.html">Blog</a></li>
-                    <li><a class="dropdown-item" href="blog-post.html">Blog Post</a></li>
-                    <li><a class="dropdown-item" href="index-landing-page.html">Landing Page</a></li>
                     <li><a class="dropdown-item" href="events.html">Events</a></li>
                     <li><a class="dropdown-item" href="course-detail.html">Course Details</a></li>
                     <li><a class="dropdown-item" href="campus-life.html">Campus Life</a></li>
                     <li><a class="dropdown-item" href="teachers-single.html">Our teachers</a></li>
                     <li><a class="dropdown-item" href="gallery.html">Gallery</a></li>
+                    <li><a class="dropdown-item" href="chairman-speech.html">Chairman Speech</a></li>
                     <li><a class="dropdown-item" href="shortcodes.html">Shortcodes</a></li>
-                    <li class="dropdown">
-                      <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Others Pages</a>
-                      <ul class="dropdown-menu dropdown-menu1">
-                        <li><a class="dropdown-item" href="index-2.html">Home Style Two</a></li>
-                        <li><a class="dropdown-item" href="index-video.html">Home Video</a></li>
-                        <li><a class="dropdown-item" href="notice-board.html">Notice Board</a></li>
-                        <li><a class="dropdown-item" href="chairman-speech.html">Chairman Speech</a></li>
-                        <li><a class="dropdown-item" href="sample-page.html">Sample Page</a></li>
-                        <li><a class="dropdown-item" href="faq.html">Faq</a></li>
-                        <li><a class="dropdown-item" href="login.html">Login</a></li>
-                        <li><a class="dropdown-item" href="sign-up.html">Sign Up</a></li>
-                        <li><a class="dropdown-item" href="coming-soon.html">Coming Soon</a></li>
-                    </ul>
-                </li>
-            </ul>
+                </ul>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="research.html">Portal</a>
+            <a class="nav-link" href="{{route('portal.dashboard')}}">Portal</a>
         </li>
 
         <li class="nav-item">
@@ -172,10 +148,10 @@
             </ol>
             <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
-                    <img class="d-block" src="images/slider12.jpg" alt="First slide">
+                    <img class="d-block" src="images/slider11.jpg" alt="First slide">
                     <div class="carousel-caption d-md-block">
                         <div class="slider_title">
-                            <h1>Creative Thinking &amp; Innovation</h1>
+                            <h1>We offer quality nursing care</h1>
                             <h4>Proactively utilize open-source users for process-centric total linkage.<br> Energistically reinvent web-enabled initiatives with premium <br>processes. Proactively drive.</h4>
                             <div class="slider-btn">
                                 <a href="#" class="btn btn-default">SEE Programs</a>
@@ -185,7 +161,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block" src="images/slider-13.jpg" alt="Second slide">
+                    <img class="d-block" src="images/slider12.jpg" alt="Second slide">
                     <div class="carousel-caption d-md-block">
                         <div class="slider_title">
                             <h1>We foster wisdom</h1>
@@ -370,7 +346,7 @@
                         <img src="images/chart-icon_1.png" class="img-fluid" alt="chart_icon">
                     </div>
                     <div class="chart-text">
-                        <p><span class="counter">39</span> Teachers
+                        <p><span class="counter">{{$lecturer}}</span> Lecturers
                         </p>
                     </div>
                 </div>
@@ -379,7 +355,7 @@
                         <img src="images/chart-icon_2.png" class="img-fluid" alt="chart_icon">
                     </div>
                     <div class="chart-text">
-                        <p><span class="counter">2600</span> Students
+                        <p><span class="counter">{{$student}}</span> Students
                         </p>
                     </div>
                 </div>
@@ -388,7 +364,7 @@
                         <img src="images/chart-icon_3.png" class="img-fluid" alt="chart_icon">
                     </div>
                     <div class="chart-text">
-                        <p><span class="counter">56</span> Courses
+                        <p><span class="counter">{{$course}}</span> Courses
                         </p>
                     </div>
                 </div>
@@ -397,7 +373,7 @@
                         <img src="images/chart-icon_4.png" class="img-fluid" alt="chart_icon">
                     </div>
                     <div class="chart-text">
-                        <p><span class="counter">13</span> Years Exp.</p>
+                        <p><span class="counter">70</span> Years Exp.</p>
                     </div>
                 </div>
             </div>
@@ -425,9 +401,9 @@
                 <div class="col-md-3">
                     <div class="foot-logo">
                         <a href="index.html">
-                            <img src="images/footer-logo.png" class="img-fluid" alt="footer_logo">
+                            <img src="images/Oysconmetrans.png" class="img-fluid" alt="footer_logo">
                         </a>
-                        <p>2016 © copyright
+                        <p>2019 © copyright
                             <br> All rights reserved.</p>
                         </div>
                     </div>
@@ -435,29 +411,31 @@
                         <div class="sitemap">
                             <h3>Navigation</h3>
                             <ul>
-                                <li><a href="about.html">About</a></li>
-                                <li><a href="admission-form.html">Admissions </a></li>
+                                <li><a href="{{asset('about')}}">About</a></li>
+                                <li><a href="#">Admissions </a></li>
                                 <li><a href="admission.html">Academics</a></li>
-                                <li><a href="research.html">Research</a></li>
+                                <li><a href="{{route('portal.dashboard')}}">Student Portal</a></li>
                                 <li><a href="contact.html">Contact</a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-4">
+
+                <!--    <div class="col-md-4">
                         <div class="tweet_box">
                             <h3>Tweets</h3>
                             <div class="tweet-wrap">
                                 <div class="tweet"></div>
-                                <!-- // end .tweet -->
+
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+
                     <div class="col-md-3">
                         <div class="address">
                             <h3>Contact us</h3>
-                            <p><span>Address: </span> Unisco university Albany, NY, USA. 11001</p>
-                            <p>Email : info@unisco.com
-                                <br> Phone : +91 555 668 986</p>
+                            <p><span>Address: </span> College of nursing, Eleyele Ibadan</p>
+                            <p>Email : info@oysconme.edu.ng
+                                <br> Phone : +2347036924010</p>
                                 <ul class="footer-social-icons">
                                     <li><a href="#"><i class="fa fa-facebook fa-fb" aria-hidden="true"></i></a></li>
                                     <li><a href="#"><i class="fa fa-linkedin fa-in" aria-hidden="true"></i></a></li>

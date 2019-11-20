@@ -53,7 +53,7 @@ Portal - Payment History
                               <tr>
                                 <td>{{$no}}</td>
                                 <td>{{$value->reference}}</td>
-                                <td>{{$no."00"}}</td>
+                                <td>{{substr($value->reference,0,3)}}</td>
                                 <td class="text-center">{{$value->amount}}</td>
                                 <td class="text-center">{{$value->status}}</td>
                                 <td>{{date("d-m-y",strtotime($value->created_at))}}</td>

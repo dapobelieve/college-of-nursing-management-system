@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Frontpages;
 use Carbon\Carbon;
 use DB;
 use App\Models\Event;
+use App\Models\Student;
+use App\Models\Lecturer;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,7 +20,10 @@ class WelcomeController extends Controller
       //dd($UpcomingEvent);
       return view('welcome')->with('department', Department::all()->pluck('name'))
                               ->with('UpcomingEvent', $UpcomingEvent)
-                              ->with('latestNews', $latestNews);
+                              ->with('latestNews', $latestNews)
+                              ->with('student', Student::all()->count())
+                              ->with('course', Department::all()->count())
+                              ->with('lecturer', Lecturer::all()->count());
 
     }
 }

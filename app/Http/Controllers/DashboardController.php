@@ -27,13 +27,8 @@ class DashboardController extends Controller
     public function index()
     {
        $student = Student::where('user_id', Auth::id())->first();
-       $user = User::find(Auth::id());
-       if(null === session()->get('st_id'))
-           {
-             session()->put('st_id', $student->id);
-           }
-           session()->put('dept_id', $student->department_id);
-           session()->put('origin', $user->state_id);
+       $user = User::find(Auth::id());       
+
 
        $sess = Currentsession::where('department_id', session()->get('dept_id'))->first();
        $latedate = date("Y-m-d", strtotime(Carbon::parse($sess->expiry_date)->addDays(30)));
@@ -54,7 +49,7 @@ class DashboardController extends Controller
        if ($late == "Closed") {
          session()->put('closed', $late);
        }
-       
+
         return view('portal.dashboard')->with('user', $user)
                                        ->with('student', $student)
                                        ->with('department', Department::find($student->department_id))
