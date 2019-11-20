@@ -14,8 +14,8 @@ class StatesTableSeeder extends Seeder
         $states = [
             "Abia",
             "Adamawa",
-            "Anambra",
             "Akwa Ibom",
+            "Anambra",
             "Bauchi",
             "Bayelsa",
             "Benue",

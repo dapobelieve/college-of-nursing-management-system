@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 class StateController extends Controller
 {
 
+  public function getLocations(State $state)
+  {
+      $lgs = $state->location()->get();
+      return response()->json($lgs);
+  }
+
+
   public function recieve($id)
   {
      $lga = State::find($id)->location->all();

@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Location;
+use App\Models\State;
 use App\User;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
@@ -16,11 +18,25 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(User::class, function (Faker $faker) {
+    $sex = $faker->randomElement(['MALE', 'FEMALE']);
+    $state = State::all()->random();
+    $location = Location::all()->random();
     return [
-        'name' => $faker->name,
+        'first_name' => $faker->firstName(strtolower($sex)),
+        'middle_name' => $faker->firstName(strtolower($sex)),
+        'last_name' => $faker->lastName,
+        'sex' => $sex,
+        'phone' => $faker->randomNumber(),
+        'dob' => $faker->dateTimeBetween(),
+        'state_id' => $state->id,
+        'location_id' => $location->id,
         'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'address' => $faker->address,
+        'city' => $faker->city,
+        'is_active' => 'ACTIVE',
         'remember_token' => Str::random(10),
+        'userable_id' => 0,
+        'userable_type' => 0
     ];
 });

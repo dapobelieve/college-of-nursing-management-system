@@ -202,30 +202,43 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('State of Origin') }}</label>
 
                             <div class="col-md-3">
-                              <select class="form-control" id="state" name="state" required>
-                                <option value=""> </option>
-                                <?php use App\Models\State;
-                                $states = State::all();?>
+                              <select class="form-control" onchange="getLga(event)" id="state" name="state" required>
+                                <option selected value="">Select</option>
                                 @foreach ($states as $state => $value)
                                   <option value="{{$value->id}}"> {{$value->name}}</option>
-
                                 @endforeach
-
                               </select>
                             </div>
+
 
                             <label for="name" class="col-md-2 col-form-label text-md-right">{{ __('LGA') }}</label>
 
                             <div class="col-md-3">
                               <select class='form-control' id='lga1' name='lga' required>
-
                               </select>
                             </div>
-
-
-
                         </div>
-
+                          <script>
+                              function getLga(event)
+                              {
+                                  event.preventDefault();
+                                  let stateId = event.target.value;
+                                  fetch(`api/get-location/${stateId}`, {
+                                      method: 'GET'
+                                  })
+                                      .then(response => response.json())
+                                      .then(data => {
+                                          let select = document.getElementById('lga1');
+                                          select.innerHTML = "";
+                                          data.forEach((ele) => {
+                                              let op = document.createElement('option');
+                                              op.appendChild(document.createTextNode(ele.lga));
+                                              op.setAttribute('value', ele.id);
+                                              select.appendChild(op);
+                                          })
+                                      });
+                              }
+                          </script>
                       </div>
                     </div>
                     <div class="row">
@@ -253,9 +266,7 @@
 @endsection
 @section('script')
     @if(Session::has('status'))
-
-    toastr.success("the need to be the best")
-
+        toastr.success("the need to be the best");
     @endif
 
     $(document).ready(function(e){

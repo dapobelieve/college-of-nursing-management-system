@@ -22,9 +22,11 @@ class CheckRole
             if (!$request->user()->hasRole($roles)) {
                 abort(404);
             }
+
             return $next($request);
         }
-        // return redirect()->route('site.home');
-        // depending on the name of the route use this accordingly
+
+        // Depending on the name of the route use this accordingly
+        return redirect()->route('welcome');
     }
 }
