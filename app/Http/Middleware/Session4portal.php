@@ -20,12 +20,16 @@ class Session4portal
     {
       if(Auth::check())
           {
-            if (null == session()->get('st_id')) {
-              $student = Student::where('user_id', Auth::id())->first();
-              $user = User::find(Auth::id());
-              session()->put('st_id', $student->id);
-              session()->put('dept_id', $student->department_id);
-              session()->put('origin', $user->state_id);
+            if (!session()->has('st_id')) {
+              if (null == Student::find(Auth::id())) {
+                //session not created if it is admin or lecturer
+              }else {
+                $student = Student::where('user_id', Auth::id())->first();
+                $user = User::find(Auth::id());
+                session()->put('st_id', $student->id);
+                session()->put('dept_id', $student->department_id);
+                session()->put('origin', $user->state_id);
+              }
             }
           }
           return $next($request);

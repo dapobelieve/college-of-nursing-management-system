@@ -8,6 +8,7 @@ use Closure;
 use App\Models\Student;
 use DB;
 use Auth;
+use App\User;
 class CheckCard
 {
     /**
@@ -19,10 +20,10 @@ class CheckCard
      */
 
 
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, ...$roles)
     {
       //check whether student session id has been set
-      if(null === session()->get('st_id'))
+      if(!session()->has('st_id'))
           {
           $student = Student::where('user_id', Auth::id())->select('id')->first();
           session()->put('st_id', $student->id);

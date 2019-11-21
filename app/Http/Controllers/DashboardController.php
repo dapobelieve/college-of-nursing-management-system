@@ -26,7 +26,7 @@ class DashboardController extends Controller
     public function index()
     {
        $student = Student::where('user_id', Auth::id())->first();
-       $user = User::find(Auth::id());       
+       $user = User::find(Auth::id());
 
 
        $sess = Currentsession::where('department_id', session()->get('dept_id'))->first();

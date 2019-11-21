@@ -24,7 +24,7 @@ class AdminController extends Controller
 
     /**
      * Shows admins in the system
-     * 
+     *
      * @return View
      */
     public function index()
@@ -38,7 +38,7 @@ class AdminController extends Controller
 
     /**
      * Shows an admin's details
-     * 
+     *
      * @return View
      */
     public function show(Admin $admin)
@@ -48,7 +48,7 @@ class AdminController extends Controller
 
     /**
      * Shows the create admin page
-     * 
+     *
      * @return View
      */
     public function create()
@@ -58,7 +58,7 @@ class AdminController extends Controller
 
     /**
      * Handles admin creation ajax call
-     * 
+     *
      * @param Request $request The HTTP request instance
      * @return array
      */
@@ -68,7 +68,7 @@ class AdminController extends Controller
 
     /**
      * Shows the edit admin page
-     * 
+     *
      * @param Admin $admin The admin to be edited
      * @return View
      */
@@ -78,7 +78,7 @@ class AdminController extends Controller
 
     /**
      * Handles admin editing ajax call
-     * 
+     *
      * @param Request $request The HTTP request instance
      * @param Admin $admin The admin to be edited
      * @return array

@@ -15,7 +15,7 @@ Route::get('/contact',function () {return view('contact');});
 
 Route::get('/our-team',function () {return view('college-officers');});
 
-Route::group(['middleware' => 'check'], function(){
+Route::group(['middleware' => ['role:STUDENT','check']], function(){
 
       Route::get('portal/home', 'HomeController@index')->name('portal.home');
 

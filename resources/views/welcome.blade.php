@@ -45,7 +45,7 @@
                     <div class="header-top_login2">
                       @if (Route::has('login'))
                               @auth
-                                  <a href="{{ url('/home') }}">Home</a>
+                                  <a href="{{ url('/portal/dashboard') }}">Home</a>
                               @else
                                   <a href="{{ route('login') }}">Login</a>
                               @endauth
@@ -229,7 +229,7 @@
             <div class="row">
               @foreach ($department as $key => $value)
 
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
                     <div class="courses_box mb-5">
                         <div class="course-img-wrap">
                             <img src="images/courses_1.jpg" class="img-fluid" alt="courses-img">
