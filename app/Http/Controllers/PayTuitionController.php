@@ -7,7 +7,7 @@ use App\Alert;
 use App\User;
 use App\Models\State;
 use App\Models\Student;
-use App\Models\Currentsession;
+use App\Models\Fee;
 use App\Models\Payment;
 use Carbon\Carbon;
 use DateTime;
@@ -41,7 +41,7 @@ class PayTuitionController extends Controller
           $lvl = "";
         }
       }
-      return view('portal.paytuition')->with('session', Currentsession::all()->first())
+      return view('portal.paytuition')->with('session', Fee::all()->first())
                                       ->with('user', User::find(Auth::id()))
                                       ->with('student', Student::find(session()->get('st_id')))
                                       ->with('level', $lvl);
@@ -49,10 +49,10 @@ class PayTuitionController extends Controller
 
     public function payAjax($lvl)
     {
-      $currentsession = new Currentsession;
+      $fee = new Fee;
       //add level into session for usage during payment through Paystack
       session()->put('lvl', $lvl);
-      $amount = $currentsession->where('level','=', $lvl)->where('department_id','=',session()->get('dept_id'))->first();
+      $amount = $fee->where('level','=', $lvl)->where('department_id','=',session()->get('dept_id'))->first();
       //to check for late payment
       $n = date("Y/m/d");
       $date1 = new DateTime($n);

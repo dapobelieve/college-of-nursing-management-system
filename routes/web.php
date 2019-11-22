@@ -39,15 +39,16 @@ Route::group(['middleware' => ['role:STUDENT','check']], function(){
 
       Route::get('portal/downloadPDF/{sem}/{date}','RegHistoryController@downloadPDF')->name('portal.showhistory');
 
+      Route::get('portal/checkpage', 'CheckpageController@index')->name('portal.checkpage');
+
+      Route::post('portal/checkpage', 'CheckpageController@store')->name('portal.check2store');
+
+      Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
+
+      Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 });
 
-Route::get('portal/checkpage', 'CheckpageController@index')->name('portal.checkpage');
 
-Route::post('portal/checkpage', 'CheckpageController@store')->name('portal.check2store');
-
-Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
-
-Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 
 
 Route::get('/guide',function () {

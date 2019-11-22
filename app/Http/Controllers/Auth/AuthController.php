@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
+use App\User;
 
 class AuthController extends Controller
 {
@@ -22,7 +23,12 @@ class AuthController extends Controller
 
             return redirect()->back()->with('error','Could not sign you in. Invalid Details');
         }else  {
-
+          if (Auth::check()) {
+            $userrole = $request->user()->roles->first();
+            if ($userrole->name == "Student") {
+              return redirect()->route('portal.dashboard');
+            }
+          }
             return redirect()->route('dashboard.home');
         }
     }

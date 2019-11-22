@@ -5,7 +5,7 @@ use Carbon\Carbon;
 use App\User;
 use App\Models\Student;
 use App\Models\Department;
-use App\Models\Currentsession;
+use App\Models\Fee;
 use App\Models\State;
 use Auth;
 use DateTime;
@@ -29,7 +29,7 @@ class DashboardController extends Controller
        $user = User::find(Auth::id());
 
 
-       $sess = Currentsession::where('department_id', session()->get('dept_id'))->first();
+       $sess = Fee::where('department_id', session()->get('dept_id'))->first();
        $latedate = date("Y-m-d", strtotime(Carbon::parse($sess->expiry_date)->addDays(30)));
        //for late registration Status
        $n = date("Y/m/d");

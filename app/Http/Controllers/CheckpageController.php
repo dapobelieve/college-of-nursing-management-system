@@ -11,6 +11,10 @@ class CheckpageController extends Controller
 {
   public function index()
   {
+    $card = Card::where('student_id', session()->get('st_id'))->first();
+      if (!$card == null) {
+        return redirect()->route('portal.dashboard');
+      }
       return view('portal.checkpage');
   }
 

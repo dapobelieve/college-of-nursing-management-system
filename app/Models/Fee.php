@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Currentsession extends Model
+class Fee extends Model
 {
     //
 }
