@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use Auth;
 use App\Alert;
 use App\User;
@@ -61,6 +62,8 @@ class PayTuitionController extends Controller
       $Ma = $interval->format('%R%a');
       $state = State::find(session()->get('origin'));
       if ($Ma < 0) {
+        //created  a session to know when registration is late
+            session()->put('regStatus', 'L');
             switch ($state->name) {
               case 'Oyo':
                 return $amount->late_payment+ $amount->indigene ;
@@ -72,6 +75,7 @@ class PayTuitionController extends Controller
             }
       }
       else {
+          session()->put('regStatus', 'E');
             switch ($state->name) {
               case 'Oyo':
                 return $amount->indigene ;
@@ -97,6 +101,24 @@ class PayTuitionController extends Controller
         return view('portal.tuitionhistory')->with('user', User::find(Auth::id()))
                                             ->with('registered', $payment)
                                             ->with('department', session()->get('dept_id'));
+      }
+
+      public function downloadPDF($id, $date)
+      {
+        $st_id = session()->get('st_id');
+        $origin = State::find(session()->get('origin'));
+        $payment = Payment::find($id);
+        $student = Student::find($st_id);
+        $user = User::find(Auth::id());
+        $session = substr($payment->reference,0,2);
+        //check to know whether it is late payment
+        $late = substr($payment->reference,2,1);
+        $late = ($late == 'L') ? 'YES' : 'NO' ;
+        $dated = $date;
+        $pdf = PDF::loadView('portal/pdfPayReceipt', compact('payment','student', 'user', 'dated', 'origin', 'session', 'late'));
+
+        return $pdf->download('invoice.pdf');
+
       }
 
 

@@ -11,7 +11,9 @@ Route::get('latest-news/{id}/{info}', 'Frontpages\latestNewsController@index')->
 
 Route::get('/provost-statement',function () {return view('provost-statement');});
 
-Route::get('/contact',function () {return view('contact');});
+Route::get('/contact', 'Frontpages\ContactController@index')->name('contact');
+
+Route::post('/contact', 'Frontpages\ContactController@sendMail')->name('contact');
 
 Route::get('/our-team',function () {return view('college-officers');});
 
@@ -38,6 +40,8 @@ Route::group(['middleware' => ['role:STUDENT','check']], function(){
       Route::get('portal/paytuition/{lvl}', 'PayTuitionController@payAjax')->name('portal.getamount');
 
       Route::get('portal/downloadPDF/{sem}/{date}','RegHistoryController@downloadPDF')->name('portal.showhistory');
+
+      Route::get('portal/paydownloadPDF/{id}/{date}','PayTuitionController@downloadPDF')->name('portal.showpayhistory');
 
       Route::get('portal/checkpage', 'CheckpageController@index')->name('portal.checkpage');
 

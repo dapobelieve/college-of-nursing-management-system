@@ -18,6 +18,12 @@ Contact Us
                 </div>
             </div>
         </div>
+        @if(session()->has('status-contact'))
+          <div class="alert alert-success " role="alert">
+            {{session()->get('status-contact')}}
+          </div>
+          <br>
+          @endif
         <div class="row">
             <div class="col-md-12">
                 <div class="contact-form " style="background-color:#f09ac0;">
@@ -25,21 +31,42 @@ Contact Us
                         <div class="col-xs-12 col-sm-12 col-md-6 contact-option">
                             <div class="contact-option_rsp">
                                 <h3>Leave a message</h3>
-                                <form action="" method="post" id="phpcontactform">
+                                <form action="{{route('contact')}}" method="post" id="phpcontactform">
+                                     @csrf
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Name" name="name" required>
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Name" name="name" value="{{ old('name') }}" required>
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <!-- // end .form-group -->
                                     <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="Email" name="email" required>
+                                        <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}" required>
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <!-- // end .form-group -->
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Phone" name="phone" required>
+                                        <input type="text" class="form-control @error('subject') is-invalid @enderror" placeholder="Subject" name="subject" value="{{ old('subject') }}" required>
+                                        @error('subject')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <!-- // end .form-group -->
                                     <div class="form-group">
-                                        <textarea placeholder="Message" class="form-control" name="message" required rows="5"></textarea>
+                                        <textarea placeholder="Message" class="form-control @error('message') is-invalid @enderror" name="message" value="{{ old('message') }}" required rows="5"></textarea>
+                                        @error('message')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <!-- // end .form-group -->
                                     <button type="submit" class="btn btn-default btn-submit" id="js-contact-btn">SUBMIT</button>
