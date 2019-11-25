@@ -8,7 +8,13 @@
         <li @if ($section == 'dashboard') class="active" @endif><a href="/admin">
             <i class="fa fa-home"></i> <span>Dashboard</span></a>
         </li>
-
+        <li class="submenu">
+            <a href="#"><i class="fa fa-book"></i> <span>Lecturers</span> <i class="arrow fa fa-chevron-right"></i></a>
+            <ul>
+                <li><a href="{{route('lecturers.index')}}">All Lecturers</a></li>
+                <li><a href="{{route('lecturers.create')}}">Add Lecturer</a></li>
+            </ul>
+        </li>
         <!-- News section -->
         <li class="submenu @if ($section == 'news') active @endif @if (collect(['all', 'create'])->contains($sub_section) & $section == 'news') open @endif">
             <a href="#"><i class="fa fa-bullhorn"></i> <span>News</span> <i class="arrow fa fa-chevron-right"></i></a>
