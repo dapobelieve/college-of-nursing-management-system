@@ -19,6 +19,15 @@
         </li>
 
         <li class="submenu">
+            <a href="#"><i class="fa fa-book"></i> <span>Cards</span> <i class="arrow fa fa-chevron-right"></i></a>
+            <ul>
+                <li><a href="{{route('cards.index')}}">Used Cards</a></li>
+                <li><a href="{{route('cards.index2')}}">Available Cards</a></li>
+                <li><a href="{{route('cards.create')}}">Add Card</a></li>
+            </ul>
+        </li>
+
+        <li class="submenu">
             <a href="#"><i class="fa fa-book"></i> <span>Courses</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
                 <li><a href="{{route('courses.index')}}">All Courses</a></li>

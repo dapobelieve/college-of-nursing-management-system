@@ -77,6 +77,10 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   // Dashboard
   Route::get('', 'DashboardController@index')->name('dashboard.home');
 
+  //cards
+  Route::resource('cards', 'CardController');
+    Route::get('/index2', 'CardController@index2')->name('cards.index2');
+
   // Courses
   Route::resource('courses', 'CourseController');
 
