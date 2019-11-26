@@ -1,16 +1,15 @@
-@extends('layout')
+@extends('welcome')
 
-@section('title')
-Contact Us - OYSCONME
-@stop
+@section('title', strtoupper(config('site.name.short'))." "." | Contact Us")
+
 
 @section('pagename')
 Principal Officers
 @stop
 
-@section('content')
+@section('site.content')
 
-<section class="our-teachers">
+    <section class="our-teachers">
   <div class="container">
       <div class="row">
         <div class="col-md-3">
@@ -139,6 +138,5 @@ Principal Officers
           <!-- End row -->
       </div>
   </section>
-
 
 @stop
