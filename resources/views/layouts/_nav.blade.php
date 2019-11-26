@@ -9,6 +9,9 @@
                     <a href="{{asset('/')}}" class="navbar-brand nav-brand2"><img class="d-block" src="images/oysconmelogo2.png" alt="School logo"></a>
                     <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                         <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('welcome')}}">Home</a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">
                                     About<span class="glyphicon glyphicon-chevron-down pull-right"></span>
@@ -32,8 +35,8 @@
                                             <li class="col">
                                                 <ul>
                                                     <li class="dropdown-header">Departments</li>
-                                                    @foreach ($department as $key => $value)
-                                                        <li class="text-white"><a href="course-detail.html">{{$value}}</a></li>
+                                                    @foreach ($department as $dept)
+                                                        <li class="text-white"><a href="#">{{$dept->name}}</a></li>
                                                     @endforeach
                                                     <li class="divider"></li>
                                                 </ul>

@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="row">
-                @foreach ($department as $key => $value)
+                @foreach ($department as $dept)
 
                     <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
                         <div class="courses_box mb-5">
@@ -47,8 +47,8 @@
                                 <img src="images/plus-icon.png" class="img-fluid close-icon" alt="plus-icon">
                             </div>
                             <a href="course-detail.html" class="course-box-content">
-                                <h3>{{$value}}</h3>
-                                <p>Know more about our {{$value}} department</p>
+                                <h3>{{$dept->name}}</h3>
+                                <p>Know more about our {{$dept->name}} department</p>
                             </a>
                         </div>
                     </div>
@@ -136,47 +136,7 @@
     </section>
     <!--//END EVENTS -->
     <!--============================= DETAILED CHART =============================-->
-    <div class="detailed_chart">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-3 chart_bottom">
-                    <div class="chart-img">
-                        <img src="images/chart-icon_1.png" class="img-fluid" alt="chart_icon">
-                    </div>
-                    <div class="chart-text">
-                        <p><span class="counter">{{$lecturer}}</span> Lecturers
-                        </p>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-3 chart_bottom chart_top">
-                    <div class="chart-img">
-                        <img src="images/chart-icon_2.png" class="img-fluid" alt="chart_icon">
-                    </div>
-                    <div class="chart-text">
-                        <p><span class="counter">{{$student}}</span> Students
-                        </p>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-3 chart_top">
-                    <div class="chart-img">
-                        <img src="images/chart-icon_3.png" class="img-fluid" alt="chart_icon">
-                    </div>
-                    <div class="chart-text">
-                        <p><span class="counter">{{$course}}</span> Courses
-                        </p>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-3">
-                    <div class="chart-img">
-                        <img src="images/chart-icon_4.png" class="img-fluid" alt="chart_icon">
-                    </div>
-                    <div class="chart-text">
-                        <p><span class="counter">70</span> Years Exp.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('layouts._stats')
 @stop
 
 @section('site.scripts')
