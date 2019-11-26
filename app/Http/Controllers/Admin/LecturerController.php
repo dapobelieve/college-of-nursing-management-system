@@ -80,6 +80,13 @@ class LecturerController extends Controller
             'department_id' => $request->department_id,
             'rank' => $request->rank
         ]);
+
+        /*
+         * Create user roles
+         * use the user id to create the role
+         */
+
+        $user->roles()->sync([(int) $request->role]);
     }
 
     /**
