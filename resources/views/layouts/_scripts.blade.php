@@ -16,24 +16,3 @@
 
 @yield('site.scripts')
 
-<script>
-    $(document).ready(function(){
-        $(function () {
-            var lastScrollTop = 205;
-
-            $(window).scroll(function(event){
-
-                var st = $(this).scrollTop();
-                if (st > lastScrollTop ) {
-                    $('#scroll').show()
-
-                } else {
-                    $('#scroll').hide()
-
-                }
-                lastScrollTop = 205;
-            });
-        });
-    });
-
-</script>

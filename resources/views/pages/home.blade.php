@@ -1,5 +1,5 @@
 @extends('welcome')
-
+@section('title',  config('site.name.long'))
 @section('site.content')
     <!--============================= ABOUT =============================-->
     <section class="clearfix about about-style2">
@@ -177,4 +177,28 @@
             </div>
         </div>
     </div>
+@stop
+
+@section('site.scripts')
+    <script>
+        $(document).ready(function(){
+            $(function () {
+                var lastScrollTop = 205;
+
+                $(window).scroll(function(event){
+
+                    var st = $(this).scrollTop();
+                    if (st > lastScrollTop ) {
+                        $('#scroll').show()
+
+                    } else {
+                        $('#scroll').hide()
+
+                    }
+                    lastScrollTop = 205;
+                });
+            });
+        });
+
+    </script>
 @stop

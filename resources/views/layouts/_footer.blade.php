@@ -14,16 +14,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3">
-                <div class="foot-logo">
-                    <a href="index.html">
-                        <img src="images/Oysconmetrans.png" class="img-fluid" alt="footer_logo">
-                    </a>
-                    <p>2019 © copyright
-                        <br> All rights reserved.</p>
-                </div>
-            </div>
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <div class="sitemap">
                     <h3>Navigation</h3>
                     <ul>
@@ -36,6 +27,17 @@
                 </div>
             </div>
 
+            <div class="col-md-4">
+                <div class="foot-logo">
+                    <a href="index.html">
+                        <img src="images/Oysconmetrans.png" class="img-fluid" alt="footer_logo">
+                    </a>
+                    <p>2019 © copyright
+                        <br> All rights reserved.</p>
+                </div>
+            </div>
+
+
             <!--    <div class="col-md-4">
                     <div class="tweet_box">
                         <h3>Tweets</h3>
@@ -46,7 +48,7 @@
                     </div>
                 </div> -->
 
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="address">
                     <h3>Contact us</h3>
                     <p><span>Address: </span> College of nursing, Eleyele Ibadan</p>

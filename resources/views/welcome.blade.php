@@ -9,17 +9,15 @@
     <header>
         @include('layouts._topbar')
         @include('layouts._nav')
-
-        @include('layouts._slider')
+        @if(Route::current()->uri == "/")
+            @include('layouts._slider')
+        @endif
     </header>
-<!--//END HEADER -->
-@yield('site.content')
-    <!--//END DETAILED CHART -->
 
-    <!--============================= FOOTER =============================-->
+    @yield('site.content')
+
     @include('layouts._footer')
-            <!--//END FOOTER -->
-            <!-- jQuery, Bootstrap JS. -->
+
     @include('layouts._scripts')
 
 </body>
