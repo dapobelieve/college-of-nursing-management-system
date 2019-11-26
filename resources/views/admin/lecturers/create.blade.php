@@ -32,18 +32,18 @@
                                 @if(Session::has('success'))
                                     <strong style="color: green">* {{ Session::get('success') }}</strong>
                                 @endif
-                                    <form style="display: grid; grid-template-columns: 1fr 1fr" method="post" action="{{route('courses.store')}}" class="form-horizontal">
+                                    <form style="display: grid; grid-template-columns: 1fr 1fr" method="post" action="{{route('lecturers.store')}}" class="form-horizontal">
                                         <div class="">
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">First Name:</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
-                                                    <input id="first_name" value="{{ old('first_name') }}" type="text" placeholder="Department Name" name="title" class="form-control input-sm" />
+                                                    <input required id="first_name" value="{{ old('first_name') }}" type="text" placeholder="First Name" name="first_name" class="form-control input-sm" />
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Last Name:</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
-                                                    <input id="last_name" value="{{ old('last_name') }}" type="text" placeholder="Department Name" name="title" class="form-control input-sm" />
+                                                    <input id="last_name" value="{{ old('last_name') }}" type="text" placeholder="Last Name" name="last_name" class="form-control input-sm" />
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -51,23 +51,24 @@
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
                                                     <select class="form-control input-sm" name="sex" id="">
                                                         <option selected value="">Select Gender</option>
-                                                        <option value="male">Male</option>
-                                                        <option value="female">Female</option>
+                                                        <option value="MALE">Male</option>
+                                                        <option value="FEMALE">Female</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Phone Number:</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
-                                                    <input id="phone" value="{{ old('phone') }}" type="text" placeholder="Phone Number" name="title" class="form-control input-sm" />
+                                                    <input id="phone" value="{{ old('phone') }}" type="text" placeholder="Phone Number" name="phone" class="form-control input-sm" />
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Date of Birth:</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
-                                                    <input id="phone" value="{{ old('phone') }}" type="date" placeholder="Phone Number" name="title" class="form-control input-sm" />
+                                                    <input id="dob" value="{{ old('dob') }}" type="date"  name="dob" class="form-control input-sm" />
                                                 </div>
                                             </div>
+                                            <input type="hidden" name="role" value="2">
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Academic Rank:</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
@@ -86,13 +87,13 @@
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Password:</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
-                                                    <input id="email" value="{{ old('password') }}"  type="text" placeholder="Password"        name="password" class="form-control input-sm" />
+                                                    <input id="password" value="{{ old('password') }}"  type="password" placeholder="Password"        name="password" class="form-control input-sm" />
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="hod" class="col-sm-3 col-md-3 col-lg-2 control-label">State</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
-                                                    <select onchange="getLga(event)" class="form-control input-sm" name="department_id" id="">
+                                                    <select onchange="getLga(event)" class="form-control input-sm" name="state_id" id="">
                                                         <option selected value="">Select</option>
                                                         @foreach($states as $dep)
                                                             <option value="{{$dep->id}}">{{$dep->name}}</option>

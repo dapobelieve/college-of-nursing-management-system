@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Lecturer;
 use App\Models\Department;
+use App\User;
 
 class LecturerController extends Controller
 {
@@ -43,7 +44,42 @@ class LecturerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'first_name' => 'string|required',
+            'last_name' => 'string|required',
+            'sex' => 'required',
+            'phone' => 'required|digits:11|unique:users,phone',
+            'dob' => 'required|date|before:1st January 2000',
+            'rank' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+            'state_id' => 'required',
+            'lga' => 'required',
+            'department_id' => 'required'
+        ], [
+            'dob.after' => 'The date of birth should be a date before January 1st 2000',
+            'rank.required' => 'The lecturer\'s rank is required',
+            'state.required' => 'Select a State of origin',
+            'lga.required' => 'Select a local government'
+        ]);
+
+        $user = User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'sex' => $request->sex,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'dob' => $request->dob,
+            'state_id' => $request->state_id,
+            'location_id' => $request->lga,
+            'password' => bcrypt($request->password),
+            'address' => $request->address
+        ]);
+
+        $lecturer = $user->lecturer()->create([
+            'department_id' => $request->department_id,
+            'rank' => $request->rank
+        ]);
     }
 
     /**
