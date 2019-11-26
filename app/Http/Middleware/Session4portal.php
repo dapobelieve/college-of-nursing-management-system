@@ -18,8 +18,8 @@ class Session4portal
      */
     public function handle($request, Closure $next)
     {
-      if(Auth::check())
-          {
+      if(Auth::check()) {
+          dd('Logged in');
             if (!session()->has('dept_id')) {
               if (null == Student::where('user_id',Auth::id())) {
                 //session not created if it is admin or lecturer
@@ -31,8 +31,12 @@ class Session4portal
                 session()->put('origin', $user->state_id);
               }
             }
-          }
+
           return $next($request);
+      }
+
+      return route('dashboard.login');
+
     }
 
 }
