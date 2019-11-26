@@ -20,7 +20,7 @@ class CreateStudentsTable extends Migration
             $table->string('admission_no');
             $table->string('marital_status');
             $table->string('sponsors_name');
-            $table->string('phone', 11);
+            $table->string('sponsors_phone', 11);
             $table->integer('department_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('department_id')->references('id')->on('departments');
