@@ -18,7 +18,7 @@ class LecturerController extends Controller
      */
     public function index()
     {
-        $lecturers = Lecturer::all();
+        $lecturers = Lecturer::with('user','department')->get();
         return view('admin.lecturers.index')->with('lecturers', $lecturers);
     }
 
@@ -87,6 +87,8 @@ class LecturerController extends Controller
          */
 
         $user->roles()->sync([(int) $request->role]);
+
+        return redirect()->route('lecturers.index')->with('success', 'Lecturer added');
     }
 
     /**
@@ -106,9 +108,14 @@ class LecturerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Lecturer $lecturer)
     {
-        //
+        $departments = Department::get();
+        $states = State::get();
+        return view('admin.lecturers.edit')
+            ->with('states', $states)
+            ->with('lecturer', $lecturer)
+            ->with('departments', $departments);
     }
 
     /**
@@ -118,9 +125,44 @@ class LecturerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Lecturer $lecturer)
     {
-        //
+        $this->validate($request, [
+            'first_name' => 'string|required',
+            'last_name' => 'string|required',
+            'sex' => 'required',
+            'phone' => 'required|digits:11|unique:users,phone,'.$lecturer->user->id,
+            'dob' => 'required|date|before:1st January 2000',
+            'rank' => 'required',
+            'email' => 'required|email|unique:users,email,'.$lecturer->user->id,
+            'state_id' => 'required',
+            'lga' => 'required',
+            'department_id' => 'required'
+        ], [
+            'dob.after' => 'The date of birth should be a date before January 1st 2000',
+            'rank.required' => 'The lecturer\'s rank is required',
+            'state.required' => 'Select a State of origin',
+            'lga.required' => 'Select a local government'
+        ]);
+
+       $lecturer->user->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'sex' => $request->sex,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'dob' => $request->dob,
+            'state_id' => $request->state_id,
+            'location_id' => $request->lga,
+            'address' => $request->address
+        ]);
+
+        $lecturer->update([
+            'department_id' => $request->department_id,
+            'rank' => $request->rank
+        ]);
+
+        return redirect()->route('lecturers.index')->with('success', 'Lecturer Updated');
     }
 
     /**
