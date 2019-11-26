@@ -2411,11 +2411,11 @@ form .form-group:last-child {
   /*
 	.controls {
 		padding: 10px 10px 10px 0;
-		
+
 		label {
 			margin-top: 6px;
 			margin-right: 10px;
-			
+
 			div[class^="iradio_flat-"], div[class^="icheckbox_flat-"] {
 				vertical-align: middle;
 				margin-top: -3px;
@@ -5845,4 +5845,9 @@ body[data-color="purple"].flat .ui-dialog .ui-dialog-titlebar {
   body[data-color="purple"] #user-nav > ul > li {
     border-right: 0;
   }
+}
+
+.spacy {
+    display: flex;
+    justify-content: space-between;
 }
