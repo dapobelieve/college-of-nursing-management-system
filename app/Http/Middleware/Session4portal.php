@@ -20,8 +20,8 @@ class Session4portal
     {
       if(Auth::check())
           {
-            if (!session()->has('st_id')) {
-              if (null == Student::find(Auth::id())) {
+            if (!session()->has('dept_id')) {
+              if (null == Student::where('user_id',Auth::id())) {
                 //session not created if it is admin or lecturer
               }else {
                 $student = Student::where('user_id', Auth::id())->first();

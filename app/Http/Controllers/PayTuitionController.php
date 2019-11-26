@@ -33,11 +33,24 @@ class PayTuitionController extends Controller
         return redirect()->route('portal.dashboard')->with($notification);
       }
       //check to know what level has been paid through reference field in payment model
-      $payment = Payment::where('student_id', session()->get('st_id'))->latest('created_at')->select('reference')->first();
+      $payment = Payment::where('student_id', session()->get('st_id'))->latest('created_at')->select('reference', 'status')->first();
         $lvl = 100;
+      //declare an object to allow choosing full or half payment
+      $payType = [
+        "full" => "full",
+        "half" => "half"
+      ];
+
       if ($payment !== null) {
-        $lvl = substr($payment->reference,0,3);
-        $lvl = $lvl + 100;
+        $lvl = substr($payment->reference,4,3);
+        //check for half payment so that the same level can be repeated
+              if ($payment->status == "HALF PAID") {
+                $lvl = $lvl;
+                $payType['full'] = "half";
+                session()->put('pay_full', 'complete');
+              }else {
+                $lvl = $lvl + 100;
+              }
         if ($lvl > 300) {
           $lvl = "";
         }
@@ -45,10 +58,13 @@ class PayTuitionController extends Controller
       return view('portal.paytuition')->with('session', Fee::all()->first())
                                       ->with('user', User::find(Auth::id()))
                                       ->with('student', Student::find(session()->get('st_id')))
-                                      ->with('level', $lvl);
+                                      ->with('level', $lvl)
+                                      ->with('payType', $payType);
     }
 
-    public function payAjax($lvl)
+
+
+    public function payAjax($lvl, $type)
     {
       $fee = new Fee;
       //add level into session for usage during payment through Paystack
@@ -66,11 +82,15 @@ class PayTuitionController extends Controller
             session()->put('regStatus', 'L');
             switch ($state->name) {
               case 'Oyo':
-                return $amount->late_payment+ $amount->indigene ;
+                  $total = $amount->late_payment+ $amount->indigene;
+                  $result= $this->verifyAmount($type, $total);
+                  return $result;
                 break;
 
-              default:
-              return $amount->late_payment+ $amount->non_indigene ;
+                default:
+                $total = $amount->late_payment+ $amount->non_indigene;
+                $result= $this->verifyAmount($type, $total);
+                return $result;
                 break;
             }
       }
@@ -78,13 +98,31 @@ class PayTuitionController extends Controller
           session()->put('regStatus', 'E');
             switch ($state->name) {
               case 'Oyo':
-                return $amount->indigene ;
+                $total = $amount->indigene;
+                $result= $this->verifyAmount($type, $total);
+                return $result;
                 break;
 
               default:
-              return $amount->non_indigene ;
+              $total = $amount->non_indigene;
+              $result= $this->verifyAmount($type, $total);
+              return $result;
                 break;
         }
+      }
+    }
+
+    public function verifyAmount($check, $amount)
+    {
+      if ($check == "half") {
+        session()->put('pay_status', 'HALF PAID');
+        if(session()->has('pay_full')){
+          session()->put('pay_status', 'PAID');
+        }
+        return $amount/2;
+      }else{
+        session()->put('pay_status', 'PAID');
+        return $amount;
       }
     }
 

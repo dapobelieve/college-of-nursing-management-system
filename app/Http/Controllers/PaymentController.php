@@ -42,7 +42,7 @@ class PaymentController extends Controller
             'student_id' => $paymentDetails['data']['metadata']['student_id'],
             'reference' => $getYr."/".session()->get('lvl')."/".$paymentDetails['data']['reference'], //adding payment level to the reference
             'payment_modes_id' => 1,
-            'status' => 'PAID',
+            'status' => session()->get('pay_status'),
             'amount' => $paymentDetails['data']['amount']/100, //getting exact amount from paystack
             'created_at' => $paymentDetails['data']['createdAt'],
           ]);

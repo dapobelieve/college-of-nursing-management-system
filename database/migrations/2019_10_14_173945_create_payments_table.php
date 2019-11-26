@@ -21,7 +21,7 @@ class CreatePaymentsTable extends Migration
             $table->foreign('payment_modes_id')->references('id')->on('payment_modes');
             $table->string('reference');
             $table->decimal('amount', 8, 2);
-            $table->enum('status', ['PAID', 'NOT PAID'])->default('NOT PAID');
+            $table->enum('status', ['PAID', 'HALF PAID', 'NOT PAID'])->default('NOT PAID');
             $table->softDeletes();
             $table->timestamps();
         });

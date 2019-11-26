@@ -37,7 +37,7 @@ Route::group(['middleware' => ['role:STUDENT','check']], function(){
 
       Route::get('portal/tuitionhistory', 'PayTuitionController@index4History')->name('portal.tuitionhistory');
 
-      Route::get('portal/paytuition/{lvl}', 'PayTuitionController@payAjax')->name('portal.getamount');
+      Route::get('portal/paytuition/{lvl}/{type}', 'PayTuitionController@payAjax')->name('portal.getamount');
 
       Route::get('portal/downloadPDF/{sem}/{date}','RegHistoryController@downloadPDF')->name('portal.showhistory');
 

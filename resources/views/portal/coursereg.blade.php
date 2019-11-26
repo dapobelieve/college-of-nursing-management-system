@@ -32,8 +32,12 @@ Portal - Course Registration
                         <div class="col-md-4">
                           <select class="form-control" id="reg_session" name="reg_session" required>
                             <option value=""> </option>
-                            <option value="{{$level}} first">{{$level}}/First</option>
-                            <option value="{{$level}} second">{{$level}}/Second</option>
+                            @if($level['first'] == $level['second'])
+                            <option value="{{$level['first']}}">{{$level['first']}}</option>
+                            @else
+                            <option value="{{$level['first']}}">{{$level['first']}}</option>
+                            <option value="{{$level['second']}}">{{$level['second']}}</option>
+                            @endif
                           </select>
                         </div>
                       </div>
