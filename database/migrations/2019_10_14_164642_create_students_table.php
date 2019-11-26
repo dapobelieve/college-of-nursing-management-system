@@ -18,7 +18,7 @@ class CreateStudentsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('matric_no');
             $table->integer('department_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('department_id')->references('id')->on('departments');
             $table->softDeletes();
             $table->timestamps();

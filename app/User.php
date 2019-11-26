@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\Models\Admin;
+use App\Models\Lecturer;
+use App\Models\Student;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -40,6 +43,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function student()
+    {
+        return $this->hasOne(Student::class);
+    }
+
+    public function lecturer()
+    {
+        return $this->hasOne(Lecturer::class);
+    }
+
+    public function admin()
+    {
+        return $this->hasOne(Admin::class);
+    }
+
     /**
      * The role relationship
      */
@@ -70,13 +88,6 @@ class User extends Authenticatable
         return $this->belongsTo(State::class);
     }
 
-    /**
-     * Get the model that owns this user
-     */
-    public function userable()
-    {
-        return $this->morphTo();
-    }
 
     /**
      * Get a concatenation of the user's first and last names
