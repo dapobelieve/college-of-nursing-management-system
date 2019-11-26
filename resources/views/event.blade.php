@@ -1,14 +1,13 @@
-@extends('layout')
+@extends('welcome')
 
-@section('title')
-Event / OYSCONME
-@stop
+@section('title', strtoupper(config('site.name.short'))." "." | Event")
+
 
 @section('pagename')
 Events
 @stop
 
-@section('content')
+@section('site.content')
 
 <section class="events">
     <div class="container">

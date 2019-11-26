@@ -1,14 +1,12 @@
-@extends('layout')
+@extends('welcome')
+@section('title', strtoupper(config('site.name.short'))." "." | Contact Us")
 
-@section('title')
-Contact Us - OYSCONME
-@stop
 
 @section('pagename')
 Contact Us
 @stop
 
-@section('content')
+@section('site.content')
 <section class="contact">
     <div class="container">
         <div class="row">
