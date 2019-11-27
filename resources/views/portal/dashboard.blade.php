@@ -44,7 +44,7 @@ Portal - Dashboard
                       <strong>Current Level : <label class="col-md-8 col-form-label text-md-left  text-primary ml-3">100</label></strong>
                     </div>
                     <div class="col-md-10">
-                      <strong>Department : <label class="col-md-8 col-form-label text-md-left  text-primary ml-4">{{ $department->name }}</label></strong>
+                      <strong>Department : <label class="col-md-8 col-form-label text-md-left  text-primary ml-4">{{$dept->name}}</label></strong>
                     </div>
                     <div class="col-md-10">
                       <strong>State of Origin : <label class="col-md-8 col-form-label text-md-left  text-primary ml-3">{{ $state->name }}</label></strong>

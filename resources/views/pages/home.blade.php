@@ -88,13 +88,14 @@
                     <h2>COLLEGE NEWS</h2>
                     <div class="event-date-slide">
                         @if($latestNews->isEmpty())
-                            <h3>No news available at the moment</h3> @else
+                            <h3>No news available at the moment</h3>
+                            @else
                             <?php $j = 1;
                             $k =0;
                             $leng = (count($latestNews));
                             $length = ceil((count($latestNews))/2);?>
-                            @for($i = 0; $i
-                            < $length; $i++) <div class="row">
+                            @for($i = 0; $i< $length; $i++)
+                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="event_date">
                                         <div class="event-date-wrap">
@@ -104,7 +105,7 @@
                                     </div>
                                     <div class="date-description">
                                         <h3>{{$latestNews[$i + $k]->title}}</h3>
-                                        <p>{{substr($latestNews[$i + $k]->details,0,100)}}..</p>
+                                        <p>{{substr($latestNews[$i + $k]->content,0,100)}}..</p>
                                         <a href="{{route('latestNews', ['id'=>$latestNews[$i + $k]->id, 'info'=>$latestNews[$i + $k]->title])}}">Read More</a>
                                         <hr class="event_line">
                                     </div>
@@ -117,7 +118,7 @@
                                     </div>
                                     <div class="date-description">
                                         <h3>{{$latestNews[$i + $j]->title}}</h3>
-                                        <p>{{substr($latestNews[$i + $j]->details,0,100)}}..</p>
+                                        <p>{{substr($latestNews[$i + $j]->content,0,100)}}..</p>
                                         <a href="{{route('latestNews', ['id'=>$latestNews[$i + $j]->id, 'info'=>$latestNews[$i + $j]->title])}}">Read More</a>
                                     </div>
                                     @endif

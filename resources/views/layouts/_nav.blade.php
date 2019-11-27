@@ -50,13 +50,12 @@
                                     Pages<span class="glyphicon glyphicon-chevron-down pull-right"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="events.html">Events</a></li>
+                                    <li><a class="dropdown-item" href="{{route('events')}}">Events</a></li>
                                     <li><a class="dropdown-item" href="course-detail.html">Course Details</a></li>
                                     <li><a class="dropdown-item" href="campus-life.html">Campus Life</a></li>
                                     <li><a class="dropdown-item" href="teachers-single.html">Our teachers</a></li>
                                     <li><a class="dropdown-item" href="gallery.html">Gallery</a></li>
-                                    <li><a class="dropdown-item" href="chairman-speech.html">Chairman Speech</a></li>
-                                    <li><a class="dropdown-item" href="shortcodes.html">Shortcodes</a></li>
+                                    <li><a class="dropdown-item" href="chairman-speech.html">Provost's Speech</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item">

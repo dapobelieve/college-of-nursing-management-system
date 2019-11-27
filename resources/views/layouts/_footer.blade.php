@@ -14,6 +14,17 @@
             </div>
         </div>
         <div class="row">
+
+          <div class="col-sm-4">
+              <div class="foot-logo">
+                  <a href="index.html">
+                      <img src="images/Oysconmetrans.png" class="img-fluid" alt="footer_logo">
+                  </a>
+                  <p>2019 © copyright
+                      <br> All rights reserved.</p>
+              </div>
+          </div>
+
             <div class="col-md-4">
                 <div class="sitemap">
                     <h3>Navigation</h3>
@@ -24,16 +35,6 @@
                         <li><a href="{{route('portal.dashboard')}}">Student Portal</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="foot-logo">
-                    <a href="index.html">
-                        <img src="images/Oysconmetrans.png" class="img-fluid" alt="footer_logo">
-                    </a>
-                    <p>2019 © copyright
-                        <br> All rights reserved.</p>
                 </div>
             </div>
 

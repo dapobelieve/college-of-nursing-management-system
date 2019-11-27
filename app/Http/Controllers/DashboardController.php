@@ -51,11 +51,11 @@ class DashboardController extends Controller
          }
 
        }
-
-
+       
+        $dept = Department::find(session()->get('dept_id'));
         return view('portal.dashboard')->with('user', $user)
                                        ->with('student', $student)
-                                       ->with('department', Department::find($student->department_id))
+                                       ->with('dept', $dept)
                                        ->with('state', State::find($user->state_id))
                                        ->with('sess', $sess)
                                        ->with('latedate', $latedate)

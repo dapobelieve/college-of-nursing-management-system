@@ -53,7 +53,7 @@ class RegHistoryController extends Controller
            }
 
         return view('portal.reghistory')->with('user', $user)
-                                      ->with('department', Department::find(session()->get('dept_id')))
+                                      ->with('dept', Department::find(session()->get('dept_id')))
                                       ->with('registered', $arraydata);
     }
 

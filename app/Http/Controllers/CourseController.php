@@ -53,7 +53,7 @@ class CourseController extends Controller
         $student = Student::where('user_id', Auth::id())->first();
 
         return view('portal.coursereg')->with('user', $user)
-                                      ->with('department', Department::find($student->department_id))
+                                      ->with('dept', Department::find($student->department_id))
                                       ->with('student', $student)
                                       ->with('level', $level);
     }

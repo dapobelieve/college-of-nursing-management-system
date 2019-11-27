@@ -28,7 +28,7 @@ Portal - Course Registration
                   <div class="col">
                     <div class="form-group row">
                       <label for="department" class="col-md-8 col-form-label text-md-right">{{ __('Select session paid for') }}</label>
-                      <input type="hidden" name="hidde" id="hidde" value='{{$department->id}}'>
+                      <input type="hidden" name="hidde" id="hidde" value='{{$dept->id}}'>
                         <div class="col-md-4">
                           <select class="form-control" id="reg_session" name="reg_session" required>
                             <option value=""> </option>
@@ -87,7 +87,7 @@ Portal - Course Registration
         $('#reg_session').change(function(){
         var valueD = $('#reg_session').val();
         var depart = $('#hidde').val();
-        var deptname = "<?php echo $department->name ?>";
+        var deptname = "<?php echo $dept->name ?>";
               $.ajax({
                 type:"GET",
                 dataType: 'json',

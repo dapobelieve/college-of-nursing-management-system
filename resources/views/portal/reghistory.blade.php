@@ -52,7 +52,7 @@ Portal - Course Registration
                             <?php $no = $key +1; ?>
                               <tr>
                                 <td>{{$no}}</td>
-                                <td>{{$department->name}}</td>
+                                <td>{{$dept->name}}</td>
                                 <td>{{$value->level." ".$value->semester}}</td>
                                 <td class="text-center">{{$value->total}}</td>
                                 <td class="text-center">{{$value->sum}}</td>
