@@ -2,6 +2,7 @@
 Auth::routes();
 
 Route::post('/signin', 'Auth\AuthController@login')->name('dashboard.login');
+Route::get('/logout', 'Auth\AuthController@logout')->name('site.logout');
 
 Route::get('/', 'Frontpages\WelcomeController@index')->name('welcome');
 

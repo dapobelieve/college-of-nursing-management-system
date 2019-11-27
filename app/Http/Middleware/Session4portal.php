@@ -19,7 +19,7 @@ class Session4portal
     public function handle($request, Closure $next)
     {
       if(Auth::check()) {
-          dd('Logged in');
+//          dd('Logged in');
             if (!session()->has('dept_id')) {
               if (null == Student::where('user_id',Auth::id())) {
                 //session not created if it is admin or lecturer

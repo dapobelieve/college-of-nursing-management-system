@@ -37,4 +37,11 @@ class AuthController extends Controller
     {
         dd($request->all());
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        //delete all sessions here
+        return redirect()->route('welcome');
+    }
 }
