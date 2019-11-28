@@ -16,7 +16,7 @@
                 <div class="card-header text-center bg-dark text-white">{{ __('Student Portal Registration') }}</div>
 
                 <div class="card-body">
-                    <form method="POsT" action="{{ route('register') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                         <div class="col-md-6">
@@ -265,10 +265,35 @@
 </div>
 @endsection
 @section('script')
-<script>
     @if(Session::has('status'))
         toastr.success("the need to be the best");
     @endif
 
-</script>
+    $(document).ready(function(e){
+      var url = "{{ URL::action('StateController@recieve', ['id'=>'id'])}}";
+
+
+        $('#state').change(function(){
+        valueD = $('#state').val();
+              $.ajax({
+                type:"GET",
+                dataType: 'json',
+                url: url.replace("id", valueD),
+                success: function(result){
+                  var output ="<option value=''></option>";
+                  for (var i in result) {
+                    var u = i+1;
+                    output += "<option value="+result[i].id+">"+result[i].lga+"</option>";
+                  }
+                  output += "</select>";
+
+                  $('#lga1').html(output);
+              }
+            });
+
+
+          });
+
+          });
+
 @endsection

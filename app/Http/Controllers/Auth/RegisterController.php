@@ -34,7 +34,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-         $this->middleware('check')->only('register');
+        $this->middleware('check',['only' =>['register']]);
         $this->middleware('guest');
     }
     /**

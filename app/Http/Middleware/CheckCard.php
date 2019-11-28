@@ -3,8 +3,12 @@
 namespace App\Http\Middleware;
 
 use Session;
+use App\Alert;
 use Closure;
+use App\Models\Student;
 use DB;
+use Auth;
+use App\User;
 class CheckCard
 {
     /**
@@ -18,18 +22,28 @@ class CheckCard
 
     public function handle($request, Closure $next)
     {
-      $card = DB::table('cards')->where('pin', $request->pin)->first();
-      if ($card == null) {
-        Session::flash('status','the card not recognized!!');
-        return redirect('register');
-      }else if($card->status == 'NOT USED'){
-        return $next($request);
-      }
-      else{
-        Session::flash('status','the card has been used');
-        return redirect('register');
-      }
+      /*//check whether it is a Student
+      if (Auth::check()) {
+        $userrole = User::find(Auth::id())->roles->first();
+        dd($userrole);
+        if ($userrole->name == "Admin") {
+          return redirect()->route('dashboard.home');
+        }
+      }*/
+      //check whether student session id has been set
+      if(!session()->has('st_id'))
+          {
+          $student = Student::where('user_id', Auth::id())->select('id')->first();
+          session()->put('st_id', $student->id);
+          }
+          //check card to know if student has registered with a scratch card
+      $card = DB::table('cards')->where('student_id', session()->get('st_id'))->first();
+        if ($card == null)
+            {
+              $notification = Alert::alertMe('you need to get a scratch card to access your portal!!!', 'info');
+              return redirect('portal/checkpage')->with($notification);
+            }
+            return $next($request);
     }
-
 
 }

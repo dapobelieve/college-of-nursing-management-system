@@ -4,15 +4,18 @@
     <meta charset="utf-8">
     <title></title>
   </head>
-  <body>
+  <body style='background-image:url("images/oysconmelogo.png");'>
 
     <div>
-      <h3 style="text-align: center;">OYO STATE COLLEGE OF NURSING AND MIDWIFERY, ELEYELE IBADAN
+      <div>
+        <div style="float:left; "><img src="images/oysconmelogo.png" height="100" width ="100" alt="logo"></div>
+      <h3 style="text-align: center; float:right; margin-right:65px;">OYO STATE COLLEGE OF NURSING AND MIDWIFERY,<br> ELEYELE IBADAN
                 OYO STATE.</h3>
+      </div>
                 <br>
                 <br>
-      <h4 style="text-decoration: underline;text-align: center;">Course Registration Form</h4>
-      <p style="text-align: center;"><span style="text-decoration: underline;padding-left:15px;">Session:</span> <span style="text-decoration: underline;padding-left:15px;">Semester: {{$course[0]->level." ".$course[0]->semester}} </span><span style="text-decoration: underline;padding-left:15px;">Date: {{$dated}}</span></p>
+      <h4 style="text-decoration: underline;text-align: center; clear:both;">Course Registration Form</h4>
+      <p style="text-align: center;"><span style="text-decoration: underline;padding-left:15px;">Session:</span> <span style="text-decoration: underline;padding-left:15px;">Semester: {{$sem}} </span><span style="text-decoration: underline;padding-left:15px;">Date: {{$dated}}</span></p>
       <p style="text-align: center;"><span style="text-decoration: underline;padding-left:15px;">Matric No: {{" ".$student->matric_no}}</span><span style="text-decoration: underline;padding-left:15px;">Fullname: {{$user->last_name.", ".$user->first_name." ".$user->middle_name}}</span></p>
     </div>
     <div style="text-align:center;padding:10px 40px;">

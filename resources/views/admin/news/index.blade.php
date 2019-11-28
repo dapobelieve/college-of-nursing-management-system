@@ -10,7 +10,7 @@
         <div id="content-header">
             <h1>News</h1>
             <div class="btn-group">
-                <a href="/admin/create-post" class="btn btn-large" title="Create Post"><i class="fa fa-pencil"></i></a>
+                <a href="{{route('news.create')}}" class="btn btn-large" title="Create Post"><i class="fa fa-pencil"></i></a>
             </div>
         </div>
         <div id="breadcrumb">
@@ -45,10 +45,11 @@
                                         @foreach ($posts as $post)
                                             <tr>
                                                 <td>{{ $post->title }}</td>
-                                                <td>{{ @$post->author->first_name }}</td>
+                                                <td>---</td>
+{{--                                                <td>{{ $post->author->name }}</td>--}}
                                                 <td class="text-center">{{ $post->created_at->format('M d, Y') }}</td>
                                                 <td class="text-center">
-                                                    <a href="/admin/edit-post/{{ $post->id }}" class="btn btn-default btn-sm">Edit</a>
+                                                    <a href="/admin/news/{{ $post->id }}/edit" class="btn btn-default btn-sm">Edit</a>
                                                     <button class="btn @if ($post->status == 'active') btn-danger @else btn-success @endif btn-sm">@if ($post->status == 'active') Mute @else Unmute @endif</button>
                                                 </td>
                                             </tr>

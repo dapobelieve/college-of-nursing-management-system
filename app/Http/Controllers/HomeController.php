@@ -15,6 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+      $this->middleware('check',['only' =>['index']]);
         $this->middleware('auth');
     }
 
@@ -37,10 +38,11 @@ class HomeController extends Controller
           'marital_sta' =>'required|string',
           'sponsor' => 'required|string|max:50',
           'sponsor_num' => 'required|string|min:11',
-          'dob_upload' => 'required|image',
-          'lga_upload' => 'required|image',
+          'dob_upload' => 'required|image|max:150',
+          'pport_upload' => 'required|image|max:50',
+          'lga_upload' => 'required|image|max:150',
           'exam_no' => 'required|string|max:20',
-          'result_upload' => 'required|image',
+          'result_upload' => 'required|image|max:150',
           'mathematics' => 'required',
           'english' => 'required',
           'biology' => 'required',
@@ -60,11 +62,15 @@ class HomeController extends Controller
 
           $featuredlga = $request->lga_upload;
           $featurednewlga = time().$featuredlga->getClientOriginalName();
-          $featuredlga->move('uploads/dob', $featurednewlga);
+          $featuredlga->move('uploads/lga', $featurednewlga);
 
           $featuredresult = $request->result_upload;
           $featurednewresult = time().$featuredresult->getClientOriginalName();
-          $featuredresult->move('uploads/dob', $featurednewresult);
+          $featuredresult->move('uploads/result', $featurednewresult);
+
+          $featuredpport = $request->pport_upload;
+          $featurednewpport = time().$featuredpport->getClientOriginalName();
+          $featuredpport->move('uploads/result', $featurednewpport);
 
         $student = Student::create([
           'user_id' => Auth::id(),
@@ -74,6 +80,15 @@ class HomeController extends Controller
           'marital_sta' =>$request->marital_sta,
           'sponsor' => $request->sponsor,
           'sponsor_num' => $request->sponsor_num,
+        ]);
+
+        $result = Result::create([
+          'exam_no' => $request->exam_no,
+          'mathematics' => $request->mathematics,
+          'english' => $request->englsih,
+          'physics' => $request->phyics,
+          'chemistry' => $request->chemistry,
+          'biology' => $request->biology
         ]);
 
 

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use DB;
 use Auth;
 use Session;
+use App\Alert;
 use App\User;
 use App\Models\Course;
 use App\Models\Student;
+use App\Models\Payment;
 use App\Models\Department;
 use Illuminate\Http\Request;
 
@@ -25,25 +27,35 @@ class CourseController extends Controller
           $this->middleware('auth');
       }
 
-      // to display alert
-     public function alertMe($message, $alertType)
-     {
-       return array(
-                       'message' => $message,
-                       'alert-type' => $alertType
-                     );
-     }
+
 
 
     public function index()
     {
+      // check the session the student has paid and only allow him to register courses for the session
+        $payment = new Payment;
+        $payment = $payment->where('student_id',session()->get('st_id'))->orderBy('created_at', 'DESC')->select('reference', 'status')->first();
 
+          if ($payment == null) {
+            $notification = Alert::alertMe('Pay your tuition fee first!!!', 'info');
+            return redirect()->back()->with($notification);
+          }
+    //get the level from the reference added in payment
+          $lvl = substr($payment->reference,4,3);
+          $level = [
+            "first" => $lvl." first",
+            "second" => $lvl." second"
+          ];
+          if ($payment->status == 'HALF PAID') {
+            $level['second'] = $lvl." first";
+          }
         $user = User::find(Auth::id());
         $student = Student::where('user_id', Auth::id())->first();
 
         return view('portal.coursereg')->with('user', $user)
                                       ->with('department', Department::find($student->department_id))
-                                      ->with('student', $student);
+                                      ->with('student', $student)
+                                      ->with('level', $level);
     }
 //to recieve data for course registration through ajax
     public function recieveAjax($id, $dept)
@@ -76,14 +88,16 @@ class CourseController extends Controller
     public function store(Request $request)
     {
             //to know if the course has been register
-            $cours =DB::table('course_student')->where('student_id','=',$request->hidst)->where('course_id','=', $request->cou_reg[0])->first();
+
+            $studentID = session()->get('st_id');
+            $cours =DB::table('course_student')->where('student_id','=',$studentID)->where('course_id','=', $request->cou_reg[0])->first();
             if(!$cours){
-              $student = Student::find($request->hidst);
+              $student = Student::find($studentID);
               $student->courses()->attach($request->cou_reg);
-              $notification = $this->alertMe('Course Registered!!!', 'success');
+              $notification = Alert::alertMe('Course Registered!!!', 'success');
               return redirect()->back()->with($notification);
             }else {
-              $notification = $this->alertMe('Course already registered!!!', 'info');
+              $notification = Alert::alertMe('Course already registered!!!', 'info');
               return redirect()->back()->with($notification);
             }
 

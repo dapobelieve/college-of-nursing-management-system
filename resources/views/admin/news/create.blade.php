@@ -36,7 +36,7 @@
                             <h5>Create New Post</h5>
                         </div>
                         <div class="widget-content">
-                            <form class="form-horizontal" action="/admin/create-post" method="post">
+                            <form class="form-horizontal ajax-form" action="{{route('news.store')}}" method="post">
                                 {{ csrf_field() }}
                                 {{ method_field('POST') }}
                                 <div class="form-group">

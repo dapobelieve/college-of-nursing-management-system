@@ -17,11 +17,13 @@ class CreateStudentsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('matric_no');
-            $table->integer('card_id')->unsigned();
+            $table->string('admission_no');
+            $table->string('marital_status');
+            $table->string('sponsors_name');
+            $table->string('sponsors_phone', 11);
             $table->integer('department_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('department_id')->references('id')->on('departments');
-            $table->foreign('card_id')->references('id')->on('cards');
             $table->softDeletes();
             $table->timestamps();
         });

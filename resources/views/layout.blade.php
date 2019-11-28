@@ -1,28 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>
-      @yield('title')
-    </title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
-    <!-- Simple Line Font -->
-    <link rel="stylesheet" href="{{asset('css/simple-line-icons.css')}}">
-    <!-- Calendar Css -->
-    <link rel="stylesheet" href="{{asset('css/fullcalendar.min.css')}}" />
-    <!-- Owl Carousel -->
-    <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
-    <!-- Main CSS -->
-    <link href="{{asset('css/style.css')}}" rel="stylesheet">
-</head>
+{{--@include('layouts._head')--}}
 
 <body>
     <!-- ========================= ABOUT IMAGE =========================-->
@@ -30,7 +9,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="index.html"><img src="images/responsive-logo.png" class="responsive-logo img-fluid" alt="responsive-logo"></a>
+                    <a href="#"><img src="images/responsive-logo.png" class="responsive-logo img-fluid" alt="responsive-logo"></a>
                 </div>
             </div>
             <div class="row">
@@ -51,7 +30,7 @@
                                     <a class="nav-link" href="academics.html">Academics</a>
                                 </li>
                                 <li class="nav-logo">
-                                    <a href="index.html" class="navbar-brand"><img src="images/logo.png" class="img-fluid" alt="logo"></a>
+                                    <a href="index.html" class="navbar-brand"><img src="images/Oysconmetrans.png" class="img-fluid" alt="logo"></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="research.html">Portal</a>
@@ -60,32 +39,6 @@
                                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Pages
                                     </a>
-                                    <ul class="dropdown-menu">
-                                     <li><a class="dropdown-item" href="index-2.html">Home Style Two</a></li>
-                                            <li><a class="dropdown-item" href="index-video.html">Home Video</a></li>
-                                        <li><a class="dropdown-item" href="blog.html">Blog</a></li>
-                                        <li><a class="dropdown-item" href="blog-post.html">Blog Post</a></li>
-                                        <li><a class="dropdown-item" href="index-landing-page.html">Landing Page</a></li>
-                                        <li><a class="dropdown-item" href="events.html">Events</a></li>
-                                        <li><a class="dropdown-item" href="course-detail.html">Course Details</a></li>
-                                        <li><a class="dropdown-item" href="campus-life.html">Campus Life</a></li>
-                                        <li><a class="dropdown-item" href="our-teachers.html">Our Teachers</a></li>
-                                        <li><a class="dropdown-item" href="teachers-single.html">Teachers Single</a></li>
-                                        <li><a class="dropdown-item" href="gallery.html">Gallery</a></li>
-                                        <li><a class="dropdown-item" href="shortcodes.html">Shortcodes</a></li>
-                                        <li class="dropdown">
-                                          <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Others Pages</a>
-                                          <ul class="dropdown-menu dropdown-menu1">
-                                            <li><a class="dropdown-item" href="notice-board.html">Notice Board</a></li>
-                                            <li><a class="dropdown-item" href="chairman-speech.html">Chairman Speech</a></li>
-                                            <li><a class="dropdown-item" href="sample-page.html">Sample Page</a></li>
-                                            <li><a class="dropdown-item" href="faq.html">FAQ</a></li>
-                                            <li><a class="dropdown-item" href="login.html">Login</a></li>
-                                            <li><a class="dropdown-item" href="sign-up.html">Sign Up</a></li>
-                                            <li><a class="dropdown-item" href="coming-soon.html">Coming Soon</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="contact.html">Contact</a>
@@ -125,7 +78,7 @@
             <div class="col-md-3">
                 <div class="foot-logo">
                     <a href="index.html">
-                        <img src="images/footer-logo.png" class="img-fluid" alt="footer_logo">
+                        <img src="images/Oysconmetrans.png" class="img-fluid" alt="footer_logo">
                     </a>
                     <p>2019 © copyright
                         <br> All rights reserved.</p>
@@ -145,7 +98,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="tweet_box">
-                      
+
                         <div class="tweet-wrap">
                             <div class="tweet"></div>
                             <!-- // end .tweet -->

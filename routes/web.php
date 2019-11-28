@@ -2,38 +2,63 @@
 Auth::routes();
 
 Route::post('/signin', 'Auth\AuthController@login')->name('dashboard.login');
+Route::get('/logout', 'Auth\AuthController@logout')->name('site.logout');
 
 Route::get('/', 'Frontpages\WelcomeController@index')->name('welcome');
 
 Route::get('about', 'Frontpages\AboutController@index')->name('about');
 
-Route::get('portal/home', 'HomeController@index')->name('portal.home');
+Route::get('latest-news/{id}/{info}', 'Frontpages\latestNewsController@index')->name('latestNews');
 
-Route::post('portal/store', 'HomeController@store')->name('portal.biodata');
+Route::get('/provost-statement',function () {return view('provost-statement');});
 
-Route::get('portal/coursereg', 'CourseController@index')->name('portal.coursereg');
+Route::get('/contact', 'Frontpages\ContactController@index')->name('contact');
 
-Route::post('portal/coursereg', 'CourseController@store')->name('portal.coursereg');
+Route::post('/contact', 'Frontpages\ContactController@sendMail')->name('contact');
 
-Route::get('portal/dashboard', 'DashboardController@index')->name('portal.dashboard');
+Route::get('/our-team',function () {return view('college-officers');});
 
-Route::get('portal/coursereg/{id}/{dept}', 'CourseController@recieveAjax');
+Route::group(['middleware' => ['role:STUDENT','check']], function(){
 
-Route::get('portal/reghistory', 'RegHistoryController@index')->name('portal.reghistory');
+      Route::get('portal/home', 'HomeController@index')->name('portal.home');
 
-Route::get('portal/downloadPDF/{id}/{sem}/{date}','RegHistoryController@downloadPDF')->name('portal.showhistory');
+      Route::post('portal/store', 'HomeController@store')->name('portal.biodata');
+
+      Route::get('portal/coursereg', 'CourseController@index')->name('portal.coursereg');
+
+      Route::post('portal/coursereg', 'CourseController@store')->name('portal.coursereg');
+
+      Route::get('portal/dashboard', 'DashboardController@index')->name('portal.dashboard');
+
+      Route::get('portal/coursereg/{id}/{dept}', 'CourseController@recieveAjax');
+
+      Route::get('portal/reghistory', 'RegHistoryController@index')->name('portal.reghistory');
+
+      Route::get('portal/paytuition', 'PayTuitionController@index')->name('portal.tuition');
+
+      Route::get('portal/tuitionhistory', 'PayTuitionController@index4History')->name('portal.tuitionhistory');
+
+      Route::get('portal/paytuition/{lvl}/{type}', 'PayTuitionController@payAjax')->name('portal.getamount');
+
+      Route::get('portal/downloadPDF/{sem}/{date}','RegHistoryController@downloadPDF')->name('portal.showhistory');
+
+      Route::get('portal/paydownloadPDF/{id}/{date}','PayTuitionController@downloadPDF')->name('portal.showpayhistory');
+
+      Route::get('portal/checkpage', 'CheckpageController@index')->name('portal.checkpage');
+
+      Route::post('portal/checkpage', 'CheckpageController@store')->name('portal.check2store');
+
+      Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
+
+      Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
+});
+
+
+
 
 Route::get('/guide',function () {
 return view('applicationguide');
 });
-
-Route::post('/register', [
-'uses' => 'Auth\RegisterController@register',
-'as' => 'register.store'
-]);
-
-//->middleware('check');
-
 
 
 Route::get('/registerSearch/{id}', [
@@ -53,26 +78,42 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   // Dashboard
   Route::get('', 'DashboardController@index')->name('dashboard.home');
 
-  //Courses
+  //cards
+  Route::resource('cards', 'CardController');
+    Route::get('/index2', 'CardController@index2')->name('cards.index2');
+
+  // Courses
   Route::resource('courses', 'CourseController');
 
   // Departments
   Route::resource('departments', 'DepartmentController');
 
-  Route::resource('news', 'NewsController');
+
+  // Lecturers
+  Route::resource('lecturers', 'LecturerController');
 
   // News section
-//  Route::get('news', 'NewsController@index');
-//  Route::get('create-post', 'NewsController@create');
-//  Route::post('create-post', 'NewsController@handleCreate');
-//  Route::get('edit-post/{post}', 'NewsController@edit');
-//  Route::put('edit-post/{post}', 'NewsController@handleEdit');
+  Route::resource('news', 'NewsController',  [
+    'only' => [
+      'index', 'create', 'store', 'edit', 'update'
+    ],
+    'parameters' => [
+      'news' => 'post'
+    ]
+  ]);
 
   // Students section
   Route::get('students', 'StudentController@index');
 
   // Admins section
-  Route::get('admins', 'AdminController@index');
+  Route::resource('admins', 'AdminController',  [
+    'only' => [
+      'index', 'create', 'store', 'edit', 'update', 'show'
+    ],
+    'parameters' => [
+      'admins' => 'admin'
+    ]
+  ]);
 
   // Roles section
   Route::get('roles', 'RoleController@index');

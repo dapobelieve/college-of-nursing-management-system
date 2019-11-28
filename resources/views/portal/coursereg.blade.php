@@ -8,17 +8,17 @@ Portal - Course Registration
     <div class="row justify-content-center">
 
       <div class="col-md-3">
-            <div class="list-group" id="list-tab" role="tablist">
-              <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
-              <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Result</a>
-              <a class="list-group-item list-group-item-action active" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Course Registration</a>
-              <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Payment History</a>
-              <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Registration History</a>
-            </div>
+        <div class="list-group" id="list-tab" role="tablist">
+          <a class="list-group-item list-group-item-action" id="list-home-list"  href="{{route('portal.dashboard')}}" role="tab" aria-controls="home">Home</a>
+          <a class="list-group-item list-group-item-action" id="list-profile-list"  href="{{route('portal.tuition')}}" role="tab" aria-controls="profile">Pay Tuition</a>
+          <a class="list-group-item list-group-item-action active" id="list-messages-list"  href="{{route('portal.coursereg')}}" role="tab" aria-controls="messages">Course Registration</a>
+          <a class="list-group-item list-group-item-action" id="list-settings-list"  href="{{route('portal.tuitionhistory')}}" role="tab" aria-controls="settings">Payment History</a>
+          <a class="list-group-item list-group-item-action" id="list-settings-list"  href="{{route('portal.reghistory')}}" role="tab" aria-controls="settings">Registration History</a>
+        </div>
       </div>
         <div class="col-md-9">
             <div class="card">
-              <div class="card-header">Dashboard - Course Registration ({{$user->last_name." ".$user->first_name}})</div>
+              <div class="card-header bg-success text-center">Dashboard - Course Registration <span class="text-uppercase"> ({{$user->last_name." ".$user->first_name}})</span></div>
               <form method="POST" action="{{ route('portal.coursereg') }}" enctype="multipart/form-data">
                   @csrf
                 <div class="row">
@@ -27,18 +27,17 @@ Portal - Course Registration
                   </div>
                   <div class="col">
                     <div class="form-group row">
-                      <label for="department" class="col-md-8 col-form-label text-md-right">{{ __('Select Registration Session') }}</label>
+                      <label for="department" class="col-md-8 col-form-label text-md-right">{{ __('Select session paid for') }}</label>
                       <input type="hidden" name="hidde" id="hidde" value='{{$department->id}}'>
-                      <input type="hidden" name="hidst" id="hidde" value='{{$student->id}}'>
                         <div class="col-md-4">
                           <select class="form-control" id="reg_session" name="reg_session" required>
                             <option value=""> </option>
-                            <option value="100 first">100/First</option>
-                            <option value="100 second">100/Second</option>
-                            <option value="200 first">200/First</option>
-                            <option value="200 second">200/Second</option>
-                            <option value="300 first">300/First</option>
-                            <option value="300 second">300/Second</option>
+                            @if($level['first'] == $level['second'])
+                            <option value="{{$level['first']}}">{{$level['first']}}</option>
+                            @else
+                            <option value="{{$level['first']}}">{{$level['first']}}</option>
+                            <option value="{{$level['second']}}">{{$level['second']}}</option>
+                            @endif
                           </select>
                         </div>
                       </div>

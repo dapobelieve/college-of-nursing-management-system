@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use App\User;
 use App\Models\Student;
 use App\Models\Department;
+use App\Models\Fee;
 use App\Models\State;
 use Auth;
+use DateTime;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -16,21 +18,48 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-     public function __construct()
-     {
-         $this->middleware('auth');
-     }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
        $student = Student::where('user_id', Auth::id())->first();
        $user = User::find(Auth::id());
-       //dd(Student::find($student->id)->department);
+
+       $sess = Fee::where('department_id', session()->get('dept_id'))->first();
+       if ($sess !== null) {
+         $latedate = date("Y-m-d", strtotime(Carbon::parse($sess->expiry_date)->addDays(30)));
+
+         //for late registration Status
+         $n = date("Y/m/d");
+         $date1 = new DateTime($n);
+         $date2 = new DateTime($sess->expiry_date);
+         $interval = $date1->diff($date2);
+         $Ma = $interval->format('%R%a');
+         if ($Ma < 0) {
+           $late ="Late";
+         }else if($Ma < -30){
+           $late = "Closed";
+         }else {
+           $late = "Open";
+         }
+         // for redirecting paytuition to dashboard when registration is closed
+         if ($late == "Closed") {
+           session()->put('closed', $late);
+         }
+
+       }
+
+
         return view('portal.dashboard')->with('user', $user)
                                        ->with('student', $student)
                                        ->with('department', Department::find($student->department_id))
-                                       ->with('state', State::find($user->state_id));
+                                       ->with('state', State::find($user->state_id))
+                                       ->with('sess', $sess)
+                                       ->with('latedate', $latedate)
+                                       ->with('late', $late);
     }
 
     /**

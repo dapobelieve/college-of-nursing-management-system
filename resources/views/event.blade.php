@@ -1,14 +1,13 @@
-@extends('layout')
+@extends('welcome')
 
-@section('title')
-Event / OYSCONME
-@stop
+@section('title', strtoupper(config('site.name.short'))." "." | Event")
+
 
 @section('pagename')
 Events
 @stop
 
-@section('content')
+@section('site.content')
 
 <section class="events">
     <div class="container">
@@ -35,6 +34,9 @@ Events
            <!-- Tab panes -->
            <div class="tab-content">
              <div class="tab-pane active" id="upcoming-events" role="tabpanel">
+               @if($UpcomingEvent->isEmpty())
+               <p class="text-justify">No event available!!!</p>
+               @endif
              @foreach($UpcomingEvent as $event => $value)
               <?php $num = $event +1; ?>
 
