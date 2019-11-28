@@ -36,16 +36,18 @@
                                 {{ csrf_field() }}
                                 {{ method_field('POST') }}
 
-                                <div class="form-group">
-                                    <input type="text" name="first_name" class="form-control" placeholder="First Name" required>
-                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-4">
+                                        <input type="text" name="first_name" class="form-control" placeholder="First Name" required>
+                                    </div>
 
-                                <div class="form-group">
-                                    <input type="text" name="middle_name" class="form-control" placeholder="Middle Name" required>
-                                </div>
+                                    <div class="form-group col-sm-4">
+                                        <input type="text" name="middle_name" class="form-control" placeholder="Middle Name" required>
+                                    </div>
 
-                                <div class="form-group">
-                                    <input type="text" name="last_name" class="form-control" placeholder="Last Name" required>
+                                    <div class="form-group col-sm-4">
+                                        <input type="text" name="last_name" class="form-control" placeholder="Last Name" required>
+                                    </div>
                                 </div>
 
                                 <div class="form-actions">
