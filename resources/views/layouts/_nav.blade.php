@@ -66,7 +66,6 @@
                                 <a class="nav-link" href="{{url('/contact')}}">Contact Us</a>
                             </li>
                             @if(Auth::check())
-                                
                                 @if(Auth::user()->hasRole(['admin']))
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('dashboard.home') }}">Dashboard</a>

@@ -26,4 +26,9 @@ class Post extends Model
     {
         return $this->hasOne('App\User', 'id', 'author_id');
     }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
 }
