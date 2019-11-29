@@ -32,6 +32,7 @@
                             <th></th>
                             <th>Department</th>
                             <th>HOD</th>
+                            <th>Department's Description</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -41,6 +42,7 @@
                                     <td>{{$loop->index + 1}}</td>
                                     <td>{{$data->name}}</td>
                                     <td>{{$data->hod}}</td>
+                                    <td>{{$data->description}}</td>
                                     <td>
                                         <a href="{{route('departments.edit', ['department' => $data->id])}}">Edit</a> |
                                         <form style="display: inline" id="department-{{$data->id}}"

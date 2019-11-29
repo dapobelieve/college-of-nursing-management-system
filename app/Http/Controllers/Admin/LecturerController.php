@@ -46,6 +46,7 @@ class LecturerController extends Controller
     {
         $this->validate($request, [
             'first_name' => 'string|required',
+            'middle_name' => 'string|required',
             'last_name' => 'string|required',
             'sex' => 'required',
             'phone' => 'required|digits:11|unique:users,phone',
@@ -129,6 +130,7 @@ class LecturerController extends Controller
     {
         $this->validate($request, [
             'first_name' => 'string|required',
+            'middle_name' => 'string|required',
             'last_name' => 'string|required',
             'sex' => 'required',
             'phone' => 'required|digits:11|unique:users,phone,'.$lecturer->user->id,

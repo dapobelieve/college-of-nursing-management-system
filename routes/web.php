@@ -2,6 +2,7 @@
 Auth::routes();
 
 Route::post('/signin', 'Auth\AuthController@login')->name('dashboard.login');
+Route::get('/logout', 'Auth\AuthController@logout')->name('site.logout');
 
 Route::get('/', 'Frontpages\WelcomeController@index')->name('welcome');
 
@@ -87,6 +88,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   // Departments
   Route::resource('departments', 'DepartmentController');
 
+
   // Lecturers
   Route::resource('lecturers', 'LecturerController');
 
@@ -101,7 +103,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   ]);
 
   // Students section
-  Route::get('students', 'StudentController@index');
+  Route::resource('students', 'StudentController');
 
   // Admins section
   Route::resource('admins', 'AdminController',  [

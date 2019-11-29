@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\User;
 
 class Student extends Model
 {
@@ -13,11 +14,25 @@ class Student extends Model
   protected $dates = ['deleted_at'];
 
   /**
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
+  protected $fillable = [
+      'sponsors_name', 'department_id', 'sponsors_phone', 'marital_status', 'user_id', 'admission_no', 'matric_no'
+  ];
+
+  /**
    * Get the user model related with the student
    */
-  public function user()
+  /*public function user()
   {
     return $this->morphOne('App\User', 'userable');
+  }*/
+
+  public function user()
+  {
+      return $this->belongsTo('App\User');
   }
 
   /**

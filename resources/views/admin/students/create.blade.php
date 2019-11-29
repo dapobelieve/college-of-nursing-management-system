@@ -1,18 +1,18 @@
 @extends('admin.layout.template')
 
 @section('admin-title')
-    Create Lecturer
+    Register Student
 @endsection
 
 @section('admin-content')
 
     <div id="content">
         <div id="content-header">
-            <h1>Lecturers</h1>
+            <h1>Register Student</h1>
         </div>
         <div id="breadcrumb">
-            <a href="#" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i> Home</a>
-            <a href="#" class="current"></a>
+            <a href="{{route('dashboard.home')}}" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i> Home</a>
+            <a href="{{route('students.create')}}" class="current">Student</a>
         </div>
         <div class="container-fluid">
             <br />
@@ -32,8 +32,8 @@
                                 @if(Session::has('success'))
                                     <strong style="color: green">* {{ Session::get('success') }}</strong>
                                 @endif
-                                    <form style="display: grid; grid-template-columns: 1fr 1fr" method="post" action="{{route('lecturers.store')}}" class="form-horizontal">
-                                        <div class="">
+                                    <form style="display: grid; grid-template-columns: 1fr 1fr" method="post" action="{{route('students.store')}}" class="form-horizontal">
+                                        <div class="col">
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">First Name:</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
@@ -76,18 +76,47 @@
                                             </div>
                                             <input type="hidden" name="role" value="2">
                                             <div class="form-group">
-                                                <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Academic Rank:</label>
+                                                <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Matric No:</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
-                                                    <input id="rank" value="{{ old('rank') }}" type="text" placeholder="Academic Rank" name="rank" class="form-control input-sm" />
+                                                    <input id="rank" value="{{ old('matric_no') }}" type="text" placeholder="Matric number" name="matric_no" class="form-control input-sm" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Sponsor's name:</label>
+                                                <div class="col-sm-9 col-md-6 col-lg-6">
+                                                    <input id="password" value="{{ old('sponsors_name') }}"  type="text" placeholder="Sponsor"        name="sponsors_name" class="form-control input-sm" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Sponsor's phone:</label>
+                                                <div class="col-sm-9 col-md-6 col-lg-6">
+                                                    <input id="password" value="{{ old('sponsor_phone') }}"  type="text" placeholder="phone number"        name="sponsors_phone" class="form-control input-sm" />
                                                 </div>
                                             </div>
 
                                         </div>
-                                        <div class="">
+                                        <div class="col">
+                                          <div class="form-group">
+                                              <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Admission No.:</label>
+                                              <div class="col-sm-9 col-md-6 col-lg-6">
+                                                  <input id="password" value="{{ old('admission_no') }}"  type="text" placeholder="Provide Admission number"   name="admission_no" class="form-control input-sm" />
+                                              </div>
+                                          </div>
+                                          <div class="form-group row">
+                                              <label for="index_no" class="col-sm-3 col-md-3 col-lg-2 control-label">{{ __('Marital Status') }}</label>
+
+                                              <div class="col-sm-9 col-md-6 col-lg-6">
+                                                <select class="form-control" value="{{ old('marital_status') }}" id="marital_sta" name="marital_status" required>
+                                                  <option value=""> </option>
+                                                  <option value="Single">Single</option>
+                                                  <option value="Married">Married</option>
+                                                </select>
+                                              </div>
+                                          </div>
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Email:</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
-                                                    <input id="email" value="{{ old('email') }}" type="text" placeholder="Email Address"        name="email" class="form-control input-sm" />
+                                                    <input id="email" value="{{ old('email') }}" type="text" placeholder="Email Address"  name="email" class="form-control input-sm" />
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -99,7 +128,7 @@
                                             <div class="form-group">
                                                 <label for="hod" class="col-sm-3 col-md-3 col-lg-2 control-label">State</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
-                                                    <select onchange="getLga(event)" class="form-control input-sm" name="state_id" id="">
+                                                    <select onchange="getLga(event)" class="form-control input-sm" name="state" id="">
                                                         <option selected value="">Select</option>
                                                         @foreach($states as $dep)
                                                             <option value="{{$dep->id}}">{{$dep->name}}</option>
@@ -137,7 +166,7 @@
                                             <div class="form-group">
                                                 <label for="hod" class="col-sm-3 col-md-3 col-lg-2 control-label">Department</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
-                                                    <select class="form-control input-sm" name="department_id" id="">
+                                                    <select class="form-control input-sm" name="department" id="">
                                                         <option selected value="">Select</option>
                                                         @foreach($departments as $dep)
                                                             <option value="{{$dep->id}}">{{$dep->name}}</option>
@@ -145,13 +174,21 @@
                                                     </select>
                                                 </div>
                                             </div>
+
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Address:</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
-                                                    <textarea name="address" id="" cols="30" rows="10"
+                                                    <textarea name="address" id="" cols="30" rows="6"
                                                               class="form-control"></textarea>
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">City:</label>
+                                                <div class="col-sm-9 col-md-6 col-lg-6">
+                                                    <input id="password" value="{{ old('city') }}"  type="text" placeholder="city"        name="city" class="form-control input-sm" />
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <div class="form-actions">
                                             <button type="submit" class="btn btn-primary btn-sm">Submit</button>

@@ -61,10 +61,19 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('portal.dashboard')}}">Portal</a>
                             </li>
-
                             <li class="nav-item">
                                 <a class="nav-link" href="{{url('/contact')}}">Contact Us</a>
                             </li>
+                            @if(Auth::check())
+                                @if(Auth::user()->hasRole(['admin']))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('dashboard.home') }}">Dashboard</a>
+                                    </li>
+                                @endif
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('site.logout') }}">Logout</a>
+                            </li>
+                            @endif
                         </ul>
                     </div>
                 </nav>

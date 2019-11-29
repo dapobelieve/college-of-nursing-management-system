@@ -50,6 +50,12 @@
                                                     <input value="{{ $department->hod }}" id="amount" name="hod" placeholder="Head of Department" type="text" class="form-control input-sm" />
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <label for="Description" class="col-sm-3 col-md-3 col-lg-2 control-label">Hod</label>
+                                                <div class="col-sm-9 col-md-6 col-lg-6">
+                                                    <textarea class="form-control input-sm" value="{{ $department->description }}" name="description" placeholder="More about Department" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                </div>
+                                            </div>
                                             <div class="form-actions">
                                                 <button type="submit" class="btn btn-primary btn-sm">Update</button>
                                             </div>

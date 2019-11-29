@@ -17,6 +17,7 @@ class CreateLecturersTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('course_id')->unsigned();
+            $table->string('rank');
             $table->softDeletes();
             $table->timestamps();
 
