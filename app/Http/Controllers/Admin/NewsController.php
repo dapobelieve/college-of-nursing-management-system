@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Http\Traits\CloudinaryUpload;
 
 use App\Models\Post;
 use App\Http\Controllers\Controller;
@@ -15,6 +16,7 @@ use App\Http\Controllers\Controller;
  */
 class NewsController extends Controller
 {
+    use CloudinaryUpload;
     /**
      * Template for json response to be returned to the user for an ajax call
      * @var array $response
@@ -61,30 +63,25 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        // validate input
-        $validator = Validator::make($request->input(), [
-            'title' => 'required|unique:news,title|max:255',
-            'content' => 'required',
+        $this->validate($request, [
+            'title' => 'required',
+            'body'  => 'required'
         ]);
 
-        if ($validator->fails()) { // If validation fails
-            $this->response['message'] = $validator->messages()->first();
-        } else { // If validation is successful
-            $post = new Post();
-            $post->title = $request->input('title');
-            $post->content = $request->input('content');
-            $post->author_id = Auth::user()->id;
-            $post->save();
+        $post = Post::create([
+            'title' => $request->title,
+            'body' => $request->body,
+            'rich_body' => $request->richBody,
+        ]);
 
-            $this->response['ok'] = true;
-            $this->response['message'] = 'Post created!';
-            $this->response['data']['redirect'] = '/admin/news';
+        if ($request->has('image')){
+            $imageData = $this->upload($request->image, 'news', 3600, '', 'auto');
+            $post->images()->create([
+                'url' => $imageData['secure_url']
+            ]);
         }
 
-        // Response
-        return $this->response;
     }
-
     /**
      * Shows the edit post page
      *

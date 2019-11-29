@@ -16,6 +16,8 @@ class Post extends Model
     // Set the table to fetch records from
     protected $table = 'news';
 
+    protected $guarded = [];
+
     // Columns to be mutated to dates
     protected $dates = ['deleted_at'];
 
@@ -25,5 +27,10 @@ class Post extends Model
     public function author()
     {
         return $this->hasOne('App\User', 'id', 'author_id');
+    }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 }

@@ -8,4 +8,5 @@
     <link rel="stylesheet" href="/dashboard/css/jquery.gritter.css">
     <link rel="stylesheet" href="/dashboard/css/jquery-ui.css">
     <link rel="stylesheet" href="/dashboard/css/unicorn.css" />
+    @yield('admin.styles')
 </head>

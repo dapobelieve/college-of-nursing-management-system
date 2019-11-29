@@ -88,6 +88,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   // Departments
   Route::resource('departments', 'DepartmentController');
 
+
   // Lecturers
   Route::resource('lecturers', 'LecturerController');
 
