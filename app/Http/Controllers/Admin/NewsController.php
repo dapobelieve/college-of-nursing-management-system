@@ -63,10 +63,22 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $this->validate($request, [
+            'title' => 'required',
+            'body'  => 'required'
+        ]);
+
+        $post = Post::create([
+            'title' => $request->title,
+            'body' => $request->body,
+            'rich_body' => $request->richBody,
+        ]);
+
         if ($request->has('image')){
             $imageData = $this->upload($request->image, 'news', 3600, '', 'auto');
-            dd($imageData['secure_url']);
+            $post->images()->create([
+                'url' => $imageData['secure_url']
+            ]);
         }
 
     }
