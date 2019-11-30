@@ -20,9 +20,22 @@ Portal - Course Registration
                             <label for="index_no" class="col-md-4 col-form-label text-md-right">{{ __('Provide Pin') }}</label>
 
                             <div class="col-md-4">
-                                <input id="pin" type="text" class="form-control @error('pin') is-invalid @enderror" name="pin" value="{{ old('pin') }}" required autocomplete="name">
+                                <input id="pin" type="text" class="form-control @error('pin') is-invalid @enderror" name="pin" value="{{ old('pin') }}" required autocomplete="pin">
 
                                 @error('pin')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="index_no" class="col-md-4 col-form-label text-md-right">{{ __('Provide Serial number') }}</label>
+
+                            <div class="col-md-4">
+                                <input id="serial_no" type="text" class="form-control @error('serial_no') is-invalid @enderror" name="serial_no" value="{{ old('serial_no') }}" required>
+
+                                @error('serial_no')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

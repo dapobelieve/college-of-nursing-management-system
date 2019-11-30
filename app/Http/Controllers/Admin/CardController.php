@@ -70,7 +70,7 @@ class CardController extends Controller
                   $msg.= $serial_no." already exists in the database at row ".$i."\n";
               }
               else{
-              Card::create(['pin' => $pin,
+              Card::create(['pin' => bcrypt($pin),
               'serial_no' => $serial_no]);
               $sql = true;
               }

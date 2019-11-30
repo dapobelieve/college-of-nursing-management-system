@@ -16,6 +16,8 @@ Route::get('/contact', 'Frontpages\ContactController@index')->name('contact');
 
 Route::post('/contact', 'Frontpages\ContactController@sendMail')->name('contact');
 
+Route::post('portal/checkpage', 'CheckpageController@store')->name('portal.check2store');
+
 Route::get('/our-team',function () {return view('college-officers');});
 
 Route::group(['middleware' => ['role:STUDENT','check']], function(){
@@ -45,8 +47,6 @@ Route::group(['middleware' => ['role:STUDENT','check']], function(){
       Route::get('portal/paydownloadPDF/{id}/{date}','PayTuitionController@downloadPDF')->name('portal.showpayhistory');
 
       Route::get('portal/checkpage', 'CheckpageController@index')->name('portal.checkpage');
-
-      Route::post('portal/checkpage', 'CheckpageController@store')->name('portal.check2store');
 
       Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
 
