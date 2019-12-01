@@ -14,10 +14,10 @@ class ModifyNewsTable extends Migration
     public function up()
     {
         Schema::table('news', function (Blueprint $table) {
-            $table->string('title', 255);
             $table->text('content');
             $table->enum('status', ['active', 'banned'])->default('active');
             $table->integer('author_id')->unsigned();
+            $table->dropColumn(['details']);
         });
     }
 
