@@ -15,8 +15,6 @@ class AlterLecturersTable extends Migration
     {
         Schema::table('lecturers', function (Blueprint $table) {
             $table->integer('department_id')->unsigned()->after('user_id');
-            $table->string('rank')->nullable()->after('department_id');
-
 
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('CASCADE');
         });
