@@ -31,17 +31,33 @@ Portal - Course Registration
                     <div class="col">
                       <div class="form-group row">
                         <label for="tuition" class="col-md-2 col-form-label text-md-right"><strong>{{ __('Select Session') }}</strong></label>
-                        <select class="form-control col-md-3" id="session_t" name="session_t" required>
+                        <select class="form-control col-md-2" id="session_t" name="session_t" required>
                           <option value=""> </option>
                           <option value="">{{$session->session}} </option>
 
                         </select>
+
+                        <label for="tuition" class="col-md-2 col-form-label text-md-right"><strong>{{ __('Payment type') }}</strong></label>
+                        <select class="form-control col-md-2" id="pay_type" name="pay_type" required>
+                          @if($payType['half'] == $payType['full'])                          
+                          <option value="{{$payType['half']}}">{{$payType['half']}}</option>
+                          @else
+                          <option value="{{$payType['full']}}">{{$payType['full']}}</option>
+                          <option value="{{$payType['half']}}">{{$payType['half']}}</option>
+                          @endif
+                        </select>
+
                         <label for="tuition" class="col-md-2 col-form-label text-md-right"><strong>{{ __('Select Level') }}</strong></label>
-                        <select class="form-control col-md-3" id="pay_level" name="pay_level" required>
+                        <select class="form-control col-md-2" id="pay_level" name="pay_level" required>
                           <option value=""> </option>
                           <option value="{{$level}}">{{$level."L"}}</option>
                         </select>
                       </div>
+                    <div class="row">
+                      <div class="col-md-4"></div>
+                      <div class="text-danger col-md-5"><strong id="not_ify"></strong></div>
+                    </div>
+
                       <div class="form-group row">
                         <label class="col-md-3"><strong>Amount to be paid :</strong></label>
                         <input class="form-control col-md-6 @error('amount') is-invalid @enderror" id="pdata" value="{{ old('amount') }}" readonly required>
@@ -55,7 +71,7 @@ Portal - Course Registration
                             <input type="hidden" name="orderID" value="345">
                             <input type="hidden" name="amount" id="pdata2">
                             <input type="hidden" name="quantity" value="3">
-                            <input type="hidden" name="metadata" value="{{json_encode($array = ['student_id' => $student->id, 'matric_no' => $student->matric_no])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
+                            <input type="hidden" name="metadata" value="{{json_encode($array = ['student_id' => $student->id, 'matric_no' => $student->matric_no, 'session' => $session->session])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
                             <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
                             <input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}
                             {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
@@ -67,6 +83,7 @@ Portal - Course Registration
                       </div>
                     </div>
                   </div>
+
                   <div class="form-group row mb-0 ml-3">
                   <div class="col-md-12 offset-md-4">
                       <button type="submit" class="btn btn-primary" value="Pay Now!">
@@ -84,20 +101,23 @@ Portal - Course Registration
 
 @section('script')
 $(document).ready(function(e){
-  var url = "{{ URL::action('PayTuitionController@payAjax', ['lvl'=>'lvl'])}}";
+  var url = "{{ URL::action('PayTuitionController@payAjax', ['lvl'=>'lvl', 'type'=>'type'])}}";
 
     $('#pay_level').change(function(){
     var valueD = $('#pay_level').val();
+    var valueP = $('#pay_type').val();
 
+    url = url.replace("lvl", valueD);
           $.ajax({
             type:"GET",
             dataType: 'json',
-            url: url.replace("lvl", valueD),
+            url: url.replace("type", valueP),
             success: function(result){
 
               $('#pdata').val(result);
               var result2 = result+""+0+""+0;
               $('#pdata2').val(result2);
+              $('#not_ify').html('You are about to make "'+valueP+'" payment');
           }
         });
 

@@ -32,13 +32,17 @@ class PaymentController extends Controller
  {
      $paymentDetails = Paystack::getPaymentData();
      //dd($paymentDetails);
+     // get the session being paid for and concatenate late payment or early payment
+     $getYr =$paymentDetails['data']['metadata']['session'];
+     $getYr = substr($getYr,2,2)."".session()->get('regStatus');
+     //determine if the payment was successful or not
      switch ($paymentDetails['data']['status']) {
        case 'success':
           $payment = Payment::create([
             'student_id' => $paymentDetails['data']['metadata']['student_id'],
-            'reference' => session()->get('lvl').".".$paymentDetails['data']['reference'], //adding payment level to the reference
+            'reference' => $getYr."/".session()->get('lvl')."/".$paymentDetails['data']['reference'], //adding payment level to the reference
             'payment_modes_id' => 1,
-            'status' => 'PAID',
+            'status' => session()->get('pay_status'),
             'amount' => $paymentDetails['data']['amount']/100, //getting exact amount from paystack
             'created_at' => $paymentDetails['data']['createdAt'],
           ]);

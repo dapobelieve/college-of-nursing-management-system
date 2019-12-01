@@ -1,14 +1,12 @@
-@extends('layout')
+@extends('welcome')
 
-@section('title')
-About Us / OYSCONME
-@stop
+@section('title', strtoupper(config('site.name.short'))." "." | About Us")
 
 @section('pagename')
 About US
 @stop
 
-@section('content')
+@section('site.content')
 
 <!--============================= WELCOME TITLE =============================-->
 <section class="welcome_about">
@@ -140,72 +138,31 @@ About US
             </div>
         </div>
     </section>
-    <!--//END WELCOME TITLE -->
-    <!--============================= TESTIMONIAL =============================-->
-    <section class="testimonial">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Our Students Says</h2>
-                </div>
-                <div class="col-md-12">
-                    <div class="single-item">
-                        <div class="quote">
-                            <i class="fa fa-quote-left" aria-hidden="true"></i>
-                            <p class="quote_text">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Printing and typesetting industry. It has survived not only five centuries.</p>
-                            <div class="testi-img_block">
-                                <img src="images/testi-img.jpg" class="img-fluid" alt="#">
-                                <p><span>Student Name</span> Top rank holder</p>
-                            </div>
+<!--//END WELCOME TITLE -->
+<!--============================= TESTIMONIAL =============================-->
+<section class="testimonial">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Our Students Says</h2>
+            </div>
+            <div class="col-md-12">
+                <div class="single-item">
+                    <div class="quote">
+                        <i class="fa fa-quote-left" aria-hidden="true"></i>
+                        <p class="quote_text">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Printing and typesetting industry. It has survived not only five centuries.</p>
+                        <div class="testi-img_block">
+                            <img src="images/testi-img.jpg" class="img-fluid" alt="#">
+                            <p><span>Student Name</span> Top rank holder</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!--//END TESTIMONIAL -->
-    <!--============================= DETAILED CHART =============================-->
-    <div class="detailed_chart">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-3 chart_bottom">
-                    <div class="chart-img">
-                        <img src="images/chart-icon_1.png" class="img-fluid" alt="chart_icon">
-                    </div>
-                    <div class="chart-text">
-                        <p><span class="counter">{{$lecturer}}</span> Lecturers
-                        </p>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-3 chart_bottom chart_top">
-                    <div class="chart-img">
-                        <img src="images/chart-icon_2.png" class="img-fluid" alt="chart_icon">
-                    </div>
-                    <div class="chart-text">
-                        <p><span class="counter">{{$student}}</span> Students
-                        </p>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-3 chart_top">
-                    <div class="chart-img">
-                        <img src="images/chart-icon_3.png" class="img-fluid" alt="chart_icon">
-                    </div>
-                    <div class="chart-text">
-                        <p><span class="counter">{{$course}}</span> Courses
-                        </p>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-3">
-                    <div class="chart-img">
-                        <img src="images/chart-icon_4.png" class="img-fluid" alt="chart_icon">
-                    </div>
-                    <div class="chart-text">
-                        <p><span class="counter">13</span> Years Exp.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-    <!--//END DETAILED CHART -->
+</section>
+<!--//END TESTIMONIAL -->
+<!--============================= DETAILED CHART =============================-->
+@include('layouts._stats')
 
 @stop

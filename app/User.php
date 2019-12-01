@@ -71,10 +71,9 @@ class User extends Authenticatable
      */
     public function hasRole($roles)
     {
-        foreach ($roles as $role) {
-            if ($this->roles()->where('name', ucfirst(strtolower($role)))->count() == 1) {
+        foreach($roles as $key => $role) {
+            if ($this->roles->contains('name', ucfirst(strtolower($role))))
                 return true;
-            }
         }
 
         return false;

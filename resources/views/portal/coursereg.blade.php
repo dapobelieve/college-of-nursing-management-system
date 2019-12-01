@@ -28,12 +28,16 @@ Portal - Course Registration
                   <div class="col">
                     <div class="form-group row">
                       <label for="department" class="col-md-8 col-form-label text-md-right">{{ __('Select session paid for') }}</label>
-                      <input type="hidden" name="hidde" id="hidde" value='{{$department->id}}'>
+                      <input type="hidden" name="hidde" id="hidde" value='{{$dept->id}}'>
                         <div class="col-md-4">
                           <select class="form-control" id="reg_session" name="reg_session" required>
                             <option value=""> </option>
-                            <option value="{{$level}} first">{{$level}}/First</option>
-                            <option value="{{$level}} second">{{$level}}/Second</option>
+                            @if($level['first'] == $level['second'])
+                            <option value="{{$level['first']}}">{{$level['first']}}</option>
+                            @else
+                            <option value="{{$level['first']}}">{{$level['first']}}</option>
+                            <option value="{{$level['second']}}">{{$level['second']}}</option>
+                            @endif
                           </select>
                         </div>
                       </div>
@@ -83,7 +87,7 @@ Portal - Course Registration
         $('#reg_session').change(function(){
         var valueD = $('#reg_session').val();
         var depart = $('#hidde').val();
-        var deptname = "<?php echo $department->name ?>";
+        var deptname = "<?php echo $dept->name ?>";
               $.ajax({
                 type:"GET",
                 dataType: 'json',

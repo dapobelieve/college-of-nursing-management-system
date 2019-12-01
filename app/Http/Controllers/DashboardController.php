@@ -5,7 +5,7 @@ use Carbon\Carbon;
 use App\User;
 use App\Models\Student;
 use App\Models\Department;
-use App\Models\Currentsession;
+use App\Models\Fee;
 use App\Models\State;
 use Auth;
 use DateTime;
@@ -28,30 +28,34 @@ class DashboardController extends Controller
        $student = Student::where('user_id', Auth::id())->first();
        $user = User::find(Auth::id());
 
+       $sess = Fee::where('department_id', session()->get('dept_id'))->first();
+       if ($sess !== null) {
+         $latedate = date("Y-m-d", strtotime(Carbon::parse($sess->expiry_date)->addDays(30)));
 
-       $sess = Currentsession::where('department_id', session()->get('dept_id'))->first();
-       $latedate = date("Y-m-d", strtotime(Carbon::parse($sess->expiry_date)->addDays(30)));
-       //for late registration Status
-       $n = date("Y/m/d");
-       $date1 = new DateTime($n);
-       $date2 = new DateTime($sess->expiry_date);
-       $interval = $date1->diff($date2);
-       $Ma = $interval->format('%R%a');
-       if ($Ma < 0) {
-         $late ="Late";
-       }else if($Ma < -30){
-         $late = "Closed";
-       }else {
-         $late = "Open";
-       }
-       // for redirecting paytuition to dashboard when registration is closed
-       if ($late == "Closed") {
-         session()->put('closed', $late);
-       }
+         //for late registration Status
+         $n = date("Y/m/d");
+         $date1 = new DateTime($n);
+         $date2 = new DateTime($sess->expiry_date);
+         $interval = $date1->diff($date2);
+         $Ma = $interval->format('%R%a');
+         if ($Ma < 0) {
+           $late ="Late";
+         }else if($Ma < -30){
+           $late = "Closed";
+         }else {
+           $late = "Open";
+         }
+         // for redirecting paytuition to dashboard when registration is closed
+         if ($late == "Closed") {
+           session()->put('closed', $late);
+         }
 
+       }
+       
+        $dept = Department::find(session()->get('dept_id'));
         return view('portal.dashboard')->with('user', $user)
                                        ->with('student', $student)
-                                       ->with('department', Department::find($student->department_id))
+                                       ->with('dept', $dept)
                                        ->with('state', State::find($user->state_id))
                                        ->with('sess', $sess)
                                        ->with('latedate', $latedate)

@@ -1,7 +1,7 @@
 @extends('admin.layout.template')
 
 @section('admin-title')
-    Departments
+    Lecturers
 @endsection
 
 @section('admin-content')
@@ -64,7 +64,7 @@
                         </table>
                     @else
                         <div class="p-5 text-center">
-                            <p class="lead">No Departments!</p>
+                            <p class="lead">No Lecturer!</p>
                         </div>
                     @endif
                 </div>

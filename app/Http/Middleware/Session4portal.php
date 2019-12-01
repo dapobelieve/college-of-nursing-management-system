@@ -18,10 +18,9 @@ class Session4portal
      */
     public function handle($request, Closure $next)
     {
-      if(Auth::check())
-          {
-            if (!session()->has('st_id')) {
-              if (null == Student::find(Auth::id())) {
+      if(Auth::check()) {
+            if (!session()->has('dept_id')) {
+              if (null == Student::where('user_id',Auth::id())->first()) {
                 //session not created if it is admin or lecturer
               }else {
                 $student = Student::where('user_id', Auth::id())->first();
@@ -31,8 +30,10 @@ class Session4portal
                 session()->put('origin', $user->state_id);
               }
             }
-          }
+
           return $next($request);
+      }
+      return $next($request);
     }
 
 }

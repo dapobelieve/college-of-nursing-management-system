@@ -20,8 +20,16 @@ class CheckCard
      */
 
 
-    public function handle($request, Closure $next, ...$roles)
+    public function handle($request, Closure $next)
     {
+      /*//check whether it is a Student
+      if (Auth::check()) {
+        $userrole = User::find(Auth::id())->roles->first();
+        dd($userrole);
+        if ($userrole->name == "Admin") {
+          return redirect()->route('dashboard.home');
+        }
+      }*/
       //check whether student session id has been set
       if(!session()->has('st_id'))
           {

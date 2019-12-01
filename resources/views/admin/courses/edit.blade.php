@@ -81,7 +81,6 @@
                                                     <input id="level" min="100" value="{{ $course->level }}" type="number" placeholder="Level" name="level" class="form-control input-sm" />
                                                 </div>
                                             </div>
-
                                             <div class="form-actions">
                                                 <button type="submit" class="btn btn-primary btn-sm">Update</button>
                                             </div>

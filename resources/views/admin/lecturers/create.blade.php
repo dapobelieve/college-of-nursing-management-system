@@ -41,6 +41,12 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
+                                                <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Middle Name:</label>
+                                                <div class="col-sm-9 col-md-6 col-lg-6">
+                                                    <input id="last_name" value="{{ old('middle_name') }}" type="text" placeholder="Middle Name" name="middle_name" class="form-control input-sm" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Last Name:</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
                                                     <input id="last_name" value="{{ old('last_name') }}" type="text" placeholder="Last Name" name="last_name" class="form-control input-sm" />

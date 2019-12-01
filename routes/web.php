@@ -2,6 +2,7 @@
 Auth::routes();
 
 Route::post('/signin', 'Auth\AuthController@login')->name('dashboard.login');
+Route::get('/logout', 'Auth\AuthController@logout')->name('site.logout');
 
 Route::get('/', 'Frontpages\WelcomeController@index')->name('welcome');
 
@@ -11,7 +12,9 @@ Route::get('latest-news/{id}/{info}', 'Frontpages\latestNewsController@index')->
 
 Route::get('/provost-statement',function () {return view('provost-statement');});
 
-Route::get('/contact',function () {return view('contact');});
+Route::get('/contact', 'Frontpages\ContactController@index')->name('contact');
+
+Route::post('/contact', 'Frontpages\ContactController@sendMail')->name('contact');
 
 Route::get('/our-team',function () {return view('college-officers');});
 
@@ -35,19 +38,22 @@ Route::group(['middleware' => ['role:STUDENT','check']], function(){
 
       Route::get('portal/tuitionhistory', 'PayTuitionController@index4History')->name('portal.tuitionhistory');
 
-      Route::get('portal/paytuition/{lvl}', 'PayTuitionController@payAjax')->name('portal.getamount');
+      Route::get('portal/paytuition/{lvl}/{type}', 'PayTuitionController@payAjax')->name('portal.getamount');
 
       Route::get('portal/downloadPDF/{sem}/{date}','RegHistoryController@downloadPDF')->name('portal.showhistory');
 
+      Route::get('portal/paydownloadPDF/{id}/{date}','PayTuitionController@downloadPDF')->name('portal.showpayhistory');
+
+      Route::get('portal/checkpage', 'CheckpageController@index')->name('portal.checkpage');
+
+      Route::post('portal/checkpage', 'CheckpageController@store')->name('portal.check2store');
+
+      Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
+
+      Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 });
 
-Route::get('portal/checkpage', 'CheckpageController@index')->name('portal.checkpage');
 
-Route::post('portal/checkpage', 'CheckpageController@store')->name('portal.check2store');
-
-Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
-
-Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 
 
 Route::get('/guide',function () {
@@ -72,11 +78,16 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   // Dashboard
   Route::get('', 'DashboardController@index')->name('dashboard.home');
 
+  //cards
+  Route::resource('cards', 'CardController');
+    Route::get('/index2', 'CardController@index2')->name('cards.index2');
+
   // Courses
   Route::resource('courses', 'CourseController');
 
   // Departments
   Route::resource('departments', 'DepartmentController');
+
 
   // Lecturers
   Route::resource('lecturers', 'LecturerController');
@@ -92,7 +103,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   ]);
 
   // Students section
-  Route::get('students', 'StudentController@index');
+  Route::resource('students', 'StudentController');
 
   // Admins section
   Route::resource('admins', 'AdminController',  [

@@ -39,10 +39,11 @@ class DepartmentController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:departments,name',
-            'hod' => 'required'
+            'hod' => 'required',
+            'description' => 'required'
         ]);
 
-        Department::create($request->only(['name', 'hod']));
+        Department::create($request->only(['name', 'hod', 'description']));
 
         return redirect()->route('departments.index')->with('success', 'Department created');
     }
@@ -80,10 +81,11 @@ class DepartmentController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:departments,name,'.$department->id,
-            'hod' => 'required'
+            'hod' => 'required',
+            'description' => 'required'
         ]);
 
-        $department->update($request->only(['name', 'hod']));
+        $department->update($request->only(['name', 'hod', 'description']));
 
         return redirect()->route('departments.index')->with('success', 'Department updated');
     }

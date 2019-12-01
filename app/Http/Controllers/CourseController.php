@@ -34,21 +34,28 @@ class CourseController extends Controller
     {
       // check the session the student has paid and only allow him to register courses for the session
         $payment = new Payment;
-        $payment = $payment->where('student_id',session()->get('st_id'))->orderBy('created_at', 'DESC')->select('reference')->first();
+        $payment = $payment->where('student_id',session()->get('st_id'))->orderBy('created_at', 'DESC')->select('reference', 'status')->first();
 
           if ($payment == null) {
             $notification = Alert::alertMe('Pay your tuition fee first!!!', 'info');
             return redirect()->back()->with($notification);
           }
     //get the level from the reference added in payment
-          $lvl = substr($payment->reference,0,3);
+          $lvl = substr($payment->reference,4,3);
+          $level = [
+            "first" => $lvl." first",
+            "second" => $lvl." second"
+          ];
+          if ($payment->status == 'HALF PAID') {
+            $level['second'] = $lvl." first";
+          }
         $user = User::find(Auth::id());
         $student = Student::where('user_id', Auth::id())->first();
 
         return view('portal.coursereg')->with('user', $user)
-                                      ->with('department', Department::find($student->department_id))
+                                      ->with('dept', Department::find($student->department_id))
                                       ->with('student', $student)
-                                      ->with('level', $lvl);
+                                      ->with('level', $level);
     }
 //to recieve data for course registration through ajax
     public function recieveAjax($id, $dept)

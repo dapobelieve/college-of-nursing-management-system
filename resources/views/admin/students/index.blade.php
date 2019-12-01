@@ -25,31 +25,37 @@
                             <h5>Students</h5>
                         </div>
                         <div class="widget-content nopadding">
-                            @if ($students->total() > 0)
+                            @if ($students->count() > 0)
                                 <table class="table table-bordered table-striped table-hover">
                                     <thead>
                                         <tr>
                                             <th>Name</th>
                                             <th>Matric.No</th>
                                             <th>Department</th>
+                                            <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($students as $student)
                                             <tr>
-                                                <td>{{ $student->user->full_name }}</td>
+                                                <td>{{$student->user->last_name." ".$student->user->first_name." ".$student->user->middle_name}}</td>
                                                 <td>{{ $student->matric_no }}</td>
                                                 <td>{{ $student->department->name }}</td>
+                                                @if($student->user->is_active == "ACTIVE")
+                                                <td><label class="badge badge-success">{{ $student->user->is_active}}</label></td>
+                                                @else
+                                                  <td><label class="badge badge-danger">{{ $student->user->is_active}}</label></td>
+                                                @endif
                                                 <td class="text-center">
-                                                    <a href="/admin/view-student/{{ $student->id }}" class="btn btn-default btn-sm">Details</a>
+                                                    <a href="{{route('students.edit', ['students' => $student->id])}}" class="btn btn-primary btn-sm">Details</a>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
 
-                                {{ $students->links() }}
+
                             @else
                                 <div class="p-5 text-center">
                                     <p class="lead">0 students found!</p>

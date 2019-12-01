@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use Auth;
 use App\Alert;
 use App\User;
 use App\Models\State;
 use App\Models\Student;
-use App\Models\Currentsession;
+use App\Models\Fee;
 use App\Models\Payment;
 use Carbon\Carbon;
 use DateTime;
@@ -32,27 +33,43 @@ class PayTuitionController extends Controller
         return redirect()->route('portal.dashboard')->with($notification);
       }
       //check to know what level has been paid through reference field in payment model
-      $payment = Payment::where('student_id', session()->get('st_id'))->latest('created_at')->select('reference')->first();
+      $payment = Payment::where('student_id', session()->get('st_id'))->latest('created_at')->select('reference', 'status')->first();
         $lvl = 100;
+      //declare an object to allow choosing full or half payment
+      $payType = [
+        "full" => "full",
+        "half" => "half"
+      ];
+
       if ($payment !== null) {
-        $lvl = substr($payment->reference,0,3);
-        $lvl = $lvl + 100;
+        $lvl = substr($payment->reference,4,3);
+        //check for half payment so that the same level can be repeated
+              if ($payment->status == "HALF PAID") {
+                $lvl = $lvl;
+                $payType['full'] = "half";
+                session()->put('pay_full', 'complete');
+              }else {
+                $lvl = $lvl + 100;
+              }
         if ($lvl > 300) {
           $lvl = "";
         }
       }
-      return view('portal.paytuition')->with('session', Currentsession::all()->first())
+      return view('portal.paytuition')->with('session', Fee::all()->first())
                                       ->with('user', User::find(Auth::id()))
                                       ->with('student', Student::find(session()->get('st_id')))
-                                      ->with('level', $lvl);
+                                      ->with('level', $lvl)
+                                      ->with('payType', $payType);
     }
 
-    public function payAjax($lvl)
+
+
+    public function payAjax($lvl, $type)
     {
-      $currentsession = new Currentsession;
+      $fee = new Fee;
       //add level into session for usage during payment through Paystack
       session()->put('lvl', $lvl);
-      $amount = $currentsession->where('level','=', $lvl)->where('department_id','=',session()->get('dept_id'))->first();
+      $amount = $fee->where('level','=', $lvl)->where('department_id','=',session()->get('dept_id'))->first();
       //to check for late payment
       $n = date("Y/m/d");
       $date1 = new DateTime($n);
@@ -61,26 +78,51 @@ class PayTuitionController extends Controller
       $Ma = $interval->format('%R%a');
       $state = State::find(session()->get('origin'));
       if ($Ma < 0) {
+        //created  a session to know when registration is late
+            session()->put('regStatus', 'L');
             switch ($state->name) {
               case 'Oyo':
-                return $amount->late_payment+ $amount->indigene ;
+                  $total = $amount->late_payment+ $amount->indigene;
+                  $result= $this->verifyAmount($type, $total);
+                  return $result;
                 break;
 
-              default:
-              return $amount->late_payment+ $amount->non_indigene ;
+                default:
+                $total = $amount->late_payment+ $amount->non_indigene;
+                $result= $this->verifyAmount($type, $total);
+                return $result;
                 break;
             }
       }
       else {
+          session()->put('regStatus', 'E');
             switch ($state->name) {
               case 'Oyo':
-                return $amount->indigene ;
+                $total = $amount->indigene;
+                $result= $this->verifyAmount($type, $total);
+                return $result;
                 break;
 
               default:
-              return $amount->non_indigene ;
+              $total = $amount->non_indigene;
+              $result= $this->verifyAmount($type, $total);
+              return $result;
                 break;
         }
+      }
+    }
+
+    public function verifyAmount($check, $amount)
+    {
+      if ($check == "half") {
+        session()->put('pay_status', 'HALF PAID');
+        if(session()->has('pay_full')){
+          session()->put('pay_status', 'PAID');
+        }
+        return $amount/2;
+      }else{
+        session()->put('pay_status', 'PAID');
+        return $amount;
       }
     }
 
@@ -97,6 +139,24 @@ class PayTuitionController extends Controller
         return view('portal.tuitionhistory')->with('user', User::find(Auth::id()))
                                             ->with('registered', $payment)
                                             ->with('department', session()->get('dept_id'));
+      }
+
+      public function downloadPDF($id, $date)
+      {
+        $st_id = session()->get('st_id');
+        $origin = State::find(session()->get('origin'));
+        $payment = Payment::find($id);
+        $student = Student::find($st_id);
+        $user = User::find(Auth::id());
+        $session = substr($payment->reference,0,2);
+        //check to know whether it is late payment
+        $late = substr($payment->reference,2,1);
+        $late = ($late == 'L') ? 'YES' : 'NO' ;
+        $dated = $date;
+        $pdf = PDF::loadView('portal/pdfPayReceipt', compact('payment','student', 'user', 'dated', 'origin', 'session', 'late'));
+
+        return $pdf->download('invoice.pdf');
+
       }
 
 
