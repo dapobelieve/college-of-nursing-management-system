@@ -40,7 +40,7 @@
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Pin:</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
-                                                    <input id="name" value="{{ $card->pin }}" type="text" placeholder="Provide Pin" name="pin" class="form-control input-sm" />
+                                                    <input id="name" value="{{ $card->pin }}" type="text" placeholder="Provide Pin" name="pin" class="form-control input-sm" readonly/>
                                                 </div>
                                             </div>
                                             <input type="hidden" name="_method" value="PUT">

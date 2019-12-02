@@ -1,6 +1,17 @@
 <?php
 Auth::routes();
 
+Route::domain('{admission}.myapp.com')->group(function () {
+
+});
+
+Route::group(['prefix' => '/admission', 'namespace' => 'Admission'], function () {
+Route::resource('application', 'ApplicationController');
+});
+
+
+
+
 Route::post('/signin', 'Auth\AuthController@login')->name('dashboard.login');
 Route::get('/logout', 'Auth\AuthController@logout')->name('site.logout');
 
@@ -104,7 +115,20 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
 
   // Students section
   Route::resource('students', 'StudentController');
+  Route::get('/index2dep/{id}', 'StudentController@dept')->name('students.index2dep');
+  Route::get('/addresult/{id}', 'StudentController@showresult')->name('students.showresult');
+  Route::post('/addresult', 'StudentController@addresult')->name('students.addresult');
 
+  //Cardapplicants sub_section
+  Route::resource('cardapplicants', 'CardapplicantController');
+  Route::get('/index3', 'CardapplicantController@index2')->name('cardapplicants.index3');
+  Route::post('/index3', 'CardapplicantController@exportcsv')->name('cardapplicants.exportcsv');
+  Route::post('cardapplicants/index', 'CardapplicantController@deleteall')->name('cardapplicants.deleteall');
+
+  //applicants
+  Route::get('applicants/index', 'ApplicantController@index')->name('applicants.index');
+  Route::put('applicants/index', 'ApplicantController@deleteall')->name('applicants.deleteall');
+  Route::post('applicants/index', 'ApplicantController@exportcsv')->name('applicants.exportcsv');
   // Admins section
   Route::resource('admins', 'AdminController',  [
     'only' => [

@@ -27,8 +27,10 @@ class CheckpageController extends Controller
           DB::table('cards')->where('serial_no', $request->serial_no)->update(['status' => 'USED', 'student_id'=> session()->get('st_id')]);
           $notification = Alert::alertMe('Successful!!', 'success');
         return redirect('portal/dashboard')->with($notification);
-        }
-
+      }else {
+        $notification = Alert::alertMe('Incorrect pin!', 'warning');
+      return redirect('portal/checkpage')->with($notification);
+      }
       }
       else{
         $notification = Alert::alertMe('the card has been used!!', 'warning');

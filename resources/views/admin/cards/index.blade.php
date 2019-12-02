@@ -47,7 +47,7 @@
                                     <td><span class="badge badge-primary">{{$data->status}}</span></td>
                                     @endif
                                     <td>{{$data->matric_no}}</td>
-                                    <td>No action</td>
+                                    <td><label class="badge badge-primary">No action</label></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -57,6 +57,7 @@
                             <p class="lead">No Cards!</p>
                         </div>
                     @endif
+                    {{$cards->links()}}
                 </div>
             </div>
         </div>

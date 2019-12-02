@@ -8,5 +8,6 @@
     <link rel="stylesheet" href="/dashboard/css/jquery.gritter.css">
     <link rel="stylesheet" href="/dashboard/css/jquery-ui.css">
     <link rel="stylesheet" href="/dashboard/css/unicorn.css" />
+    <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
     @yield('admin.styles')
 </head>

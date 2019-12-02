@@ -12,5 +12,29 @@
 <script src="/dashboard/js/unicorn.dashboard.js"></script>
 <script src="/dashboard/js/jquery.gritter.min.js"></script>
 
+<script src="{{ asset('js/toastr.min.js') }}"></script>
 <script src="/js/iyiola-forms.js"></script>
+<script>
+@if(Session::has('message'))
+  var type = "{{ Session::get('alert-type') }}";
+  switch(type){
+      case 'info':
+          toastr.info("{{ Session::get('message') }}");
+          break;
+
+      case 'warning':
+          toastr.warning("{{ Session::get('message') }}");
+          break;
+
+      case 'success':
+          toastr.success("{{ Session::get('message') }}");
+          break;
+
+      case 'error':
+          toastr.error("{{ Session::get('message') }}");
+          break;
+  }
+@endif
+
+</script>
 @yield('admin.scripts')

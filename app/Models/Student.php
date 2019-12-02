@@ -48,4 +48,11 @@ class Student extends Model
   public function courses(){
     return $this->belongsToMany('App\Models\Course')->withTimestamps();
   }
+
+  /**
+  *get result
+  */
+  public function result(){
+    return $this->belongsTo('App\Models\Result');
+  }
 }
