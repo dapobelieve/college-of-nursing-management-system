@@ -89,16 +89,17 @@
                                                         <input readonly  value="{{ $student->sponsors_name}}" type="text" class="form-control input-sm" />
                                                     </div>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">sponsor's phone:</label>
+                                                    <div class="col-sm-9 col-md-6 col-lg-6">
+                                                        <input readonly  value="{{ $student->sponsors_phone}}" type="text" class="form-control input-sm" />
+                                                    </div>
+                                                </div>
 
 
                                             </div>
                                             <div class="">
-                                              <div class="form-group">
-                                                  <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">sponsor's phone:</label>
-                                                  <div class="col-sm-9 col-md-6 col-lg-6">
-                                                      <input readonly  value="{{ $student->sponsors_phone}}" type="text" class="form-control input-sm" />
-                                                  </div>
-                                              </div>
+
                                                 <div class="form-group">
                                                     <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">State of origin</label>
                                                     <div class="col-sm-9 col-md-6 col-lg-6">
@@ -116,7 +117,7 @@
                                                 <div class="form-group">
                                                     <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Address:</label>
                                                     <div class="col-sm-9 col-md-6 col-lg-6">
-                                                        <textarea value="" name="address" cols="30" rows="6" class="form-control">{{$student->user->address}}</textarea>
+                                                        <textarea value="" name="address" cols="30" rows="3" class="form-control">{{$student->user->address}}</textarea>
                                                     </div>
                                                 </div>
 
@@ -139,15 +140,48 @@
                                                         @endif
                                                     </div>
                                                 </div>
+                                                <br>
+                                                @if($result !== null)
+                                                <div class="row">
+                                                    <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">Exam type:</label>
+                                                      <p class="col-sm-9 col-md-6 col-lg-6">{{$result->exam_type}}</p>
+                                                </div>
+                                                <div class="row">
+                                                    <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">Exam number:</label>
+                                                      <p class="col-sm-9 col-md-6 col-lg-6">{{$result->exam_no}}</p>
+                                                </div>
+                                                <div class="row">
+                                                    <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">Mathematics:</label>
+                                                      <p class="col-sm-9 col-md-6 col-lg-6">{{$result->mathematics}}</p>
+                                                </div>
+                                                <div class="row">
+                                                    <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">English:</label>
+                                                      <p class="col-sm-9 col-md-6 col-lg-6">{{$result->english}}</p>
+                                                </div>
+                                                <div class="row">
+                                                    <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">Physics:</label>
+                                                      <p class="col-sm-9 col-md-6 col-lg-6">{{$result->physics}}</p>
+                                                </div>
+                                                <div class="row">
+                                                    <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">Chemistry:</label>
+                                                      <p class="col-sm-9 col-md-6 col-lg-6">{{$result->chemistry}}</p>
+                                                </div>
+                                                <div class="row">
+                                                    <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">Biology:</label>
+                                                      <p class="col-sm-9 col-md-6 col-lg-6">{{$result->biology}}</p>
+                                                </div>
+                                                @endif
 
                                             </div>
+
                                             <div class="form-actions">
-                                                <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                                                <button type="submit" class="btn btn-primary btn-sm">Update Profile</button>
                                             </div>
                                             {{ csrf_field() }}
                                         </form>
 
                                     </div>
+
                                 </div>
                             </div>
 

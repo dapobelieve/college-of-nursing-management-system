@@ -1,6 +1,17 @@
 <?php
 Auth::routes();
 
+Route::domain('{admission}.myapp.com')->group(function () {
+
+});
+
+Route::group(['prefix' => '/admission', 'namespace' => 'Admission'], function () {
+Route::resource('application', 'ApplicationController');
+});
+
+
+
+
 Route::post('/signin', 'Auth\AuthController@login')->name('dashboard.login');
 Route::get('/logout', 'Auth\AuthController@logout')->name('site.logout');
 
@@ -15,6 +26,8 @@ Route::get('/provost-statement',function () {return view('provost-statement');})
 Route::get('/contact', 'Frontpages\ContactController@index')->name('contact');
 
 Route::post('/contact', 'Frontpages\ContactController@sendMail')->name('contact');
+
+Route::post('portal/checkpage', 'CheckpageController@store')->name('portal.check2store');
 
 Route::get('/our-team',function () {return view('college-officers');});
 
@@ -45,8 +58,6 @@ Route::group(['middleware' => ['role:STUDENT','check']], function(){
       Route::get('portal/paydownloadPDF/{id}/{date}','PayTuitionController@downloadPDF')->name('portal.showpayhistory');
 
       Route::get('portal/checkpage', 'CheckpageController@index')->name('portal.checkpage');
-
-      Route::post('portal/checkpage', 'CheckpageController@store')->name('portal.check2store');
 
       Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
 
@@ -104,7 +115,20 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
 
   // Students section
   Route::resource('students', 'StudentController');
+  Route::get('/index2dep/{id}', 'StudentController@dept')->name('students.index2dep');
+  Route::get('/addresult/{id}', 'StudentController@showresult')->name('students.showresult');
+  Route::post('/addresult', 'StudentController@addresult')->name('students.addresult');
 
+  //Cardapplicants sub_section
+  Route::resource('cardapplicants', 'CardapplicantController');
+  Route::get('/index3', 'CardapplicantController@index2')->name('cardapplicants.index3');
+  Route::post('/index3', 'CardapplicantController@exportcsv')->name('cardapplicants.exportcsv');
+  Route::post('cardapplicants/index', 'CardapplicantController@deleteall')->name('cardapplicants.deleteall');
+
+  //applicants
+  Route::get('applicants/index', 'ApplicantController@index')->name('applicants.index');
+  Route::put('applicants/index', 'ApplicantController@deleteall')->name('applicants.deleteall');
+  Route::post('applicants/index', 'ApplicantController@exportcsv')->name('applicants.exportcsv');
   // Admins section
   Route::resource('admins', 'AdminController',  [
     'only' => [

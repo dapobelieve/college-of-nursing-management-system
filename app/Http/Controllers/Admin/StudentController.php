@@ -10,6 +10,8 @@ use App\Models\State;
 use App\Models\Location;
 use App\Models\Department;
 use App\Models\Lecturer;
+use App\Models\Result;
+use App\Alert;
 use App\User;
 use Carbon\Carbon;
 
@@ -25,10 +27,63 @@ class StudentController extends Controller
       /*  $students = Student::orderBy('created_at', 'DESC')
             ->orderBy('updated_at', 'DESC')
             ->paginate(10); */
-        $students =  Student::with('user', 'department')->get();
-        //dd($students);
+        $students =  Student::with('user', 'department', 'result')->paginate(10);
+        $dept = Department::all();
+        return View('admin.students.index', ['section' => 'students', 'sub_section' => 'all', 'students' => $students, 'dept' => $dept]);
+    }
 
-        return View('admin.students.index', ['section' => 'students', 'sub_section' => 'all', 'students' => $students]);
+    /**
+    *show all student by department
+    *@return View
+    */
+    public function dept($id)
+    {
+      $students = Student::with('user')->where('department_id', $id)->paginate(10);
+      $dept = Department::all();
+      return View('admin.students.index2dep', ['section' => 'students', 'sub_section' => 'all', 'students' => $students, 'dept' => $dept]);
+    }
+
+    /**
+    *add student mysqli_more_results
+    *
+    *@return view
+    */
+    public function showresult($id)
+    {
+      $student = Student::find($id)->user;
+      $result = Result::where('student_id', $id)->first();
+      if ($result == null) {
+        return View('admin.students.addresult', ['section' => 'students', 'sub_section' => 'all', 'students'=> $student]);
+      }
+      $notification = Alert::alertMe('Result has been added!!', 'success');
+      return redirect()->route('students.index')->with($notification);
+    }
+
+    public function addresult(Request $request)
+    {
+
+      $this->validate($request, [
+        'exam_type' => 'required',
+        'exam_no' => 'required|string|min:10|unique:results',
+        'mathematics' => 'required',
+        'english' => 'required',
+        'physics' => 'required',
+        'chemistry' => 'required',
+        'biology' => 'required'
+      ]);
+
+      $result = Result::create([
+          'student_id' =>$request->student_id,
+          'exam_type' => $request->exam_type,
+          'exam_no' => $request->exam_no,
+          'mathematics' => $request->mathematics,
+          'english' => $request->english,
+          'physics' => $request->physics,
+          'chemistry' => $request->chemistry,
+          'biology' => $request->biology
+      ]);
+      $notification = Alert::alertMe('Result Added!', 'success');
+      return redirect()->route('students.index')->with($notification);
     }
 
 
@@ -112,8 +167,8 @@ class StudentController extends Controller
          */
 
         $user->roles()->sync([(int) $request->role]);
-
-        return redirect()->route('students.index')->with('success', 'Student added!!!');
+          $notification = Alert::alertMe('Student Added!', 'success');
+        return redirect()->route('students.index')->with($notification);
     }
 
     /**
@@ -138,7 +193,8 @@ class StudentController extends Controller
       $students = $student->with('user', 'department')->first();
       $state = State::find($students->user->state_id);
       $lga = Location::find($students->user->location_id);
-      return View('admin.students.edit', ['section' => 'students', 'student' => $students, 'lga' =>$lga, 'state' =>$state]);
+      $results = Result::where('student_id', $student->id)->first();
+      return View('admin.students.edit', ['section' => 'students', 'student' => $students, 'lga' =>$lga, 'state' =>$state, 'result'=>$results]);
     }
     /**
      * Update the specified resource in storage.
@@ -161,7 +217,8 @@ class StudentController extends Controller
             'address' => $request->address
         ]);
 
-        return redirect()->route('students.index')->with('success', 'Student Updated');
+          $notification = Alert::alertMe('Student Updated!', 'success');
+        return redirect()->route('students.index')->with($notification);
     }
 
     /**

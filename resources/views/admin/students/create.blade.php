@@ -74,7 +74,7 @@
                                                     <input id="dob" value="{{ old('dob') }}" type="date"  name="dob" class="form-control input-sm" />
                                                 </div>
                                             </div>
-                                            <input type="hidden" name="role" value="2">
+                                            <input type="hidden" name="role" value="3">
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Matric No:</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">

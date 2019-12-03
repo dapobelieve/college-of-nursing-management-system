@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Card;
+use App\Alert;
 
 class CardController extends Controller
 {
@@ -18,13 +19,13 @@ class CardController extends Controller
       $cards = Card::select('serial_no', 'matric_no', 'status')
                ->join('students', 'students.id', '=', 'cards.student_id')
                ->paginate(10);
-        return view('admin.cards.index', ['section' =>'cards', 'cards' => $cards]);
+        return view('admin.cards.index', ['section' =>'cards','sub_section' => 'all', 'cards' => $cards]);
     }
 
     public function index2()
     {
       $cards = Card::where('student_id', null)->paginate(10);
-      return view('admin.cards.index2', ['section' =>'cards', 'cards' => $cards]);
+      return view('admin.cards.index2', ['section' =>'cards','sub_section' => 'all2', 'cards' => $cards]);
     }
 
     /**
@@ -34,7 +35,7 @@ class CardController extends Controller
      */
     public function create()
     {
-        return view('admin.cards.create');
+        return view('admin.cards.create',['section' =>'cards','sub_section' => 'create']);
     }
 
     /**
@@ -57,7 +58,8 @@ class CardController extends Controller
         $handle = fopen($file, "r");
         $filename = $request->file_csv->getClientOriginalExtension();
         if ($file == NULL || $filename !== 'csv') {
-            return redirect()->route('cards.create')->with('success', 'Please select a CSV file to import');
+          $notification = Alert::alertMe('Please select a CSV file to import', 'warning');
+            return redirect()->route('cards.create')->with($notification);
         }else {
           while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
             {
@@ -70,7 +72,7 @@ class CardController extends Controller
                   $msg.= $serial_no." already exists in the database at row ".$i."\n";
               }
               else{
-              Card::create(['pin' => $pin,
+              Card::create(['pin' => bcrypt($pin),
               'serial_no' => $serial_no]);
               $sql = true;
               }
@@ -82,10 +84,12 @@ class CardController extends Controller
               $message = "imported successfully!!! but '.$msg.'";
             return redirect()->route('cards.index')->with('success', $message);
             }
-              return redirect()->route('cards.index')->with('success', 'Imported successfully!!!');
+            $notification = Alert::alertMe('Imported successfully!!!', 'success');
+              return redirect()->route('cards.index')->with($notification);
 
           } else {
-            return redirect()->route('cards.create')->with('success', 'Sorry! There is some problem in the import file.');
+            $notification = Alert::alertMe('Sorry! There is some problem in the import file', 'warning');
+            return redirect()->route('cards.create')->with($notification);
 
           }
           }
@@ -135,6 +139,7 @@ class CardController extends Controller
     public function destroy(Card $card)
     {
       $card->delete();
-      return redirect()->route('cards.index2')->with('success', 'Card deleted');
+      $notification = Alert::alertMe('Card deleted!!!', 'success');
+      return redirect()->route('cards.index2')->with($notification);
     }
 }

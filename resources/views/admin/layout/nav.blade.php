@@ -16,6 +16,13 @@
             </ul>
         </li>
 
+        <li class="submenu @if ($section == 'applicants') active @endif @if (collect(['all', 'all2', 'create'])->contains($sub_section) & $section == 'applicants') open @endif">
+            <a href="#"><i class="fa fa-book"></i> <span>Applicants</span> <i class="arrow fa fa-chevron-right"></i></a>
+            <ul>
+                <li @if ($sub_section == 'all') class="active" @endif><a href="{{route('applicants.index')}}">View Applicants</a></li>
+            </ul>
+        </li>
+
         <li class=" submenu @if ($section == 'students') active @endif @if (collect(['all', 'create'])->contains($sub_section) & $section == 'students') open @endif">
             <a href="#"><i class="fa fa-group"></i> <span>Students</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
@@ -34,12 +41,21 @@
             </ul>
         </li>
 
-        <li class="submenu">
+        <li class="submenu @if ($section == 'cardapplicants') active @endif @if (collect(['all', 'all2', 'create'])->contains($sub_section) & $section == 'cardapplicants') open @endif">
+            <a href="#"><i class="fa fa-book"></i> <span>Admission Cards</span> <i class="arrow fa fa-chevron-right"></i></a>
+            <ul>
+                <li @if ($sub_section == 'all') class="active" @endif><a href="{{route('cardapplicants.index')}}">Used Cards</a></li>
+                <li @if ($sub_section == 'all2') class="active" @endif><a href="{{route('cardapplicants.index3')}}">Available Cards</a></li>
+                <li @if ($sub_section == 'create') class="active" @endif><a href="{{route('cardapplicants.create')}}">Add Card</a></li>
+            </ul>
+        </li>
+
+        <li class="submenu @if ($section == 'cards') active @endif @if (collect(['all', 'all2', 'create'])->contains($sub_section) & $section == 'cards') open @endif">
             <a href="#"><i class="fa fa-book"></i> <span>Cards</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
-                <li><a href="{{route('cards.index')}}">Used Cards</a></li>
-                <li><a href="{{route('cards.index2')}}">Available Cards</a></li>
-                <li><a href="{{route('cards.create')}}">Add Card</a></li>
+                <li @if ($sub_section == 'all') class="active" @endif><a href="{{route('cards.index')}}">Used Cards</a></li>
+                <li @if ($sub_section == 'all2') class="active" @endif><a href="{{route('cards.index2')}}">Available Cards</a></li>
+                <li @if ($sub_section == 'create') class="active" @endif><a href="{{route('cards.create')}}">Add Card</a></li>
             </ul>
         </li>
 

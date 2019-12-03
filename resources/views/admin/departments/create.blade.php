@@ -50,7 +50,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="Description" class="col-sm-3 col-md-3 col-lg-2 control-label">Hod</label>
+                                                <label for="Description" class="col-sm-3 col-md-3 col-lg-2 control-label">Description</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
                                                     <textarea class="form-control input-sm" value="{{ old('description') }}" name="description" placeholder="More about Department" id="exampleFormControlTextarea1" rows="3"></textarea>
                                                 </div>

@@ -1,14 +1,14 @@
 @extends('admin.layout.template')
 
 @section('admin-title')
-    Cards
+    Cards for Applicants
 @endsection
 
 @section('admin-content')
 
     <div id="content">
         <div id="content-header">
-            <h1>Cards</h1>
+            <h1>Applicant's Cards</h1>
         </div>
         <div id="breadcrumb">
             <a href="#" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i> Home</a>
@@ -31,6 +31,7 @@
                         <tr>
                             <th></th>
                             <th>serial_no</th>
+                            <th>Name</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -39,24 +40,10 @@
                             @foreach($cards as $data)
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
-                                    <td>{{$data->serial_no}}</td>
-                                    @if($data->status == 'USED')
-                                    <td><span class="badge badge-success">{{$data->status}}</span></td>
-                                    @else
-                                    <td><span class="badge badge-primary">{{$data->status}}</span></td>
-                                    @endif
-
-                                    <td>
-                                        <a href="{{route('cards.edit', ['card' => $data->id])}}">Edit</a> |
-                                        <form style="display: inline" id="card-{{$data->id}}"
-                                              method="post"
-                                              action="{{route('cards.destroy', ['card' => $data->id])}}">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            {{csrf_field()}}
-                                        </form>
-                                        <a onclick="event.preventDefault();
-if (confirm('Are you sure you want to delete this record?')) document.getElementById('card-{{$data->id}}').submit()" href="{{route('cards.destroy', ['card' => $data->id])}}">Delete</a>
-                                    </td>
+                                    <td>{{$data->card_id}}</td>
+                                    <td>{{$data->surname." ".$data->first_name}}</td>
+                                    <td><span class="badge badge-success">USED</span></td>
+                                    <td><span class="badge badge-primary">No action</span></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -67,6 +54,24 @@ if (confirm('Are you sure you want to delete this record?')) document.getElement
                         </div>
                     @endif
                     {{$cards->links()}}
+                </div>
+                <div class="col-xs-12">
+                  <label class="text text-danger">*Do not delete until admission process is finished*</labe>
+                </div>
+                <div class="col-xs-12">
+                  <form class="form-inline" method="post" action="{{route('cardapplicants.deleteall')}}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group mx-sm-3 mb-2">
+                      <label for="inputPassword2" class="sr-only">Password</label>
+                      <input type="password" class="form-control  @error('password') is-invalid @enderror" value="{{ old('password') }}" name="password" placeholder="Provide Password" required>
+                      @error('password')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Delete Used Cards</button>
+                  </form>
                 </div>
             </div>
         </div>

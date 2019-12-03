@@ -67,7 +67,7 @@ class DepartmentController extends Controller
      */
     public function edit(Department $department)
     {
-        return view('admin.departments.edit')->with('department', $department);
+        return view('admin.departments.edit')->with('departments', $department);
     }
 
     /**

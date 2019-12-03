@@ -6,29 +6,31 @@ use App\Alert;
 use App\Models\Student;
 use App\Card;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class CheckpageController extends Controller
 {
   public function index()
   {
-    $card = Card::where('student_id', session()->get('st_id'))->first();
-      if (!$card == null) {
-        return redirect()->route('portal.dashboard');
-      }
-      return view('portal.checkpage');
+        return view('portal.checkpage');
   }
 
   public function store(Request $request)
   {
       $card = new Card;
-      $card = $card->where('pin', $request->pin)->first();
+      $card = $card->where('serial_no', $request->serial_no)->first();
       if ($card == null) {
         $notification = Alert::alertMe('the card is not available!!', 'info');
         return redirect('portal/checkpage')->with($notification);
       }else if($card->status == 'NOT USED'){
-          DB::table('cards')->where('pin', $request->pin)->update(['status' => 'USED', 'student_id'=> session()->get('st_id')]);
+        if (Hash::check($request->pin, $card->pin)) {
+          DB::table('cards')->where('serial_no', $request->serial_no)->update(['status' => 'USED', 'student_id'=> session()->get('st_id')]);
           $notification = Alert::alertMe('Successful!!', 'success');
         return redirect('portal/dashboard')->with($notification);
+      }else {
+        $notification = Alert::alertMe('Incorrect pin!', 'warning');
+      return redirect('portal/checkpage')->with($notification);
+      }
       }
       else{
         $notification = Alert::alertMe('the card has been used!!', 'warning');

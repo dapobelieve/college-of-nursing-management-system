@@ -15,6 +15,15 @@ class CreateResultsTable extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('student_id')->unsigned();
+            $table->enum('exam_type', ['WAEC', 'NECO']);
+            $table->string('exam_no');
+            $table->string('mathematics');
+            $table->string('english');
+            $table->string('chemistry');
+            $table->string('biology');
+            $table->string('physics');
+              $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

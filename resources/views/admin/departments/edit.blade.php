@@ -36,24 +36,24 @@
                                         @if(Session::has('success'))
                                             <strong style="color: green">* {{ Session::get('success') }}</strong>
                                         @endif
-                                        <form method="post" action="{{route('departments.update', ['department' => $department->id])}}" class="form-horizontal">
+                                        <form method="post" action="{{route('departments.update', ['department' => $departments->id])}}" class="form-horizontal">
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Name:</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
-                                                    <input id="name" value="{{ $department->name }}" type="text" placeholder="Department Name" name="name" class="form-control input-sm" />
+                                                    <input id="name" value="{{ $departments->name }}" type="text" placeholder="Department Name" name="name" class="form-control input-sm" />
                                                 </div>
                                             </div>
                                             <input type="hidden" name="_method" value="PUT">
                                             <div class="form-group">
                                                 <label for="hod" class="col-sm-3 col-md-3 col-lg-2 control-label">Hod</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
-                                                    <input value="{{ $department->hod }}" id="amount" name="hod" placeholder="Head of Department" type="text" class="form-control input-sm" />
+                                                    <input value="{{ $departments->hod }}" id="amount" name="hod" placeholder="Head of Department" type="text" class="form-control input-sm" />
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="Description" class="col-sm-3 col-md-3 col-lg-2 control-label">Hod</label>
+                                                <label for="Description" class="col-sm-3 col-md-3 col-lg-2 control-label">Description</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
-                                                    <textarea class="form-control input-sm" value="{{ $department->description }}" name="description" placeholder="More about Department" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                    <textarea class="form-control input-sm" name="description" placeholder="More about Department" id="exampleFormControlTextarea1" rows="3">{{ $departments->description }}</textarea>
                                                 </div>
                                             </div>
                                             <div class="form-actions">
