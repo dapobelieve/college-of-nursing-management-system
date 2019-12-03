@@ -99,6 +99,8 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   // Departments
   Route::resource('departments', 'DepartmentController');
 
+  // Fees
+  Route::resource('fees', 'FeeController');
 
   // Lecturers
   Route::resource('lecturers', 'LecturerController');
@@ -129,6 +131,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   Route::get('applicants/index', 'ApplicantController@index')->name('applicants.index');
   Route::put('applicants/index', 'ApplicantController@deleteall')->name('applicants.deleteall');
   Route::post('applicants/index', 'ApplicantController@exportcsv')->name('applicants.exportcsv');
+  
   // Admins section
   Route::resource('admins', 'AdminController',  [
     'only' => [
