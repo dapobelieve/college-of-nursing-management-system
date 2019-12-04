@@ -6,7 +6,20 @@ Route::domain('{admission}.myapp.com')->group(function () {
 });
 
 Route::group(['prefix' => '/admission', 'namespace' => 'Admission'], function () {
-Route::resource('application', 'ApplicationController');
+
+Route::get('login', 'LoginController@index')->name('admission.login');
+
+Route::post('login', 'LoginController@check')->name('admission.login');
+
+Route::get('dashboard', 'DashboardController@index')->name('admission.dashboard');
+
+Route::get('application', 'ApplicationController@index')->name('application.index');
+
+Route::post('application', 'ApplicationController@store')->name('application.store');
+
+Route::get('application/steptwo', 'ApplicationtwoController@index')->name('application.steptwo');
+
+Route::post('application/steptwo', 'ApplicationtwoController@update')->name('application.update');
 });
 
 
@@ -30,6 +43,10 @@ Route::post('/contact', 'Frontpages\ContactController@sendMail')->name('contact'
 Route::post('portal/checkpage', 'CheckpageController@store')->name('portal.check2store');
 
 Route::get('/our-team',function () {return view('college-officers');});
+
+Route::get('/coursedetails/{id}', 'Frontpages\CoursedetailsController@index')->name('coursedetails');
+
+
 
 Route::group(['middleware' => ['role:STUDENT','check']], function(){
 

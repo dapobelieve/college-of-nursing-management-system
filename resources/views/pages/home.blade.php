@@ -36,7 +36,7 @@
                                 <img src="images/courses_1.jpg" class="img-fluid" alt="courses-img">
                                 <div class="courses_box-img">
                                     <div class="courses-link-wrap">
-                                        <a href="#" class="course-link"><span>course Details </span></a>
+                                        <a href="#" class="course-link"><span>{{$dept->name}}</span></a>
                                         <a href="#" class="course-link"><span>Join today </span></a>
                                     </div>
                                     <!-- // end .courses-link-wrap -->
@@ -46,7 +46,7 @@
                             <div class="courses_icon">
                                 <img src="images/plus-icon.png" class="img-fluid close-icon" alt="plus-icon">
                             </div>
-                            <a href="course-detail.html" class="course-box-content">
+                            <a href="{{route('coursedetails',['id' => $dept->id])}}" class="course-box-content">
                                 <h3>{{$dept->name}}</h3>
                                 <p>Know more about our {{$dept->name}} department</p>
                             </a>

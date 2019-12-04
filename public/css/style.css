@@ -1,11 +1,11 @@
 /*------------------------------------------------------------------
 Theme Name: UNISCO - Responsive Bootstrap Landing Page
 Version: 1.0
-Author: 
+Author:
 -------------------------------------------------------------------*/
 /*------------------------------------------------------------------
 [TABLE OF CONTENTS]
-    
+
     1. GLOBAL STYLES
     2. HEADER
     3. ABOUT
@@ -24,9 +24,9 @@ Author:
     14. ADMISSION COURCES
     15. ADMISSION DETAILS COURCES
 
-    16. ADMISSION FORM RULES 
+    16. ADMISSION FORM RULES
 
-    17. CAMPUS 
+    17. CAMPUS
 
     18. RESEARCH
 
@@ -1747,7 +1747,7 @@ select.form-control.custom-select {
  * ADMISSION FORM
  ********************************/
 /* ==============================================================
-   ADMISSION FORM RULES 
+   ADMISSION FORM RULES
    ============================================================== */
 .admission-form_rules {
   padding: 60px 0; }
@@ -1855,7 +1855,7 @@ select.form-control.custom-select {
  * CAMPUS LIFE
  ********************************/
 /* ==============================================================
-   CAMPUS 
+   CAMPUS
    ============================================================== */
 .campus {
   padding: 98px 0; }
