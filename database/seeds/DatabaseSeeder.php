@@ -14,8 +14,9 @@ class DatabaseSeeder extends Seeder
       $this->call(RoleTableSeeder::class);
       $this->call(StatesTableSeeder::class);
       $this->call(LocationsSeeder::class);
-      $this->call(CardTableSeeder::class);
-      $this->call(DepartmentSeeder::class);
+      $this->call(SettingsSeeder::class);
+      //$this->call(CardTableSeeder::class);
+      //$this->call(DepartmentSeeder::class);
 
       // $this->call(UsersTableSeeder::class);
     }

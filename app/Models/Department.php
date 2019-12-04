@@ -6,9 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Department extends Model
 {
-    protected $guarded = [];
+  protected $guarded = [];
 
-    public function student(){
+  /**
+   * Get department students
+   */
+  public function student(){
     return $this->hasMany('App\Models\Student');
+  }
+
+  /**
+   * Get department fees
+   */
+  public function fee()
+  {
+    return $this->hasMany('App\Models\Fee');
   }
 }
