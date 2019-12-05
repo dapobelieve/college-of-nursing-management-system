@@ -22,6 +22,7 @@ Admission - Form one
                     @endif
                 </span>
                 <form class="form-horizontal" action="{{route('application.store')}}" method="post">
+                  @csrf
                         <div class='row'>
                             <div class='col-md-6'>
                               <div class='row form-group'>

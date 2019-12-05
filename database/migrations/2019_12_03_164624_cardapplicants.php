@@ -15,7 +15,7 @@ class Cardapplicants extends Migration
   {
     Schema::create('cardapplicants', function (Blueprint $table) {
         $table->increments('id')->unsigned();
-        $table->integer('reg_no')->unsigned();
+        $table->string('reg_no')->unique();
         $table->string('password');
         $table->timestamps();
     });

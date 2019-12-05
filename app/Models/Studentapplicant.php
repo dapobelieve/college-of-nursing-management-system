@@ -10,7 +10,8 @@ class Studentapplicant extends Model
       'card_id', 'first_name', 'middle_name', 'surname', 'gender', 'dob', 'email',
       'phone', 'home_address', 'state', 'state_id', 'lga', 'state_of_origin', 'pic_url',
       'sponsor_add', 'sponsor_name', 'sponsor_type', 'sponsor_email', 'sponsor_phone', 'religion',
-      'reg_step', 'marital_status'
+      'reg_step', 'marital_status','exam_no', 'exam_type', 'mathematics', 'english','physics',
+      'chemistry', 'biology', 'score', 'Admssion_status'
   ];
 
 

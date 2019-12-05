@@ -13,7 +13,21 @@ Admission - Form two
                     </div>
                 </div>
     <form class="" action="{{route('application.update', ['Studentapplicant'=>$id])}}" method="post">
+      @csrf
+      <input type="hidden" name="_method" value="PUT">
+          <div class="row">
+            <span>
+                @foreach($errors->all() as $error)
+                    <strong style="color: red">*{{ $error }}</strong> <br>
+                @endforeach
+                @if(Session::has('error'))
+                    <strong style="color: red">* {{ Session::get('error') }}</strong> <br>
+                @endif
+            </span>
+
+          </div>
                         <div class='row'>
+
                             <div class='col-md-6'>
 
                                <div class='row form-group'>
@@ -85,7 +99,7 @@ Admission - Form two
                                             Exam Type</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <select class='form-control custom-select' name='exam-type' required>
+                                        <select class='form-control custom-select' name='exam_type' required>
                                             <option selected='' value=''>Select</option>
                                             <option value='WAEC'>WAEC</option>
                                             <option value='NECO'>NECO</option>

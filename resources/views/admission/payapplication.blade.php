@@ -7,7 +7,7 @@ Admission - Payment Dashboard
 
 <div class="card">
   <div class="card-header text-center bg-success">Dashboard - Pay for Form</div>
-  <form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8" enctype="multipart/form-data">
+  <form method="POST" action="{{ route('payadmission') }}" accept-charset="UTF-8" enctype="multipart/form-data">
       @csrf
     <div class="row">
       <div class="col card-body">
@@ -29,12 +29,25 @@ Admission - Payment Dashboard
 
           <div class="form-group row">
             <label class="col-md-3"><strong>Amount to be paid :</strong></label>
-            <input class="form-control col-md-6 @error('amount') is-invalid @enderror" id="pdata" value="{{ old('amount') }}" readonly required>
+            <input class="form-control col-md-6 @error('amount') is-invalid @enderror" id="pdata" value="{{ $amount }}" readonly required>
             @error('amount')
                 <span class="invalid-feedback col-md-3" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
+
+            <input type="hidden" name="email" value="{{$student->email}}"> {{-- required --}}
+            <input type="hidden" name="orderID" value="">
+            <input type="hidden" name="amount" value="{{$amount.'00'}}">
+            <input type="hidden" name="quantity" value="">
+            <input type="hidden" name="fees_split" value="50">
+            <input type="hidden" name="subaccount" value="ACCT_965haoklrfwcghx">
+            <input type="hidden" name="metadata" value="{{json_encode($array = ['student_id' => $student->id, 'payment_type'=> 'Admission'])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
+            <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
+            <input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}
+            {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
+
+             <input type="hidden" name="_token" value="{{ csrf_token() }}"> {{-- employ this in place of csrf_field only in laravel 5.0 --}}
 
 
 

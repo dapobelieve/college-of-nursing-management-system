@@ -17,14 +17,14 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        $card_id = "";//recieve session of auth
-        $reg_no = '';
-        $student = Studentapplicant::where('card_id', $card_id)->first();
+        $card_id = session()->get('auth');//recieve session of auth
+        //$reg_no = '';
+        $student = Studentapplicant::where('cardapplicant_id', $card_id)->first();
         if ($student == null) {
           return view('admission.application', ['section' => 'application']);
         }else {
           $notification = Alert::alertMe('That part has been registered!', 'info');
-          return redirect()->route('admission.applicationtwo')->with($notification);
+          return redirect()->route('application.steptwo')->with($notification);
         }
     }
 
@@ -52,12 +52,12 @@ class ApplicationController extends Controller
       ]);
       // $reg_step is to determine the first insert into the Studentapplicant table
         $reg_step = 'First';
-        $card_id = ""; //session
-      $student = studentapplicants::create([
+        $card_id = session()->get('auth');//session
+      $student = studentapplicant::create([
           'card_id' => $card_id,
           'surname' => $request->surname,
           'first_name' => $request->first_name,
-          'middle_name' => $request->last_name,
+          'middle_name' => $request->middle_name,
           'gender' => $request->gender,
           'email' => $request->email,
           'phone' => $request->phone,
@@ -68,8 +68,11 @@ class ApplicationController extends Controller
           'state_of_origin' => $request->state_of_origin,
           'religion' => $request->religion,
           'marital_status' => $request->marital_status,
-          'reg_status' => $reg_step
+          'reg_step' => $reg_step
       ]);
+
+      $notification = Alert::alertMe('Registered successful', 'success');
+      return redirect()->route('application.steptwo')->with($notification);
 
     }
 

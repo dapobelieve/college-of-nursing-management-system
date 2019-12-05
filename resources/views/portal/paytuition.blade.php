@@ -39,7 +39,7 @@ Portal - Course Registration
 
                         <label for="tuition" class="col-md-2 col-form-label text-md-right"><strong>{{ __('Payment type') }}</strong></label>
                         <select class="form-control col-md-2" id="pay_type" name="pay_type" required>
-                          @if($payType['half'] == $payType['full'])                          
+                          @if($payType['half'] == $payType['full'])
                           <option value="{{$payType['half']}}">{{$payType['half']}}</option>
                           @else
                           <option value="{{$payType['full']}}">{{$payType['full']}}</option>
@@ -71,7 +71,7 @@ Portal - Course Registration
                             <input type="hidden" name="orderID" value="345">
                             <input type="hidden" name="amount" id="pdata2">
                             <input type="hidden" name="quantity" value="3">
-                            <input type="hidden" name="metadata" value="{{json_encode($array = ['student_id' => $student->id, 'matric_no' => $student->matric_no, 'session' => $session->session])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
+                            <input type="hidden" name="metadata" value="{{json_encode($array = ['student_id' => $student->id, 'matric_no' => $student->matric_no, 'session' => $session->session, 'payment_type'=> 'Portal'])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
                             <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
                             <input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}
                             {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}

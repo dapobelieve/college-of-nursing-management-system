@@ -6,10 +6,12 @@ Route::domain('{admission}.myapp.com')->group(function () {
 });
 
 Route::group(['prefix' => '/admission', 'namespace' => 'Admission'], function () {
-
 Route::get('login', 'LoginController@index')->name('admission.login');
 
 Route::post('login', 'LoginController@check')->name('admission.login');
+});
+
+Route::group(['prefix' => '/admission', 'namespace' => 'Admission', 'middleware' => 'checkAuth'], function () {
 
 Route::get('dashboard', 'DashboardController@index')->name('admission.dashboard');
 
@@ -19,7 +21,18 @@ Route::post('application', 'ApplicationController@store')->name('application.sto
 
 Route::get('application/steptwo', 'ApplicationtwoController@index')->name('application.steptwo');
 
-Route::post('application/steptwo', 'ApplicationtwoController@update')->name('application.update');
+Route::put('application/steptwo/{studentapplicant}', 'ApplicationtwoController@update')->name('application.update');
+
+Route::get('upload', 'UploadController@index')->name('upload.index');
+
+Route::post('upload', 'UploadController@store')->name('upload.store');
+
+Route::get('payapplication', 'PayapplicationController@index')->name('payapplication.index');
+
+Route::post('payapplication', 'PayapplicationController@index')->name('payapplication.pay');
+
+Route::post('/pay', 'Payment2Controller@redirectToGateway')->name('payadmission');
+
 });
 
 
@@ -78,9 +91,8 @@ Route::group(['middleware' => ['role:STUDENT','check']], function(){
 
       Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
 
-      Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
-});
-
+    });
+    Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 
 
 

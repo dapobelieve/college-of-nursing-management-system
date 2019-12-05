@@ -29,8 +29,7 @@ class LoginController extends Controller
          {
 
             if (Hash::check($request->password, $login->password)) {
-              //session()->put('auth', $login->id);
-
+              session()->put('auth', $login->id);
               $notification = Alert::alertMe('Login succesful!', 'success');
               return redirect()->route('admission.dashboard')->with($notification);
             }

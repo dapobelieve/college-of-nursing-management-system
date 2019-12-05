@@ -54,8 +54,8 @@
                         <a class="list-group-item list-group-item-action @if ($section == 'dashboard') active @endif"  href="{{route('admission.dashboard')}}" role="tab" aria-controls="home">Home</a>
                         <a class="list-group-item list-group-item-action @if ($section == 'application') active @endif"   href="{{route('application.index')}}" role="tab" aria-controls="profile">Application- Step One</a>
                         <a class="list-group-item list-group-item-action @if ($section == 'applicationtwo') active @endif"   href="{{route('application.steptwo')}}" role="tab" aria-controls="messages">Application- Step two</a>
-                        <a class="list-group-item list-group-item-action"   href="{{route('portal.tuitionhistory')}}" role="tab" aria-controls="settings">Pay Application Form</a>
-                        <a class="list-group-item list-group-item-action"   href="{{route('portal.reghistory')}}" role="tab" aria-controls="settings">Upload Passport</a>
+                        <a class="list-group-item list-group-item-action @if ($section == 'payment') active @endif"   href="{{route('payapplication.index')}}" role="tab" aria-controls="settings">Pay Application Form</a>
+                        <a class="list-group-item list-group-item-action @if ($section == 'upload') active @endif"   href="{{route('upload.index')}}" role="tab" aria-controls="settings">Upload Passport</a>
                         <a class="list-group-item list-group-item-action"  href="{{route('portal.reghistory')}}" role="tab" aria-controls="settings">Print Form</a>
                       </div>
                 </div>
