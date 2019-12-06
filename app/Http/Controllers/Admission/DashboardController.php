@@ -12,10 +12,24 @@ class DashboardController extends Controller
 {
     public function index()
     {
-  
 
-      return View('admission.dashboard',['section'=>'dashboard']);
-      //need to add logic to know whereby they have been given admission or not but first of all to show
-      //the Instruction
+      $student = Studentapplicant::where('cardapplicant_id', session()->get('auth'))->first();
+
+      if($student == null)
+      {
+        //assign an object inorder to decieve the login
+        $student = '{"score":null, "admission_status" :null, "first_name":null, "pic_url":null}';
+        $student = json_decode($student);
+        //dd($student);
+      return View('admission.dashboard',['section'=>'dashboard', 'student' => $student]);
+      }
+      return View('admission.dashboard',['section'=>'dashboard', 'student' => $student]);
     }
+
+    public function logout()
+    {
+      session()->flush();
+      return redirect()->route('admission.login');
+    }
+
 }

@@ -40,8 +40,7 @@ Admission - Payment Dashboard
             <input type="hidden" name="orderID" value="">
             <input type="hidden" name="amount" value="{{$amount.'00'}}">
             <input type="hidden" name="quantity" value="">
-            <input type="hidden" name="fees_split" value="50">
-            <input type="hidden" name="subaccount" value="ACCT_965haoklrfwcghx">
+            <input type="hidden" name="subaccount" value="ACCT_arzfl9hyn18yce6">
             <input type="hidden" name="metadata" value="{{json_encode($array = ['student_id' => $student->id, 'payment_type'=> 'Admission'])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
             <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
             <input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}

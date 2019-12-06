@@ -37,7 +37,7 @@
                     <ul class="navbar-nav ml-auto">
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('logout') }}">{{ __('Logout') }}</a>
+                                <a class="nav-link" href="{{ route('admission.logout') }}">{{ __('Logout') }}</a>
                             </li>
                     </ul>
                     </div>
@@ -56,7 +56,7 @@
                         <a class="list-group-item list-group-item-action @if ($section == 'applicationtwo') active @endif"   href="{{route('application.steptwo')}}" role="tab" aria-controls="messages">Application- Step two</a>
                         <a class="list-group-item list-group-item-action @if ($section == 'payment') active @endif"   href="{{route('payapplication.index')}}" role="tab" aria-controls="settings">Pay Application Form</a>
                         <a class="list-group-item list-group-item-action @if ($section == 'upload') active @endif"   href="{{route('upload.index')}}" role="tab" aria-controls="settings">Upload Passport</a>
-                        <a class="list-group-item list-group-item-action"  href="{{route('portal.reghistory')}}" role="tab" aria-controls="settings">Print Form</a>
+                        <a class="list-group-item list-group-item-action"  href="{{route('printform.downloadPDF')}}" role="tab" aria-controls="settings">Print Form</a>
                       </div>
                 </div>
                 <div class="col-md-9">

@@ -23,7 +23,7 @@ class ApplicationController extends Controller
         if ($student == null) {
           return view('admission.application', ['section' => 'application']);
         }else {
-          $notification = Alert::alertMe('That part has been registered!', 'info');
+          $notification = Alert::alertMe('Step one been registered!', 'info');
           return redirect()->route('application.steptwo')->with($notification);
         }
     }
@@ -54,7 +54,7 @@ class ApplicationController extends Controller
         $reg_step = 'First';
         $card_id = session()->get('auth');//session
       $student = studentapplicant::create([
-          'card_id' => $card_id,
+          'cardapplicant_id' => $card_id,
           'surname' => $request->surname,
           'first_name' => $request->first_name,
           'middle_name' => $request->middle_name,

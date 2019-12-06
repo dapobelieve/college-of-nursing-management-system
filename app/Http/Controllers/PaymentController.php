@@ -32,8 +32,8 @@ class PaymentController extends Controller
  public function handleGatewayCallback()
  {
      $paymentDetails = Paystack::getPaymentData();
-     dd($paymentDetails);
-     if ($paymentDetails['data']['metadata']['payment_type'] == 'Portal')
+     //dd($paymentDetails['data']['metadata']['payment_type']);
+     if ($paymentDetails['data']['metadata']['payment_type'] == "Portal")
      {
      // get the session being paid for and concatenate late payment or early payment
      $getYr =$paymentDetails['data']['metadata']['session'];
@@ -62,12 +62,12 @@ class PaymentController extends Controller
 
 
    //admission payment
-   if ($paymentDetails['data']['metadata']['payment_type'] == 'Admssion')
+   if ($paymentDetails['data']['metadata']['payment_type'] == "Admission")
    {
      switch ($paymentDetails['data']['status']) {
        case 'success':
          $payment = Paymentapplicant::create([
-           'student_id' => $paymentDetails['data']['metadata']['student_id'],
+           'studentapplicant_id' => $paymentDetails['data']['metadata']['student_id'],
            'reference' => $paymentDetails['data']['reference'],
            'payment_modes_id' => 1, // to show it is paid through paystack
            'status' => 'PAID',

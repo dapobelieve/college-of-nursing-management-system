@@ -33,24 +33,26 @@
                             <td>Address</td>
                             <th>State of origin</th>
                             <th>Admission status</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                             @foreach($applicant as $data)
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
-                                    <td>{{$data->card_id}}</td>
+                                    <td>{{$data->cardapplicant->reg_no}}</td>
                                     <td>{{$data->surname." ".$data->first_name}}</td>
                                     <td>{{$data->email}}</td>
                                     <td>{{$data->phone}}</td>
                                     <td>{{$data->sponsor_phone}}</td>
                                     <td>{{$data->home_address.", ".$data->address_state}}</td>
                                     <td><span class="badge badge-success">{{$data->state_of_origin}}</span></td>
-                                    @if($data->admission_status == null)
-                                    <td><span class="badge badge-primary">No action</span></td>
+                                    @if($data->admission_status == "NO")
+                                    <td><span class="badge badge-danger">NOT YET</span></td>
                                     @else
                                     <td><span class="badge badge-success">{{$data->admission_status}}</span></td>
                                     @endif
+                                    <td><a href="{{route('applicants.edit', ['studentapplicant' => $data->id])}}" class="btn btn-primary btn-sm">Details</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

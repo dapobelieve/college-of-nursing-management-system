@@ -15,6 +15,8 @@ Route::group(['prefix' => '/admission', 'namespace' => 'Admission', 'middleware'
 
 Route::get('dashboard', 'DashboardController@index')->name('admission.dashboard');
 
+Route::get('dashboard/logout', 'DashboardController@logout')->name('admission.logout');
+
 Route::get('application', 'ApplicationController@index')->name('application.index');
 
 Route::post('application', 'ApplicationController@store')->name('application.store');
@@ -25,13 +27,15 @@ Route::put('application/steptwo/{studentapplicant}', 'ApplicationtwoController@u
 
 Route::get('upload', 'UploadController@index')->name('upload.index');
 
-Route::post('upload', 'UploadController@store')->name('upload.store');
+Route::put('upload/{studentapplicant}', 'UploadController@update')->name('upload.update');
 
 Route::get('payapplication', 'PayapplicationController@index')->name('payapplication.index');
 
 Route::post('payapplication', 'PayapplicationController@index')->name('payapplication.pay');
 
 Route::post('/pay', 'Payment2Controller@redirectToGateway')->name('payadmission');
+
+Route::get('printform', 'PrintformController@downloadPDF')->name('printform.downloadPDF');
 
 });
 
@@ -156,6 +160,8 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
 
   //applicants
   Route::get('applicants/index', 'ApplicantController@index')->name('applicants.index');
+  Route::get('applicants/index/{studentapplicant}', 'ApplicantController@edit')->name('applicants.edit');
+  Route::put('applicants/addscore/{studentapplicant}', 'ApplicantController@update')->name('applicants.update');
   Route::put('applicants/index', 'ApplicantController@deleteall')->name('applicants.deleteall');
   Route::post('applicants/index', 'ApplicantController@exportcsv')->name('applicants.exportcsv');
   // Admins section

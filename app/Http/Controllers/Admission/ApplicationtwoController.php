@@ -17,11 +17,18 @@ class ApplicationtwoController extends Controller
       $student = Cardapplicant::find($card_id)->studentapplicant;
       //dd($student);
       if ($student != null) {
+
+        if ($student->reg_step === "Completed") {
+          $notification = Alert::alertMe('All sections are completed!! Proceed by printing your form', 'success');
+          return redirect()->route('admission.dashboard')->with($notification);
+        }
+
         $students = $student->where('reg_step', $reg_step)->first();
         if ($students == null) {
           $notification = Alert::alertMe('Step one and two has been completed!!!', 'info');
           return redirect()->route('payapplication.index')->with($notification);
         }
+
         session()->put('studapp_id', $student->id);
         return view('admission.applicationtwo', ['section' => 'applicationtwo', 'id'=>$student->id]);
       }else {
