@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use App\User;
 use App\Models\Student;
 use App\Models\Department;
+use App\Models\SystemSetting;
 use App\Models\Fee;
 use App\Models\State;
 use Auth;
@@ -27,6 +28,8 @@ class DashboardController extends Controller
     {
        $student = Student::where('user_id', Auth::id())->first();
        $user = User::find(Auth::id());
+
+       $session = SystemSetting::where('name','current_session')->first();
 
        $sess = Fee::where('department_id', session()->get('dept_id'))->first();
        if ($sess !== null) {
@@ -51,7 +54,7 @@ class DashboardController extends Controller
          }
 
        }
-       
+
         $dept = Department::find(session()->get('dept_id'));
         return view('portal.dashboard')->with('user', $user)
                                        ->with('student', $student)
@@ -59,7 +62,8 @@ class DashboardController extends Controller
                                        ->with('state', State::find($user->state_id))
                                        ->with('sess', $sess)
                                        ->with('latedate', $latedate)
-                                       ->with('late', $late);
+                                       ->with('late', $late)
+                                       ->with('session', $session);
     }
 
     /**

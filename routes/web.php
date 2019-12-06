@@ -1,9 +1,6 @@
 <?php
 Auth::routes();
 
-Route::domain('{admission}.myapp.com')->group(function () {
-
-});
 
 Route::group(['prefix' => '/admission', 'namespace' => 'Admission'], function () {
 Route::get('login', 'LoginController@index')->name('admission.login');

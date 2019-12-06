@@ -190,6 +190,20 @@
                                             </div>
 
                                         </div>
+                                        <div class="row">
+                                          <div class="col">
+                                            <div class="form-group row">
+                                                <label for="dob" class="col-sm-3 col-md-3 col-lg-2 control-label">{{ __('Passport Upload') }}</label>
+
+                                                <div class="col-sm-9 col-md-6 col-lg-6">
+                                                    <input id="pport_upload" type="file" class="form-control @error('pport_upload') is-invalid @enderror" name="pport_upload" value="{{ old('pport_upload') }}" required>
+                                                </div>
+                                            </div>
+                                          </div>
+                                          <div class="col">
+
+                                          </div>
+                                        </div>
                                         <div class="form-actions">
                                             <button type="submit" class="btn btn-primary btn-sm">Submit</button>
                                         </div>

@@ -59,7 +59,7 @@ Portal - Dashboard
                     <?php use Carbon\Carbon; ?>
                     <div class="col-md-6">
                       <div class="col-md-12">
-                         <label class="col-md-12 col-form-label text-md-left text-primary"><strong class="text-success">Current Session :</strong><span class="ml-5"> {{ $sess->session }}</span></label>
+                         <label class="col-md-12 col-form-label text-md-left text-primary"><strong class="text-success">Current Session :</strong><span class="ml-5"> {{ $session->value }}</span></label>
 
                         <label class="col-md-12 col-form-label text-md-left text-primary"><strong class="text-success">Registration Status : </strong><span class="ml-4">{{ $late }}</span></label>
 
