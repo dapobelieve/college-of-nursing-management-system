@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Fee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Department;
+use Illuminate\Validation\ValidationException;
 
 class FeeController extends Controller
 {
@@ -15,7 +17,8 @@ class FeeController extends Controller
      */
     public function index()
     {
-        //
+        $fees = Fee::orderBy('created_at', 'DESC')->paginate();
+        return view('admin.fees.index', ['fees' => $fees]);
     }
 
     /**
@@ -25,7 +28,8 @@ class FeeController extends Controller
      */
     public function create()
     {
-        //
+        $departments = Department::all();
+        return view('admin.fees.create', ['departments' => $departments]);
     }
 
     /**
@@ -36,7 +40,24 @@ class FeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'department_id' => 'required|numeric',
+            'level' => 'required|in:100,200,300,400,500',
+            'indigene' => 'required|numeric',
+            'non_indigene' => 'required|numeric',
+        ]);
+
+        $count = Department::where('id', $request->input('department_id'))->count();
+        if ($count != 1) {
+            $error = ValidationException::withMessages([
+                'department_id' => ['Invalid department']
+            ]);
+            throw $error;
+        }
+
+        Fee::create($request->only(['department_id', 'level', 'indigene', 'non_indigene']));
+
+        return redirect()->route('fees.index')->with('success', 'Fee created');
     }
 
     /**
@@ -58,7 +79,8 @@ class FeeController extends Controller
      */
     public function edit(Fee $fee)
     {
-        //
+        $departments = Department::all();
+        return view('admin.fees.edit', ['fee' => $fee, 'departments' => $departments]);
     }
 
     /**
@@ -70,7 +92,26 @@ class FeeController extends Controller
      */
     public function update(Request $request, Fee $fee)
     {
-        //
+        $this->validate($request, [
+            'level' => 'required|in:100,200,300,400,500',
+            'indigene' => 'required|numeric',
+            'non_indigene' => 'required|numeric',
+        ]);
+
+        $count = Fee::where('department_id', $fee->department->id)
+            ->where('level', $fee->level)
+            ->where('id', '!=', $fee->id)
+            ->count();
+        if ($count != 0) {
+            $error = ValidationException::withMessages([
+                'level' => ['A department fee for this level already exists!']
+            ]);
+            throw $error;
+        }
+
+        $fee->update($request->only(['level', 'indigene', 'non_indigene']));
+
+        return redirect()->route('fees.index')->with('success', 'Fee updated');
     }
 
     /**
@@ -81,6 +122,7 @@ class FeeController extends Controller
      */
     public function destroy(Fee $fee)
     {
-        //
+        $fee->delete();
+        return redirect()->route('fees.index')->with('success', 'Fee deleted');
     }
 }
