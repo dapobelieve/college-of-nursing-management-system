@@ -14,7 +14,35 @@ Application Guide
         <div class="row">
             <div class="col-md-7 admission-form_mr">
                 <h2>Admission Rules</h2>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries. It has survived not only five centuries, but also the leap into electronic.</p>
+                <h4><strong>Nursing Department</strong></h4>
+                <br>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                   when an unknown printer took a galley of type and scrambled it to make a type
+                    specimen book. It has survived not only five centuries. It has survived not
+                    only five centuries, but also the leap into electronic.</p>
+            </div>
+            <div class="col-md-5 admission-form_mr">
+              <br>
+              <br>
+                <ul class="admission-form_listed">
+                    <li>Donec molestie felis eget justo pellentesque</li>
+                    <li>Phasellus et justo sit amet nisl fringilla semper.</li>
+                    <li>Nam vitae ligula at risus posuere laoreet.</li>
+                    <li>Mauris tempor ex id sapien tincidunt porta</li>
+                </ul>
+            </div>
+        </div>
+          <br>
+        <div class="row">
+            <div class="col-md-7 admission-form_mr">
+                <h4><strong>Midwifery Department</strong></h4>
+                <br>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                   when an unknown printer took a galley of type and scrambled it to make a type
+                    specimen book. It has survived not only five centuries. It has survived not
+                    only five centuries, but also the leap into electronic.</p>
             </div>
             <div class="col-md-5 admission-form_mr">
                 <ul class="admission-form_listed">
@@ -25,6 +53,27 @@ Application Guide
                 </ul>
             </div>
         </div>
+
+        <br>
+      <div class="row">
+          <div class="col-md-7 admission-form_mr">
+              <h4><strong>Basic Midwifery Department</strong></h4>
+              <br>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                 when an unknown printer took a galley of type and scrambled it to make a type
+                  specimen book. It has survived not only five centuries. It has survived not
+                  only five centuries, but also the leap into electronic.</p>
+          </div>
+          <div class="col-md-5 admission-form_mr">
+              <ul class="admission-form_listed">
+                  <li>Donec molestie felis eget justo pellentesque</li>
+                  <li>Phasellus et justo sit amet nisl fringilla semper.</li>
+                  <li>Nam vitae ligula at risus posuere laoreet.</li>
+                  <li>Mauris tempor ex id sapien tincidunt porta</li>
+              </ul>
+          </div>
+      </div>
     </div>
 </section>
 <!--//END ADMISSION FORM RULES -->

@@ -45,10 +45,11 @@
                                         </div>
                                         <input type="hidden" name="_method" value="PUT">
                                         <div class="form-group">
-                                            <label for="hod" class="col-sm-3 col-md-3 col-lg-2 control-label">Serial No.</label>
+                                            <label for="hod" class="col-sm-3 col-md-3 col-lg-2 control-label">Admission Status.</label>
                                             <div class="col-sm-9 col-md-6 col-lg-6">
                                                 <select class="form-control input-sm" name="ad_sta" required>
                                                   <option value="{{$studentapplicant->admission_status}}">{{$studentapplicant->admission_status}}</option>
+                                                  <option value="NO">NO</option>
                                                   <option value="YES">YES</option>
                                                 </select>
                                             </div>

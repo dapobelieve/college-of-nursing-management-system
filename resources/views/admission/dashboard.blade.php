@@ -1,7 +1,7 @@
 @extends('admission.app')
 
 @section('title')
-Portal - Course Registration
+Admission - Dashboard
 @endsection
 @section('content')
 

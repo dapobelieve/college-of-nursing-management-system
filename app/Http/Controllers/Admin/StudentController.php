@@ -210,11 +210,20 @@ class StudentController extends Controller
             'address' => 'required'
         ]);
 
+        switch ($request->is_active) {
+          case 'on':
+            $request->is_active = 'ACTIVE';
+            break;
 
+          default:
+              $request->is_active = 'DISABLED';
+            break;
+        }
 
        $student->user->update([
             'phone' => $request->phone,
-            'address' => $request->address
+            'address' => $request->address,
+            'is_active' => $request->is_active
         ]);
 
           $notification = Alert::alertMe('Student Updated!', 'success');

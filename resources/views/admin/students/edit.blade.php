@@ -132,11 +132,11 @@
                                                     <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Activity</label>
                                                     <div class="col-sm-9 col-md-6 col-lg-6">
                                                         @if($student->user->is_active == 'ACTIVE')
-                                                        <input type="checkbox" name="activity" class="custom-control-input" checked id="customControlAutosizing">
-                                                        <label class="badge badge-success">ACTIVE</label>
+                                                        <input type="checkbox" name="is_active" class="custom-control-input"  checked id="customControlAutosizing">
+                                                        <label class="badge badge-success">ACTIVE</label><span> unclick to disable student</span>
                                                         @else
-                                                        <input type="checkbox" name="activity" class="custom-control-input" id="customControlAutosizing">
-                                                        <label class="badge badge-danger">DISABLED</label>
+                                                        <input type="checkbox" name="is_active" class="custom-control-input" id="customControlAutosizing">
+                                                        <label class="badge badge-danger">DISABLED</label><span> click to enable student</span>
                                                         @endif
                                                     </div>
                                                 </div>

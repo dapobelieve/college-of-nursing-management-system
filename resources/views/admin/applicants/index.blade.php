@@ -17,6 +17,20 @@
         <div class="container-fluid">
             <br />
             <div class="row">
+              <div class="col-xs-10">
+                <form class="form-inline" method="post" action="{{route('applicants.search')}}" enctype="multipart/form-data">
+                  @csrf
+                  <div class="form-group mx-sm-3 mb-2">
+                    <input type="text" class="form-control  @error('user') is-invalid @enderror" value="{{ old('user') }}" name="user" placeholder="Search by Registration No." required>
+                    @error('user')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                  </div>
+                  <button type="submit" class="btn btn-primary mb-2">Search</button>
+                </form>
+              </div>
 
                 <div class="col-xs-12">
 
@@ -52,7 +66,7 @@
                                     @else
                                     <td><span class="badge badge-success">{{$data->admission_status}}</span></td>
                                     @endif
-                                    <td><a href="{{route('applicants.edit', ['studentapplicant' => $data->id])}}" class="btn btn-primary btn-sm">Details</a></td>
+                                    <td><a href="{{route('applicants.edit', ['studentapplicant' => $data->id])}}" class="btn btn-primary btn-sm">Add Score</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

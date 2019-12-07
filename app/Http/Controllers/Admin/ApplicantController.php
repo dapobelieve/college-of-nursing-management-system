@@ -63,7 +63,7 @@ class ApplicantController extends Controller
 
     public function edit(Studentapplicant $studentapplicant)
     {
-      return view('admin.applicants.addscore', ['studentapplicant' => $studentapplicant]);
+      return view('admin.applicants.addscore', ['section' =>'applicants','sub_section' => 'all', 'studentapplicant' => $studentapplicant]);
     }
 
       public function update(Request $request, Studentapplicant $studentapplicant)
@@ -81,4 +81,25 @@ class ApplicantController extends Controller
           return redirect()->route('applicants.index')->with($notification);
       }
 
+
+      public function search(Request $request)
+      {
+        $this->validate($request, [
+          'user' => 'required'
+          ]);
+
+          $student = Cardapplicant::with('studentapplicant')->where('reg_no', $request->user)->first();
+          if ($student == null) {
+            return view('admin.applicants.search',['section' =>'applicants','sub_section' => 'all', 'applicant' => $student, 'reg_no' => $student]);
+          }
+          return view('admin.applicants.search',['section' =>'applicants','sub_section' => 'all', 'applicant' => $student->studentapplicant, 'reg_no' => $student->reg_no]);
+      }
+
+      public function delete(Studentapplicant $studentapplicant)
+      {
+        $studentapplicant->delete();
+        $notification = Alert::alertMe('Deleted successfully!!!', 'success');
+          return redirect()->route('applicants.index')->with($notification);
+
+      }
 }

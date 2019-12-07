@@ -6,6 +6,8 @@ Route::group(['prefix' => '/admission', 'namespace' => 'Admission'], function ()
 Route::get('login', 'LoginController@index')->name('admission.login');
 
 Route::post('login', 'LoginController@check')->name('admission.login');
+
+Route::get('/',function () {return view('admission.index');});
 });
 
 Route::group(['prefix' => '/admission', 'namespace' => 'Admission', 'middleware' => 'checkAuth'], function () {
@@ -161,6 +163,8 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   Route::put('applicants/addscore/{studentapplicant}', 'ApplicantController@update')->name('applicants.update');
   Route::put('applicants/index', 'ApplicantController@deleteall')->name('applicants.deleteall');
   Route::post('applicants/index', 'ApplicantController@exportcsv')->name('applicants.exportcsv');
+  Route::post('applicants/search', 'ApplicantController@search')->name('applicants.search');
+  Route::delete('applicants/destroy/{studentapplicant}', 'ApplicantController@delete')->name('applicants.destroy');
   // Admins section
   Route::resource('admins', 'AdminController',  [
     'only' => [

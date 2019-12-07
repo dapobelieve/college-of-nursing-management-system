@@ -24,6 +24,12 @@ class AuthController extends Controller
             return redirect()->back()->with('error','Could not sign you in. Invalid Details');
         }else  {
           if (Auth::check()) {
+            //check if user is DISABLED
+            if ($request->user()->is_active === 'DISABLED') {
+              session()->flush();
+              return redirect()->back()->with('error', 'Contact the Administrator');
+            }
+            //check roles
             $userrole = $request->user()->roles->first();
             if ($userrole->name == "Student") {
               return redirect()->route('portal.dashboard');

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Cardapplicant;
-use App\Models\Student;
+use App\Models\Studentapplicant;
 use App\Card;
 use App\Alert;
 
@@ -18,15 +18,13 @@ class CardapplicantController extends Controller
    */
   public function index()
   {
-    $cards = Cardapplicant::select('cardapplicants.card_id', 'first_name', 'surname')->join('studentapplicants', 'studentapplicants.card_id', '=', 'cardapplicants.card_id')
-    ->paginate(10);
+    $cards = Studentapplicant::with('cardapplicant')->paginate(10);
       return view('admin.cardapplicants.index', ['section' =>'cardapplicants','sub_section' => 'all', 'cards' => $cards]);
   }
 
   public function index2()
   {
-    $cards =Cardapplicant::select('cardapplicants.card_id')->join('studentapplicants', 'studentapplicants.card_id', '!=', 'cardapplicants.card_id')
-    ->paginate(10);
+    $cards =Cardapplicant::whereDoesntHave('studentapplicant')->paginate(10);
     return view('admin.cardapplicants.index3', ['section' =>'cardapplicants','sub_section' => 'all2', 'cards' => $cards]);
   }
 
@@ -65,17 +63,17 @@ class CardapplicantController extends Controller
       }else {
         while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
           {
-            $pin=  filter_var($filesop[0], FILTER_SANITIZE_STRING);
-            $serial_no =  filter_var($filesop[1], FILTER_SANITIZE_STRING);
+            $reg_no=  filter_var($filesop[0], FILTER_SANITIZE_STRING);
+            $password =  filter_var($filesop[1], FILTER_SANITIZE_STRING);
 
             // check to know if the pin already exist in the database
-            $result = Card::where('pin', $pin)->first();
+            $result = Cardapplicant::where('reg_no', $reg_no)->first();
             if ($result != null) {
                 $msg.= $serial_no." already exists in the database at row ".$i."\n";
             }
             else{
-            Card::create(['pin' => bcrypt($pin),
-            'serial_no' => $serial_no]);
+            Cardapplicant::create(['reg_no' => $reg_no,
+            'password' => bcrypt($password)]);
             $sql = true;
             }
             $i++;
@@ -109,8 +107,7 @@ class CardapplicantController extends Controller
         $notification = Alert::alertMe('Sorry! you are not allowed to download this file', 'info');
         return redirect()->route('cardapplicants.index3')->with($notification);
       }else {
-        $cardss =Cardapplicant::select('cardapplicants.card_id')->join('studentapplicants', 'studentapplicants.card_id', '!=', 'cardapplicants.card_id')
-        ->get();
+        $cardss = Cardapplicant::whereDoesntHave('studentapplicant')->select('reg_no')->get();
         // file name for download
         $fileName = "cardapplicants".date('Ymd').".xls";
 

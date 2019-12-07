@@ -9,7 +9,7 @@ Admission - Form two
             <div class='container'>
                 <div class='row'>
                     <div class='col-md-12 my-5'>
-                        <h2>Application for Admission - Step Two</h2>
+                        <h2>Application for Admission - <span class="badge badge-success">Step Two</span></h2>
                     </div>
                 </div>
     <form class="" action="{{route('application.update', ['Studentapplicant'=>$id])}}" method="post">
