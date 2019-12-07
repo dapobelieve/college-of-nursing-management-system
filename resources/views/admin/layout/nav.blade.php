@@ -74,6 +74,15 @@
             </ul>
         </li>
 
+        <!-- Fees -->
+        <li class="submenu @if ($section == 'fees') active @endif @if (collect(['all', 'create'])->contains($sub_section) & $section == 'fees') open @endif">
+            <a href="#"><i class="fa fa-bullhorn"></i> <span>Fees</span> <i class="arrow fa fa-chevron-right"></i></a>
+            <ul>
+                <li @if ($sub_section == 'all' & $section == 'fees') class="active" @endif><a href="{{route('fees.index')}}">All Fees</a></li>
+                <li @if ($sub_section == 'create' & $section == 'fees') class="active" @endif><a href="{{route('fees.create')}}">Add New Fee</a></li>
+            </ul>
+        </li>
+
 
 
         <!-- Admins section -->

@@ -22,7 +22,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Admission</a>
+                                <a class="nav-link" href="{{route('')}}">Admission</a>
                             </li>
                             <li class="js-navbar-collapse">
                                 <ul class="nav navbar-nav">
