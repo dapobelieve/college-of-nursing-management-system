@@ -23,7 +23,7 @@ class ApplicationController extends Controller
         if ($student == null) {
           return view('admission.application', ['section' => 'application']);
         }else {
-          $notification = Alert::alertMe('Step one been registered!', 'info');
+          $notification = Alert::alertMe('Step one has been registered!', 'info');
           return redirect()->route('application.steptwo')->with($notification);
         }
     }

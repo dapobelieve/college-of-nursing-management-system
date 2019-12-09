@@ -50,7 +50,7 @@ Route::get('about', 'Frontpages\AboutController@index')->name('about');
 
 Route::get('latest-news/{id}/{info}', 'Frontpages\latestNewsController@index')->name('latestNews');
 
-Route::get('/provost-statement',function () {return view('provost-statement');});
+Route::get('/speech',function () {return view('speech');});
 
 Route::get('/contact', 'Frontpages\ContactController@index')->name('contact');
 
@@ -144,6 +144,16 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
     ],
     'parameters' => [
       'news' => 'post'
+    ]
+  ]);
+
+  // Events section
+  Route::resource('events', 'EventController',  [
+    'only' => [
+      'index', 'create', 'store', 'edit', 'update'
+    ],
+    'parameters' => [
+      'events' => 'post'
     ]
   ]);
 

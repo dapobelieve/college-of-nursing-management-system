@@ -46,7 +46,11 @@
                                     <label for="image">Display Image</label>
                                     <input id="news-image" accept="image/x-png,image/jpeg" type="file" a class="form-control">
                                 </div>
-                                <input type="hidden" name="postBody">
+                                <div class="form-group">
+                                    <label for="image">Event date</label>
+                                    <input id="news-date" type="date" name="date" a class="form-control">
+                                </div>
+
                                 <input type="hidden" id="recievebody" name="body">
                                 <div class="form-group">
                                     <label for="content">Content</label>
@@ -99,19 +103,19 @@
         {
             event.preventDefault();
             let title = document.querySelector('input[name=title]').value;
+            let date = document.querySelector('input[name=date]').value;
             let body = quill.root.innerText;
-            let richBody = quill.root.innerHTML;
             let image = document.getElementById('news-image').files[0];
 
             let formData = new FormData();
             formData.append('title', title);
-            formData.append('body', body);
-            formData.append('richBody', richBody);
+            formData.append('details', body);
+            formData.append('date', date);
             formData.append('image', image);
 
             //let body input recieve value
             //$('#recievebody').val(body);
-            axios.post('/admin/news', formData, {
+            axios.post('/admin/events', formData, {
                 headers: {
                     "Content-type": "multipart/form-data"
                 }
@@ -120,8 +124,8 @@
                 console.log(response.data.message)
                 switch (response.data.ok) {
                   case true:
-                    toastr.success(response.data.message);
-                    var url = "{{ route('news.index')}}";
+                    toastr.success(response.data.message)
+                    var url = "{{ route('events.index')}}";
                     window.location.replace(url);
                     break;
                   default:

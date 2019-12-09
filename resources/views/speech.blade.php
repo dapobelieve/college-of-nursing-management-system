@@ -1,14 +1,13 @@
-@extends('layout')
+@extends('welcome')
 
-@section('title')
-Provost's Statement / OYSCONME
-@stop
+@section('title', strtoupper(config('site.name.short'))." "." | Speech")
+
 
 @section('pagename')
-Provost's Speach
+Speech
 @stop
 
-@section('content')
+@section('site.content')
 
 <!--============================= Message =============================-->
 <div class="speech">

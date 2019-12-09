@@ -27,7 +27,7 @@ Portal - Dashboard
                     </div>
                     <div class="col-md-2">
                       <div class="media">
-                        <img class="ml-2 img-thumbnail rounded" src="{{asset('images/akinkunmi005.jpg')}}" alt="Generic placeholder image">
+                        <img class="ml-2 img-thumbnail rounded" src="{{$user->images[0]->url}}" alt="Generic placeholder image">
                       </div>
                     </div>
                   </div>
@@ -41,7 +41,9 @@ Portal - Dashboard
                       <strong>Fullname : <label class="col-md-8 col-form-label text-md-left  text-primary ml-5">{{ $user->last_name.", ".$user->first_name." ".$user->middle_name }}</label></strong>
                     </div>
                     <div class="col-md-10">
-                      <strong>Current Level : <label class="col-md-8 col-form-label text-md-left  text-primary ml-3">100</label></strong>
+                      @if($payment != null)
+                      <strong>Current Level : <label class="col-md-8 col-form-label text-md-left  text-primary ml-3">{{substr($payment->reference, 4,3)}}</label></strong>
+                      @endif
                     </div>
                     <div class="col-md-10">
                       <strong>Department : <label class="col-md-8 col-form-label text-md-left  text-primary ml-4">{{$dept->name}}</label></strong>
@@ -69,9 +71,11 @@ Portal - Dashboard
                       </div>
                     </div>
                     <div class="col-md-6">
-                      <label class="col-md-12 col-form-label text-md-right text-primary"><strong class="text-success ">Current Semester : </strong>{{ $user->phone }}</label>
-                      <label class="col-md-12 col-form-label text-md-right text-primary"><strong class="text-success ">Tuition Fee Payment : </strong>{{ $user->phone }}</label>
-                      <label class="col-md-12 col-form-label text-md-right text-primary"><strong class="text-success ">Course Registration : </strong>{{ $user->phone }}</label>
+                      <label class="col-md-12 col-form-label text-md-right text-primary"><strong class="text-success ">Current Semester : </strong></label>
+                      @if($payment != null)
+                      <label class="col-md-12 col-form-label text-md-right text-primary"><strong class="text-success ">Tuition Fee Payment : </strong><span class="badge badge-info">{{$payment->status." / ".substr($payment->reference, 4,3)}}</span></label>
+                      @endif
+                      <label class="col-md-12 col-form-label text-md-right text-primary"><strong class="text-success ">Course Registration : </strong></label>
                       </div>
                   </div>
                 </div>

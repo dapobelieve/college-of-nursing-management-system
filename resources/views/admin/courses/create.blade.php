@@ -71,8 +71,8 @@
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
                                                     <select class="form-control" name="semester" id="">
                                                         <option selected value="">Select</option>
-                                                        <option value="1">First</option>
-                                                        <option value="2">Second</option>
+                                                        <option value="First">First</option>
+                                                        <option value="Second">Second</option>
                                                     </select>
                                                 </div>
                                             </div>

@@ -30,7 +30,7 @@
                     <h3>Navigation</h3>
                     <ul>
                         <li><a href="{{asset('about')}}">About</a></li>
-                        <li><a href="#">Admissions </a></li>
+                        <li><a href="{{url('/admission')}}">Admissions </a></li>
                         <li><a href="#">Academics</a></li>
                         <li><a href="{{route('portal.dashboard')}}">Student Portal</a></li>
                         <li><a href="{{route('contact')}}">Contact</a></li>

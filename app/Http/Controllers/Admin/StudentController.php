@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
+use App\Http\Traits\CloudinaryUpload;
+
 use App\Models\Student;
 use App\Models\State;
 use App\Models\Location;
@@ -17,6 +19,7 @@ use Carbon\Carbon;
 
 class StudentController extends Controller
 {
+  use CloudinaryUpload;
     /**
      * Shows all students
      *
@@ -24,6 +27,7 @@ class StudentController extends Controller
      */
     public function index()
     {
+
       /*  $students = Student::orderBy('created_at', 'DESC')
             ->orderBy('updated_at', 'DESC')
             ->paginate(10); */
@@ -128,16 +132,17 @@ class StudentController extends Controller
           'sponsors_name' => 'required|string|max:50',
           'sponsors_phone' => 'required|string|min:11',
           //'dob_upload' => 'required|image|max:150',
-        //  'pport_upload' => 'required|image|max:50',
+          'pport_upload' => 'required|image|max:150',
           //'lga_upload' => 'required|image|max:150',
           //'exam_no' => 'required|string|max:20',
         ], [
             'dob.after' => 'The date of birth should be a date before January 1st 2004',
+            //'pport_upload.image' => 'The file should not be more than 70kb',
             'state.required' => 'Select a State of origin',
             'lga.required' => 'Select a local government'
         ]);
 
-        $user = User::create([
+      $user = User::create([
             'first_name' => $request->first_name,
             'middle_name' => $request->middle_name,
             'last_name' => $request->last_name,
@@ -161,6 +166,13 @@ class StudentController extends Controller
             'sponsors_phone' => $request->sponsors_phone
         ]);
 
+
+        if ($request->has('pport_upload')){
+            $imageData = $this->upload($request->pport_upload, 'students', 3600, '', 'auto');
+            $user->images()->create([
+                'url' => $imageData['secure_url']
+            ]);
+        }
         /*
          * Create user roles
          * use the user id to create the role

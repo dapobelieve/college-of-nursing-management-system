@@ -10,6 +10,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Role;
 use App\Models\State;
+use App\Models\Image;
 
 class User extends Authenticatable
 {
@@ -42,6 +43,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
 
     public function student()
     {

@@ -8,7 +8,7 @@
                 <div class="col-md-8">
                     <h2>Welcome</h2>
                     <p>It is my privilege to welcome the aspiring and returning students to Oyo State College of Nursing and Midwifery, Eleyele, Ibadan, Nigeria which has created its own fame during the last 7 decades. Oyo State College of Nursing and Midwifery Eleyele, Ibadan ensures high quality professional education through various innovative programmes keeping ‘A’ grade in position among other colleges of Nursing in Nigeria. The College has a long history of providing quality nursing education fostered by visionary and committed leadership. I feel honoured to be given the opportunity to lead the College in this phase of its development.</p>
-                    <a href="{{ url('/provost-statement') }}">
+                    <a href="{{ url('/speech') }}">
                         <button type="button" class="btn btn-outline-dark">Read More</button>
                     </a>
                 </div>
@@ -67,7 +67,7 @@
     <section class="event">
         <div class="container">
             <div class="row">
-                @if(!$UpcomingEvent)
+                @if($UpcomingEvent == null)
                     <div class="col-lg-6">
                         <h2>No upcoming event</h2>
                     </div>
@@ -76,7 +76,11 @@
                         <h2>Upcoming Events</h2>
                         <div class="event-img">
                             <span class="event-img_date">{{date("d-m-y",strtotime($UpcomingEvent->expiry_date))}}</span>
+                            @if($UpcomingEvent->images->isEmpty())
                             <img src="images/upcoming-event-img.jpg" class="img-fluid" alt="event-img">
+                            @else
+                            <img src="{{$UpcomingEvent->images[0]->url}}" class="img-fluid" alt="event-img">
+                            @endif
                             <div class="event-img_title">
                                 <h3>{{$UpcomingEvent->title}}</h3>
                                 <p>{{$UpcomingEvent->details}}</p>
@@ -94,41 +98,45 @@
                             $k =0;
                             $leng = (count($latestNews));
                             $length = ceil((count($latestNews))/2);?>
+
+
                             @for($i = 0; $i< $length; $i++)
-                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="event_date">
-                                        <div class="event-date-wrap">
-                                            <p></p>
-                                            <span>NEWS</span>
-                                        </div>
-                                    </div>
-                                    <div class="date-description">
-                                        <h3>{{$latestNews[$i + $k]->title}}</h3>
-                                        <p>{{substr($latestNews[$i + $k]->content,0,100)}}..</p>
-                                        <a href="{{route('latestNews', ['id'=>$latestNews[$i + $k]->id, 'info'=>$latestNews[$i + $k]->title])}}">Read More</a>
-                                        <hr class="event_line">
-                                    </div>
-                                    @if(($i+$j)
-                                    < $leng) <div class="event_date">
-                                        <div class="event-date-wrap">
-                                            <p></p>
-                                            <span>NEWS</span>
-                                        </div>
-                                    </div>
-                                    <div class="date-description">
-                                        <h3>{{$latestNews[$i + $j]->title}}</h3>
-                                        <p>{{substr($latestNews[$i + $j]->content,0,100)}}..</p>
-                                        <a href="{{route('latestNews', ['id'=>$latestNews[$i + $j]->id, 'info'=>$latestNews[$i + $j]->title])}}">Read More</a>
-                                    </div>
-                                    @endif
-                                </div>
+                            <div class="event-img2">
+                            <div class="row">
+                              @if($latestNews[$i + $k]->images->isEmpty())
+                                <div class="col-sm-4"> <img src="images/upcoming-event-img.jpg" class="img-fluid" alt="event-img"></div>
+                              @else
+                                <div class="col-sm-4"> <img src="{{$latestNews[$i + $k]->images[0]->url}}" height="80" width="130" class="img-fluid" alt="event-img"></div><!-- // end .col-sm-3 -->
+                              @endif
+                                <div class="col-sm-8"> <h3>{{$latestNews[$i + $k]->title}} </h3>
+                                <span>{{$latestNews[$i + $k]->updated_at}}</span>
+                                <p>{{substr($latestNews[$i + $k]->body,0,100)}}..</p>
+                                <a href="{{route('latestNews', ['id'=>$latestNews[$i + $k]->id, 'info'=>$latestNews[$i + $k]->title])}}">Read More</a>
+                              </div><!-- // end .col-sm-7 -->
                             </div>
+                            @if(($i+$j) < $leng)
+                            <div class="row">
+                              @if($latestNews[$i + $j]->images->isEmpty())
+                                <div class="col-sm-4"> <img src="images/upcoming-event-img.jpg"  class="img-fluid" alt="event-img"></div>
+                              @else
+                                <div class="col-sm-4"> <img src="{{$latestNews[$i + $j]->images[0]->url}}" height="80" width="130" class="img-fluid" alt="event-img"></div><!-- // end .col-sm-3 -->
+                              @endif<!-- // end .col-sm-3 -->
+                                <div class="col-sm-8"> <h3>{{$latestNews[$i + $j]->title}}</h3>
+                                <span>{{$latestNews[$i + $k]->updated_at}}</span>
+                                <p>{{substr($latestNews[$i + $j]->body,0,100)}}..</p>
+                                <a href="{{route('latestNews', ['id'=>$latestNews[$i + $j]->id, 'info'=>$latestNews[$i + $j]->title])}}">Read More</a>
+                              </div><!-- // end .col-sm-7 -->
+                            </div>
+                            @endif
+
                             <?php
                             $j++;
                             $k++;
                             ?>
-                            @endfor @endif
+                            </div>
+                            @endfor
+                                @endif
+
 
                     </div>
                 </div>

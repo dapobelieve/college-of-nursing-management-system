@@ -74,7 +74,15 @@ Application Guide
               </ul>
           </div>
       </div>
+      <div class="row">
+        <div class="col-md-5">
+
+        </div>
+        <a href="{{route('admission.login')}}" class="col-md-6"><button type="button" class="btn btn-info" name="button">Click here to apply</button></a>
+      </div>
+
     </div>
+
 </section>
 <!--//END ADMISSION FORM RULES -->
 

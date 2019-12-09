@@ -1,7 +1,7 @@
 /**
  * Forms utility library
  * Automatically converts a form into an ajx form
- * 
+ *
  * @author Iyiola-am
  */
 var forms = (function () {
