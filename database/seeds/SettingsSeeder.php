@@ -13,14 +13,15 @@ class SettingsSeeder extends Seeder
      */
     public function run()
     {
+        $now = Carbon::now()->format('Y-m-d');
         // Add the basic system settings
         DB::table('system_settings')->insert([
-            ['name' => 'admission_open_date', 'value' => ''],
-            ['name' => 'admission_close_date', 'value' => ''],
-            ['name' => 'late_payment_fee', 'value' => ''],
+            ['name' => 'admission_open_date', 'value' => $now],
+            ['name' => 'admission_close_date', 'value' => $now],
+            ['name' => 'late_payment_fee', 'value' => $now],
             ['name' => 'current_year', 'value' => Carbon::now()->format('Y')],
-            ['name' => 'admission_payment_fee', 'value' => ''],
-            ['name' => 'acceptance_payment_fee', 'value' => ''],
+            ['name' => 'admission_payment_fee', 'value' => $now],
+            ['name' => 'acceptance_payment_fee', 'value' => $now],
         ]);
     }
 }

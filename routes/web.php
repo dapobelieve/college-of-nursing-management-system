@@ -146,5 +146,5 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   Route::get('roles', 'RoleController@index');
 
   // System settings
-  Route::get('settings', 'SettingController@index');
+  Route::resource('settings', 'SettingController');
 });
