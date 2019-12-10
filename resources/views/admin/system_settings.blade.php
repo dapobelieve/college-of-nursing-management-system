@@ -28,22 +28,79 @@
                             <h5>System settings</h5>
                         </div>
                         <div class="widget-content nopadding">
-                            <table class="table table-bordered table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Setting</th>
-                                        <th>Value</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($settings as $setting)
+                            <span>
+                                @foreach($errors->all() as $error)
+                                    <strong style="color: red">*{{ $error }}</strong> <br>
+                                @endforeach
+                                @if(Session::has('error'))
+                                    <strong style="color: red">* {{ Session::get('error') }}</strong> <br>
+                                @endif
+                            </span>
+                            @if(Session::has('success'))
+                                <div class="alert alert-info">
+                                    {{Session::get('success')}}
+                                    <a href="#" data-dismiss="alert" class="close">×</a>
+                                </div>
+                            @endif
+                            <form method="post" action="{{route('settings.update')}}" class="form-horizontal">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <thead>
                                         <tr>
-                                            <td>{{ $setting->name }}</td>
-                                            <td>{{ $setting->value }}</td>
+                                            <th>Setting</th>
+                                            <th>Value</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Current Year</td>
+                                            <td>
+                                                <input type="number" name="current_year" value="{{$settings['current_year']}}" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Admission Open Date</td>
+                                            <td>
+                                                <input type="date" name="admission_open_date" value="{{$settings['admission_open_date']}}" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Admission Close Date</td>
+                                            <td>
+                                                <input type="date" name="admission_close_date" value="{{$settings['admission_close_date']}}" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Late Payment Fee</td>
+                                            <td>
+                                                <input type="number" name="late_payment_fee" value="{{$settings['late_payment_fee']}}" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Admission Payment Fee</td>
+                                            <td>
+                                                <input type="number" name="admission_payment_fee" value="{{$settings['admission_payment_fee']}}" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Acceptance Payment Fee</td>
+                                            <td>
+                                                <input type="number" name="acceptance_payment_fee" value="{{$settings['acceptance_payment_fee']}}" class="form-control">
+                                            </td>
+                                        </tr>
+                                        {{--
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <input type="text" name="" value="{{$settings['']}}" class="form-control">
+                                                </td>
+                                            </tr>
+                                        --}}
+                                    </tbody>
+                                </table>
+                                <button type="submit" class="btn btn-primary">Update Settings</button>
+                                {{ csrf_field() }}
+                                {{ method_field('PUT') }}
+                            </form>
                         </div>
                     </div>
                 </div>
