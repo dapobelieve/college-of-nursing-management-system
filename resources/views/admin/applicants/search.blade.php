@@ -44,10 +44,11 @@
                                     <td>{{$applicant->home_address.", ".$applicant->address_state}}</td>
                                     <td><span class="badge badge-success">{{$applicant->state_of_origin}}</span></td>
                                     @if($applicant->admission_status == "NO")
-                                    <td><span class="badge badge-danger">NOT YET</span></td>
+                                    <td><span class="badge badge-danger" title="No admission">NOT YET</span></td>
                                     @else
-                                    <td><span class="badge badge-success">{{$applicant->admission_status}}</span></td>
+                                    <td><span class="badge badge-success" title="admitted">{{$applicant->admission_status}}</span></td>
                                     @endif
+                                    @if($tag == 'approved')
                                     <td><form style="display: inline" id="applicant-{{$applicant->id}}"
                                           method="post"
                                           action="{{route('applicants.destroy', ['studentapplicant' => $applicant->id])}}">
@@ -55,14 +56,21 @@
                                         {{csrf_field()}}
                                     </form>
                                     <a onclick="event.preventDefault();
-                                    if (confirm('Are you sure you want to delete this record?')) document.getElementById('applicant-{{$applicant->id}}').submit()" href="{{route('applicants.destroy', ['studentapplicant' => $applicant->id])}}">Delete</a>
+                                    if (confirm('Are you sure you want to delete this record?')) document.getElementById('applicant-{{$applicant->id}}').submit()" href="{{route('applicants.destroy', ['studentapplicant' => $applicant->studentapplicant_id])}}">Delete</a>
                                     </td>
+                                    @else
+                                    <td><a href="{{route('applicants.addtelleredit', ['studentapplicant' => $studentID])}}" class="btn btn-primary btn-sm " title="Provide teller number for confirmation">Confirm payment</a></td>
+                                    @endif
                                 </tr>
                         </tbody>
                     </table>
                     @else
                         <div class="p-5 text-center">
-                            <p class="lead">No student with such registration!</p>
+                          @if($tag == 'approved')
+                            <p class="lead">No student with such registration! or<span class="badge badge-warning">Payment not yet confirmed!! Check unapproved applicant</span></p>
+                          @else
+                            <p class="lead">No student with such registration! or <span class="badge badge-success">Might have Paid!! Check approved applicant</span></p>
+                          @endif
                         </div>
                     @endif
                 </div>

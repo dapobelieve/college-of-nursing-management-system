@@ -176,7 +176,10 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   Route::put('applicants/index', 'ApplicantController@deleteall')->name('applicants.deleteall');
   Route::post('applicants/index', 'ApplicantController@exportcsv')->name('applicants.exportcsv');
   Route::post('applicants/search', 'ApplicantController@search')->name('applicants.search');
+  Route::post('applicants/searchunapproved', 'ApplicantController@searchunapproved')->name('applicants.searchunapproved');
   Route::delete('applicants/destroy/{studentapplicant}', 'ApplicantController@delete')->name('applicants.destroy');
+  Route::get('applicants/confirmteller/{studentapplicant}', 'ApplicantController@tellerindex')->name('applicants.addtelleredit');
+  Route::put('applicants/confirmteller/{studentapplicant}', 'ApplicantController@addteller')->name('applicants.addteller');
   // Admins section
   Route::resource('admins', 'AdminController',  [
     'only' => [

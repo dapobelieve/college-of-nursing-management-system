@@ -104,7 +104,7 @@
                             <div class="event-img2">
                             <div class="row">
                               @if($latestNews[$i + $k]->images->isEmpty())
-                                <div class="col-sm-4"> <img src="images/upcoming-event-img.jpg" class="img-fluid" alt="event-img"></div>
+                                <div class="col-sm-4"> <img src="images/upcoming-event-img.jpg" height="80" width="130" class="img-fluid" alt="event-img"></div>
                               @else
                                 <div class="col-sm-4"> <img src="{{$latestNews[$i + $k]->images[0]->url}}" height="80" width="130" class="img-fluid" alt="event-img"></div><!-- // end .col-sm-3 -->
                               @endif
@@ -117,7 +117,7 @@
                             @if(($i+$j) < $leng)
                             <div class="row">
                               @if($latestNews[$i + $j]->images->isEmpty())
-                                <div class="col-sm-4"> <img src="images/upcoming-event-img.jpg"  class="img-fluid" alt="event-img"></div>
+                                <div class="col-sm-4"> <img src="images/upcoming-event-img.jpg" height="80" width="130"  class="img-fluid" alt="event-img"></div>
                               @else
                                 <div class="col-sm-4"> <img src="{{$latestNews[$i + $j]->images[0]->url}}" height="80" width="130" class="img-fluid" alt="event-img"></div><!-- // end .col-sm-3 -->
                               @endif<!-- // end .col-sm-3 -->

@@ -1,14 +1,14 @@
 @extends('admin.layout.template')
 
 @section('admin-title')
-  Applicants
+  Approved Applicants
 @endsection
 
 @section('admin-content')
 
     <div id="content">
         <div id="content-header">
-            <h1>Applicants</h1>
+            <h1>Approved Applicants</h1>
         </div>
         <div id="breadcrumb">
             <a href="#" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i> Home</a>
@@ -17,7 +17,7 @@
         <div class="container-fluid">
             <br />
             <div class="row">
-              <div class="col-xs-10">
+              <div class="col-xs-6">
                 <form class="form-inline" method="post" action="{{route('applicants.search')}}" enctype="multipart/form-data">
                   @csrf
                   <div class="form-group mx-sm-3 mb-2">
@@ -28,7 +28,22 @@
                         </span>
                     @enderror
                   </div>
-                  <button type="submit" class="btn btn-primary mb-2">Search</button>
+                  <button type="submit" class="btn btn-primary mb-2" title="Search applicant(s) that have successfully made form payment">Search Approved applicants</button>
+                </form>
+              </div>
+
+              <div class="col-xs-6">
+                <form class="form-inline" method="post" action="{{route('applicants.searchunapproved')}}" enctype="multipart/form-data">
+                  @csrf
+                  <div class="form-group mx-sm-3 mb-2">
+                    <input type="text" class="form-control  @error('user') is-invalid @enderror" value="{{ old('user') }}" name="user" placeholder="Search by Registration No." required>
+                    @error('user')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                  </div>
+                  <button type="submit" class="btn btn-primary" title="search applicant(s) that are yet to make form payment">Search Unapproved applicants</button>
                 </form>
               </div>
 
@@ -62,11 +77,11 @@
                                     <td>{{$data->home_address.", ".$data->address_state}}</td>
                                     <td><span class="badge badge-success">{{$data->state_of_origin}}</span></td>
                                     @if($data->admission_status == "NO")
-                                    <td><span class="badge badge-danger">NOT YET</span></td>
+                                    <td><span class="badge badge-danger" title="No admission">NOT YET</span></td>
                                     @else
-                                    <td><span class="badge badge-success">{{$data->admission_status}}</span></td>
+                                    <td><span class="badge badge-success" title="Admitted">{{$data->admission_status}}</span></td>
                                     @endif
-                                    <td><a href="{{route('applicants.edit', ['studentapplicant' => $data->id])}}" class="btn btn-primary btn-sm">Add Score</a></td>
+                                    <td><a href="{{route('applicants.edit', ['studentapplicant' => $data->id])}}" class="btn btn-primary btn-sm" title="add score and admission status">Add Score</a></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -94,14 +109,14 @@
                           </span>
                       @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary mb-2">Truncate DataTable</button>
+                    <button type="submit" class="btn btn-primary mb-2" title="Delete all applicants in the database">Truncate DataTable</button>
                   </form>
                 </div>
                 <div class="col-xs-2">
                   <form class="form-inline" method="post" action="{{route('applicants.exportcsv')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group mb-4">
-                    <button type="submit" class="btn btn-success mb-2">Export excel file</button>
+                    <button type="submit" class="btn btn-success mb-2" title="Export approved applicants information">Export excel file</button>
                   </form>
                 </div>
             </div>

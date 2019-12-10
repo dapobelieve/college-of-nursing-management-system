@@ -15,5 +15,9 @@ class Payment_modesSeeder extends Seeder
       PaymentMode::create([
         'name' => 'Paystack',
       ]);
+
+      PaymentMode::create([
+        'name' => 'Teller',
+      ]);
     }
 }

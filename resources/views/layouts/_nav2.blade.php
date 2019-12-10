@@ -2,7 +2,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="index.html"><img src="images/responsive-logo.png" class="responsive-logo img-fluid" alt="responsive-logo"></a>
+                    <a href="{{url('/')}}"><img src="{{asset('images/Oysconmetrans.png')}}" class="responsive-logo img-fluid" alt="responsive-logo"></a>
                 </div>
             </div>
             <div class="row">
@@ -16,11 +16,19 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{route('about')}}">About<span class="sr-only">(current)</span></a>
                                 </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Admissions
+                                    </a>
+                                    <ul class="dropdown-menu">
+
+                                        <li><a class="dropdown-item" href="{{url('/admission')}}">Application Requirement</a></li>
+                                        <li><a class="dropdown-item" href="{{route('admission.login')}}">Application Form</a></li>
+                                        </ul>
+                                    </li>
+
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{url('/admission')}}">Admissions</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="academics.html">Academics</a>
+                                    <a class="nav-link" href="#">Academics</a>
                                 </li>
                                 <li class="nav-logo">
                                     <a href="{{url('/')}}" class="navbar-brand"><img src="{{asset('images/Oysconmetrans.png')}}" class="img-fluid" alt="logo"></a>
@@ -37,7 +45,7 @@
                                         <li><a class="dropdown-item" href="{{route('events')}}">Events</a></li>
                                         <li><a class="dropdown-item" href="#">Our Lecturers</a></li>
                                         <li><a class="dropdown-item" href="#">Gallery</a></li>
-                                            <li><a class="dropdown-item" href="{{asset('/provost-statement')}}">Provost's Speech</a></li>
+                                            <li><a class="dropdown-item" href="{{asset('/speech')}}">Provost's Speech</a></li>
                                             <li><a class="dropdown-item" href="{{route('dashboard.login')}}">Login</a></li>
                                             <li><a class="dropdown-item" href="#">Coming Soon</a></li>
                                         </ul>

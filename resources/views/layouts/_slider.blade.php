@@ -10,8 +10,8 @@
                 <img class="d-block" src="images/slider11.jpg" alt="First slide">
                 <div class="carousel-caption d-md-block">
                     <div class="slider_title">
-                        <h1>We offer quality nursing care</h1>
-                        <h4>Proactively utilize open-source users for process-centric total linkage.<br> Energistically reinvent web-enabled initiatives with premium <br>processes. Proactively drive.</h4>
+                        <h1>OYSCONME still setting the pace</h1>
+                        <h4>We train student to become pragmatic and transformational leaders<br>in Nursing and Midwifery</h4>
                         <div class="slider-btn">
                             <a href="#" class="btn btn-default">SEE Programs</a>
                             <a href="#" class="btn btn-default">Learn more</a>
@@ -23,8 +23,8 @@
                 <img class="d-block" src="images/slider12.jpg" alt="Second slide">
                 <div class="carousel-caption d-md-block">
                     <div class="slider_title">
-                        <h1>We foster wisdom</h1>
-                        <h4>Proactively utilize open-source users for process-centric total linkage.<br> Energistically reinvent web-enabled initiatives with premium <br>processes. Proactively drive.</h4>
+                        <h1>We provide effective and qualitative education and training</h1>
+                        <h4><br></h4>
                         <div class="slider-btn">
                             <a href="#" class="btn btn-default">SEE Programs</a>
                             <a href="#" class="btn btn-default">Learn more</a>
@@ -37,9 +37,9 @@
                 <div class="carousel-caption d-md-block">
                     <div class="slider_title">
                         <h1>Campus life @ OYSCONME</h1>
-                        <h4>Proactively utilize open-source users for process-centric total linkage.<br> Energistically reinvent web-enabled initiatives with premium <br>processes. Proactively drive.</h4>
+                        <h4><br></h4>
                         <div class="slider-btn">
-                            <a href="campus-life.html" class="btn btn-default">Campus Life</a>
+                            <a href="#" class="btn btn-default">Campus Life</a>
                         </div>
                     </div>
                 </div>
