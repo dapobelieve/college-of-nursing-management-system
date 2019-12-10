@@ -54,37 +54,37 @@
                                         <tr>
                                             <td>Current Session</td>
                                             <td>
-                                                <input type="number" name="current_session" value="{{$settings['current_session']}}" class="form-control">
+                                                <input type="text" name="current_session" value="{{$settings['current_session']}}" class="form-control" required>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Admission Open Date</td>
                                             <td>
-                                                <input type="date" name="admission_open_date" value="{{$settings['admission_open_date']}}" class="form-control">
+                                                <input type="date" name="admission_open_date" value="{{$settings['admission_open_date']}}" class="form-control" required>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Admission Close Date</td>
                                             <td>
-                                                <input type="date" name="admission_close_date" value="{{$settings['admission_close_date']}}" class="form-control">
+                                                <input type="date" name="admission_close_date" value="{{$settings['admission_close_date']}}" class="form-control" required>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Late Payment Fee</td>
                                             <td>
-                                                <input type="number" name="late_payment_fee" value="{{$settings['late_payment_fee']}}" class="form-control">
+                                                <input type="number" name="late_payment_fee" value="{{$settings['late_payment_fee']}}" class="form-control" required>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Admission Payment Fee</td>
                                             <td>
-                                                <input type="number" name="admission_payment_fee" value="{{$settings['admission_payment_fee']}}" class="form-control">
+                                                <input type="number" name="admission_payment_fee" value="{{$settings['admission_payment_fee']}}" class="form-control" required>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Acceptance Payment Fee</td>
                                             <td>
-                                                <input type="number" name="acceptance_payment_fee" value="{{$settings['acceptance_payment_fee']}}" class="form-control">
+                                                <input type="number" name="acceptance_payment_fee" value="{{$settings['acceptance_payment_fee']}}" class="form-control" required>
                                             </td>
                                         </tr>
                                         {{--
