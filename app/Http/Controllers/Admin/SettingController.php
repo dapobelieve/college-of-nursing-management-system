@@ -36,7 +36,7 @@ class SettingController extends Controller
         $this->validate($request, [
             'admission_open_date' => 'required|date_format:Y-m-d',
             'admission_close_date' => 'required|date_format:Y-m-d',
-            'current_year' => 'required|date_format:Y',
+            'current_session' => 'required|date_format:Y',
             'late_payment_fee' => 'required|numeric',
             'admission_payment_fee' => 'required|numeric',
             'acceptance_payment_fee' => 'required|numeric',

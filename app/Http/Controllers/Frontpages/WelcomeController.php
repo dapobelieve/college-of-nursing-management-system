@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Frontpages;
 
 use Carbon\Carbon;
-use DB;
 use App\Models\Event;
+use App\Models\Post;
 use App\Models\Student;
 use App\Models\Lecturer;
 use App\Models\Department;
@@ -15,9 +15,10 @@ class WelcomeController extends Controller
 {
     public function index()
     {
-      $UpcomingEvent = Event::all()-> sortBy('expiry_date')->where('expiry_date', '>', Carbon::now())->first();
-      $latestNews = DB::table('news')->orderBy('created_at', 'DESC')->select('id','title','content')->take(6)->get();
-      //dd($UpcomingEvent);
+      $UpcomingEvent = Event::with('images')->orderBy('expiry_date')->where('expiry_date', '>', Carbon::now())->first();
+      $latestNews = Post::with('images')->orderBy('updated_at', 'DESC')->take(6)->get();
+    //  dd($latestNews[3]->images);
+    //  dd($UpcomingEvent->images[0]->url);
       return view('pages.home')->with('UpcomingEvent', $UpcomingEvent)
                               ->with('latestNews', $latestNews)
                               ->with('student', Student::all()->count())

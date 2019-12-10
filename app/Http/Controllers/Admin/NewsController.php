@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Traits\CloudinaryUpload;
 
+use App\Alert;
 use App\Models\Post;
 use App\Http\Controllers\Controller;
 
@@ -63,24 +64,32 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'title' => 'required',
+        $validator = Validator::make($request->input(), [
+            'title' => 'required|unique:news,title',
             'body'  => 'required'
         ]);
-
-        $post = Post::create([
-            'title' => $request->title,
-            'body' => $request->body,
-            'rich_body' => $request->richBody,
-        ]);
-
-        if ($request->has('image')){
-            $imageData = $this->upload($request->image, 'news', 3600, '', 'auto');
-            $post->images()->create([
-                'url' => $imageData['secure_url']
+        //dd($request->body);
+        if ($validator->fails()) { // If validation fails
+            $this->response['message'] = $validator->messages()->first();
+          }
+          else {
+            $post = Post::create([
+                'title' => $request->title,
+                'body' => $request->body,
+                'rich_body' => $request->richBody,
             ]);
-        }
 
+            if ($request->image != 'undefined'){
+                $imageData = $this->upload($request->image, 'news', 3600, '', 'auto');
+                $post->images()->create([
+                    'url' => $imageData['secure_url']
+                ]);
+            }
+            $this->response['ok'] = true;
+            $this->response['message'] = 'Post Created!!';
+          }
+          // Response
+          return $this->response;
     }
     /**
      * Shows the edit post page
@@ -104,7 +113,7 @@ class NewsController extends Controller
     {
         // validate input
         $validator = Validator::make($request->input(), [
-            'title' => "required|unique:news,title,$post->id|max:255",
+            'title' => "required|max:255",
             'content' => 'required',
         ]);
 
@@ -112,7 +121,7 @@ class NewsController extends Controller
             $this->response['message'] = $validator->messages()->first();
         } else { // If validation is successful
             $post->title = $request->input('title');
-            $post->content = $request->input('content');
+            $post->body = $request->input('content');
             $post->save();
 
             $this->response['ok'] = true;

@@ -67,9 +67,9 @@ class CardController extends Controller
               $serial_no =  filter_var($filesop[1], FILTER_SANITIZE_STRING);
 
               // check to know if the pin already exist in the database
-              $result = Card::where('pin', $pin)->first();
+              $result = Card::where('serial_no', $serial_no)->first();
               if ($result != null) {
-                  $msg.= $serial_no." already exists in the database at row ".$i."\n";
+                  $msg.= nl2br("<br><strong>".$serial_no."</strong> already exists in the database at row ".$i);
               }
               else{
               Card::create(['pin' => bcrypt($pin),
@@ -81,7 +81,7 @@ class CardController extends Controller
 
           if ($sql) {
             if($msg != ""){
-              $message = "imported successfully!!! but '.$msg.'";
+              $message = "imported successfully!!!, But '.$msg.'";
             return redirect()->route('cards.index')->with('success', $message);
             }
             $notification = Alert::alertMe('Imported successfully!!!', 'success');

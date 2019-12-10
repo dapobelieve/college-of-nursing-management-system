@@ -11,9 +11,8 @@ class EventController extends Controller
     //
     public function index()
     {
-      $UpcomingEvent = Event::all()-> sortBy('expiry_date')->where('expiry_date', '>', Carbon::now())->take(4);
-      $CompletedEvent = Event::all()-> sortByDesc('expiry_date')->where('expiry_date', '<', Carbon::now())->take(4);
-
+      $UpcomingEvent = Event::with('images')->orderBy('expiry_date')->where('expiry_date', '>', Carbon::now())->take(4)->get();
+      $CompletedEvent = Event::with('images')->orderByDesc('expiry_date')->where('expiry_date', '<', Carbon::now())->take(4)->get();
      return view('event')->with('UpcomingEvent', $UpcomingEvent)
                         ->with('CompletedEvent', $CompletedEvent);
 

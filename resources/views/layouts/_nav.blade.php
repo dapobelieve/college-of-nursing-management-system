@@ -21,8 +21,14 @@
                                     <li><a class="dropdown-item" href="{{url('/our-team')}}">College Officers</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Admission</a>
+                            <li class="nav-item dropdown">
+                                <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">
+                                    Admission<span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{url('/admission')}}">Application Requirement</a></li>
+                                    <li><a class="dropdown-item" href="{{route('admission.login')}}">Application form</a></li>
+                                </ul>
                             </li>
                             <li class="js-navbar-collapse">
                                 <ul class="nav navbar-nav">
@@ -34,9 +40,9 @@
                                             </li>
                                             <li class="col">
                                                 <ul>
-                                                    <li class="dropdown-header">Departments</li>
+                                                    <li class="dropdown-header">More about Our Courses</li>
                                                     @foreach ($department as $dept)
-                                                        <li class="text-white"><a href="#">{{$dept->name}}</a></li>
+                                                        <li class="text-white"><a href="{{route('coursedetails',['id'=> $dept->id])}}">{{$dept->name}}</a></li>
                                                     @endforeach
                                                     <li class="divider"></li>
                                                 </ul>
@@ -51,7 +57,6 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{route('events')}}">Events</a></li>
-                                    <li><a class="dropdown-item" href="course-detail.html">Course Details</a></li>
                                     <li><a class="dropdown-item" href="campus-life.html">Campus Life</a></li>
                                     <li><a class="dropdown-item" href="teachers-single.html">Our teachers</a></li>
                                     <li><a class="dropdown-item" href="gallery.html">Gallery</a></li>

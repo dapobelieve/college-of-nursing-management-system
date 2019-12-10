@@ -55,6 +55,16 @@ Events
                                </div>
                                <div id="collapse{{$num}}" class="panel-collapse collapse in show">
                                    <div class="panel-body">
+                                     <div class="event-hilights">
+                                          @if(!$value->images->isEmpty()) <h5>Event Photo</h5>@endif
+                                       </div>
+                                       <div class="row">
+                                           <div class="col-md-4">
+                                             @if(!$value->images->isEmpty())
+                                             <img src="{{$value->images[0]->url}}" class="img-fluid" alt="event-img">
+                                             @endif
+                                           </div>
+                                       </div>
                                        <div class="row">
                                            <div class="col-md-6">
                                                <div class="event-highlight-discription">
@@ -96,6 +106,16 @@ Events
                                 </div>
                                 <div id="collapse{{$num}}" class="panel-collapse collapse in show">
                                     <div class="panel-body">
+                                      <div class="event-hilights">
+                                           @if(!$value->images->isEmpty()) <h5>Event Photo</h5>@endif
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                              @if(!$value->images->isEmpty())
+                                              <img src="{{$value->images[0]->url}}" class="img-fluid" alt="event-img">
+                                              @endif
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="event-highlight-discription">

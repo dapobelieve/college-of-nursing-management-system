@@ -35,7 +35,7 @@
                             <h5>Create New Post</h5>
                         </div>
                         <div class="widget-content">
-                            <form class="form-horizontal " action="{{route('news.store')}}" method="post">
+                            <form class="form-horizontal">
                                 {{ csrf_field() }}
                                 {{ method_field('POST') }}
                                 <div class="form-group">
@@ -44,9 +44,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="image">Display Image</label>
-                                    <input id="news-image" accept="image/x-png,image/jpeg" type="file" a class="form-control" required>
+                                    <input id="news-image" accept="image/x-png,image/jpeg" type="file" a class="form-control">
                                 </div>
                                 <input type="hidden" name="postBody">
+                                <input type="hidden" id="recievebody" name="body">
                                 <div class="form-group">
                                     <label for="content">Content</label>
                                     <div id="toolbar-container"></div>
@@ -108,17 +109,30 @@
             formData.append('richBody', richBody);
             formData.append('image', image);
 
-
+            //let body input recieve value
+            //$('#recievebody').val(body);
             axios.post('/admin/news', formData, {
                 headers: {
                     "Content-type": "multipart/form-data"
                 }
             })
             .then(response => {
-                console.log(response.data)
+                console.log(response.data.message)
+                switch (response.data.ok) {
+                  case true:
+                    toastr.success(response.data.message);
+                    var url = "{{ route('news.index')}}";
+                    window.location.replace(url);
+                    break;
+                  default:
+                  toastr.error(response.data.message);
+                  break;
+
+                }
+
             })
             .catch(error => {
-                // console.log(error.response)
+                console.log(error.response)
             })
         }
     </script>

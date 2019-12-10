@@ -21,7 +21,7 @@
                 <div class="col-xs-12">
                     @if(Session::has('success'))
                         <div class="alert alert-info">
-                            {{Session::get('success')}}
+                            {!!Session::get('success')!!}
                             <a href="#" data-dismiss="alert" class="close">×</a>
                         </div>
                     @endif

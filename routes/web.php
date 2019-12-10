@@ -1,12 +1,41 @@
 <?php
 Auth::routes();
 
-Route::domain('{admission}.myapp.com')->group(function () {
-
-});
 
 Route::group(['prefix' => '/admission', 'namespace' => 'Admission'], function () {
-Route::resource('application', 'ApplicationController');
+Route::get('login', 'LoginController@index')->name('admission.login');
+
+Route::post('login', 'LoginController@check')->name('admission.login');
+
+Route::get('/',function () {return view('admission.index');});
+});
+
+Route::group(['prefix' => '/admission', 'namespace' => 'Admission', 'middleware' => 'checkAuth'], function () {
+
+Route::get('dashboard', 'DashboardController@index')->name('admission.dashboard');
+
+Route::get('dashboard/logout', 'DashboardController@logout')->name('admission.logout');
+
+Route::get('application', 'ApplicationController@index')->name('application.index');
+
+Route::post('application', 'ApplicationController@store')->name('application.store');
+
+Route::get('application/steptwo', 'ApplicationtwoController@index')->name('application.steptwo');
+
+Route::put('application/steptwo/{studentapplicant}', 'ApplicationtwoController@update')->name('application.update');
+
+Route::get('upload', 'UploadController@index')->name('upload.index');
+
+Route::put('upload/{studentapplicant}', 'UploadController@update')->name('upload.update');
+
+Route::get('payapplication', 'PayapplicationController@index')->name('payapplication.index');
+
+Route::post('payapplication', 'PayapplicationController@index')->name('payapplication.pay');
+
+Route::post('/pay', 'Payment2Controller@redirectToGateway')->name('payadmission');
+
+Route::get('printform', 'PrintformController@downloadPDF')->name('printform.downloadPDF');
+
 });
 
 
@@ -21,7 +50,7 @@ Route::get('about', 'Frontpages\AboutController@index')->name('about');
 
 Route::get('latest-news/{id}/{info}', 'Frontpages\latestNewsController@index')->name('latestNews');
 
-Route::get('/provost-statement',function () {return view('provost-statement');});
+Route::get('/speech',function () {return view('speech');});
 
 Route::get('/contact', 'Frontpages\ContactController@index')->name('contact');
 
@@ -30,6 +59,10 @@ Route::post('/contact', 'Frontpages\ContactController@sendMail')->name('contact'
 Route::post('portal/checkpage', 'CheckpageController@store')->name('portal.check2store');
 
 Route::get('/our-team',function () {return view('college-officers');});
+
+Route::get('/coursedetails/{id}', 'Frontpages\CoursedetailsController@index')->name('coursedetails');
+
+
 
 Route::group(['middleware' => ['role:STUDENT','check']], function(){
 
@@ -61,9 +94,8 @@ Route::group(['middleware' => ['role:STUDENT','check']], function(){
 
       Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
 
-      Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
-});
-
+    });
+    Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 
 
 
@@ -115,6 +147,16 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
     ]
   ]);
 
+  // Events section
+  Route::resource('events', 'EventController',  [
+    'only' => [
+      'index', 'create', 'store', 'edit', 'update'
+    ],
+    'parameters' => [
+      'events' => 'post'
+    ]
+  ]);
+
   // Students section
   Route::resource('students', 'StudentController');
   Route::get('/index2dep/{id}', 'StudentController@dept')->name('students.index2dep');
@@ -129,9 +171,15 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
 
   //applicants
   Route::get('applicants/index', 'ApplicantController@index')->name('applicants.index');
+  Route::get('applicants/index/{studentapplicant}', 'ApplicantController@edit')->name('applicants.edit');
+  Route::put('applicants/addscore/{studentapplicant}', 'ApplicantController@update')->name('applicants.update');
   Route::put('applicants/index', 'ApplicantController@deleteall')->name('applicants.deleteall');
   Route::post('applicants/index', 'ApplicantController@exportcsv')->name('applicants.exportcsv');
-  
+  Route::post('applicants/search', 'ApplicantController@search')->name('applicants.search');
+  Route::post('applicants/searchunapproved', 'ApplicantController@searchunapproved')->name('applicants.searchunapproved');
+  Route::delete('applicants/destroy/{studentapplicant}', 'ApplicantController@delete')->name('applicants.destroy');
+  Route::get('applicants/confirmteller/{studentapplicant}', 'ApplicantController@tellerindex')->name('applicants.addtelleredit');
+  Route::put('applicants/confirmteller/{studentapplicant}', 'ApplicantController@addteller')->name('applicants.addteller');
   // Admins section
   Route::resource('admins', 'AdminController',  [
     'only' => [

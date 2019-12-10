@@ -1,14 +1,12 @@
-@extends('layout')
+@extends('welcome')
 
-@section('title')
-News -  OYSCONME
-@stop
+@section('title', strtoupper(config('site.name.short'))." "." | News")
 
 @section('pagename')
 NEWS
 @stop
 
-@section('content')
+@section('site.content')
 
 <section class="events">
     <div class="container">
@@ -41,10 +39,20 @@ NEWS
                                </div>
                                <div id="collapse" class="panel-collapse collapse in show">
                                    <div class="panel-body">
+                                     <div class="event-hilights">
+                                          @if($locate != null) <h5>Event Photo</h5>@endif
+                                       </div>
+                                       <div class="row">
+                                           <div class="col-md-4">
+                                             @if($locate != null)
+                                             <img src="{{$locate->url}}" class="img-fluid" alt="event-img">
+                                             @endif
+                                           </div>
+                                       </div>
                                        <div class="row">
                                            <div class="col-md-10">
                                                <div class="event-highlight-discription">
-                                                   <p class="text-justify">{{$latestNews->details}}</p>
+                                                   <p class="text-justify">{{$latestNews->body}}</p>
                                                </div>
                                            </div>
                                        </div>

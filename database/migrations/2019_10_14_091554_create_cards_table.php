@@ -17,7 +17,7 @@ class CreateCardsTable extends Migration
             $table->increments('id');
             $table->string('pin');
             $table->string('serial_no');
-            $table->integer('student_id');
+            $table->integer('student_id')->nullable();
             $table->enum('status', ['USED', 'NOT USED'])->default('NOT USED');
             $table->timestamps();
         });

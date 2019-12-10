@@ -9,7 +9,7 @@
             <i class="fa fa-home"></i> <span>Dashboard</span></a>
         </li>
         <li class="submenu">
-            <a href="#"><i class="fa fa-book"></i> <span>Lecturers</span> <i class="arrow fa fa-chevron-right"></i></a>
+            <a href="#"><i class="fa fa-group"></i> <span>Lecturers</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
                 <li><a href="{{route('lecturers.index')}}">All Lecturers</a></li>
                 <li><a href="{{route('lecturers.create')}}">Add Lecturer</a></li>
@@ -17,7 +17,7 @@
         </li>
 
         <li class="submenu @if ($section == 'applicants') active @endif @if (collect(['all', 'all2', 'create'])->contains($sub_section) & $section == 'applicants') open @endif">
-            <a href="#"><i class="fa fa-book"></i> <span>Applicants</span> <i class="arrow fa fa-chevron-right"></i></a>
+            <a href="#"><i class="fa fa-group"></i> <span>Applicants</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
                 <li @if ($sub_section == 'all') class="active" @endif><a href="{{route('applicants.index')}}">View Applicants</a></li>
             </ul>
@@ -41,8 +41,17 @@
             </ul>
         </li>
 
+        <li class="submenu @if ($section == 'events') active @endif @if (collect(['all', 'create'])->contains($sub_section) & $section == 'events') open @endif">
+            <a href="#"><i class="fa fa-bullhorn"></i> <span>Events</span> <i class="arrow fa fa-chevron-right"></i></a>
+            <ul>
+                <li @if ($sub_section == 'all') class="active" @endif><a href="{{route('events.index')}}">All Events</a></li>
+                <li @if ($sub_section == 'create') class="active" @endif><a href="{{route('events.create')}}">Create New Event</a></li>
+
+            </ul>
+        </li>
+
         <li class="submenu @if ($section == 'cardapplicants') active @endif @if (collect(['all', 'all2', 'create'])->contains($sub_section) & $section == 'cardapplicants') open @endif">
-            <a href="#"><i class="fa fa-book"></i> <span>Admission Cards</span> <i class="arrow fa fa-chevron-right"></i></a>
+            <a href="#"><i class="fa fa-briefcase"></i> <span>Admission Cards</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
                 <li @if ($sub_section == 'all') class="active" @endif><a href="{{route('cardapplicants.index')}}">Used Cards</a></li>
                 <li @if ($sub_section == 'all2') class="active" @endif><a href="{{route('cardapplicants.index3')}}">Available Cards</a></li>
@@ -51,7 +60,7 @@
         </li>
 
         <li class="submenu @if ($section == 'cards') active @endif @if (collect(['all', 'all2', 'create'])->contains($sub_section) & $section == 'cards') open @endif">
-            <a href="#"><i class="fa fa-book"></i> <span>Cards</span> <i class="arrow fa fa-chevron-right"></i></a>
+            <a href="#"><i class="fa fa-briefcase"></i> <span>Cards</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
                 <li @if ($sub_section == 'all') class="active" @endif><a href="{{route('cards.index')}}">Used Cards</a></li>
                 <li @if ($sub_section == 'all2') class="active" @endif><a href="{{route('cards.index2')}}">Available Cards</a></li>
@@ -76,7 +85,7 @@
 
         <!-- Fees -->
         <li class="submenu @if ($section == 'fees') active @endif @if (collect(['all', 'create'])->contains($sub_section) & $section == 'fees') open @endif">
-            <a href="#"><i class="fa fa-bullhorn"></i> <span>Fees</span> <i class="arrow fa fa-chevron-right"></i></a>
+            <a href="#"><i class="fa fa-money"></i> <span>Fees</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
                 <li @if ($sub_section == 'all' & $section == 'fees') class="active" @endif><a href="{{route('fees.index')}}">All Fees</a></li>
                 <li @if ($sub_section == 'create' & $section == 'fees') class="active" @endif><a href="{{route('fees.create')}}">Add New Fee</a></li>

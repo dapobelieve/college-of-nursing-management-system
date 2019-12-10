@@ -8,6 +8,7 @@ use App\Alert;
 use App\User;
 use App\Models\State;
 use App\Models\Student;
+use App\Models\SystemSetting;
 use App\Models\Fee;
 use App\Models\Payment;
 use Carbon\Carbon;
@@ -32,6 +33,10 @@ class PayTuitionController extends Controller
         $notification = Alert::alertMe('Registration Closed!!!','info');
         return redirect()->route('portal.dashboard')->with($notification);
       }
+
+      //check for session
+      $session = SystemSetting::where('name','current_session')->first();
+
       //check to know what level has been paid through reference field in payment model
       $payment = Payment::where('student_id', session()->get('st_id'))->latest('created_at')->select('reference', 'status')->first();
         $lvl = 100;
@@ -59,7 +64,8 @@ class PayTuitionController extends Controller
                                       ->with('user', User::find(Auth::id()))
                                       ->with('student', Student::find(session()->get('st_id')))
                                       ->with('level', $lvl)
-                                      ->with('payType', $payType);
+                                      ->with('payType', $payType)
+                                      ->with('sess', $session);
     }
 
 

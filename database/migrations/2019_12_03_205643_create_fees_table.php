@@ -16,7 +16,7 @@ class CreateFeesTable extends Migration
         Schema::create('fees', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('department_id')->unsigned();
-            $table->enum('level', ['100', '200', '300', '400', '500']);
+            $table->enum('level', ['100', '200', '300']);
             $table->decimal('indigene')->unsigned();
             $table->decimal('non_indigene')->unsigned();
             $table->timestamp('expiry_date');

@@ -41,7 +41,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <textarea name="content" rows="10" class="form-control" placeholder="Post Content" required>{{$post->content}}</textarea>
+                                    <textarea name="content" rows="10" class="form-control" placeholder="Post Content" required>{{$post->body}}</textarea>
                                 </div>
 
                                 <div class="form-actions">

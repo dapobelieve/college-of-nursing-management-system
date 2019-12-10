@@ -62,7 +62,7 @@ Principal Officers
                   <img src="images/registrar.jpg" class="img-fluid teachers-img" alt="#">
                   <div class="teachers-description">
                       <p><strong>Mr A.O Jayeoba</strong>
-                          <br> MCA, PhD
+                          <br> BSc, MSc
                       </p>
                       <hr>
                       <p><span>REGISTRAR</span></p>

@@ -19,7 +19,7 @@ class SettingsSeeder extends Seeder
             ['name' => 'admission_open_date', 'value' => $now],
             ['name' => 'admission_close_date', 'value' => $now],
             ['name' => 'late_payment_fee', 'value' => '2000.00'],
-            ['name' => 'current_year', 'value' => Carbon::now()->format('Y')],
+            ['name' => 'current_session', 'value' => Carbon::now()->format('Y')],
             ['name' => 'admission_payment_fee', 'value' => '50000.00'],
             ['name' => 'acceptance_payment_fee', 'value' => '10000.00'],
         ]);

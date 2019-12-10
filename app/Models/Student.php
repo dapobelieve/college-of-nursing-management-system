@@ -30,6 +30,8 @@ class Student extends Model
     return $this->morphOne('App\User', 'userable');
   }*/
 
+
+
   public function user()
   {
       return $this->belongsTo('App\User');
@@ -55,4 +57,9 @@ class Student extends Model
   public function result(){
     return $this->belongsTo('App\Models\Result');
   }
+
+  public function payment(){
+    return $this->hasMany('App\Models\Payment');
+  }
+
 }

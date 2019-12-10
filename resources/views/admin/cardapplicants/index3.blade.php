@@ -39,7 +39,7 @@
                             @foreach($cards as $data)
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
-                                    <td>{{$data->card_id}}</td>
+                                    <td>{{$data->reg_no}}</td>
                                     <td><span class="badge badge-primary">NOT USED</span></td>
                                     <td><span class="badge badge-primary">No Action</span></td>
                                 </tr>

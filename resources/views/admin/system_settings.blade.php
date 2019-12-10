@@ -52,9 +52,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>Current Year</td>
+                                            <td>Current Session</td>
                                             <td>
-                                                <input type="number" name="current_year" value="{{$settings['current_year']}}" class="form-control">
+                                                <input type="number" name="current_session" value="{{$settings['current_session']}}" class="form-control">
                                             </td>
                                         </tr>
                                         <tr>

@@ -62,7 +62,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'role'   => \App\Http\Middleware\CheckRole::class,
-        'check'  => \App\Http\Middleware\CheckCard::class
+        'check'  => \App\Http\Middleware\CheckCard::class,
+        'checkAuth' => \App\Http\Middleware\CheckAuth::class
     ];
 
     /**
@@ -78,7 +79,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\Authenticate::class,
         \Illuminate\Session\Middleware\AuthenticateSession::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        \Illuminate\Auth\Middleware\Authorize::class,        
+        \Illuminate\Auth\Middleware\Authorize::class,
         \App\Http\Middleware\Session4portal::class,
     ];
 }
