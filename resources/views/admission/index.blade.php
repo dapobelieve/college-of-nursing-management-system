@@ -33,7 +33,7 @@ Application Guide
                     <li>1.	Possess WAEC/SSCE/GCE or NECO/SSCE/GCE with at least five (5) credits at more than
                       two (2) sittings in English Language, Mathematics, Physics, Chemistry and Biology</li>
                     <li>2.	Only individuals with required credit passes at not more than two (2) sittings form the same examination body may apply.
-                       He or She should be at least Seventeen (17) years old on admission.</li>
+                       He or She should be at least Sixteen (16) years old on admission.</li>
                 </ul>
             </div>
         </div>
@@ -56,7 +56,7 @@ Application Guide
                   <li>1.	Possess WAEC/SSCE/GCE or NECO/SSCE/GCE with at least five (5) credits at more than
                     two (2) sittings in English Language, Mathematics, Physics, Chemistry and Biology</li>
                   <li>2.	Only individuals with required credit passes at not more than two (2) sittings form the same examination body may apply.
-                     He or She should be at least Seventeen (17) years old on admission.</li>
+                     He or She should be at least Sixteen (16) years old on admission.</li>
               </ul>
             </div>
         </div>
@@ -90,11 +90,14 @@ Application Guide
         <div class="row">
           <div class="col-md-12">
               <strong><p class="text-center">Method of Application</p></strong>
-            <p class="text-justify">Any interested candidate for Basic Midwifery programme should visit the main campus
-              at Eleyele and also kishi campus in order to obtain a scratch card for registration process.
-               Payment can be made online or a sum of Ten Thousand Naira (#10,000.00) only will be
-                paid to the College Account Number: 0123032629.
-              Bank Name: Wema Bank Plc. Account Name Oyo State College of Nursing and Midwifery. </p>
+            <p class="text-justify">Any interested candidate for Basic Midwifery programme will visit
+              the main campus at Eleyele and also kishi campus in order to obtain a scratch card to
+              start registration process after which  payment of Ten Thousand five hundred Naira
+              (#10,500.00) only can be made online while those wanting to pay in banks pay the
+              sum of Ten Thousand (#10,000)Naira only to the College Account Number: 0123032629.
+              Bank Name: Wema Bank Plc. Account Name: Oyo State College of Nursing and Midwifery,
+              Eleyele, Ibadan and sum of Two Hundred Naira (#200.00) only to Nursing and Midwifery
+               Council of Nigeria, Oyo State Chapter Account Number: 2019704292 at any First Bank Plc.</p>
           </div>
         </div>
       <div class="row">

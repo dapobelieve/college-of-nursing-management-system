@@ -4,13 +4,13 @@
             <div class="col-xs-6 col-sm-8 col-md-9">
                 <div class="header-top_address">
                     <div class="header-top_list">
-                        <span class="icon-phone">+2348160126553</span>
+                      <a href="tel:+2347086157620"><span class="icon-phone">+2347086157620</span></a>
                     </div>
                     <div class="header-top_list">
-                        <span class="icon-envelope-open">info@oysconme.edu.ng</span>
+                      <a href="malito:info@oysconme.edu.ng"><span class="icon-envelope-open">info@oysconme.edu.ng</span></a>
                     </div>
                     <div class="header-top_list">
-                        <span class="icon-location-pin">Eleyele, Ibadan Oyo state</span>
+                      <a href="http://maps.google.com/?q=Oyo%20state%20college%20of%20nursing%20&%20midwifery"><span class="icon-location-pin">Eleyele, Ibadan Oyo state</span></a>
                     </div>
                 </div>
                 <div class="header-top_login2">
