@@ -20,6 +20,6 @@ class Admin extends Model
      */
     public function user()
     {
-        return $this->morphOne('App\User', 'userable');
+        return $this->hasOne('App\User', 'id', 'user_id');
     }
 }
