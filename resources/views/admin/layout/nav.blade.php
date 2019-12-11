@@ -3,6 +3,7 @@
         @php
             if (!isset($section)) $section = '';
             if (!isset($sub_section)) $sub_section = '';
+            $permission_level = Auth::user()->permission_level;
         @endphp
 
         <li @if ($section == 'dashboard') class="active" @endif><a href="/admin">
