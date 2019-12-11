@@ -17,7 +17,7 @@ class CheckAdminPermission
     public function handle($request, Closure $next, string ...$permission)
     {
         if (Auth::check()) {
-            if (!in_array(Auth::user()->permission_level, $permission)) {
+            if (!in_array(Auth::user()->admin->permission_level, $permission)) {
                 return redirect()->route('dashboard.home');
             }
 
