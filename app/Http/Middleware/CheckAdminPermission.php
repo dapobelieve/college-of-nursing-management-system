@@ -13,8 +13,17 @@ class CheckAdminPermission
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, string $permission)
     {
-        return $next($request);
+        if (Auth::check()) {
+            if (Auth::user()->permission_level != $permission) {
+                return redirect()->route('dashboard.home');
+            }
+
+            return $next($request);
+        }
+
+        // Depending on the name of the route use this accordingly
+        return redirect()->route('welcome');
     }
 }
