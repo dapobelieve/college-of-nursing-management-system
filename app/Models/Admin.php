@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -20,6 +21,6 @@ class Admin extends Model
      */
     public function user()
     {
-        return $this->morphOne('App\User', 'userable');
+        return $this->belongsTo(User::class);
     }
 }

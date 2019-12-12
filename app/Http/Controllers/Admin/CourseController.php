@@ -10,6 +10,12 @@ use App\Models\Course;
 
 class CourseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkAdminPermissions:super,intermediate')->except('index');
+        $this->middleware('checkAdminPermissions:super')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
