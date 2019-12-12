@@ -12,7 +12,7 @@ Speech
 <!--============================= Message =============================-->
 <div class="speech">
     <div class="container">
-         <h2>Welcome to the OYSCONME — We believe in Quality Teaching &amp; Practices </h2>
+         <h2>Welcome to OYSCONME — We believe in Quality Teaching &amp; Practices </h2>
                 <div class="row">
                     <div class="col-md-8 text-justify">
                       <p>It is my privilege to welcome the aspiring and returning students to Oyo State College of Nursing and Midwifery, Eleyele, Ibadan, Nigeria which has created its own fame during the last 7 decades. Oyo State College of Nursing and Midwifery Eleyele, Ibadan ensures high quality professional education through various innovative programmes keeping ‘A’ grade in position among other colleges of Nursing in Nigeria. The College has a long history of providing quality nursing education fostered by visionary and committed leadership. I feel honoured to be given the opportunity to lead the College in this phase of its development.</p>
@@ -22,7 +22,6 @@ Speech
                       <p>My vision is that the College will be continually recognized locally, regionally and internationally for providing excellence in nursing education through innovative programmes that are responsive to global health challenges and for generating high quality interdisciplinary and international research. Achieving this vision will only be possible when the whole college community, including the students is committed to it. We will therefore strive to foster a student centered culture, where the students are our top priority and opportunities are afforded for students to engage in our vision and development. Whilst we will continue to challenge our students to enable them to achieve their full potential and to maintain academic standards, we will continue to strive to work with students in a supportive, sensitive and respectful manner.</p>
                       <p>You have come not by chance but chosen by God Almighty and hard work to the college. I can assure you that you are going to become a part of a high- spirited college with continuous learning. In the journey of achieving excellence, students are active partners. The College will impact your life forever. The teachers are involved in teaching, counseling and research work. They guide and assist the students in developing and refining their individual skills. I wish you Best of Luck! Thank you for your interest in studying at Oyo State College of Nursing and Midwifery.</p>
                       <p> G.O. Owolabi <br>The Provost</p>
-                        <img src="images/welcom_sign.png" class="img-fluid" alt="welcom-img">
                     </div>
                     <div class="col-md-4">
                        <img src="images/provost1.jpg" class="img-fluid ml-5" alt="#">

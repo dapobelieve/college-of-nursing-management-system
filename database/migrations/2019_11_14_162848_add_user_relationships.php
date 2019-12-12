@@ -13,7 +13,10 @@ class AddUserRelationships extends Migration
      */
     public function up()
     {
-        //
+      Schema::table('users', function (Blueprint $table) {
+          $table->integer('userable_id')->unsigned();
+          $table->text('userable_type');
+      });
     }
 
     /**
@@ -23,6 +26,8 @@ class AddUserRelationships extends Migration
      */
     public function down()
     {
-        //
+      Schema::table('users', function (Blueprint $table) {
+          $table->dropColumn(['userable_id', 'userable_type']);
+      });
     }
 }
