@@ -17,10 +17,10 @@
 
           <div class="col-sm-4">
               <div class="foot-logo">
-                  <a href="index.html">
+                  <a href="{{url('/')}}">
                       <img src="{{asset('images/Oysconmetrans.png')}}" class="img-fluid" alt="footer_logo">
                   </a>
-                  <p>2019 © copyright
+                  <p> © 2019 OYSCONME
                       <br> All rights reserved.</p>
               </div>
           </div>
@@ -52,7 +52,7 @@
             <div class="col-md-4">
                 <div class="address">
                     <h3>Contact us</h3>
-                    <p><span>Address: </span> College of nursing, Eleyele Ibadan</p>
+                    <p><span>Address: </span> Oyo State College of nursing, Eleyele Ibadan. PMB 5081 Eleyele Ibadan, Oyo State, Nigeria. </p>
                     <p>Email : info@oysconme.edu.ng
                         <br> Phone : +2347036924010</p>
                     <ul class="footer-social-icons">

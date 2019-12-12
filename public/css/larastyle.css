@@ -67,3 +67,14 @@
           display: block;
         }
 }
+#hhh{
+        -webkit-animation-name: movetrans;
+        -webkit-animation-duration: 15s;
+        -webkit-animation-timing-function: linear;
+        -webkit-animation-iteration-count: infinite;
+      }
+      @-webkit-keyframes movetrans {
+        0%   { -webkit-transform:translateX(300px);	}
+        50%  { -webkit-transform:translateX(0px);}
+        100% { -webkit-transform:translateX(-50px);}
+    }

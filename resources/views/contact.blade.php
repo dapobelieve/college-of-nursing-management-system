@@ -80,8 +80,9 @@ Contact Us
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                     <h6>Address</h6>
                                     <p> Oyo State College of Nursing and Midwifery
-                                        <br> Eleyele, IB
-                                        <br> Oyo state</p>
+                                        <br> Eleyele, Ibadan.
+                                        <br>PMB 5081 Eleyele Ibadan,
+                                        <br>Oyo state, Nigeria</p>
                                     </div>
                                     <br>
                                     <div class="contact-details">
@@ -95,7 +96,7 @@ Contact Us
                                     <div class="contact-details">
                                         <i class="fa fa-phone" aria-hidden="true"></i>
                                         <h6>phone</h6>
-                                        <p>+2348</p>
+                                        <p>+2347036924010</p>
                                     </div>
                                 </div>
                             </div>

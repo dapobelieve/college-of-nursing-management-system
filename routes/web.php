@@ -60,6 +60,8 @@ Route::post('portal/checkpage', 'CheckpageController@store')->name('portal.check
 
 Route::get('/our-team',function () {return view('college-officers');});
 
+Route::get('/campus-life',function () {return view('campus-life');});
+
 Route::get('/coursedetails/{id}', 'Frontpages\CoursedetailsController@index')->name('coursedetails');
 
 

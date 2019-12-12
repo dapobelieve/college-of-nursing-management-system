@@ -11,7 +11,7 @@
                 <div class="carousel-caption d-md-block">
                     <div class="slider_title">
                         <h1>OYSCONME still setting the pace</h1>
-                        <h4>We train student to become pragmatic and transformational leaders<br>in Nursing and Midwifery</h4>
+                        <h4>We train students to become pragmatic and transformational leaders<br>in Nursing and Midwifery</h4>
                         <div class="slider-btn">
                             <a href="#" class="btn btn-default">SEE Programs</a>
                             <a href="#" class="btn btn-default">Learn more</a>
@@ -37,9 +37,11 @@
                 <div class="carousel-caption d-md-block">
                     <div class="slider_title">
                         <h1>Campus life @ OYSCONME</h1>
-                        <h4><br></h4>
+                        <h4 style="color:white;">Oyo State College of Nursing and Midwifery has an outstanding reputation
+                          <br> of excellence in education and positive student experience.
+                          <br> This is because we focus on delivering best student support.</h4>
                         <div class="slider-btn">
-                            <a href="#" class="btn btn-default">Campus Life</a>
+                            <a href="{{url('/campus-life')}}" class="btn btn-default">Campus Life</a>
                         </div>
                     </div>
                 </div>

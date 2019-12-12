@@ -9,6 +9,7 @@
             <div id="header">
                 <h1><a href="#">Unicorn Admin</a></h1>
                 <a id="menu-trigger" href="#"><i class="fa fa-bars"></i></a>
+                <li class="btn"><a title="" href="{{route('logout')}}"><i class="fa fa-share"></i> <span class="text">Logout</span></a></li>
             </div>
 
             {{-- @include('admin.layout.topnav') --}}

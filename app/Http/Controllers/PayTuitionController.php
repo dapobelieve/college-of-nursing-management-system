@@ -76,6 +76,8 @@ class PayTuitionController extends Controller
       //add level into session for usage during payment through Paystack
       session()->put('lvl', $lvl);
       $amount = $fee->where('level','=', $lvl)->where('department_id','=',session()->get('dept_id'))->first();
+      $latepayment = SystemSetting::where('name', 'late_payment_fee')->select('value')->first();
+      //dd($latepayment->value);
       //to check for late payment
       $n = date("Y/m/d");
       $date1 = new DateTime($n);
@@ -88,14 +90,14 @@ class PayTuitionController extends Controller
             session()->put('regStatus', 'L');
             switch ($state->name) {
               case 'Oyo':
-                  $total = $amount->late_payment+ $amount->indigene;
-                  $result= $this->verifyAmount($type, $total);
+                  $total = $amount->indigene;
+                  $result= $this->verifyAmount($type, $total, $latepayment->value);
                   return $result;
                 break;
 
                 default:
-                $total = $amount->late_payment+ $amount->non_indigene;
-                $result= $this->verifyAmount($type, $total);
+                $total = $amount->non_indigene;
+                $result= $this->verifyAmount($type, $total, $latepayment->value);
                 return $result;
                 break;
             }
@@ -105,27 +107,29 @@ class PayTuitionController extends Controller
             switch ($state->name) {
               case 'Oyo':
                 $total = $amount->indigene;
-                $result= $this->verifyAmount($type, $total);
+                $late = 0;
+                $result= $this->verifyAmount($type, $total, $late);
                 return $result;
                 break;
 
               default:
               $total = $amount->non_indigene;
-              $result= $this->verifyAmount($type, $total);
+              $late = 0;
+              $result= $this->verifyAmount($type, $total, $late);
               return $result;
                 break;
         }
       }
     }
 
-    public function verifyAmount($check, $amount)
+    public function verifyAmount($check, $amount, $late)
     {
       if ($check == "half") {
         session()->put('pay_status', 'HALF PAID');
         if(session()->has('pay_full')){
           session()->put('pay_status', 'PAID');
         }
-        return $amount/2;
+        return ($amount/2)+ $late;
       }else{
         session()->put('pay_status', 'PAID');
         return $amount;

@@ -63,7 +63,7 @@ Portal - Dashboard
                       <div class="col-md-12">
                          <label class="col-md-12 col-form-label text-md-left text-primary"><strong class="text-success">Current Session :</strong><span class="ml-5"> {{ $session->value }}</span></label>
 
-                        <label class="col-md-12 col-form-label text-md-left text-primary"><strong class="text-success">Registration Status : </strong><span class="ml-4">{{ $late }}</span></label>
+                        <label class="col-md-12 col-form-label text-md-left text-primary"><strong class="text-success">Registration Status : </strong><span class="ml-4 badge badge-info">{{ $late }}</span></label>
 
                         <label class="col-md-12 col-form-label text-md-left text-primary"><strong class="text-success">Registration Closes : </strong><span class="ml-4">{{ $sess->expiry_date }}</span></label>
 

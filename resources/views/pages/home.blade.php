@@ -28,12 +28,12 @@
                 </div>
             </div>
             <div class="row">
-                @foreach ($department as $dept)
+                @foreach ($department as $value => $dept)
 
                     <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
                         <div class="courses_box mb-5">
                             <div class="course-img-wrap">
-                                <img src="images/courses_1.jpg" class="img-fluid" alt="courses-img">
+                                <img src="images/courses{{$value}}.jpg" class="img-fluid" alt="courses-img">
                                 <div class="courses_box-img">
                                     <div class="courses-link-wrap">
                                         <a href="#" class="course-link"><span>{{$dept->name}}</span></a>

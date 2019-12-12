@@ -49,7 +49,7 @@ Portal - Course Registration
 
                         <label for="tuition" class="col-md-2 col-form-label text-md-right"><strong>{{ __('Select Level') }}</strong></label>
                         <select class="form-control col-md-2" id="pay_level" name="pay_level" required>
-                          <option value=""> </option>
+                          <option value="{{$level}}"> </option>
                           <option value="{{$level}}">{{$level."L"}}</option>
                         </select>
                       </div>

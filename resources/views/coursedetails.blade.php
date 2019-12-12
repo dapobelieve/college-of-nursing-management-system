@@ -48,18 +48,13 @@ Events
                   </div>
                   <div class="col-lg-4">
                       <ul class="admission_rating">
-                          <li>Ratings<span>:</span></li>
-                          <li class="admission_star">5 Star</li>
-                          <li class="admission_star-second">Starts<span>:</span></li>
-                          <li class="admission_star">7 August </li>
+
                           <li>Duration<span>:</span></li>
-                          @if($dept->name == 'Midwifery')
+                          @if($dept->name == 'Basic Midwifery' or $dept->name == 'Post Basic Midwifery')
                           <li class="admission_star">18 months</li>
                           @else
                           <li class="admission_star">3 years</li>
                           @endif
-                          <li class="admission_star-second">Timing<span>:</span></li>
-                          <li class="admission_star">8 am - 6 pm</li>
                           <li>Fees<span>:</span></li>
                           <li class="admission_star">Contact us</li>
                           <li>Seats available<span>:</span></li>

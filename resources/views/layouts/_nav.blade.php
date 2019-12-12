@@ -6,7 +6,7 @@
                     <button class="navbar-toggler navbar-toggler2 navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown">
                         <span class="icon-menu"></span>
                     </button>
-                    <a href="{{asset('/')}}" class="navbar-brand nav-brand2"><img class="d-block" src="images/oysconmelogo2.png" alt="School logo"></a>
+                    <a href="{{asset('/')}}" class="navbar-brand nav-brand2"><img class="d-block" src="images/oysconmelogo.jpg" alt="School logo" height="90" width="250"></a>
                     <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                         <ul class="navbar-nav">
                             <li class="nav-item">
