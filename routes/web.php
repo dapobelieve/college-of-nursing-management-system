@@ -118,61 +118,33 @@ Route::get('/events',[
 
 // The admin panel routes
 Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'role:ADMIN'], function () {
-  // Dashboard
-  Route::get('', 'DashboardController@index')->name('dashboard.home');
-
-
-  // Courses
-  Route::resource('courses', 'CourseController');
-
-  // Departments
-  Route::resource('departments', 'DepartmentController');
-
-  // Fees
-  Route::resource('fees', 'FeeController');
-
-  // Lecturers
-  Route::resource('lecturers', 'LecturerController');
-
-  // News section
-  Route::resource('news', 'NewsController',  [
-    'only' => [
-      'index', 'create', 'store', 'edit', 'update'
-    ],
-    'parameters' => [
-      'news' => 'post'
-    ]
-  ]);
-
-  // Events section
-  Route::resource('events', 'EventController',  [
-    'only' => [
-      'index', 'create', 'store', 'edit', 'update'
-    ],
-    'parameters' => [
-      'events' => 'post'
-    ]
-  ]);
-
-  // Students section
-  Route::resource('students', 'StudentController');
-  Route::group(['middleware' => ['checkAdminPermissions:super,intermediate']], function() {
+  // Super and intermediate admin only routes
+  Route::group(['middleware' => ['checkAdminPermissions:super,intermediate']], function () {
     Route::get('/index2dep/{id}', 'StudentController@dept')->name('students.index2dep');
     Route::get('/addresult/{id}', 'StudentController@showresult')->name('students.showresult');
     Route::post('/addresult', 'StudentController@addresult')->name('students.addresult');
+
+    Route::put('applicants/addscore/{studentapplicant}', 'ApplicantController@update')->name('applicants.update');
+
+    // Events section
+    Route::resource('events', 'EventController',  [
+      'only' => [
+        'index', 'create', 'store', 'edit', 'update'
+      ],
+      'parameters' => [
+        'events' => 'post'
+      ]
+    ]);
+
+    // Fees
+    Route::resource('fees', 'FeeController');
+
+    // Lecturers
+    Route::resource('lecturers', 'LecturerController');
   });
 
-  // Applicants section
-  Route::get('applicants/index', 'ApplicantController@index')->name('applicants.index');
-  Route::get('applicants/index/{studentapplicant}', 'ApplicantController@edit')->name('applicants.edit');
-  Route::post('applicants/search', 'ApplicantController@search')->name('applicants.search');
-  Route::post('applicants/searchunapproved', 'ApplicantController@searchunapproved')->name('applicants.searchunapproved');
-  Route::post('applicants/index', 'ApplicantController@exportcsv')->name('applicants.exportcsv');
-
-  Route::put('applicants/addscore/{studentapplicant}', 'ApplicantController@update')->name('applicants.update')->middleware('checkAdminPermissions:super,intermediate');
-
   // Super admin only routes
-  Route::group(['middleware' => ['checkAdminPermissions:super']], function() {
+  Route::group(['middleware' => ['checkAdminPermissions:super']], function () {
     // Cards
     Route::resource('cards', 'CardController');
     Route::get('/index2', 'CardController@index2')->name('cards.index2');
@@ -206,4 +178,33 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
     Route::get('settings', 'SettingController@index')->name('settings.index');
     Route::put('settings/update', 'SettingController@update')->name('settings.update');
   });
+
+  // Dashboard
+  Route::get('', 'DashboardController@index')->name('dashboard.home');
+
+  // Courses
+  Route::resource('courses', 'CourseController');
+
+  // Departments
+  Route::resource('departments', 'DepartmentController');
+
+  // News section
+  Route::resource('news', 'NewsController',  [
+    'only' => [
+      'index', 'create', 'store', 'edit', 'update'
+    ],
+    'parameters' => [
+      'news' => 'post'
+    ]
+  ]);
+
+  // Students section
+  Route::resource('students', 'StudentController');
+
+  // Applicants section
+  Route::get('applicants/index', 'ApplicantController@index')->name('applicants.index');
+  Route::get('applicants/index/{studentapplicant}', 'ApplicantController@edit')->name('applicants.edit');
+  Route::post('applicants/search', 'ApplicantController@search')->name('applicants.search');
+  Route::post('applicants/searchunapproved', 'ApplicantController@searchunapproved')->name('applicants.searchunapproved');
+  Route::post('applicants/index', 'ApplicantController@exportcsv')->name('applicants.exportcsv');
 });

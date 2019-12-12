@@ -49,7 +49,9 @@
                                     <td>{{$data->semester}}</td>
                                     <td>{{$data->department->name}}</td>
                                     <td>
-                                        <a href="{{route('courses.edit', ['courses' => $data->id])}}">Edit</a> |
+                                        @if (Gate::allows('edit-course'))
+                                        <a href="{{route('courses.edit', ['courses' => $data->id])}}">Edit</a>
+                                        @if (Gate::allows('delete-course')) |
                                         <form style="display: inline" id="courses-{{$data->id}}"
                                               method="post"
                                               action="{{route('courses.destroy', ['courses' => $data->id])}}">
@@ -58,6 +60,8 @@
                                         </form>
                                         <a onclick="event.preventDefault();
                                             if (confirm('Are you sure you want to delete this record?')) document.getElementById('courses-{{$data->id}}').submit()" href="{{route('courses.destroy', ['courses' => $data->id])}}">Delete</a>
+                                        @endif
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

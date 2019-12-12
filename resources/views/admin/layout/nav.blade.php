@@ -16,9 +16,7 @@
             <a href="#"><i class="fa fa-group"></i> <span>Lecturers</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
                 <li><a href="{{route('lecturers.index')}}">All Lecturers</a></li>
-                @if ($permission_level >= 3)
-                    <li><a href="{{route('lecturers.create')}}">Add Lecturer</a></li>
-                @endif
+                <li><a href="{{route('lecturers.create')}}">Add Lecturer</a></li>
             </ul>
         </li>
         @endif
