@@ -3,19 +3,25 @@
         @php
             if (!isset($section)) $section = '';
             if (!isset($sub_section)) $sub_section = '';
-            $permission_level = Auth::user()->permission_level;
+            $permission_level = ['super' => 3, 'intermediate' => 2, 'basic' => 1][Auth::user()->admin->permission_level];
         @endphp
-
+    
+            
         <li @if ($section == 'dashboard') class="active" @endif><a href="/admin">
             <i class="fa fa-home"></i> <span>Dashboard</span></a>
         </li>
+
+        @if ($permission_level >= 2)
         <li class="submenu">
             <a href="#"><i class="fa fa-group"></i> <span>Lecturers</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
                 <li><a href="{{route('lecturers.index')}}">All Lecturers</a></li>
-                <li><a href="{{route('lecturers.create')}}">Add Lecturer</a></li>
+                @if ($permission_level >= 3)
+                    <li><a href="{{route('lecturers.create')}}">Add Lecturer</a></li>
+                @endif
             </ul>
         </li>
+        @endif
 
         <li class="submenu @if ($section == 'applicants') active @endif @if (collect(['all', 'all2', 'create'])->contains($sub_section) & $section == 'applicants') open @endif">
             <a href="#"><i class="fa fa-group"></i> <span>Applicants</span> <i class="arrow fa fa-chevron-right"></i></a>
@@ -27,7 +33,9 @@
         <li class=" submenu @if ($section == 'students') active @endif @if (collect(['all', 'create'])->contains($sub_section) & $section == 'students') open @endif">
             <a href="#"><i class="fa fa-group"></i> <span>Students</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
+                @if ($permission_level >= 2)
                 <li @if ($sub_section == 'all') class="active" @endif><a href="{{route('students.index')}}">All Student</a></li>
+                @endif
                 <li @if ($sub_section == 'create') class="active" @endif><a href="{{url('admin/students/create')}}">Register Student</a></li>
             </ul>
         </li>
@@ -41,7 +49,8 @@
 
             </ul>
         </li>
-
+        
+        @if ($permission_level >= 2)
         <li class="submenu @if ($section == 'events') active @endif @if (collect(['all', 'create'])->contains($sub_section) & $section == 'events') open @endif">
             <a href="#"><i class="fa fa-bullhorn"></i> <span>Events</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
@@ -50,7 +59,9 @@
 
             </ul>
         </li>
+        @endif
 
+        @if ($permission_level >= 2)
         <li class="submenu @if ($section == 'cardapplicants') active @endif @if (collect(['all', 'all2', 'create'])->contains($sub_section) & $section == 'cardapplicants') open @endif">
             <a href="#"><i class="fa fa-briefcase"></i> <span>Admission Cards</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
@@ -68,22 +79,29 @@
                 <li @if ($sub_section == 'create') class="active" @endif><a href="{{route('cards.create')}}">Add Card</a></li>
             </ul>
         </li>
+        @endif
 
         <li class="submenu">
             <a href="#"><i class="fa fa-book"></i> <span>Courses</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
                 <li><a href="{{route('courses.index')}}">All Courses</a></li>
-                <li><a href="{{route('courses.create')}}">Add Course</a></li>
+                @if ($permission_level >= 2)
+                    <li><a href="{{route('courses.create')}}">Add Course</a></li>
+                @endif
             </ul>
         </li>
+
         <li class="submenu">
             <a href="#"><i class="fa fa-book"></i> <span>Departments</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
                 <li><a href="{{route('departments.index')}}">All Departments</a></li>
-                <li><a href="{{route('departments.create')}}">Add Department</a></li>
+                @if ($permission_level >= 2)
+                    <li><a href="{{route('departments.create')}}">Add Department</a></li>
+                @endif
             </ul>
         </li>
 
+        @if ($permission_level >= 2)
         <!-- Fees -->
         <li class="submenu @if ($section == 'fees') active @endif @if (collect(['all', 'create'])->contains($sub_section) & $section == 'fees') open @endif">
             <a href="#"><i class="fa fa-money"></i> <span>Fees</span> <i class="arrow fa fa-chevron-right"></i></a>
@@ -92,8 +110,6 @@
                 <li @if ($sub_section == 'create' & $section == 'fees') class="active" @endif><a href="{{route('fees.create')}}">Add New Fee</a></li>
             </ul>
         </li>
-
-
 
         <!-- Admins section -->
         <li class="submenu @if ($section == 'admins') active @endif @if (collect(['all', 'create'])->contains($sub_section) & $section == 'admins') open @endif">
@@ -110,6 +126,11 @@
 
         <li @if ($section == 'settings') class="active" @endif><a href="/admin/settings">
             <i class="fa fa-cog"></i> <span>System Settings</span></a>
+        </li>
+        @endif
+
+        <li><a href="{{url('logout')}}">
+            <i class="fa fa-home"></i> <span>Logout</span></a>
         </li>
     </ul>
 </div>
