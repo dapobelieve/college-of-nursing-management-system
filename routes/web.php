@@ -123,7 +123,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
 
   //cards
   Route::resource('cards', 'CardController');
-    Route::get('/index2', 'CardController@index2')->name('cards.index2');
+  Route::get('/index2', 'CardController@index2')->name('cards.index2');
 
   // Courses
   Route::resource('courses', 'CourseController');
@@ -163,23 +163,28 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   Route::get('/addresult/{id}', 'StudentController@showresult')->name('students.showresult');
   Route::post('/addresult', 'StudentController@addresult')->name('students.addresult');
 
-  //Cardapplicants sub_section
+  // Cardapplicants sub_section
   Route::resource('cardapplicants', 'CardapplicantController');
   Route::get('/index3', 'CardapplicantController@index2')->name('cardapplicants.index3');
   Route::post('/index3', 'CardapplicantController@exportcsv')->name('cardapplicants.exportcsv');
   Route::post('cardapplicants/index', 'CardapplicantController@deleteall')->name('cardapplicants.deleteall');
 
-  //applicants
+  // Applicants section
   Route::get('applicants/index', 'ApplicantController@index')->name('applicants.index');
   Route::get('applicants/index/{studentapplicant}', 'ApplicantController@edit')->name('applicants.edit');
-  Route::put('applicants/addscore/{studentapplicant}', 'ApplicantController@update')->name('applicants.update');
-  Route::put('applicants/index', 'ApplicantController@deleteall')->name('applicants.deleteall');
-  Route::post('applicants/index', 'ApplicantController@exportcsv')->name('applicants.exportcsv');
   Route::post('applicants/search', 'ApplicantController@search')->name('applicants.search');
   Route::post('applicants/searchunapproved', 'ApplicantController@searchunapproved')->name('applicants.searchunapproved');
-  Route::delete('applicants/destroy/{studentapplicant}', 'ApplicantController@delete')->name('applicants.destroy');
-  Route::get('applicants/confirmteller/{studentapplicant}', 'ApplicantController@tellerindex')->name('applicants.addtelleredit');
-  Route::put('applicants/confirmteller/{studentapplicant}', 'ApplicantController@addteller')->name('applicants.addteller');
+  Route::post('applicants/index', 'ApplicantController@exportcsv')->name('applicants.exportcsv');
+
+  Route::put('applicants/addscore/{studentapplicant}', 'ApplicantController@update')->name('applicants.update')->middleware('checkAdminPermissions:super,intermediate');
+
+  Route::group(['middleware' => ['checkAdminPermissions:super']], function() {
+    Route::put('applicants/index', 'ApplicantController@deleteall')->name('applicants.deleteall');
+    Route::delete('applicants/destroy/{studentapplicant}', 'ApplicantController@delete')->name('applicants.destroy');
+    Route::get('applicants/confirmteller/{studentapplicant}', 'ApplicantController@tellerindex')->name('applicants.addtelleredit');
+    Route::put('applicants/confirmteller/{studentapplicant}', 'ApplicantController@addteller')->name('applicants.addteller');
+  });
+
   // Admins section
   Route::resource('admins', 'AdminController',  [
     'only' => [
@@ -188,7 +193,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
     'parameters' => [
       'admins' => 'admin'
     ]
-  ]);
+  ])->middleware('checkAdminPermissions:super');
 
   // Roles section
   Route::get('roles', 'RoleController@index');
