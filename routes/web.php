@@ -156,9 +156,11 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
 
   // Students section
   Route::resource('students', 'StudentController');
-  Route::get('/index2dep/{id}', 'StudentController@dept')->name('students.index2dep');
-  Route::get('/addresult/{id}', 'StudentController@showresult')->name('students.showresult');
-  Route::post('/addresult', 'StudentController@addresult')->name('students.addresult');
+  Route::group(['middleware' => ['checkAdminPermissions:super,intermediate']], function() {
+    Route::get('/index2dep/{id}', 'StudentController@dept')->name('students.index2dep');
+    Route::get('/addresult/{id}', 'StudentController@showresult')->name('students.showresult');
+    Route::post('/addresult', 'StudentController@addresult')->name('students.addresult');
+  });
 
   // Applicants section
   Route::get('applicants/index', 'ApplicantController@index')->name('applicants.index');

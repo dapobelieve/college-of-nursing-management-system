@@ -19,7 +19,13 @@ use Carbon\Carbon;
 
 class StudentController extends Controller
 {
-  use CloudinaryUpload;
+    use CloudinaryUpload;
+
+    public function __construct()
+    {
+      $this->middleware('checkAdminPermissions:super,intermediate')->except(['create', 'store']);
+    }
+  
     /**
      * Shows all students
      *
