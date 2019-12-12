@@ -61,7 +61,7 @@
         </li>
         @endif
 
-        @if ($permission_level >= 2)
+        @if ($permission_level >= 3)
         <li class="submenu @if ($section == 'cardapplicants') active @endif @if (collect(['all', 'all2', 'create'])->contains($sub_section) & $section == 'cardapplicants') open @endif">
             <a href="#"><i class="fa fa-briefcase"></i> <span>Admission Cards</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
@@ -110,7 +110,9 @@
                 <li @if ($sub_section == 'create' & $section == 'fees') class="active" @endif><a href="{{route('fees.create')}}">Add New Fee</a></li>
             </ul>
         </li>
+        @endif
 
+        @if ($permission_level >= 3)
         <!-- Admins section -->
         <li class="submenu @if ($section == 'admins') active @endif @if (collect(['all', 'create'])->contains($sub_section) & $section == 'admins') open @endif">
             <a href="#"><i class="fa fa-group"></i> <span>Admins</span> <i class="arrow fa fa-chevron-right"></i></a>
