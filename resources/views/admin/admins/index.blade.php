@@ -36,6 +36,8 @@
                                     {{Session::get('success')}}
                                     <a href="#" data-dismiss="alert" class="close">×</a>
                                 </div>
+                            @elseif(Session::has('error'))
+                                <strong style="color: red">* {{ Session::get('error') }}</strong> <br>
                             @endif
                             @if ($admins->total() > 0)
                                 <table class="table table-bordered table-striped table-hover">
@@ -54,9 +56,11 @@
                                                 <td>{{ $admin->user->email }}</td>
                                                 <td>{{ ucwords($admin->permission_level) }} Admin</td>
                                                 <td class="text-center">
-                                                    <a href="{{route('admins.edit', $admin)}}">Edit</a> |
+                                                    <a href="{{route('admins.edit', $admin)}}">Edit</a>
+                                                    @if(Gate::allows('delete-admin', $admin)) |
                                                     <form style="display: inline" id="admin-{{$admin->id}}" method="post" action="{{route('admins.destroy', $admin)}}">{{ method_field("DELETE")}}{{csrf_field()}}</form>
                                                     <a onclick="event.preventDefault();if (confirm('Are you sure you want to delete this admin?')) document.getElementById('admin-{{$admin->id}}').submit()" href="{{route('admins.destroy', $admin)}}">Delete</a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

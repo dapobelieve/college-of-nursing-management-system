@@ -7,6 +7,7 @@ use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Models\{Admin, Role};
 use App\User;
+use Illuminate\Auth\Access\Gate;
 
 class AdminController extends Controller
 {
@@ -104,6 +105,36 @@ class AdminController extends Controller
      */
     public function update(Request $request, Admin $admin)
     {
+        $this->validate($request, [
+            'first_name' => 'required',
+            'middle_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|same:c_password|min:6',
+            'c_password' => 'required|same:password|min:6',
+            'permission_level' => 'required|in:basic,intermediate',
+        ]);
+
+        // Make the user record
+        $user = factory(User::class)->make();
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->middle_name = $request->input('middle_name');
+        $user->email = $request->input('email');
+        $user->password = password_hash($request->input('password'), PASSWORD_DEFAULT);
+        $user->save();
+
+        // Make the user an admin
+        $role = Role::where('name', 'Admin')->first();
+        $user->roles()->attach($role);
+
+        // Create an admin record for the user
+        $admin = new Admin;
+        $admin->permission_level = $request->input('permission_level');
+        $user->admin()->save($admin);
+
+        // Success
+        return redirect()->route('admins.index')->with('success', 'Admin updated!');
     }
 
     /**
@@ -114,7 +145,11 @@ class AdminController extends Controller
      */
     public function destroy(Admin $admin)
     {
-        $admin->delete();
-        return redirect()->route('admins.index')->with('success', 'Admin deleted');
+        if (Gate::allow('delete-admin')) {
+            $admin->delete();
+            return redirect()->route('admins.index')->with('success', 'Admin deleted');
+        } else {
+            return redirect()->route('admins.index')->with('error', 'You can not delete this admin');
+        }
     }
 }
