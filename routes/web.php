@@ -167,14 +167,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
     Route::put('applicants/confirmteller/{studentapplicant}', 'ApplicantController@addteller')->name('applicants.addteller');
 
     // Admins section
-    Route::resource('admins', 'AdminController',  [
-      'only' => [
-        'index', 'create', 'store', 'edit', 'update', 'show'
-      ],
-      'parameters' => [
-        'admins' => 'admin'
-      ]
-    ]);
+    Route::resource('admins', 'AdminController',  ['parameters' => ['admins' => 'admin']]);
 
     // Roles section
     Route::get('roles', 'RoleController@index');
