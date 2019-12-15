@@ -92,6 +92,7 @@ class AdminController extends Controller
      */
     public function edit(Admin $admin)
     {
+        return View('admin.admins.edit', ['section' => 'admins', 'sub_section' => 'create', 'admin' => $admin]);
     }
 
     /**
@@ -103,5 +104,17 @@ class AdminController extends Controller
      */
     public function update(Request $request, Admin $admin)
     {
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Admin $admin)
+    {
+        $admin->delete();
+        return redirect()->route('admins.index')->with('success', 'Admin deleted');
     }
 }
