@@ -72,13 +72,13 @@
                                     <div class="form-group">
                                         <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Password:</label>
                                         <div class="col-sm-9 col-md-6 col-lg-6">
-                                            <input id="name" value="{{ old('password') }}" type="password" placeholder="Password" name="password" class="form-control input-sm" />
+                                            <input id="name" type="password" placeholder="Password" name="password" class="form-control input-sm" />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Retype Password:</label>
                                         <div class="col-sm-9 col-md-6 col-lg-6">
-                                            <input id="name" value="{{ old('c_password') }}" type="password" placeholder="Retype Password" name="c_password" class="form-control input-sm" />
+                                            <input id="name" type="password" placeholder="Retype Password" name="c_password" class="form-control input-sm" />
                                         </div>
                                     </div>
                                     <div class="form-group">
