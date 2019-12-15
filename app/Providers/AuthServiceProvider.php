@@ -51,7 +51,10 @@ class AuthServiceProvider extends ServiceProvider
             return collect(['super'])->contains($user->admin->permission_level);
         });
 
-        Gate::define('modify-admin', function ($user, Admin $admin) {
+        Gate::define('delete-admin', function ($user, Admin $admin) {
+            if ($user->admin->permission_level != 'super') {
+                return false;
+            }
             return $admin->permission_level != 'super';
         });
     }

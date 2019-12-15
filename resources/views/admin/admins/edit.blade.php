@@ -74,6 +74,7 @@
                                                         <option selected value="">Select a permission level for the admin</option>
                                                         <option value="basic" @if ($admin->permission_level == 'basic')selected @endif>Basic</option>
                                                         <option value="intermediate" @if ($admin->permission_level == 'intermediate')selected @endif>Intermediate</option>
+                                                        <option value="super" @if ($admin->permission_level == 'super')selected @endif>Super</option>
                                                     </select>
                                                 </div>
                                             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
@@ -60,7 +61,7 @@ class AdminController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:c_password|min:6',
             'c_password' => 'required|same:password|min:6',
-            'permission_level' => 'required|in:basic,intermediate',
+            'permission_level' => 'required|in:basic,intermediate,super',
         ]);
 
         // Make the user record
@@ -111,15 +112,21 @@ class AdminController extends Controller
             'last_name' => 'required',
             'password' => 'sometimes|same:c_password',
             'c_password' => 'sometimes|same:password',
-            'permission_level' => 'required|in:basic,intermediate',
+            'permission_level' => 'required|in:basic,intermediate,super',
         ]);
+
+        if ($admin->id != Auth::user()->admin->id & $admin->permission_level == 'super' & !empty($request->input('password'))) {
+            return redirect()->route('admins.edit', $admin)->with('error', 'You can not change the password of another super admin!');
+        } else if ($admin->permission_level == 'super' & $request->input('permission_level') != 'super') {
+            return redirect()->route('admins.edit', $admin)->with('error', 'You can not demote a super admin, please contact the server admin!');
+        }
 
         // Update the user record
         $user = $admin->user;
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
         $user->middle_name = $request->input('middle_name');
-        if ($request->has('password')) {
+        if (!empty($request->has('password'))) {
             $user->password = password_hash($request->input('password'), PASSWORD_DEFAULT);
         }
         $user->save();
@@ -140,7 +147,7 @@ class AdminController extends Controller
      */
     public function destroy(Admin $admin)
     {
-        if (Gate::allow('modify-admin')) {
+        if (Gate::allow('delete-admin')) {
             $admin->delete();
             return redirect()->route('admins.index')->with('success', 'Admin deleted');
         } else {

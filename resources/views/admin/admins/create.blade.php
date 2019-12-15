@@ -88,6 +88,7 @@
                                                 <option selected value="">Select a permission level for the admin</option>
                                                 <option value="basic">Basic</option>
                                                 <option value="intermediate">Intermediate</option>
+                                                <option value="super">Super</option>
                                             </select>
                                         </div>
                                     </div>
