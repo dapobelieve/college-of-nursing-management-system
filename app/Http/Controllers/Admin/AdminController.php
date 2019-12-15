@@ -10,27 +10,14 @@ use App\Models\Admin;
 class AdminController extends Controller
 {
     /**
-     * Template for json response to be returned to the user for an ajax call
-     * @var array $response
-     */
-    protected $response = [
-        'ok' => false,
-        'message' => '',
-        'data' => [
-            'reload' => false,
-            'redirect' => null
-        ]
-    ];
-
-    /**
      * Shows admins in the system
      *
      * @return View
      */
     public function index()
     {
-        $admins = Admin::orderBy('created_at', 'DESC')
-            ->orderBy('updated_at', 'DESC')
+        $admins = Admin::orderBy('updated_at', 'DESC')
+            ->orderBy('created_at', 'DESC')
             ->paginate(10);
 
         return View('admin.admins.index', ['section' => 'admins', 'sub_section' => 'all', 'admins' => $admins]);

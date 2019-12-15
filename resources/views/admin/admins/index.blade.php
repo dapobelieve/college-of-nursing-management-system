@@ -37,6 +37,7 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Email</th>
+                                            <th>Permission Level</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -45,9 +46,11 @@
                                             <tr>
                                                 <td>{{ $admin->user->full_name }}</td>
                                                 <td>{{ $admin->user->email }}</td>
+                                                <td>{{ ucwords($admin->permission_level) }} Admin</td>
                                                 <td class="text-center">
-                                                    <a href="{{route('admins.edit', ['admins' => $admin->id])}}" class="btn btn-default btn-sm">Edit</a>
-                                                    <a href="{{route('admins.show', ['admins' => $admin->id])}}" class="btn btn-default btn-sm">Details</a>
+                                                    <a href="{{route('admins.edit', $admin)}}">Edit</a> |
+                                                    <form style="display: inline" id="admin-{{$admin->id}}" method="post" action="{{route('admins.destroy', $admin)}}">{{ method_field("DELETE")}}{{csrf_field()}}</form>
+                                                    <a onclick="event.preventDefault();if (confirm('Are you sure you want to delete this admin?')) document.getElementById('admin-{{$admin->id}}').submit()" href="{{route('admins.destroy', $admin)}}">Delete</a>
                                                 </td>
                                             </tr>
                                         @endforeach
