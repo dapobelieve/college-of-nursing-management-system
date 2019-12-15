@@ -109,29 +109,24 @@ class AdminController extends Controller
             'first_name' => 'required',
             'middle_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|same:c_password|min:6',
-            'c_password' => 'required|same:password|min:6',
+            'password' => 'sometimes|same:c_password',
+            'c_password' => 'sometimes|same:password',
             'permission_level' => 'required|in:basic,intermediate',
         ]);
 
-        // Make the user record
-        $user = factory(User::class)->make();
+        // Update the user record
+        $user = $admin->user;
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
         $user->middle_name = $request->input('middle_name');
-        $user->email = $request->input('email');
-        $user->password = password_hash($request->input('password'), PASSWORD_DEFAULT);
+        if ($request->has('password')) {
+            $user->password = password_hash($request->input('password'), PASSWORD_DEFAULT);
+        }
         $user->save();
 
-        // Make the user an admin
-        $role = Role::where('name', 'Admin')->first();
-        $user->roles()->attach($role);
-
-        // Create an admin record for the user
-        $admin = new Admin;
+        // Update the admin record for the user
         $admin->permission_level = $request->input('permission_level');
-        $user->admin()->save($admin);
+        $admin->save();
 
         // Success
         return redirect()->route('admins.index')->with('success', 'Admin updated!');
@@ -145,7 +140,7 @@ class AdminController extends Controller
      */
     public function destroy(Admin $admin)
     {
-        if (Gate::allow('delete-admin')) {
+        if (Gate::allow('modify-admin')) {
             $admin->delete();
             return redirect()->route('admins.index')->with('success', 'Admin deleted');
         } else {
