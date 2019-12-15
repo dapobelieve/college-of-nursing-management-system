@@ -31,6 +31,12 @@
                             <h5>Admins</h5>
                         </div>
                         <div class="widget-content nopadding">
+                            @if(Session::has('success'))
+                                <div class="alert alert-info">
+                                    {{Session::get('success')}}
+                                    <a href="#" data-dismiss="alert" class="close">×</a>
+                                </div>
+                            @endif
                             @if ($admins->total() > 0)
                                 <table class="table table-bordered table-striped table-hover">
                                     <thead>
