@@ -16,7 +16,7 @@
                 <br>
                 <br>
       <h4 style="text-decoration: underline;text-align: center; clear:both;">Registration Form</h4>
-      <p style="text-align: center;"><span style="text-decoration: underline;padding-left:15px;">Bank Ref: {{$payment->reference}}</span><span style="text-decoration: underline;padding-left:15px;">Amount Paid: {{$payment->amount}}</span></p>
+
     </div>
     <div style="text-align:center;padding:10px 40px;">
 

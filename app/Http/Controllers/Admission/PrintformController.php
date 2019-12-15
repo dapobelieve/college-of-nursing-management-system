@@ -13,7 +13,8 @@ use PDF;
 
 class PrintformController extends Controller
 {
-  public function downloadPDF()
+
+  public function index()
   {
     if (!Session::has('studapp_id')) {
       $student = Studentapplicant::where('cardapplicant_id', session()->get('auth'))->first();
@@ -35,6 +36,17 @@ class PrintformController extends Controller
       $notification = Alert::alertMe('Upload your passport', 'info');
       return redirect()->route('upload.index')->with($notification);
     }
+
+    return view('admission.printout', ['section' => 'printout', 'student' => $student]);
+  }
+
+
+  public function downloadPDF()
+  {
+    if (Session::has('studapp_id')) {
+
+    $student = Cardapplicant::find(session()->get('auth'))->studentapplicant;
+
     $payment = $student->paymentapplicant;
 
     $dob = date('d-m-Y', strtotime($student->dob));
@@ -44,4 +56,25 @@ class PrintformController extends Controller
     return $pdf->download('invoice.pdf');
 
   }
+
+  }
+
+  public function receiptPDF()
+  {
+      if (Session::has('studapp_id')) {
+
+    $student = Cardapplicant::find(session()->get('auth'))->studentapplicant;
+
+    $payment = $student->paymentapplicant;
+
+    $dob = date('d-m-Y', strtotime($student->dob));
+
+    $pdf = PDF::loadView('admission/PDFreceipt', compact('student', 'dob', 'payment'));
+
+    return $pdf->download('invoice.pdf');
+
+  }
+
+}
+
 }

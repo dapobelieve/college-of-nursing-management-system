@@ -34,8 +34,11 @@ Route::post('payapplication', 'PayapplicationController@index')->name('payapplic
 
 Route::post('/pay', 'Payment2Controller@redirectToGateway')->name('payadmission');
 
+Route::get('printout', 'PrintformController@index')->name('printout.index');
+
 Route::get('printform', 'PrintformController@downloadPDF')->name('printform.downloadPDF');
 
+Route::get('printreceipt', 'PrintformController@receiptPDF')->name('printform.receiptPDF');
 });
 
 
@@ -48,7 +51,7 @@ Route::get('/', 'Frontpages\WelcomeController@index')->name('welcome');
 
 Route::get('about', 'Frontpages\AboutController@index')->name('about');
 
-Route::get('latest-news/{id}/{info}', 'Frontpages\latestNewsController@index')->name('latestNews');
+Route::get('latest-news/{id}/{info}', 'Frontpages\LatestNewsController@index')->name('latestNews');
 
 Route::get('/speech',function () {return view('speech');});
 

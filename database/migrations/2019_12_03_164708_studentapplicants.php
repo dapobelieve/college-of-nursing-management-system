@@ -15,7 +15,7 @@ class Studentapplicants extends Migration
   {
     Schema::create('studentapplicants', function (Blueprint $table) {
         $table->increments('id')->unsigned();
-        $table->integer('Cardapplicant_id')->unsigned();
+        $table->integer('cardapplicant_id')->unsigned();
         $table->string('first_name');
         $table->string('middle_name');
         $table->string('surname');
@@ -44,7 +44,7 @@ class Studentapplicants extends Migration
         $table->enum('biology', ['A1','B2','B3','C4','C5','C6','AR'])->default('AR');
         $table->string('reg_step');
         $table->string('score')->nullable();
-        $table->enum('Admission_status',['NO', 'YES'])->default('NO');
+        $table->enum('admission_status',['NO', 'YES'])->default('NO');
         $table->foreign('Cardapplicant_id')->references('id')->on('cardapplicants')->onDelete('CASCADE');
         $table->timestamps();
     });

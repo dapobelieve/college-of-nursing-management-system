@@ -2,6 +2,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="images/Oysconmelogo.png" type="image/png" sizes="16x16">
     <title>
         @yield('title')
     </title>

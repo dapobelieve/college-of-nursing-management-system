@@ -31,7 +31,7 @@ Admission - Form one
                                           Surname</label>
                                   </div>
                                   <div class='col-lg-8'>
-                                      <input type='text' name='surname' class='form-control' required>
+                                      <input type='text' name='surname'  value="{{ old('surname') }}" class='form-control' required>
                                   </div>
                               </div>
 
@@ -41,7 +41,7 @@ Admission - Form one
                                             First name</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='text' name='first_name' class='form-control' required>
+                                        <input type='text' name='first_name'  value="{{ old('first_name') }}" class='form-control' required>
                                     </div>
                                 </div>
                                 <div class='row form-group'>
@@ -50,7 +50,7 @@ Admission - Form one
                                             Middle name</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='text' name='middle_name' class='form-control' required>
+                                        <input type='text' name='middle_name'  value="{{ old('middle_name') }}" class='form-control' required>
                                     </div>
                                 </div>
                                 <div class='row form-group'>
@@ -59,7 +59,7 @@ Admission - Form one
                                             Email address</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='email' name='email' placeholder="email address" class='form-control' required>
+                                        <input type='email' name='email' placeholder="email address"  value="{{ old('email') }}" class='form-control' required>
                                     </div>
                                 </div>
 
@@ -69,7 +69,7 @@ Admission - Form one
                                             Phone</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='text' name='phone' placeholder="phone number" class='form-control'>
+                                        <input type='text' name='phone' placeholder="phone number" class='form-control'  value="{{ old('phone') }}">
                                     </div>
                                 </div>
 
@@ -79,7 +79,7 @@ Admission - Form one
                                             Date of birth </label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='date' name='dob' class='form-control' required>
+                                        <input type='date' name='dob' class='form-control'  value="{{ old('dob') }}" required>
                                     </div>
                                 </div>
                                 <div class='row form-group'>
@@ -89,7 +89,7 @@ Admission - Form one
                                     </div>
                                     <div class='col-lg-8'>
                                         <div class='form-group'>
-                                          <textarea class="form-control" name="home_address" rows="3" required></textarea>
+                                          <textarea class="form-control" name="home_address" rows="3"  value="{{ old('home_address') }}" required></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -104,7 +104,7 @@ Admission - Form one
                                   </div>
                                   <div class='col-lg-8'>
                                       <div class='form-group'>
-                                          <input type='text' name='state' class='form-control' placeholder='Your present state' required>
+                                          <input type='text' name='state' class='form-control'  value="{{ old('state') }}" placeholder='Your present state' required>
                                       </div>
                                   </div>
                               </div>
@@ -117,7 +117,7 @@ Admission - Form one
                                     </div>
                                     <div class='col-lg-8'>
                                         <div class='form-group'>
-                                            <input type='text' name='lga' class='form-control' placeholder='Local Government Area' required>
+                                            <input type='text' name='lga' class='form-control'  value="{{ old('lga') }}" placeholder='Local Government Area' required>
                                         </div>
                                     </div>
                                 </div>
@@ -128,7 +128,7 @@ Admission - Form one
                                             State of Origin</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='text' name='state_of_origin' class='form-control' required>
+                                        <input type='text' name='state_of_origin'  value="{{ old('state_of_origin') }}" class='form-control' required>
                                     </div>
                                 </div>
 

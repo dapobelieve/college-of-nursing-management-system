@@ -50,7 +50,7 @@ Admission - Form two
                                             Sponsor's Name</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='text' name='sponsor_name' class='form-control' required>
+                                        <input type='text' name='sponsor_name'  value="{{ old('sponsor_name') }}" class='form-control' required>
                                     </div>
                                 </div>
                                 <div class='row form-group'>
@@ -59,7 +59,7 @@ Admission - Form two
                                             Sponsor's Phone number</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='text' name='sponsor_phone' class='form-control' required>
+                                        <input type='text' name='sponsor_phone'  value="{{ old('sponsor_phone') }}" class='form-control' required>
                                     </div>
                                 </div>
                                 <div class='row form-group'>
@@ -68,7 +68,7 @@ Admission - Form two
                                             Sponsor's Email</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='email' name='sponsor_email' class='form-control' required>
+                                        <input type='email' name='sponsor_email'  value="{{ old('sponsor_email') }}" class='form-control' required>
                                     </div>
                                 </div>
                                 <div class='row form-group'>
@@ -114,7 +114,7 @@ Admission - Form two
                                             Exam Number</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='text' name='exam_no' class='form-control' required>
+                                        <input type='text' name='exam_no'  value="{{ old('exam_no') }}" class='form-control' required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
