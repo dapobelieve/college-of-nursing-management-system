@@ -3,7 +3,7 @@
 @section('title', strtoupper(config('site.name.short'))." "." | About Us")
 
 @section('pagename')
-admission Login
+Activate Card
 @stop
 
 @section('site.content')
@@ -13,7 +13,7 @@ admission Login
         <div class="row justify-content-center">
             <div class="col-md-6">
               @if(Session::has('success'))
-            <div class="alert alert-danger" role="alert">
+            <div class="alert alert-success" role="alert">
               {{Session::get('success')}}
             </div>
             @endif
@@ -21,16 +21,6 @@ admission Login
                   <div class="modal-content">
                       <div class="modal-body">
                           <div class="row">
-                            <div class="col-md-12">
-                              <div class="form-group row">
-                                  <label for="exam_no" class="col-md-6 col-form-label text-md-right">{{ __('Course for Admission') }}</label>
-                                  <div class="col-md-6">
-                                    <select class="form-control" id="courses" readonly>
-                                        <option value="">BASIC MIDWIFERY </option>
-                                    </select>
-                                  </div>
-                              </div>
-                            </div>
                             <div class="col-md-12">
                             <span>
                                 @foreach($errors->all() as $error)
@@ -44,22 +34,25 @@ admission Login
                           </div>
                               <div class="col-md-12">
                                   <div class="well">
-                                      <form method="POST" action="{{route('admission.login')}}" novalidate="novalidate">
+                                      <form method="POST" action="{{route('activate.store')}}" novalidate="novalidate">
                                             @csrf
+                                            <div class="form-group">
+                                                <label for="username" class="control-label">Provide Password to activate</label>
+                                                <input type="password" class="form-control" name="passage"  required title="Please enter activation password" placeholder="provide password to activate">
+                                                <span class="help-block"></span>
+                                            </div>
                                           <div class="form-group">
                                               <label for="username" class="control-label">Registration No.</label>
-                                              <input type="text" class="form-control" name="username"  required title="Please enter Registration number on the card" placeholder="provide card details">
+                                              <input type="text" class="form-control" name="reg_no"  required title="Please enter Registration number on the card" placeholder="provide reg. no on the card">
                                               <span class="help-block"></span>
                                           </div>
                                           <div class="form-group">
                                               <label for="password" class="control-label">Password</label>
-                                              <input type="password" class="form-control" name="password" required title="Please enter the password">
+                                              <input type="password" class="form-control" name="password" required title="Please enter the pin on the card">
                                               <span class="help-block"></span>
                                           </div>
                                           <div class="checkbox">
-                                              <label>
-                                                  <input type="checkbox" name="remember" id="remember"> Remember login
-                                              </label>
+
                                           </div>
                                           <button type="submit" class="btn btn-warning" id="js-subscribe-btn">LOG IN</button>                                          </form>
                                       </div>

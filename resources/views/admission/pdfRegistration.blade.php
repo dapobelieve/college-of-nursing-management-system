@@ -8,10 +8,10 @@
 
     <div>
       <div>
-        <div style="float:left; "><img src="images/oysconmelogo.png" height="100" width ="100" alt="logo"></div>
+        <div style="float:left; "><img src="{{asset('images/Oysconmetrans.png')}}" height="100" width ="100" alt="logo"></div>
       <h3 style="text-align: center; margin-right:45px;padding:0 100px;">OYO STATE COLLEGE OF NURSING AND MIDWIFERY,<br> ELEYELE IBADAN
                 OYO STATE.</h3>
-        <div style="float:right; margin-top:-100px;"><img src="{{$student->pic_url}}" height="100" width ="100" alt="logo"></div>
+        <div style="float:right; margin-top:-100px;"><img src="{{asset($student->pic_url)}}" height="100" width ="100" alt="logo"></div>
       </div>
                 <br>
                 <br>

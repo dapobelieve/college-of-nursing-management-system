@@ -44,7 +44,7 @@
                                 @if(Session::has('success'))
                                     <strong style="color: green">* {{ Session::get('success') }}</strong>
                                 @endif
-                                <form method="post" action="{{route('admins.store')}}" class="form-horizontal">
+                                <form method="post" action="{{route('cards.store')}}" class="form-horizontal">
                                     <div class="form-group">
                                         <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">First Name:</label>
                                         <div class="col-sm-9 col-md-6 col-lg-6">

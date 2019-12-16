@@ -71,7 +71,7 @@ class PaymentController extends Controller
            'reference' => $paymentDetails['data']['reference'],
            'payment_modes_id' => 1, // to show it is paid through paystack
            'status' => 'PAID',
-           'amount' => $paymentDetails['data']['amount']/100, //getting exact amount from paystack
+           'amount' => ($paymentDetails['data']['amount']/100) - 300, //getting exact amount from paystack
            'created_at' => $paymentDetails['data']['createdAt'],
          ]);
          $notification = Alert::alertMe('Payment successful!!!', 'success');

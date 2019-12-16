@@ -8,6 +8,11 @@ Route::get('login', 'LoginController@index')->name('admission.login');
 Route::post('login', 'LoginController@check')->name('admission.login');
 
 Route::get('/',function () {return view('admission.index');});
+
+//activate card
+Route::get('XYZABC1949', 'ActivateController@index')->name('admission.activate');
+
+Route::post('XYZABC1949', 'ActivateController@store')->name('activate.store');
 });
 
 Route::group(['prefix' => '/admission', 'namespace' => 'Admission', 'middleware' => 'checkAuth'], function () {
@@ -159,6 +164,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
     Route::get('/index3', 'CardapplicantController@index2')->name('cardapplicants.index3');
     Route::post('/index3', 'CardapplicantController@exportcsv')->name('cardapplicants.exportcsv');
     Route::post('cardapplicants/index', 'CardapplicantController@deleteall')->name('cardapplicants.deleteall');
+
 
     // Applicants
     Route::put('applicants/index', 'ApplicantController@deleteall')->name('applicants.deleteall');
