@@ -41,8 +41,8 @@ class ApplicantController extends Controller
 
           $student =Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')
           ->join('paymentapplicants', 'paymentapplicants.studentapplicant_id', '=', 'studentapplicants.id')
-          ->select('reg_no','surname', 'first_name', 'gender', 'marital_status',
-          'state_of_origin', 'home_address','phone')->get();
+          ->select('reg_no','surname', 'first_name', 'middle_name', 'password', 'pic_url', 'gender', 'marital_status',
+          'lga', 'state_of_origin', 'home_address','phone')->get();
           // file name for download
           $fileName = "cardapplicants".date('Ymd').".xls";
 

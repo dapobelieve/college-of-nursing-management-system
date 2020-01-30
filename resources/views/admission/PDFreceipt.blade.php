@@ -36,7 +36,7 @@
           <label><strong>Paid the sum of :</strong></label>
         </div>
         <div style="float:right; margin-right:105px; margin-bottom: 15px;">
-            <label>@if($payment->payment_modes_id == 1) N{{$payment->amount - 300}}.00 @else N{{$payment->amount}} @endif</label>
+            <label>@if($payment->payment_modes_id == 1) N{{$payment->amount}}.00 @else N{{$payment->amount}} @endif</label>
         </div>
         <div style="clear:both"></div>
         <div style="float:left; margin-left:85px; margin-bottom: 15px;">
@@ -60,6 +60,14 @@
         </div>
         <div style="float:right; margin-right:105px; margin-bottom: 15px; ">
             <label>{{$payment->created_at}}</label>
+        </div>
+
+        <div style="clear:both"></div>
+        <div style="float:left; margin-left:85px; margin-bottom: 15px; ">
+          <label><strong>Email Address :</strong></label>
+        </div>
+        <div style="float:right; margin-right:105px; margin-bottom: 15px; ">
+            <label>{{$student->email}}</label>
         </div>
 
         <div style="clear:both"></div>

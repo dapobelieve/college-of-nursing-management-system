@@ -46,9 +46,10 @@ class UploadController extends Controller
     public function update(Request $request, Studentapplicant $studentapplicant)
     {
       $this->validate($request, [
-          'pport_upload' => 'required|image|max:100'
+          'pport_upload' => 'required|image|max:100|dimensions:min_width=80,max_width=150'
         ],[
-          'pport_upload.max' => 'Upload file less than 100kb'
+          'pport_upload.max' => 'Upload file less than 100kb',
+          'pport_upload.dimensions' => 'Upload file should have maximum width of 150px'
         ]);
 
       $featuredpport = $request->pport_upload;

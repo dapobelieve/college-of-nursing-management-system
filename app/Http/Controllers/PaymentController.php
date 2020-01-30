@@ -77,7 +77,6 @@ class PaymentController extends Controller
          $notification = Alert::alertMe('Payment successful!!!', 'success');
          return redirect()->route('upload.index')->with($notification);
         break;
-         break;
 
        default:
        $notification = Alert::alertMe('something went wrong!', 'warning');

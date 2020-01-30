@@ -13,6 +13,10 @@
 <script src="js/subscribe.js"></script>
 <!-- Script JS -->
 <script src="js/script.js"></script>
+<script type="text/javascript">
+    $(window).on('load',function(){
+        $('#myModal').modal('show');
+    });
+</script>
 
 @yield('site.scripts')
-

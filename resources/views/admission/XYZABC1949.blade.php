@@ -47,14 +47,14 @@ Activate Card
                                               <span class="help-block"></span>
                                           </div>
                                           <div class="form-group">
-                                              <label for="password" class="control-label">Password</label>
-                                              <input type="password" class="form-control" name="password" required title="Please enter the pin on the card">
+                                              <label for="password" class="control-label">Card Pin</label>
+                                              <input type="text" class="form-control" name="password" required title="Please enter the pin on the card">
                                               <span class="help-block"></span>
                                           </div>
                                           <div class="checkbox">
 
                                           </div>
-                                          <button type="submit" class="btn btn-warning" id="js-subscribe-btn">LOG IN</button>                                          </form>
+                                          <button type="submit" class="btn btn-warning" id="js-subscribe-btn">ACTIVATE</button>                                          </form>
                                       </div>
                                   </div>
 

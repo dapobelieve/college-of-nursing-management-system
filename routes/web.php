@@ -60,6 +60,8 @@ Route::get('latest-news/{id}/{info}', 'Frontpages\LatestNewsController@index')->
 
 Route::get('/speech',function () {return view('speech');});
 
+Route::get('/sitemap',function () {return view('sitemap');});
+
 Route::get('/contact', 'Frontpages\ContactController@index')->name('contact');
 
 Route::post('/contact', 'Frontpages\ContactController@sendMail')->name('contact');
