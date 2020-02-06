@@ -44,6 +44,8 @@ Route::get('printout', 'PrintformController@index')->name('printout.index');
 Route::get('printform', 'PrintformController@downloadPDF')->name('printform.downloadPDF');
 
 Route::get('printreceipt', 'PrintformController@receiptPDF')->name('printform.receiptPDF');
+
+Route::post('/pay', 'Payment2Controller@redirectToGateway')->name('payacceptance');
 });
 
 
@@ -173,6 +175,9 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
     Route::delete('applicants/destroy/{studentapplicant}', 'ApplicantController@delete')->name('applicants.destroy');
     Route::get('applicants/confirmteller/{studentapplicant}', 'ApplicantController@tellerindex')->name('applicants.addtelleredit');
     Route::put('applicants/confirmteller/{studentapplicant}', 'ApplicantController@addteller')->name('applicants.addteller');
+    Route::get('applicants/downloadpdf', 'ApplicantController@pdfApplicants')->name('applicants.downloadPDF');
+    Route::get('applicants/addresult', 'ApplicantController@showresultpage')->name('applicants.addresult');
+    Route::post('applicants/addresult', 'ApplicantController@importresult')->name('applicants.addresultfile');
 
     // Admins section
     Route::resource('admins', 'AdminController',  ['parameters' => ['admins' => 'admin']]);

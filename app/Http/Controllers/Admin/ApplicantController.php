@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Studentapplicant;
 use App\Models\Paymentapplicant;
 use App\Models\Cardapplicant;
-use App\Alert;;
+use App\Alert;
+use PDF;
 
 class ApplicantController extends Controller
 {
@@ -44,7 +45,7 @@ class ApplicantController extends Controller
           ->select('reg_no','surname', 'first_name', 'middle_name', 'password', 'pic_url', 'gender', 'marital_status',
           'lga', 'state_of_origin', 'home_address','phone')->get();
           // file name for download
-          $fileName = "cardapplicants".date('Ymd').".xls";
+          $fileName = "applicants".date('Ymd').".xls";
 
           // headers for download
           header("Content-Type: application/vnd.ms-excel");
@@ -104,6 +105,7 @@ class ApplicantController extends Controller
           return view('admin.applicants.search',['section' =>'applicants','sub_section' => 'all', 'tag' => 'approved', 'applicant' => $student, 'reg_no' => $student->reg_no]);
       }
 
+
       public function searchunapproved(Request $request)
       {
         $this->validate($request, [
@@ -123,6 +125,7 @@ class ApplicantController extends Controller
           return view('admin.applicants.search',['section' =>'applicants','sub_section' => 'all', 'tag' => 'unapproved', 'applicant' => $student, 'reg_no' => $student->reg_no, 'studentID' => $studentID]);
       }
 
+
       public function delete(Studentapplicant $studentapplicant)
       {
         $studentapplicant->delete();
@@ -131,10 +134,12 @@ class ApplicantController extends Controller
 
       }
 
+
       public function tellerindex(Studentapplicant $studentapplicant)
       {
         return view('admin.applicants.confirmteller', ['section' =>'applicants','sub_section' => 'all', 'studentapplicant' => $studentapplicant]);
       }
+
 
       public function addteller(Request $request, Studentapplicant $studentapplicant)
       {
@@ -152,4 +157,77 @@ class ApplicantController extends Controller
           $notification = Alert::alertMe('Applicant Payment confirmed', 'success');
           return redirect()->back()->with($notification);
       }
+
+// create ExaminationList in PDF format
+      public function pdfApplicants()
+      {
+        $applicants= Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')
+        ->join('paymentapplicants', 'paymentapplicants.studentapplicant_id', '=', 'studentapplicants.id')->get();
+        //dd($applicants[0]);
+        $pdf = PDF::loadView('admin/applicants/downloadpdf', compact('applicants'));
+
+        return $pdf->download('ExaminationList.pdf');
+      }
+
+      // show page to add result
+      public function showresultpage()
+      {
+        return view('admin.applicants.addresult', ['section' =>'applicants','sub_section' => 'add']);
+      }
+
+
+      public function importresult(Request $request)
+      {
+        $this->validate($request,[
+                'file_csv'          => 'required',
+            ]
+          );
+
+          $msg = "";
+          $i = 0;
+          $sql = true;
+          $file = $request->file('file_csv')->getRealPath();
+          $handle = fopen($file, "r");
+          $filename = $request->file_csv->getClientOriginalExtension();
+          if ($file == NULL || $filename !== 'csv') {
+            $notification = Alert::alertMe('Please select a CSV file to import', 'warning');
+              return redirect()->route('applicants.addresult')->with($notification);
+          }else {
+            while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
+              {
+                $reg_no=  filter_var($filesop[0], FILTER_SANITIZE_STRING);
+                $score =  filter_var($filesop[1], FILTER_SANITIZE_STRING);
+                $status = filter_var($filesop[2], FILTER_SANITIZE_STRING);
+
+                // get the id of the card
+                $result = Cardapplicant::where('reg_no', $reg_no)->first();
+                if ($result == null) {
+                    $msg.= $reg_no." does not exist in the database at row ".$i."\n";
+                }
+                else{
+                  Studentapplicant::where('cardapplicant_id', $result->id)
+                  ->update(['score' => $score, 'admission_status' => $status]);
+
+                $sql = true;
+                }
+                $i++;
+              }
+
+            if ($sql) {
+              if($msg != ""){
+                $message = "imported successfully!!! but '.$msg.'";
+              return redirect()->route('applicants.addresult')->with('success', $message);
+              }
+              $notification = Alert::alertMe('Imported successfully!!!', 'success');
+                return redirect()->route('applicants.addresult')->with($notification);
+
+            } else {
+              $notification = Alert::alertMe('Sorry! There is some problem in the import file', 'warning');
+              return redirect()->route('applicants.addresult')->with($notification);
+
+            }
+            }
+
+      }
+
 }

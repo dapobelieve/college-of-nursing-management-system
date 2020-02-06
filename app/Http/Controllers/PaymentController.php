@@ -85,6 +85,30 @@ class PaymentController extends Controller
      }
    }
 
+   //acceptance payment
+   if ($paymentDetails['data']['metadata']['payment_type'] == "Acceptance")
+   {
+     switch ($paymentDetails['data']['status']) {
+       case 'success':
+         $payment = Paymentapplicant::create([
+           'studentapplicant_id' => $paymentDetails['data']['metadata']['student_id'],
+           'reference' => "accept/".$paymentDetails['data']['reference'], //concatenate accept to know whether a student has paid for his/her acceptance fee
+           'payment_modes_id' => 1, // to show it is paid through paystack
+           'status' => 'PAID',
+           'amount' => ($paymentDetails['data']['amount']/100) - 300, //getting exact amount from paystack
+           'created_at' => $paymentDetails['data']['createdAt'],
+         ]);
+         $notification = Alert::alertMe('Payment successful!!!', 'success');
+         return redirect()->route('upload.index')->with($notification);
+        break;
+
+       default:
+       $notification = Alert::alertMe('something went wrong!', 'warning');
+       return redirect()->route('payapplication.pay')->with($notification);
+         break;
+     }
+   }
+
 
  }
 }
