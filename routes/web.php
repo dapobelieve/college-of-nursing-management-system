@@ -118,24 +118,68 @@ Route::get('/events',[
 
 // The admin panel routes
 Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'role:ADMIN'], function () {
+  // Super and intermediate admin only routes
+  Route::group(['middleware' => ['checkAdminPermissions:super,intermediate']], function () {
+    Route::get('/index2dep/{id}', 'StudentController@dept')->name('students.index2dep');
+    Route::get('/addresult/{id}', 'StudentController@showresult')->name('students.showresult');
+    Route::post('/addresult', 'StudentController@addresult')->name('students.addresult');
+
+    Route::put('applicants/addscore/{studentapplicant}', 'ApplicantController@update')->name('applicants.update');
+
+    // Events section
+    Route::resource('events', 'EventController',  [
+      'only' => [
+        'index', 'create', 'store', 'edit', 'update'
+      ],
+      'parameters' => [
+        'events' => 'post'
+      ]
+    ]);
+
+    // Fees
+    Route::resource('fees', 'FeeController');
+
+    // Lecturers
+    Route::resource('lecturers', 'LecturerController');
+  });
+
+  // Super admin only routes
+  Route::group(['middleware' => ['checkAdminPermissions:super']], function () {
+    // Cards
+    Route::resource('cards', 'CardController');
+    Route::get('/index2', 'CardController@index2')->name('cards.index2');
+
+    // Cardapplicants sub_section
+    Route::resource('cardapplicants', 'CardapplicantController');
+    Route::get('/index3', 'CardapplicantController@index2')->name('cardapplicants.index3');
+    Route::post('/index3', 'CardapplicantController@exportcsv')->name('cardapplicants.exportcsv');
+    Route::post('cardapplicants/index', 'CardapplicantController@deleteall')->name('cardapplicants.deleteall');
+
+    // Applicants
+    Route::put('applicants/index', 'ApplicantController@deleteall')->name('applicants.deleteall');
+    Route::delete('applicants/destroy/{studentapplicant}', 'ApplicantController@delete')->name('applicants.destroy');
+    Route::get('applicants/confirmteller/{studentapplicant}', 'ApplicantController@tellerindex')->name('applicants.addtelleredit');
+    Route::put('applicants/confirmteller/{studentapplicant}', 'ApplicantController@addteller')->name('applicants.addteller');
+
+    // Admins section
+    Route::resource('admins', 'AdminController',  ['parameters' => ['admins' => 'admin']]);
+
+    // Roles section
+    Route::get('roles', 'RoleController@index');
+
+    // System settings
+    Route::get('settings', 'SettingController@index')->name('settings.index');
+    Route::put('settings/update', 'SettingController@update')->name('settings.update');
+  });
+
   // Dashboard
   Route::get('', 'DashboardController@index')->name('dashboard.home');
-
-  //cards
-  Route::resource('cards', 'CardController');
-    Route::get('/index2', 'CardController@index2')->name('cards.index2');
 
   // Courses
   Route::resource('courses', 'CourseController');
 
   // Departments
   Route::resource('departments', 'DepartmentController');
-
-  // Fees
-  Route::resource('fees', 'FeeController');
-
-  // Lecturers
-  Route::resource('lecturers', 'LecturerController');
 
   // News section
   Route::resource('news', 'NewsController',  [
@@ -147,53 +191,13 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
     ]
   ]);
 
-  // Events section
-  Route::resource('events', 'EventController',  [
-    'only' => [
-      'index', 'create', 'store', 'edit', 'update'
-    ],
-    'parameters' => [
-      'events' => 'post'
-    ]
-  ]);
-
   // Students section
   Route::resource('students', 'StudentController');
-  Route::get('/index2dep/{id}', 'StudentController@dept')->name('students.index2dep');
-  Route::get('/addresult/{id}', 'StudentController@showresult')->name('students.showresult');
-  Route::post('/addresult', 'StudentController@addresult')->name('students.addresult');
 
-  //Cardapplicants sub_section
-  Route::resource('cardapplicants', 'CardapplicantController');
-  Route::get('/index3', 'CardapplicantController@index2')->name('cardapplicants.index3');
-  Route::post('/index3', 'CardapplicantController@exportcsv')->name('cardapplicants.exportcsv');
-  Route::post('cardapplicants/index', 'CardapplicantController@deleteall')->name('cardapplicants.deleteall');
-
-  //applicants
+  // Applicants section
   Route::get('applicants/index', 'ApplicantController@index')->name('applicants.index');
   Route::get('applicants/index/{studentapplicant}', 'ApplicantController@edit')->name('applicants.edit');
-  Route::put('applicants/addscore/{studentapplicant}', 'ApplicantController@update')->name('applicants.update');
-  Route::put('applicants/index', 'ApplicantController@deleteall')->name('applicants.deleteall');
-  Route::post('applicants/index', 'ApplicantController@exportcsv')->name('applicants.exportcsv');
   Route::post('applicants/search', 'ApplicantController@search')->name('applicants.search');
   Route::post('applicants/searchunapproved', 'ApplicantController@searchunapproved')->name('applicants.searchunapproved');
-  Route::delete('applicants/destroy/{studentapplicant}', 'ApplicantController@delete')->name('applicants.destroy');
-  Route::get('applicants/confirmteller/{studentapplicant}', 'ApplicantController@tellerindex')->name('applicants.addtelleredit');
-  Route::put('applicants/confirmteller/{studentapplicant}', 'ApplicantController@addteller')->name('applicants.addteller');
-  // Admins section
-  Route::resource('admins', 'AdminController',  [
-    'only' => [
-      'index', 'create', 'store', 'edit', 'update', 'show'
-    ],
-    'parameters' => [
-      'admins' => 'admin'
-    ]
-  ]);
-
-  // Roles section
-  Route::get('roles', 'RoleController@index');
-
-  // System settings
-  Route::get('settings', 'SettingController@index')->name('settings.index');
-  Route::put('settings/update', 'SettingController@update')->name('settings.update');
+  Route::post('applicants/index', 'ApplicantController@exportcsv')->name('applicants.exportcsv');
 });

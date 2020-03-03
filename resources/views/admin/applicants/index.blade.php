@@ -76,42 +76,52 @@
                                     <td>{{$data->sponsor_phone}}</td>
                                     <td>{{$data->home_address.", ".$data->address_state}}</td>
                                     <td><span class="badge badge-success">{{$data->state_of_origin}}</span></td>
-                                    @if($data->admission_status == "NO")
-                                    <td><span class="badge badge-danger" title="No admission">NOT YET</span></td>
-                                    @else
-                                    <td><span class="badge badge-success" title="Admitted">{{$data->admission_status}}</span></td>
-                                    @endif
-                                    <td><a href="{{route('applicants.edit', ['studentapplicant' => $data->id])}}" class="btn btn-primary btn-sm" title="add score and admission status">Add Score</a></td>
+                                    <td>
+                                      @if($data->admission_status == "NO")
+                                        <span class="badge badge-danger" title="No admission">NOT YET</span>
+                                      @else
+                                        <span class="badge badge-success" title="Admitted">{{$data->admission_status}}</span>
+                                      @endif
+                                    </td>
+                                    <td>
+                                      @if (Gate::allows('add-applicant-score'))
+                                        <a href="{{route('applicants.edit', ['studentapplicant' => $data->id])}}" class="btn btn-primary btn-sm" title="add score and admission status">Add Score</a>
+                                      @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                     @else
                         <div class="p-5 text-center">
-                            <p class="lead">No Cards!</p>
+                            <p class="lead">No Applicants!</p>
                         </div>
                     @endif
                     {{$applicant->links()}}
                 </div>
-                <div class="col-xs-12">
-                  <label class="text text-danger">*Do not delete until admission process is finished*</labe>
-                </div>
-                <div class="col-xs-10">
-                  <form class="form-inline" method="post" action="{{route('applicants.deleteall')}}" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group mx-sm-3 mb-2">
-                      <label for="inputPassword2" class="sr-only">Password</label>
-                      <input type="hidden" name="_method" value="PUT">
-                      <input type="password" class="form-control  @error('password') is-invalid @enderror" value="{{ old('password') }}" name="password" placeholder="Provide Password" required>
-                      @error('password')
-                          <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                          </span>
-                      @enderror
-                    </div>
-                    <button type="submit" class="btn btn-primary mb-2" title="Delete all applicants in the database">Truncate DataTable</button>
-                  </form>
-                </div>
+
+                @if (Gate::allows('delete-all-applicants'))
+                  <div class="col-xs-12">
+                    <label class="text text-danger">*Do not delete until admission process is finished*</labe>
+                  </div>
+                  <div class="col-xs-10">
+                    <form class="form-inline" method="post" action="{{ route('applicants.deleteall') }}" enctype="multipart/form-data">
+                      @csrf
+                      <div class="form-group mx-sm-3 mb-2">
+                        <label for="inputPassword2" class="sr-only">Password</label>
+                        <input type="hidden" name="_method" value="PUT">
+                        <input type="password" class="form-control  @error('password') is-invalid @enderror" value="{{ old('password') }}" name="password" placeholder="Provide Password" required>
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                      </div>
+                      <button type="submit" class="btn btn-primary mb-2" title="Delete all applicants in the database">Truncate DataTable</button>
+                    </form>
+                  </div>
+                @endif
+
                 <div class="col-xs-2">
                   <form class="form-inline" method="post" action="{{route('applicants.exportcsv')}}" enctype="multipart/form-data">
                     @csrf

@@ -36,7 +36,5 @@ $factory->define(User::class, function (Faker $faker) {
         'city' => $faker->city,
         'is_active' => 'ACTIVE',
         'remember_token' => Str::random(10),
-        'userable_id' => 0,
-        'userable_type' => 0
     ];
 });

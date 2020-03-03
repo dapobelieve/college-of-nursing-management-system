@@ -18,11 +18,10 @@ class AdminSeeder extends Seeder
         $admin->permission_level = 'super';
         $user = factory(User::class)->make();
         $role = Role::where('name', 'Admin')->first();
-        
-        $admin->save();
+
         $user->save();
 
         $user->roles()->attach($role);
-        $admin->user()->save($user);
+        $user->admin()->save($admin);
     }
 }

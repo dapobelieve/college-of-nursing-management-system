@@ -44,7 +44,9 @@
                                     <td>{{$data->hod}}</td>
                                     <td>{{$data->description}}</td>
                                     <td>
-                                        <a href="{{route('departments.edit', ['department' => $data->id])}}">Edit</a> |
+                                        @if (Gate::allows('edit-department'))
+                                        <a href="{{route('departments.edit', ['department' => $data->id])}}">Edit</a>
+                                        @if (Gate::allows('delete-department')) |
                                         <form style="display: inline" id="department-{{$data->id}}"
                                               method="post"
                                               action="{{route('departments.destroy', ['department' => $data->id])}}">
@@ -53,6 +55,8 @@
                                         </form>
                                         <a onclick="event.preventDefault();
 if (confirm('Are you sure you want to delete this record?')) document.getElementById('department-{{$data->id}}').submit()" href="{{route('departments.destroy', ['department' => $data->id])}}">Delete</a>
+                                        @endif
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

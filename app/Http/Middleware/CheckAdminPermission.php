@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Support\Facades\Auth;
 use Closure;
 
 class CheckAdminPermission
@@ -13,10 +14,10 @@ class CheckAdminPermission
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, string $permission)
+    public function handle($request, Closure $next, string ...$permission)
     {
         if (Auth::check()) {
-            if (Auth::user()->permission_level != $permission) {
+            if (!in_array(Auth::user()->admin->permission_level, $permission)) {
                 return redirect()->route('dashboard.home');
             }
 
