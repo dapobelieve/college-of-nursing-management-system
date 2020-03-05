@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use DB;
 use Auth;
 use Session;
+use DateTime;
+use Carbon\Carbon;
 use App\Alert;
 use App\User;
 use App\Models\Course;
@@ -29,7 +31,18 @@ class CourseController extends Controller
     {
       // check the session the student has paid and only allow him to register courses for the session
         $payment = new Payment;
-        $payment = $payment->where('student_id',session()->get('st_id'))->orderBy('created_at', 'DESC')->select('reference', 'status')->first();
+        $payment = $payment->where('student_id',session()->get('st_id'))->orderBy('created_at', 'DESC')->select('reference', 'status', 'created_at')->first();
+
+        //generate time in order to hide second semester input in cousereg
+        $n = date("Y/m/d");
+        $date1 = new DateTime($n);
+        $date2 = new DateTime($payment->created_at);
+        $interval = $date1->diff($date2);
+        $Ma = $interval->format('%R%a');
+        $timed = "";
+        if ($Ma < -59) {
+          $timed = "elapsed";
+        }
 
           if ($payment == null) {
             $notification = Alert::alertMe('Pay your tuition fee first!!!', 'info');
@@ -47,10 +60,11 @@ class CourseController extends Controller
         $user = User::find(Auth::id());
         $student = Student::where('user_id', Auth::id())->first();
 
-        return view('portal.coursereg')->with('user', $user)
+        return view('portal.coursereg',  ['section' => 'coursereg'])->with('user', $user)
                                       ->with('dept', Department::find($student->department_id))
                                       ->with('student', $student)
-                                      ->with('level', $level);
+                                      ->with('level', $level)
+                                      ->with('timed', $timed);
     }
 //to recieve data for course registration through ajax
     public function recieveAjax($id, $dept)

@@ -62,7 +62,7 @@ Events
                       </ul>
                       <div class="admission_insruction">
                           <h4>HOD</h4>
-                          <img src="{{asset('images/admission-detail/instruction-img.jpg')}}" class="img-fluid" alt="#">
+                          <img src="{{asset('images/'.$dept->name)}}.jpg" class="img-fluid" alt="#">
                           <p>{{$dept->hod}}
                               <br>
                               <span>Head of Department</span></p>

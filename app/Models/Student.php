@@ -19,7 +19,7 @@ class Student extends Model
    * @var array
    */
   protected $fillable = [
-      'sponsors_name', 'department_id', 'sponsors_phone', 'marital_status', 'user_id', 'admission_no', 'matric_no'
+      'sponsors_name', 'department_id', 'level', 'sponsors_phone', 'marital_status', 'user_id', 'admission_no', 'matric_no'
   ];
 
   /**
@@ -55,7 +55,7 @@ class Student extends Model
   *get result
   */
   public function result(){
-    return $this->belongsTo('App\Models\Result');
+    return $this->hasOne('App\Models\Result');
   }
 
   public function payment(){

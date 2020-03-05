@@ -23,11 +23,17 @@ class ContactController extends Controller
           'message' => 'required|string'
       ]);
 
-      $toEmail = "info@oysconme.edu.ng";
-      $subject = $request->subject;
-    	$mailHeaders = "From: " . $request->name . "<". $request->email .">\r\n";
-      $content = $request->message;
-    	if(mail($toEmail, $subject, $content, $mailHeaders)) {
+      $toEmail = 'info@oysconme.edu.ng';
+     $subject = $request->subject;
+
+     $headers = array("From: admin@oysconme.edu.ng",
+   "Reply-To: $request->email",
+   "X-Mailer: PHP/" . PHP_VERSION
+);
+$headers = implode("\r\n", $headers);
+     $content = $request->message;
+     $send = mail($toEmail, $subject, $content, $headers);
+     if($send) {
         session()->flash('status-contact', 'Message sent successfully!');
         return redirect()->back();
     	}

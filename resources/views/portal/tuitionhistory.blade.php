@@ -4,18 +4,7 @@
 Portal - Payment History
 @endsection
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
 
-      <div class="col-md-3">
-        <div class="list-group" id="list-tab" role="tablist">
-          <a class="list-group-item list-group-item-action" id="list-home-list"  href="{{route('portal.dashboard')}}" role="tab" aria-controls="home">Home</a>
-          <a class="list-group-item list-group-item-action" id="list-profile-list"  href="{{route('portal.tuition')}}" role="tab" aria-controls="profile">Pay Tuition</a>
-          <a class="list-group-item list-group-item-action" id="list-messages-list"  href="{{route('portal.coursereg')}}" role="tab" aria-controls="messages">Course Registration</a>
-          <a class="list-group-item list-group-item-action active" id="list-settings-list"  href="{{route('portal.tuitionhistory')}}" role="tab" aria-controls="settings">Payment History</a>
-          <a class="list-group-item list-group-item-action" id="list-settings-list"  href="{{route('portal.reghistory')}}" role="tab" aria-controls="settings">Registration History</a>
-        </div>
-      </div>
       <div class="col-md-9">
           <div class="card">
               <div class="card-header text-center bg-success text-white">Dashboard - Registration History</div>
@@ -28,7 +17,7 @@ Portal - Payment History
                   </div>
                   <div class="col-md-2">
                     <div class="media">
-                      <img class="ml-2 img-thumbnail rounded" src="{{asset('images/akinkunmi005.jpg')}}" alt="Generic placeholder image">
+                      <img class="ml-2 img-thumbnail rounded" src="{{$user->images[0]->url}}" alt="Generic placeholder image">
                     </div>
                   </div>
                 </div>

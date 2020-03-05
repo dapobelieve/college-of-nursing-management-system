@@ -23,6 +23,6 @@ class Studentapplicant extends Model
 
   public function paymentapplicant()
   {
-      return $this->hasOne('App\Models\Paymentapplicant');
+      return $this->hasMany('App\Models\Paymentapplicant');
   }
 }

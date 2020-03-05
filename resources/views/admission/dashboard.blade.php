@@ -48,40 +48,60 @@ Admission - Dashboard
           <label class="col-xs-4"><h4>Your Score is : <span class="badge badge-success">{{$student->score}}</span></h4></label>
         </div>
         <div class="col-md-12">
-          @if($student->admission_status == 'YES')
+      @if($student->admission_status == 'YES')
           <label class="col-xs-4"><h4>Admission Status : <span class="badge badge-success">You Have been Admitted</span></h4></label>
-          <div class="col-xs-4">
-          <button type="button" class="btn btn-info btn-sm" data-toggle="collapse" data-target="#demo">Proceed to payment</button>
+        @if(substr($student->Paymentapplicant->last()->reference, 0, 6) == 'accept')
+          <br>
+          <div class="col-sm-12">
+            <b>Please click the button below and print your Acceptance receipt</b>
           </div>
+
+          <div class="col-sm-12">
+              <a href="{{route('printform.acceptance')}}"> <button type="submit" class="btn btn-info" name="button">Print Acceptance receipt</button></a>
+          </div>
+
+          <div class="col-sm-12 text-danger">
+              <b>Note: You are mandated to pay your school fees on or before 12 of march, 2020</b>
+          </div>
+        @else
+          <div class="col-xs-4">
+            <b>Please click the button below and make acceptance payment.</b>
+          </div>
+
+          <div class="col-xs-4">
+            <button type="button" class="btn btn-info btn-sm" data-toggle="collapse" data-target="#demo">Proceed to payment</button>
+          </div>
+
             <div id="demo" class="collapse">
-              <form  action="{{ route('payacceptance') }}" accept-charset="UTF-8" enctype="multipart/form-data">
+              <form method="post" action="{{ route('payacceptance') }}" accept-charset="UTF-8" enctype="multipart/form-data">
                 @csrf
 
-              <div class="col-md-12">
-                <br>
-                <h5 class=" col-sm-12">Bank Charges = N300</h5>
-                <h5 class="col-sm-12">Acceptance is {{$amount}}</h5>
+                <div class="col-md-12">
+                    <br>
+                    <h5 class=" col-sm-12">Bank Charges = N300</h5>
+                    <h5 class="col-sm-12">Acceptance is {{$amount}}</h5>
 
 
-              <input type="hidden" name="email" value="{{$student->email}}"> {{-- required --}}
-              <input type="hidden" name="orderID" value="">
-              <input type="hidden" name="amount" value='{{$amount + $charges}}'>
-              <input type="hidden" name="quantity" value="">
-              <input type="hidden" name="subaccount" value="ACCT_oi8hw5t7cfm0ib6">
-              <input type="hidden" name="metadata" value="{{json_encode($array = ['student_id' => $student->id, 'payment_type'=> 'Acceptance'])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
-              <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
-              <input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}
-              {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
+                  <input type="hidden" name="email" value="{{$student->email}}"> {{-- required --}}
+                  <input type="hidden" name="orderID" value="">
+                  <input type="hidden" name="amount" value='{{($amount + $charges )* 100}}'>
+                  <input type="hidden" name="quantity" value="">
+                  <input type="hidden" name="subaccount" value="ACCT_44zw32m42e4a05n"> <!--WEMA-->
+                  <input type="hidden" name="metadata" value="{{json_encode($array = ['student_id' => $student->id, 'payment_type'=> 'Acceptance'])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
+                  <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
+                  <input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}
+                  {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
 
-               <input type="hidden" name="_token" value="{{ csrf_token() }}"> {{-- employ this in place of csrf_field only in laravel 5.0 --}}
+                   <input type="hidden" name="_token" value="{{ csrf_token() }}"> {{-- employ this in place of csrf_field only in laravel 5.0 --}}
 
-               <button type="button" name="submit" class="col-sm-12 btn btn-sm btn-success">Pay</button>
-               </div>
+                   <button type="submit" name="submit" class="col-sm-12 btn btn-sm btn-success">Pay</button>
+                 </div>
                </form>
             </div>
-          @else
-          <label class="col-xs-4"><h4>Admission Status : <span class="badge badge-info">Sorry!! Check back later.</span></h4></label>
           @endif
+        @else
+          <label class="col-xs-4"><h4>Admission Status : <span class="badge badge-info">Sorry!! Check back later.</span></h4></label>
+        @endif
         </div>
 
 

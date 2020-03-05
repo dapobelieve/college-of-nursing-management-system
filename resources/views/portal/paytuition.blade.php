@@ -4,18 +4,7 @@
 Portal - Course Registration
 @endsection
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
 
-      <div class="col-md-3">
-        <div class="list-group" id="list-tab" role="tablist">
-          <a class="list-group-item list-group-item-action" id="list-home-list"  href="{{route('portal.dashboard')}}" role="tab" aria-controls="home">Home</a>
-          <a class="list-group-item list-group-item-action active" id="list-profile-list"  href="{{route('portal.tuition')}}" role="tab" aria-controls="profile">Pay Tuition</a>
-          <a class="list-group-item list-group-item-action" id="list-messages-list"  href="{{route('portal.coursereg')}}" role="tab" aria-controls="messages">Course Registration</a>
-          <a class="list-group-item list-group-item-action" id="list-settings-list"  href="{{route('portal.tuitionhistory')}}" role="tab" aria-controls="settings">Payment History</a>
-          <a class="list-group-item list-group-item-action" id="list-settings-list"  href="{{route('portal.reghistory')}}" role="tab" aria-controls="settings">Registration History</a>
-        </div>
-      </div>
         <div class="col-md-9">
             <div class="card">
               <div class="card-header text-center bg-success">Dashboard - Tuition Fee Payment</div>
@@ -43,7 +32,7 @@ Portal - Course Registration
                           <option value="{{$payType['half']}}">{{$payType['half']}}</option>
                           @else
                           <option value="{{$payType['full']}}">{{$payType['full']}}</option>
-                          <option value="{{$payType['half']}}">{{$payType['half']}}</option>
+                        <!--  <option value="{{$payType['half']}}">{{$payType['half']}}</option>   -->
                           @endif
                         </select>
 
@@ -71,7 +60,7 @@ Portal - Course Registration
                             <input type="hidden" name="orderID" value="345">
                             <input type="hidden" name="amount" id="pdata2">
                             <input type="hidden" name="quantity" value="3">
-                            <input type="hidden" name="subaccount" value="ACCT_2j004x9z6ufhhhy">
+                            <input type="hidden" name="subaccount" value="ACCT_h4lizjcec6yh4mw">
                             <input type="hidden" name="metadata" value="{{json_encode($array = ['student_id' => $student->id, 'matric_no' => $student->matric_no, 'session' => $sess->value, 'payment_type'=> 'Portal'])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
                             <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
                             <input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}

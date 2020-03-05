@@ -45,6 +45,8 @@ Route::get('printform', 'PrintformController@downloadPDF')->name('printform.down
 
 Route::get('printreceipt', 'PrintformController@receiptPDF')->name('printform.receiptPDF');
 
+Route::get('printacceptance', 'DashboardController@acceptancePDF')->name('printform.acceptance');
+
 Route::post('/pay', 'Payment2Controller@redirectToGateway')->name('payacceptance');
 });
 
@@ -78,7 +80,7 @@ Route::get('/coursedetails/{id}', 'Frontpages\CoursedetailsController@index')->n
 
 
 
-Route::group(['middleware' => ['role:STUDENT','check']], function(){
+Route::group(['middleware' => ['role:STUDENT']], function(){
 
       Route::get('portal/home', 'HomeController@index')->name('portal.home');
 
