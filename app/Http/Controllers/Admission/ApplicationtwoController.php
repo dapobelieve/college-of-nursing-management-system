@@ -26,7 +26,7 @@ class ApplicationtwoController extends Controller
         $students = $student->where('reg_step', $reg_step)->first();
         if ($students == null) {
           $notification = Alert::alertMe('Step one and two has been completed!!!', 'info');
-          return redirect()->route('payapplication.index')->with($notification);
+          return redirect()->route('upload.index')->with($notification);
         }
 
         session()->put('studapp_id', $student->id);
@@ -74,7 +74,7 @@ class ApplicationtwoController extends Controller
         'reg_step' => $reg_step
     ]);
     $notification = Alert::alertMe('Step two completed successfully!!!', 'success');
-    return redirect()->route('payapplication.index')->with($notification);
+    return redirect()->route('upload.index')->with($notification);
   }
 
 }

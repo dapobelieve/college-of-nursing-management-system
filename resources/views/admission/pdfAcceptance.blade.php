@@ -30,6 +30,11 @@
       </div>
 
       <div style="margin : 15px;border: 1px solid #4CAF50;">
+        <div style="margin-left : 10px;">Email Address : </div>
+        <div style="margin: -23px 0px 0px 210px;"> {{$student->email}}</div>
+      </div>
+
+      <div style="margin : 15px;border: 1px solid #4CAF50;">
         <div style="margin-left : 10px;">Amount Paid : </div>
         <div style="margin: -23px 0px 0px 210px;"> {{$payment->last()->amount}}</div>
       </div>

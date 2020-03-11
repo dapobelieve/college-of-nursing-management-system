@@ -18,6 +18,7 @@ class CreateStudentsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('matric_no');
             $table->string('admission_no');
+            $table->string('level');
             $table->string('marital_status');
             $table->string('sponsors_name');
             $table->string('sponsors_phone', 11);

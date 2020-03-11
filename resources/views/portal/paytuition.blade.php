@@ -60,7 +60,11 @@ Portal - Course Registration
                             <input type="hidden" name="orderID" value="345">
                             <input type="hidden" name="amount" id="pdata2">
                             <input type="hidden" name="quantity" value="3">
-                            <input type="hidden" name="subaccount" value="ACCT_h4lizjcec6yh4mw">
+                          @if($student->department_id == 2)
+                            <input type="hidden" name="subaccount" value="ACCT_lxktcyq27vklld1">
+                          @else
+                            <input type="hidden" name="subaccount" value="ACCT_90wcdxusucx3hm0">
+                          @endif
                             <input type="hidden" name="metadata" value="{{json_encode($array = ['student_id' => $student->id, 'matric_no' => $student->matric_no, 'session' => $sess->value, 'payment_type'=> 'Portal'])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
                             <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
                             <input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}

@@ -34,11 +34,9 @@ Admission - Dashboard
         <strong><label class="col-md-12 col-form-label text-md-left text-uppercase">Once the application is complete, make sure
         you make a print out, Not providing it during exam means you will forfiet your exam. </label></strong>
         <strong><label class="col-md-12 col-form-label text-md-left text-uppercase">After Examination, you can come back to Your
-        dashboard to know your admission status </label></strong>
-        <strong><label class="col-md-12 col-form-label text-md-left text-uppercase">
-        Do not destroy the scratch card, it will be needed during your examination. </label></strong>
-        <strong><label class="col-md-12 col-form-label text-md-left text-uppercase text-danger">
-        Failure to provide the scratch card during examination will incur extra charges </label></strong>
+        dashboard to know your admission status with the same Login details</label></strong>
+        <strong><label class="col-md-12 col-form-label text-md-left text-uppercase text-info">
+        Click application step one to start application </label></strong>
         </div>
       </div>
       @endif
@@ -61,7 +59,7 @@ Admission - Dashboard
           </div>
 
           <div class="col-sm-12 text-danger">
-              <b>Note: You are mandated to pay your school fees on or before 12 of march, 2020</b>
+              <b>Note: You are mandated to pay your school fees on or before 21st of march, 2020</b>
           </div>
         @else
           <div class="col-xs-4">

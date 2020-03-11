@@ -11,20 +11,30 @@
         <div class="row">
           <div class="col-md-12">
             <div class="alert alert-secondary alert-dismissible fade show text-black" role="alert">
-              <h5 class="alert-heading">ADVERTISEMENT FOR COMPETITIVE ENTRY/ADMISSION INTO THE SCHOOL OF BASIC MIDWIVERY, KISHI,
-               A SATELLITE CAMPUS OF OYO STATE COLLEGE OF NURSING AND MIDWIFERY, ELEYELE,
-               IBADAN FOR 2020/2021 ACADEMIC SESSION</h5>
-              <p>Online application which commences on Monday, 16th December, 2019 must be completed on or before Friday, 31st January, 2020.</p>
-          <ul><li>	Date and Venue of Entrance Examination:  Saturday, 1st February, 2020 and will be held simultaneously at:<br>
-          a)	School of Basic Midwifery, Kishi, Irepo Local Government<br>
-          b)	Oyo State College of Nursing and Midwifery, Eleyele, Ibadan</li>
-          <li>	Time:		8:00am prompt <br>
-          <b>Date of Resumption:</b> Successful applicants/candidates will resumes on Monday, 2nd March, 2020 for academic activities.</li>
-
-              <Strong class="mb-0">Note: No payment to any Individual/Agent or Personal Bank Account. Pay directly to the
-                College Account Number 0123032629 at any Wema Bank Branch and
-                obtain the scratch card from the Bursary Department of the College to complete your application ONLINE.</strong>
+              <h5 class="alert-heading">Advertisement for Admission into Basic General Nursing and Post Basic Midwifery Programmes
+                of Oyo State College of Nursing and Midwifery, Eleyele, Ibadan for 2020/2021 Academic Session</h5>
+              <p>Applications are hereby invited from suitably qualified candidates for admission
+                 into the following programmes of Oyo State College of Nursing and Midwifery, Eleyele, Ibadan.</p>
+          <ul>
+            <li>Basic General Nursing</li>
+            <li>Post-Basic Midwifery</li>
+          </ul>
+          <Strong class="mb-0">Note: No payment to any Individual/Agent or Personal Bank Account.
+            All payment should be done via the school website</strong>
                 <a href="{{url('/admission')}}">Click here for more information</a>
+              </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="alert alert-secondary alert-dismissible fade show text-black" role="alert">
+              <h5 class="alert-heading">2020 ENTRANCE EXAMINATION RESULT OF THE SCHOOL OF BASIC MIDWIFERY, KISHI</h5>
+              <p>The listed candidates who were at the recently conducted entrance examination and interview into the School
+                of Basic Midwifery, Kishi have been offered Admission into Basic Midwifery programme of the Institution</p>
+          <ul>
+            <li> <a href="{{url('/admission/shortlist')}}">click here</a> for more information </li>
+          </ul>
+          <Strong class="mb-0">The resumption date for the Basic Midwifery Programme is Sunday, 1st March, 2020. Successful candidates who are on the merit list are to report at the office of the Registrar, Oyo State College of Nursing and Midwifery, Eleyele, Ibadan from 8:00am to 4:00pm to collect their admission letter, but must have paid the sum of Fifteen
+            Thousand Naira (N15,000:00) only as Acceptance Fee via this <a href="{{url('/admission/login')}}">link</a></strong>
               </div>
           </div>
         </div>

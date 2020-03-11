@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Studentapplicant;
 use App\Models\Cardapplicant;
+use App\Models\State;
 use App\Alert;
 use PDF;
 
@@ -18,7 +19,7 @@ class PrintformController extends Controller
   {
     if (!Session::has('studapp_id')) {
       $student = Studentapplicant::where('cardapplicant_id', session()->get('auth'))->first();
-      if ($student == null) {
+      if ($student->reg_step == null) {
         $notification = Alert::alertMe('Complete step one and two', 'info');
         return redirect()->route('application.index')->with($notification);
       }
@@ -27,7 +28,7 @@ class PrintformController extends Controller
 
     $student = Cardapplicant::find(session()->get('auth'))->studentapplicant;
     //redirect to application stepone
-    if ($student == null) {
+    if ($student->reg_step == null) {
       $notification = Alert::alertMe('Complete step one and two', 'info');
       return redirect()->route('application.index')->with($notification);
     }
@@ -49,11 +50,13 @@ class PrintformController extends Controller
 
     $payment = $student->paymentapplicant;
 
+    $state = State::find($student->state_of_origin);
+
     $dob = date('d-m-Y', strtotime($student->dob));
 
-    $pdf = PDF::loadView('admission/pdfRegistration', compact('student', 'dob', 'payment'));
+    $pdf = PDF::loadView('admission/pdfRegistration', compact('student', 'dob', 'payment', 'state'));
 
-    return $pdf->download('invoice.pdf');
+    return $pdf->download('AppRegistration.pdf');
 
   }
 
@@ -65,13 +68,13 @@ class PrintformController extends Controller
 
     $student = Cardapplicant::find(session()->get('auth'))->studentapplicant;
 
-    $payment = $student->paymentapplicant;
+    $payment = $student->paymentapplicant->first();
 
     $dob = date('d-m-Y', strtotime($student->dob));
 
     $pdf = PDF::loadView('admission/PDFreceipt', compact('student', 'dob', 'payment'));
 
-    return $pdf->download('invoice.pdf');
+    return $pdf->download('Appreceipt.pdf');
 
   }
 

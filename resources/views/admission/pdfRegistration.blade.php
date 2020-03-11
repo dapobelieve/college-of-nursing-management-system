@@ -34,17 +34,12 @@
 
           <div style="margin : 15px;border: 1px solid #4CAF50;">
             <div style="margin-left : 10px;">Date of Birth : </div>
-            <div style="margin: -23px 0px 0px 210px;"> {{date('d, M-Y', strtotime($student->dob)}}</div>
+            <div style="margin: -23px 0px 0px 210px;"> {{date('d, M-Y', strtotime($student->dob))}}</div>
           </div>
 
           <div style="margin : 15px;border: 1px solid #4CAF50;">
             <div style="margin-left : 10px;">State of Origin : </div>
-            <div style="margin: -23px 0px 0px 210px;"> {{$student->state_of_origin}}</div>
-          </div>
-
-          <div style="margin : 15px;border: 1px solid #4CAF50;">
-            <div style="margin-left : 10px;">Local Government Area : </div>
-            <div style="margin: -23px 0px 0px 210px;"> {{$student->lga}}</div>
+            <div style="margin: -23px 0px 0px 210px;"> {{$state->name}}</div>
           </div>
 
           <div style="margin : 15px;border: 1px solid #4CAF50;">
@@ -70,6 +65,11 @@
           <div style="margin : 15px;border: 1px solid #4CAF50;">
             <div style="margin-left : 10px;">Sponsor Phone Number : </div>
             <div style="margin: -23px 0px 0px 210px;"> {{$student->sponsor_phone}}</div>
+          </div>
+
+          <div style="margin : 15px;border: 1px solid #4CAF50;">
+            <div style="margin-left : 10px;">Date of Exam : </div>
+            <div style="margin: -23px 0px 0px 210px;"> {{date('d, M-Y', strtotime($student->date_exam))}} : 8:00am Prompt</div>
           </div>
 
         </div>

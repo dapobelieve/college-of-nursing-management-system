@@ -197,7 +197,18 @@ Admission - Form two
                         </div>
                         <div class='row'>
                             <div class='col-md-12 text-center'>
-                                <button type='submit' class='btn btn-default btn-courses mt-4' id='js-admission-btn'>Save</button>
+                              <button type='submit' onclick="myFunction()" class='btn btn-default btn-courses mt-4' id='js-admission-btn'>Save</button>
+                              <script>
+                                  function myFunction() {
+                                    var txt;
+                                    if (confirm("You are about to save, Are you sure?")) {
+                                      return true;
+                                    } else {
+                                      return false;
+                                    }
+
+                                  }
+                                  </script>
                             </div>
                             <div class='col-md-12'>
                                 <div id='js-admission-result' data-success-msg='Success, Your application has been sent' data-error-msg='Oops! Something went wrong'></div>

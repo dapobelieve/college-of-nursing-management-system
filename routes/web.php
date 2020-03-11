@@ -9,10 +9,23 @@ Route::post('login', 'LoginController@check')->name('admission.login');
 
 Route::get('/',function () {return view('admission.index');});
 
-//activate card
-Route::get('XYZABC1949', 'ActivateController@index')->name('admission.activate');
+//register for form
+Route::get('appform', 'InvoiceController@index')->name('invoice.activate');
 
-Route::post('XYZABC1949', 'ActivateController@store')->name('activate.store');
+Route::post('appform', 'InvoiceController@store')->name('invoice.store');
+
+Route::get('appformlogin', 'InvoiceController@indexLogin')->name('invoice.activateLogin');
+
+Route::post('appformlogin', 'InvoiceController@storeLogin')->name('invoice.storeLogin');
+
+//pay for form
+Route::get('appformfee', 'ActivateController@index')->name('appformfee.activate');
+
+Route::post('appformfee', 'ActivateController@redirectToGateway')->name('appformfee.pay');
+
+Route::get('appformPDF/{cardapplicant}', 'ActivateController@downloadPDF')->name('appformfee.PDF');
+
+Route::get('appformfee/logout', 'ActivateController@logout')->name('appformfee.logout');
 });
 
 Route::group(['prefix' => '/admission', 'namespace' => 'Admission', 'middleware' => 'checkAuth'], function () {
@@ -23,11 +36,11 @@ Route::get('dashboard/logout', 'DashboardController@logout')->name('admission.lo
 
 Route::get('application', 'ApplicationController@index')->name('application.index');
 
-Route::post('application', 'ApplicationController@store')->name('application.store');
+Route::get('application/{studentapplicant}', 'ApplicationController@update')->name('application.store');
 
-Route::get('application/steptwo', 'ApplicationtwoController@index')->name('application.steptwo');
+Route::get('applicationtwo/steptwo', 'ApplicationtwoController@index')->name('application.steptwo');
 
-Route::put('application/steptwo/{studentapplicant}', 'ApplicationtwoController@update')->name('application.update');
+Route::put('applicationtwo/steptwo/{studentapplicant}', 'ApplicationtwoController@update')->name('application.update');
 
 Route::get('upload', 'UploadController@index')->name('upload.index');
 
@@ -115,9 +128,10 @@ Route::group(['middleware' => ['role:STUDENT']], function(){
 
 
 
-Route::get('/guide',function () {
-return view('applicationguide');
-});
+Route::get('/shortlist',[
+'uses' => 'Frontpages\ShortlistController@index',
+'as' => 'shortlist'
+]);
 
 
 Route::get('/registerSearch/{id}', [

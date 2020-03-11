@@ -23,11 +23,9 @@ admission Login
                           <div class="row">
                             <div class="col-md-12">
                               <div class="form-group row">
-                                  <label for="exam_no" class="col-md-6 col-form-label text-md-right">{{ __('Course for Admission') }}</label>
+                                  <label for="exam_no" class="col-md-12 col-form-label text-md-right">{{ __('Please provide Reg No. and Pin number') }}</label>
                                   <div class="col-md-6">
-                                    <select class="form-control" id="courses" readonly>
-                                        <option value="">BASIC MIDWIFERY </option>
-                                    </select>
+
                                   </div>
                               </div>
                             </div>
@@ -44,15 +42,15 @@ admission Login
                           </div>
                               <div class="col-md-12">
                                   <div class="well">
-                                      <form method="POST" action="{{route('admission.login')}}" novalidate="novalidate">
+                                      <form method="POST" action="{{route('admission.login')}}">
                                             @csrf
                                           <div class="form-group">
                                               <label for="username" class="control-label">Registration No.</label>
-                                              <input type="text" class="form-control" name="username"  required title="Please enter Registration number on the card" placeholder="provide card details">
+                                              <input type="text" class="form-control" name="username"  required title="Please enter Registration number" placeholder="provide reg No. details">
                                               <span class="help-block"></span>
                                           </div>
                                           <div class="form-group">
-                                              <label for="password" class="control-label">Password</label>
+                                              <label for="password" class="control-label">Pin</label>
                                               <input type="password" class="form-control" name="password" required title="Please enter the password">
                                               <span class="help-block"></span>
                                           </div>

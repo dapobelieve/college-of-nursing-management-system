@@ -33,6 +33,11 @@ class CourseController extends Controller
         $payment = new Payment;
         $payment = $payment->where('student_id',session()->get('st_id'))->orderBy('created_at', 'DESC')->select('reference', 'status', 'created_at')->first();
 
+        if ($payment == null) {
+          $notification = Alert::alertMe('Pay your tuition fee first!!!', 'info');
+          return redirect()->back()->with($notification);
+        }
+
         //generate time in order to hide second semester input in cousereg
         $n = date("Y/m/d");
         $date1 = new DateTime($n);
@@ -44,10 +49,7 @@ class CourseController extends Controller
           $timed = "elapsed";
         }
 
-          if ($payment == null) {
-            $notification = Alert::alertMe('Pay your tuition fee first!!!', 'info');
-            return redirect()->back()->with($notification);
-          }
+
     //get the level from the reference added in payment
           $lvl = substr($payment->reference,4,3);
           $level = [

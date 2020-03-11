@@ -154,6 +154,9 @@ Total pages: 14</span>
 <li class="lpage"><a href="https://oysconme.edu.ng/admission" title="
         OYSCONME  | Admission    ">
         Oyo State College of Nursing and Midwifery  | Admission    </a></li>
+<li class="lpage"><a href="https://oysconme.edu.ng/shortlist" title="
+				        OYSCONME  | Admission    ">
+				        Oyo State College of Nursing and Midwifery  | Shortlist    </a></li>
 <li class="lpage last-page"><a href="https://oysconme.edu.ng/speech" title="
         OYSCONME  | Speech    ">
         Oyo State College of Nursing and Midwifery  | Speech    </a></li><li><ul class="level-3">

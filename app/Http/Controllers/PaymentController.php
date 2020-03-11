@@ -11,6 +11,7 @@ use App\Models\Result;
 use App\Models\Student;
 use App\Models\Studentapplicant;
 use App\Models\Paymentapplicant;
+use App\Models\Cardapplicant;
 use App\Http\Traits\CloudinaryUpload;
 use App\Alert;
 
@@ -71,23 +72,56 @@ class PaymentController extends Controller
    //admission payment
    if ($paymentDetails['data']['metadata']['payment_type'] == "Admission")
    {
+     //dd($paymentDetails);
      switch ($paymentDetails['data']['status']) {
        case 'success':
-         $payment = Paymentapplicant::create([
-           'studentapplicant_id' => $paymentDetails['data']['metadata']['student_id'],
+       //generate a rand pin
+       $pin = (string)rand(1000000000, 9999999999);
+
+      $card = Cardapplicant::create([
+         'reg_no' => $paymentDetails['data']['metadata']['reg_no'],
+         'password' => bcrypt($pin),
+         'pin' => $pin,
+       ]);
+
+       $arr = explode(",",$paymentDetails['data']['metadata']['Appname'] );
+       $lastname = $arr[0];
+       $firstname = $arr[1];
+
+       //create a date for examination
+       $num = $card->id;
+       if ($num <= 650 ) {
+         $date=date_create("2020-06-16");
+       }elseif ($num > 650 and $num < 1150) {
+         $date=date_create("2020-06-17");
+       }else {
+         $date=date_create("2020-06-18");
+       }
+
+       $student = $card->studentapplicant()->create([
+          'first_name' => $firstname,
+          'surname' => $lastname,
+          'phone' => $paymentDetails['data']['metadata']['phone'],
+          'email' => $paymentDetails['data']['customer']['email'],
+          'dob' => $paymentDetails['data']['metadata']['dob'],
+          'date_exam' => $date
+       ]);
+
+         $payment = $student->Paymentapplicant()->create([
            'reference' => $paymentDetails['data']['reference'],
            'payment_modes_id' => 1, // to show it is paid through paystack
            'status' => 'PAID',
            'amount' => ($paymentDetails['data']['amount']/100) - 300, //getting exact amount from paystack
            'created_at' => $paymentDetails['data']['createdAt'],
          ]);
+
          $notification = Alert::alertMe('Payment successful!!!', 'success');
-         return redirect()->route('upload.index')->with($notification);
+         return redirect()->route('appformfee.activate')->with('success', 'Payment successful!!!');
         break;
 
        default:
        $notification = Alert::alertMe('something went wrong!', 'warning');
-       return redirect()->route('payapplication.pay')->with($notification);
+       return redirect()->back()->with('success', 'something went wrong!!');
          break;
      }
    }
@@ -97,8 +131,27 @@ class PaymentController extends Controller
    {  //dd($paymentDetails);
      switch ($paymentDetails['data']['status']) {
        case 'success':
+
+
+       $payment = Paymentapplicant::create([
+         'studentapplicant_id' => $paymentDetails['data']['metadata']['student_id'],
+         'reference' => "accept/".$paymentDetails['data']['reference'], //concatenate accept to know whether a student has paid for his/her acceptance fee
+         'payment_modes_id' => 1, // to show it is paid through paystack
+         'status' => 'PAID',
+         'amount' => ($paymentDetails['data']['amount']/100) - 300, //getting exact amount from paystack
+         'created_at' => $paymentDetails['data']['createdAt'],
+       ]);
+
        //automatically insert students that have paid acceptance fee into the school database
        $student = studentapplicant::find($paymentDetails['data']['metadata']['student_id']);
+       $stateID = 29;
+       $lgaID = 593;
+       $SOR = $student->state_of_origin;
+       if ($SOR == 'OYO STATE' or $SOR == 'OYO' or $SOR == 'Oyo state' or $SOR == 'Oyo State') {
+         $stateID = 31;
+         $lgaID = 661;
+       }
+
        $user = User::create([
          'first_name' => $student->first_name,
          'middle_name' => $student->middle_name,
@@ -106,18 +159,15 @@ class PaymentController extends Controller
          'sex' => $student->gender,
          'phone' => $student->phone,
          'dob' => $student->dob,
-         'state_id' => 31,
-         'location_id' => 661,
+         'state_id' => $stateID,
+         'location_id' => $lgaID,
          'email' => $student->email,
          'password' => bcrypt($student->phone),
          'address' =>  $student->home_address,
          'city' => $student->state,
        ]);
 
-       $imageData = $this->upload($student->pic_url, 'students', 3600, '', 'auto');
-       $user->images()->create([
-           'url' => $imageData['secure_url']
-       ]);
+
        $rol = 3; // 3 is id for role as a student
          $user->roles()->sync([(int) $rol]);
 
@@ -141,15 +191,11 @@ class PaymentController extends Controller
          'physics' =>  $student->physics,
        ]);
 
-         $payment = Paymentapplicant::create([
-           'studentapplicant_id' => $paymentDetails['data']['metadata']['student_id'],
-           'reference' => "accept/".$paymentDetails['data']['reference'], //concatenate accept to know whether a student has paid for his/her acceptance fee
-           'payment_modes_id' => 1, // to show it is paid through paystack
-           'status' => 'PAID',
-           'amount' => ($paymentDetails['data']['amount']/100) - 300, //getting exact amount from paystack
-           'created_at' => $paymentDetails['data']['createdAt'],
-         ]);
 
+       $imageData = $this->upload($student->pic_url, 'students', 3600, '', 'auto');
+       $user->images()->create([
+           'url' => $imageData['secure_url']
+       ]);
 
 
          $notification = Alert::alertMe('Payment successful!!!', 'success');
