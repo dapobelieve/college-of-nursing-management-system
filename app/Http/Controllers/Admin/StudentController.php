@@ -209,11 +209,11 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-      $students = $student->with('user', 'department')->first();
-      $state = State::find($students->user->state_id);
-      $lga = Location::find($students->user->location_id);
+      //$students = $student->with('user', 'department')->first();
+      $state = State::find($student->user->state_id);
+      $lga = Location::find($student->user->location_id);
       $results = Result::where('student_id', $student->id)->first();
-      return View('admin.students.edit', ['section' => 'students', 'student' => $students, 'lga' =>$lga, 'state' =>$state, 'result'=>$results]);
+      return View('admin.students.edit', ['section' => 'students', 'student' => $student, 'lga' =>$lga, 'state' =>$state, 'result'=>$results]);
     }
     /**
      * Update the specified resource in storage.

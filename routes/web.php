@@ -126,6 +126,8 @@ Route::group(['middleware' => ['role:STUDENT']], function(){
     });
     Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 
+    Route::post('/payment/webhook', 'PaymentController@handleGatewayWebhook')->name('webhook');
+
 
 
 Route::get('/shortlist',[

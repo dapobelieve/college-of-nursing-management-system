@@ -54,7 +54,7 @@ class PaymentController extends Controller
             'reference' => $getYr."/".session()->get('lvl')."/".$paymentDetails['data']['reference'], //adding payment level to the reference
             'payment_modes_id' => 1,
             'status' => session()->get('pay_status'),
-            'amount' => $paymentDetails['data']['amount']/100, //getting exact amount from paystack
+            'amount' => ($paymentDetails['data']['amount']/100) - 300, //getting exact amount from paystack
             'created_at' => $paymentDetails['data']['createdAt'],
           ]);
           $notification = Alert::alertMe('Payment successful!!!', 'success');
@@ -211,4 +211,33 @@ class PaymentController extends Controller
 
 
  }
+
+
+//webhook to handle event
+public function handleGatewayWebhook()
+{
+  // only a post with paystack signature header gets our attention
+
+
+  // Retrieve the request's body
+  $input = @file_get_contents("php://input");
+
+
+
+
+  // parse event (which is json string) as object
+  // Do something - that will not take long - with $event
+  $event = json_decode($input);
+
+
+$fWrite = fopen("akinator.txt","a");
+$wrote = fwrite($fWrite, var_dump($event));
+fclose($fWrite);
+http_response_code(200);
+
+  exit();
+}
+
+
+
 }

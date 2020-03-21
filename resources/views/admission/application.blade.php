@@ -79,7 +79,7 @@ Admission - Form one
                                             Date of birth </label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='date' name='dob' class='form-control'  value="{{$student->dob}}" required>
+                                        <input type='date' name='dob' class='form-control'  value="{{date("Y-m-d", strtotime($student->dob))}}" required>
                                     </div>
                                 </div>
                                 <div class='row form-group'>
@@ -104,7 +104,7 @@ Admission - Form one
                                   </div>
                                   <div class='col-lg-8'>
                                       <div class='form-group'>
-                                          <input type='text' name='state' class='form-control'  value="{{ old('state') }}" placeholder='Your present state' required>
+                                          <input type='text' name='state' class='form-control'  value="{{ old('state') }}" placeholder='Your present city' required>
                                       </div>
                                   </div>
                               </div>

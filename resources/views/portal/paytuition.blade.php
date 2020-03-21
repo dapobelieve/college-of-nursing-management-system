@@ -61,7 +61,7 @@ Portal - Course Registration
                             <input type="hidden" name="amount" id="pdata2">
                             <input type="hidden" name="quantity" value="3">
                           @if($student->department_id == 2)
-                            <input type="hidden" name="subaccount" value="ACCT_lxktcyq27vklld1">
+                            <input type="hidden" name="subaccount" value="ACCT_r4tbfc69hne489y">
                           @else
                             <input type="hidden" name="subaccount" value="ACCT_90wcdxusucx3hm0">
                           @endif
@@ -108,10 +108,10 @@ $(document).ready(function(e){
             url: url.replace("type", valueP),
             success: function(result){
 
-              $('#pdata').val(result);
-              var result2 = result+""+0+""+0;
+              $('#pdata').val(result + 300);
+              var result2 = (result +300)+""+0+""+0;
               $('#pdata2').val(result2);
-              $('#not_ify').html('You are about to make "'+valueP+'" payment');
+              $('#not_ify').html('You are about to make "'+valueP+'" payment with bank charges of 300');
           }
         });
 

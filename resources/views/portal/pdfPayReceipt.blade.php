@@ -40,6 +40,14 @@
         <div style="float:right; margin-right:105px; margin-bottom: 15px; ">
             <label>{{substr($payment->reference,8)}}</label>
         </div>
+        
+        <div style="clear:both"></div>
+        <div style="float:left; margin-left:85px; margin-bottom: 15px; ">
+          <label><strong>Email address :</strong></label>
+        </div>
+        <div style="float:right; margin-right:105px; margin-bottom: 15px; ">
+            <label>{{$user->email}}</label>
+        </div>
 
         <div style="clear:both"></div>
         <div style="float:left; margin-left:85px; margin-bottom: 15px; ">

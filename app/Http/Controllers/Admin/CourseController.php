@@ -23,7 +23,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::with('department:id,name')->orderBy('title')->get();
+        $courses = Course::with('department:id,name')->orderBy('level')->paginate(15);
         return view('admin.courses.index')->with('courses', $courses);
     }
 
@@ -47,7 +47,7 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required|unique:courses,title',
+            'title' => 'required',
             'code' => 'required|unique:courses,code',
             'units' => 'required|numeric',
             'semester' => 'required',

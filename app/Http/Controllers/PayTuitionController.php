@@ -136,7 +136,7 @@ class PayTuitionController extends Controller
         return ($amount/2)+ $late;
       }else{
         session()->put('pay_status', 'PAID');
-        return $amount;
+        return $amount + $late;
       }
     }
 
