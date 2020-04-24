@@ -54,7 +54,7 @@ Application Form (Registration Page)
                               <div class="col-lg-6">
                                             <div class="form-control-sm">
                                                 <label for="username" class="control-label">Surname of Applicant</label>
-                                                <input type="text" class="form-control form-control-sm" name="last_name"  required  placeholder="provide surname">
+                                                <input type="text" class="frt_nm form-control form-control-sm" name="last_name"  required  placeholder="provide surname">
                                                 <span class="help-block"></span>
 
                                               <label for="username" class="control-label">Email Address</label>
@@ -73,7 +73,7 @@ Application Form (Registration Page)
                                   <div class="col-lg-6">
                                                 <div class="form-control-sm">
                                                     <label for="username" class="control-label">Firstname of Applicant</label>
-                                                    <input type="text" class="form-control form-control-sm" name="first_name"  required  placeholder="provide name of applicant">
+                                                    <input type="text" class="frt_nm form-control form-control-sm" name="first_name"  required  placeholder="provide name of applicant">
                                                     <span class="help-block"></span>
 
                                                   <label for="username" class="control-label">Phone number</label>
@@ -108,4 +108,16 @@ Application Form (Registration Page)
   </div>
   <!--//End Login -->
 
+@stop
+@section('site.scripts')
+<script type="text/javascript">
+
+
+
+$('.frt_nm').keydown(function(e) {
+    if (e.keyCode == 32) {
+        return false;
+    }
+});
+</script>
 @stop
