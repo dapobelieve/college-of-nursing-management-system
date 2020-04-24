@@ -65,7 +65,7 @@ Portal - Course Registration
                           @else
                             <input type="hidden" name="subaccount" value="ACCT_90wcdxusucx3hm0">
                           @endif
-                            <input type="hidden" name="metadata" value="{{json_encode($array = ['student_id' => $student->id, 'matric_no' => $student->matric_no, 'session' => $sess->value, 'payment_type'=> 'Portal'])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
+                            <input type="hidden" id="metadata" name="metadata" value="{{json_encode($array = ['student_id' => $student->id, 'matric_no' => $student->matric_no, 'session' => $sess->value, 'payment_type'=> 'Portal'])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
                             <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
                             <input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}
                             {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
@@ -106,12 +106,21 @@ $(document).ready(function(e){
             type:"GET",
             dataType: 'json',
             url: url.replace("type", valueP),
-            success: function(result){
+            success: function(results){
 
+              var result = results.amount;
               $('#pdata').val(result + 300);
               var result2 = (result +300)+""+0+""+0;
               $('#pdata2').val(result2);
               $('#not_ify').html('You are about to make "'+valueP+'" payment with bank charges of 300');
+
+              var obj =$('#metadata').val();
+              obj = JSON.parse(obj);
+              obj.pay_status = results.pay_status;
+              obj.reg_status = results.reg_status;
+              obj.lvl = results.lvl
+              obj = JSON.stringify(obj);
+              $('#metadata').val(obj);
           }
         });
 

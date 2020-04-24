@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Paystack;
+use Session;
 use  App\User;
 use App\Models\Payment;
 use App\Models\Result;
@@ -45,15 +46,15 @@ class PaymentController extends Controller
      {
      // get the session being paid for and concatenate late payment or early payment
      $getYr =$paymentDetails['data']['metadata']['session'];
-     $getYr = substr($getYr,2,2)."".session()->get('regStatus');
+     $getYr = substr($getYr,2,2)."".$paymentDetails['data']['metadata']['reg_status'];
      //determine if the payment was successful or not
      switch ($paymentDetails['data']['status']) {
        case 'success':
           $payment = Payment::create([
             'student_id' => $paymentDetails['data']['metadata']['student_id'],
-            'reference' => $getYr."/".session()->get('lvl')."/".$paymentDetails['data']['reference'], //adding payment level to the reference
+            'reference' => $getYr."/".$paymentDetails['data']['metadata']['lvl']."/".$paymentDetails['data']['reference'], //adding payment level to the reference
             'payment_modes_id' => 1,
-            'status' => session()->get('pay_status'),
+            'status' => $paymentDetails['data']['metadata']['pay_status'],
             'amount' => ($paymentDetails['data']['amount']/100) - 300, //getting exact amount from paystack
             'created_at' => $paymentDetails['data']['createdAt'],
           ]);

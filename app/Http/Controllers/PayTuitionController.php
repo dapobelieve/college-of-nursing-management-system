@@ -95,14 +95,12 @@ class PayTuitionController extends Controller
             switch ($state->name) {
               case 'Oyo':
                   $total = $amount->indigene;
-                  $result= $this->verifyAmount($type, $total, $latepayment->value);
-                  return $result;
-                break;
+                  return $this->verifyAmount($type, $total, $latepayment->value);
+                  break;
 
                 default:
                 $total = $amount->non_indigene;
-                $result= $this->verifyAmount($type, $total, $latepayment->value);
-                return $result;
+                return $this->verifyAmount($type, $total, $latepayment->value);
                 break;
             }
       }
@@ -112,16 +110,14 @@ class PayTuitionController extends Controller
               case 'Oyo':
                 $total = $amount->indigene;
                 $late = 0;
-                $result= $this->verifyAmount($type, $total, $late);
-                return $result;
+                return $this->verifyAmount($type, $total, $late);
                 break;
 
               default:
               $total = $amount->non_indigene;
               $late = 0;
-              $result= $this->verifyAmount($type, $total, $late);
-              return $result;
-                break;
+              return $this->verifyAmount($type, $total, $late);
+              break;
         }
       }
     }
@@ -133,10 +129,20 @@ class PayTuitionController extends Controller
         if(session()->has('pay_full')){
           session()->put('pay_status', 'PAID');
         }
-        return ($amount/2)+ $late;
+        return json_encode($obj = [
+          "amount" =>($amount/2)+ $late,
+          "pay_status" => session()->get('pay_status'),
+          "reg_status" => session()->get('regStatus'),
+          "lvl" => session()->get('lvl')
+        ]);
       }else{
         session()->put('pay_status', 'PAID');
-        return $amount + $late;
+        return json_encode($obj = [
+          "amount" => $amount + $late,
+          "pay_status" => session()->get('pay_status'),
+          "reg_status" => session()->get('regStatus'),
+          "lvl" => session()->get('lvl')
+        ]);
       }
     }
 
