@@ -44,20 +44,10 @@ class PaymentController extends Controller
      //Payment of school fees (PORTAL)
      if ($paymentDetails['data']['metadata']['payment_type'] == "Portal")
      {
-     // get the session being paid for and concatenate late payment or early payment
-     $getYr =$paymentDetails['data']['metadata']['session'];
-     $getYr = substr($getYr,2,2)."".$paymentDetails['data']['metadata']['reg_status'];
      //determine if the payment was successful or not
      switch ($paymentDetails['data']['status']) {
        case 'success':
-          $payment = Payment::create([
-            'student_id' => $paymentDetails['data']['metadata']['student_id'],
-            'reference' => $getYr."/".$paymentDetails['data']['metadata']['lvl']."/".$paymentDetails['data']['reference'], //adding payment level to the reference
-            'payment_modes_id' => 1,
-            'status' => $paymentDetails['data']['metadata']['pay_status'],
-            'amount' => ($paymentDetails['data']['amount']/100) - 300, //getting exact amount from paystack
-            'created_at' => $paymentDetails['data']['createdAt'],
-          ]);
+
           $notification = Alert::alertMe('Payment successful!!!', 'success');
           return redirect('/portal/dashboard')->with($notification);
          break;
@@ -76,48 +66,9 @@ class PaymentController extends Controller
      //dd($paymentDetails);
      switch ($paymentDetails['data']['status']) {
        case 'success':
-       //generate a rand pin
-       $pin = (string)rand(1000000000, 9999999999);
 
-      $card = Cardapplicant::create([
-         'reg_no' => $paymentDetails['data']['metadata']['reg_no'],
-         'password' => bcrypt($pin),
-         'pin' => $pin,
-       ]);
-
-       $arr = explode(",",$paymentDetails['data']['metadata']['Appname'] );
-       $lastname = $arr[0];
-       $firstname = $arr[1];
-
-       //create a date for examination
-       $num = $card->id;
-       if ($num <= 650 ) {
-         $date=date_create("2020-06-16");
-       }elseif ($num > 650 and $num < 1150) {
-         $date=date_create("2020-06-17");
-       }else {
-         $date=date_create("2020-06-18");
-       }
-
-       $student = $card->studentapplicant()->create([
-          'first_name' => $firstname,
-          'surname' => $lastname,
-          'phone' => $paymentDetails['data']['metadata']['phone'],
-          'email' => $paymentDetails['data']['customer']['email'],
-          'dob' => $paymentDetails['data']['metadata']['dob'],
-          'date_exam' => $date
-       ]);
-
-         $payment = $student->Paymentapplicant()->create([
-           'reference' => $paymentDetails['data']['reference'],
-           'payment_modes_id' => 1, // to show it is paid through paystack
-           'status' => 'PAID',
-           'amount' => ($paymentDetails['data']['amount']/100) - 300, //getting exact amount from paystack
-           'created_at' => $paymentDetails['data']['createdAt'],
-         ]);
-
-         $notification = Alert::alertMe('Payment successful!!!', 'success');
-         return redirect()->route('appformfee.activate')->with('success', 'Payment successful!!!');
+         $notification = Alert::alertMe('Payment successful!!!, Please refresh if any value is not given', 'success');
+         return redirect()->route('appformfee.activate')->with('success', 'Payment successful!!!, Please refresh page if any value is not yet given');
         break;
 
        default:
@@ -214,31 +165,111 @@ class PaymentController extends Controller
  }
 
 
-//webhook to handle event
-public function handleGatewayWebhook()
-{
-  // only a post with paystack signature header gets our attention
+ //webhook to handle event
+ public function handleGatewayWebhook()
+ {
 
 
-  // Retrieve the request's body
-  $input = @file_get_contents("php://input");
+ // Retrieve the request's body
+ $input = @file_get_contents("php://input");
+ $PAYSTACK = config('paystack.secretKey');
 
+ // validate event do all at once to avoid timing attack
+ if($_SERVER['HTTP_X_PAYSTACK_SIGNATURE'] !== hash_hmac('sha512', $input, $PAYSTACK))
+   exit();
 
+ http_response_code(200);
 
+ // parse event (which is json string) as object
+ // Do something - that will not take long - with $event
+ $event = json_decode($input);
+ /*$txt = $event->event." and ". $event->data->metadata->reg_no;
+ $txt.= "\r\n";*/
 
-  // parse event (which is json string) as object
-  // Do something - that will not take long - with $event
-  $event = json_decode($input);
+//for tuition fee
+ if ($event->data->metadata->payment_type == "Portal")
+ {
+ // get the session being paid for and concatenate late payment or early payment
+ $getYr =$event->data->metadata->session;
+ $getYr = substr($getYr,2,2)."".$event->data->metadata->reg_status;
+ //determine if the payment was successful or not
+ switch ($event->event) {
+   case 'charge.success':
+      $payment = Payment::create([
+        'student_id' => $event->data->metadata->student_id,
+        'reference' => $getYr."/".$event->data->metadata->lvl."/".$event->data->reference, //adding payment level to the reference
+        'payment_modes_id' => 1,
+        'status' => $event->data->metadata->pay_status,
+        'amount' => ($event->data->amount/100) - 300, //getting exact amount from paystack
+        'created_at' => $event->data->createdAt,
+      ]);
 
+     break;
 
-$fWrite = fopen("akinator.txt","a");
-$wrote = fwrite($fWrite, var_dump($event));
-fclose($fWrite);
-http_response_code(200);
+ }
+}
 
-  exit();
+ //admission payment
+ if ($event->data->metadata->payment_type == "Admission")
+ {
+   //dd($paymentDetails);
+   switch ($event->event) {
+     case 'charge.success':
+     //check whether the payment has been completed
+     $chck = Cardapplicant::where('reg_no', $event->data->metadata->reg_no)->first();
+    if ($chck == null)
+    {
+   //generate a rand pin
+         $pin = (string)rand(1000000000, 9999999999);
+
+        $card = Cardapplicant::create([
+           'reg_no' => $event->data->metadata->reg_no,
+           'password' => bcrypt($pin),
+           'pin' => $pin,
+         ]);
+
+         $arr = explode(",",$event->data->metadata->Appname);
+         $lastname = $arr[0];
+         $firstname = $arr[1];
+
+         //create a date for examination
+         $num = $card->id;
+           if ($num <= 650 ) {
+             $date=date_create("2020-06-16");
+           }elseif ($num > 650 and $num < 1150) {
+             $date=date_create("2020-06-17");
+           }else {
+             $date=date_create("2020-06-18");
+           }
+
+         $student = $card->studentapplicant()->create([
+            'first_name' => $firstname,
+            'surname' => $lastname,
+            'phone' => $event->data->metadata->phone,
+            'email' => $event->data->customer->email,
+            'dob' => $event->data->metadata->dob,
+            'date_exam' => $date
+         ]);
+
+           $payment = $student->Paymentapplicant()->create([
+             'reference' => $event->data->reference,
+             'payment_modes_id' => 1, // to show it is paid through paystack
+             'status' => 'PAID',
+             'amount' => ($event->data->amount/100) - 300, //getting exact amount from paystack
+             'created_at' => $event->data->created_at,
+           ]);
+
+          break;
+       }
+    }
 }
 
 
 
-}
+/* $fWrite = fopen("akinator.txt","a");
+ $wrote = fwrite($fWrite, $txt);
+ fclose($fWrite);*/
+
+   exit();
+ }
+ }
