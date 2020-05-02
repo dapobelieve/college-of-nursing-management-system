@@ -43,7 +43,12 @@ class ActivateController extends Controller
         'amount' => 'required|string|max:255',
     ]);
 
+    try {
       return Paystack::getAuthorizationUrl()->redirectNow();
+    } catch (\Exception $e) {
+      $note = $e->getMessage();
+      return redirect()->back()->with('warning', $note);
+    }
   }
 
   public function downloadPDF(Cardapplicant $cardapplicant)

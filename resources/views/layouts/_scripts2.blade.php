@@ -1,5 +1,6 @@
 <!-- jQuery, Bootstrap JS. -->
         <script src="{{asset('js/jquery.min.js')}}"></script>
+      <!--  <script src="{{asset('js/jquery-ui-1.10.4.min.js')}}"></script> -->
         <script src="{{asset('js/tether.min.js')}}"></script>
         <script src="{{asset('js/bootstrap.min.js')}}"></script>
         <!-- Plugins -->

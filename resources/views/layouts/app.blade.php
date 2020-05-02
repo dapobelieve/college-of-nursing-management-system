@@ -78,7 +78,7 @@
           <div class="container">
               <div class="row justify-content-center">
                 @if($section != "")
-                <div class="col-md-3">
+                <div class="col-xs-3">
                   <div class="list-group" id="list-tab" role="tablist">
                     <a class="list-group-item list-group-item-action @if ($section == 'dashboard') active @endif" id="list-home-list"  href="{{route('portal.dashboard')}}" role="tab" aria-controls="home">Home</a>
                     <a class="list-group-item list-group-item-action @if ($section == 'tuition') active @endif" id="list-profile-list"  href="{{route('portal.tuition')}}" role="tab" aria-controls="profile">Pay Tuition</a>

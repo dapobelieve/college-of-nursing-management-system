@@ -29,8 +29,12 @@ class PaymentController extends Controller
    $request->validate([
        'amount' => 'required|string|max:255',
    ]);
-
+   try {
      return Paystack::getAuthorizationUrl()->redirectNow();
+   } catch (\Exception $e) {
+     $note = $e->getMessage();
+     return redirect()->back()->with('warning', $note);
+   }
  }
 
  /**
@@ -201,7 +205,7 @@ class PaymentController extends Controller
         'payment_modes_id' => 1,
         'status' => $event->data->metadata->pay_status,
         'amount' => ($event->data->amount/100) - 300, //getting exact amount from paystack
-        'created_at' => $event->data->createdAt,
+        'created_at' => $event->data->created_at,
       ]);
 
      break;

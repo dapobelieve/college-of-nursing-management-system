@@ -17,14 +17,19 @@ class Payment2Controller extends Controller
  public function redirectToGateway(Request $request)
  {
    $request->validate([
-       'amount' => 'required|string|max:255',
-   ]);
+        'amount' => 'required|string|max:255',
+    ]);
 
-     return Paystack::getAuthorizationUrl()->redirectNow();
+    try {
+      return Paystack::getAuthorizationUrl()->redirectNow();
+    } catch (\Exception $e) {
+      $note = $e->getMessage();
+      return redirect()->back()->with('warning', $note);
+    }
  }
 
 
 
- 
+
 
 }

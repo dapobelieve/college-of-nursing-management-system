@@ -31,6 +31,11 @@ Application Form (Registration Page)
               {{Session::get('success')}}
             </div>
             @endif
+            @if(Session::has('warning'))
+              <div class="alert alert-danger" role="alert">
+                {{Session::get('warning')}}
+              </div>
+              @endif
                <div id="login-overlay" class="modal-dialog">
                   <div class="modal-content">
                       <div class="modal-body">
@@ -119,5 +124,10 @@ $('.frt_nm').keydown(function(e) {
         return false;
     }
 });
+
+/*$('[type=date]').datepicker({
+    format: 'yyyy-mm-dd'
+});*/
+
 </script>
 @stop

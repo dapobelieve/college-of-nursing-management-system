@@ -5,7 +5,8 @@ Portal - Course Registration
 @endsection
 @section('content')
 
-        <div class="col-md-9">
+        <div class="col-sm-9">
+
             <div class="card">
               <div class="card-header text-center bg-success">Dashboard - Tuition Fee Payment</div>
               <form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8" enctype="multipart/form-data">
@@ -59,7 +60,8 @@ Portal - Course Registration
                             <input type="hidden" name="email" value="{{$user->email}}"> {{-- required --}}
                             <input type="hidden" name="orderID" value="345">
                             <input type="hidden" name="amount" id="pdata2">
-                            <input type="hidden" name="quantity" value="3">
+                            <input type="hidden" name="first_name" value="{{$user->first_name}}">
+                            <input type="hidden" name="last_name" value="{{$user->last_name}}">
                           @if($student->department_id == 2)
                             <input type="hidden" name="subaccount" value="ACCT_r4tbfc69hne489y">
                           @else

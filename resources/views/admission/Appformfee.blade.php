@@ -15,6 +15,11 @@ Application Form Fee
     {{Session::get('success')}}
   </div>
   @endif
+  @if(Session::has('warning'))
+    <div class="alert alert-danger" role="alert">
+      {{Session::get('warning')}}
+    </div>
+    @endif
 </div>
   <br>
   <br>
