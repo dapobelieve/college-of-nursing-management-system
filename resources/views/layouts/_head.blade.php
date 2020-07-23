@@ -21,4 +21,5 @@
     <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
     <!-- Main CSS -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
+      <link href="{{asset('css/larastyle.css')}}" rel="stylesheet">
 </head>

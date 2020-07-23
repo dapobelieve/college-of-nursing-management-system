@@ -1,6 +1,6 @@
 @extends('welcome')
 
-@section('title', strtoupper(config('site.name.short'))." "." | Event")
+@section('title', strtoupper(config('site.name.short'))." "." | Course details")
 
 
 @section('pagename')

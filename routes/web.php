@@ -1,4 +1,6 @@
 <?php
+
+
 Auth::routes();
 
 
@@ -90,6 +92,12 @@ Route::get('/our-team',function () {return view('college-officers');});
 Route::get('/campus-life',function () {return view('campus-life');});
 
 Route::get('/coursedetails/{id}', 'Frontpages\CoursedetailsController@index')->name('coursedetails');
+
+Route::get('/job-application', 'Job\EmploymentController@index')->name('employment.index');
+
+Route::post('/job-application', 'Job\EmploymentController@store')->name('employment.store');
+
+Route::get('/job-guide',function () {return view('employment/index');});
 
 
 

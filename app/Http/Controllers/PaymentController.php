@@ -52,6 +52,7 @@ class PaymentController extends Controller
      switch ($paymentDetails['data']['status']) {
        case 'success':
 
+
           $notification = Alert::alertMe('Payment successful!!!', 'success');
           return redirect('/portal/dashboard')->with($notification);
          break;
@@ -70,6 +71,52 @@ class PaymentController extends Controller
      //dd($paymentDetails);
      switch ($paymentDetails['data']['status']) {
        case 'success':
+
+       $chck = Cardapplicant::where('reg_no', $paymentDetails['data']['metadata']['reg_no'])->first();
+      if ($chck == null)
+      {
+     //generate a rand pin
+           $pin = (string)rand(1000000000, 9999999999);
+
+          $card = Cardapplicant::create([
+             'reg_no' =>  $paymentDetails['data']['metadata']['reg_no'],
+             'password' => bcrypt($pin),
+             'pin' => $pin,
+           ]);
+
+           $arr = explode(",", $paymentDetails['data']['metadata']['Appname']);
+           $lastname = $arr[0];
+           $firstname = $arr[1];
+
+           //create a date for examination
+           $num = $card->id;
+             if ($num <= 650 ) {
+               $date=date_create("2020-06-16");
+             }elseif ($num > 650 and $num < 1150) {
+               $date=date_create("2020-06-17");
+             }else {
+               $date=date_create("2020-06-18");
+             }
+
+           $student = $card->studentapplicant()->create([
+              'first_name' => $firstname,
+              'surname' => $lastname,
+              'phone' =>  $paymentDetails['data']['metadata']['phone'],
+              'email' => $paymentDetails['data']['email'],
+              'dob' => $paymentDetails['data']['metadata']['dob'],
+              'date_exam' => $date
+           ]);
+
+             $payment = $student->Paymentapplicant()->create([
+               'reference' => $paymentDetails['data']['reference'],
+               'payment_modes_id' => 1, // to show it is paid through paystack
+               'status' => 'PAID',
+               'amount' => ($paymentDetails['data']['amount']/100) - 300, //getting exact amount from paystack
+               'created_at' => $paymentDetails['data']['createdAt'],
+             ]);
+
+
+         }
 
          $notification = Alert::alertMe('Payment successful!!!, Please refresh if any value is not given', 'success');
          return redirect()->route('appformfee.activate')->with('success', 'Payment successful!!!, Please refresh page if any value is not yet given');
@@ -263,8 +310,9 @@ class PaymentController extends Controller
              'created_at' => $event->data->created_at,
            ]);
 
-          break;
+
        }
+       break;
     }
 }
 

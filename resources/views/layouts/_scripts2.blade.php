@@ -14,4 +14,5 @@
         <script src="{{asset('js/subscribe.js')}}"></script>
         <!-- Script JS -->
         <script src="{{asset('js/script.js')}}"></script>
+          <script src="{{asset('js/multipleform.js')}}"></script>
         @yield('site.scripts')
