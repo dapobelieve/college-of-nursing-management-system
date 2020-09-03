@@ -12,9 +12,15 @@
 <body>
     <div id="container">
     <div id="logo">
+      @if(Session::has('error'))
+          <div class="alert alert-info">
+              {{Session::get('error')}}
+              <a href="#" data-dismiss="alert" class="close">×</a>
+          </div>
+      @endif
     </div>
     <div id="loginbox">
-        <form method="post"  action="{{ route('dashboard.login') }}">
+      <form method="post"  action="{{ route('dashboard.login') }}">
             <p>Login</p>
             <div class="input-group input-sm">
                 <span class="input-group-addon">
