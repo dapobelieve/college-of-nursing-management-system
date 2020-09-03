@@ -9,6 +9,9 @@ use App\Models\Admin;
 use App\Models\Lecturer;
 use App\Models\Student;
 use App\Models\Post;
+use App\Model2\Applicant;
+use PDF;
+
 
 class DashboardController extends Controller
 {
@@ -23,4 +26,13 @@ class DashboardController extends Controller
             'posts' => Post::all()
         ]);
     }
+
+    public function pdfRecruiment()
+      {
+        $applicants= Applicant::all();
+        //dd($applicants[85]);
+        $pdf = PDF::loadView('admin/dlRecruitpdf', compact('applicants'));
+
+        return $pdf->download('RecruitmentList.pdf');
+      }
 }

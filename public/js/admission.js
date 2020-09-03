@@ -41,14 +41,14 @@ $(function() {
     });
 
 
-    /* 
+    /*
     VALIDATE
     -------- */
 
     $("#admissionform").submit(function(e) {
         e.preventDefault();
     }).validate({
-        rules: { 
+        rules: {
             email: {
                 required: true,
                 email: true
@@ -65,7 +65,7 @@ $(function() {
 
             $("#js-admission-btn").attr("disabled", true);
 
-            /* 
+            /*
             CHECK PAGE FOR REDIRECT (Thank you page)
             ---------------------------------------- */
 
@@ -77,7 +77,7 @@ $(function() {
 
             $("#js-admission-result").html('<p class="help-block">Please wait...</p>');
 
-            /* 
+            /*
             FETCH SUCCESS / ERROR MSG FROM HTML DATA-ATTR
             --------------------------------------------- */
 
@@ -86,7 +86,7 @@ $(function() {
 
             var dataString = $(form).serialize();
 
-            /* 
+            /*
              AJAX POST
              --------- */
 

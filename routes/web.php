@@ -97,6 +97,8 @@ Route::get('/job-application', 'Job\EmploymentController@index')->name('employme
 
 Route::post('/job-application', 'Job\EmploymentController@store')->name('employment.store');
 
+Route::post('/job-application-pdf', 'Job\EmploymentController@PDF')->name('employment.pdf');
+
 Route::get('/job-guide',function () {return view('employment/index');});
 
 
@@ -218,6 +220,8 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
 
   // Dashboard
   Route::get('', 'DashboardController@index')->name('dashboard.home');
+
+  Route::post('', 'DashboardController@pdfRecruiment')->name('dashboard.downloadPDF');
 
   // Courses
   Route::resource('courses', 'CourseController');

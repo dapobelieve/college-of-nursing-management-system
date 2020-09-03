@@ -72,6 +72,25 @@
       </span>
 
     </div>
+    <div class="col-md-12">
+              <p>
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Print Application Form
+          </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body col-md-6">
+            <form class="form-inline" method="POST" action="{{route('employment.pdf')}}">
+              @csrf
+              <div class="form-group mx-sm-3 mb-2">
+                <label for="inputPassword2" class="sr-only">Email</label>
+                <input type="email" name="email" class="form-control" id="inpute2" placeholder="Email" required>
+              </div>
+              <button type="submit" class="btn btn-primary mb-2">Print</button>
+              </form>
+          </div>
+        </div>
+    </div>
   </div>
 
   <div class="row">
@@ -200,6 +219,7 @@
 <div class="form-group col-md-8">
   <label for="inputPhone">Upload your passport </label>
   <input type="file" name="passport" class="form-control col-md-6 "  id="pdata"  required>
+  <span class="error text-primary">Note: passport size should be less than 300kb & should have maximum width of 400px</span>
 </div>
 </div>
 

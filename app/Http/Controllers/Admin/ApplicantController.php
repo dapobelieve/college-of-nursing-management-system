@@ -162,7 +162,7 @@ class ApplicantController extends Controller
       public function pdfApplicants()
       {
         $applicants= Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')
-        ->join('paymentapplicants', 'paymentapplicants.studentapplicant_id', '=', 'studentapplicants.id')->get();
+        ->where('department_id', '!=', '2')->orderBy('cardapplicants.reg_no')->skip(1077)->take(359)->get();
         //dd($applicants[0]);
         $pdf = PDF::loadView('admin/applicants/downloadpdf', compact('applicants'));
 

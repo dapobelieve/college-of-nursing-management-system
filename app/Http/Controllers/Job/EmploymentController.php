@@ -9,6 +9,7 @@ use App\Model2\Applicant;
 use App\Model2\education;
 use App\Model2\Referee;
 use App\Model2\Emphistory;
+use PDF;
 
 class EmploymentController extends Controller
 {
@@ -127,6 +128,7 @@ class EmploymentController extends Controller
         }
 
         for ($i=0; $i < 2 ; $i++) {
+          $str = (string)$i;
           $applicant->referee()->create([
             'name' => $request['R_title'.''.$str].' '.$request['R_full_name'.''.$str],
             'position' => $request['R_position'.''.$str],
@@ -140,5 +142,27 @@ class EmploymentController extends Controller
 
       return view('employment/register', ['section' => 'apply']);
   }
+
+
+  public function PDF(Request $request)
+  {
+      $applicant = Applicant::where('email', $request->email)->first();
+      if ($applicant == null) {
+        $state = State::all();
+        return redirect('/job-application')->with(['error' =>'Could not find email address']);
+          }else {
+        $education = $applicant->education;
+        $referee = $applicant->referee;
+        $employ = $applicant->emphistory;
+        //dd($education);
+        $pdf = PDF::loadView('employment/pdfEmploy', compact('applicant','education', 'referee', 'employ'));
+
+        return $pdf->download('jobapplicant.pdf');
+
+      }
+
+
+  }
+
 
 }

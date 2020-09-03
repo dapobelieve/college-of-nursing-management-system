@@ -54,12 +54,22 @@
                                         </div>
                                       </div>
                                       <div class="box-body">
-                                          <canvas id="myChart" width="400" height="150"></canvas>                                        
+                                          <canvas id="myChart" width="400" height="150"></canvas>
                                       </div>
                                       <!-- /.box-body -->
                                     </div>
 
                                 </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-xs-2">
+                                <form class="form-inline" method="post" action="{{route('dashboard.downloadPDF')}}" enctype="multipart/form-data">
+                                  @csrf
+                                  <div class="form-group mb-4">
+                                  <button type="submit" class="btn btn-success btn-xs mb-2" title="Generate Recruitment list">Generate PDF</button>
+                                </form>
+                              </div>
+                          </div>
                             </div>
                         </div>
                     </div>
