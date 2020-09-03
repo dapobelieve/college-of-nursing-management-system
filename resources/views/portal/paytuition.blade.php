@@ -4,19 +4,9 @@
 Portal - Course Registration
 @endsection
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
 
-      <div class="col-md-3">
-        <div class="list-group" id="list-tab" role="tablist">
-          <a class="list-group-item list-group-item-action" id="list-home-list"  href="{{route('portal.dashboard')}}" role="tab" aria-controls="home">Home</a>
-          <a class="list-group-item list-group-item-action active" id="list-profile-list"  href="{{route('portal.tuition')}}" role="tab" aria-controls="profile">Pay Tuition</a>
-          <a class="list-group-item list-group-item-action" id="list-messages-list"  href="{{route('portal.coursereg')}}" role="tab" aria-controls="messages">Course Registration</a>
-          <a class="list-group-item list-group-item-action" id="list-settings-list"  href="{{route('portal.tuitionhistory')}}" role="tab" aria-controls="settings">Payment History</a>
-          <a class="list-group-item list-group-item-action" id="list-settings-list"  href="{{route('portal.reghistory')}}" role="tab" aria-controls="settings">Registration History</a>
-        </div>
-      </div>
-        <div class="col-md-9">
+        <div class="col-sm-9">
+
             <div class="card">
               <div class="card-header text-center bg-success">Dashboard - Tuition Fee Payment</div>
               <form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8" enctype="multipart/form-data">
@@ -43,7 +33,7 @@ Portal - Course Registration
                           <option value="{{$payType['half']}}">{{$payType['half']}}</option>
                           @else
                           <option value="{{$payType['full']}}">{{$payType['full']}}</option>
-                          <option value="{{$payType['half']}}">{{$payType['half']}}</option>
+                        <!--  <option value="{{$payType['half']}}">{{$payType['half']}}</option>   -->
                           @endif
                         </select>
 
@@ -70,9 +60,14 @@ Portal - Course Registration
                             <input type="hidden" name="email" value="{{$user->email}}"> {{-- required --}}
                             <input type="hidden" name="orderID" value="345">
                             <input type="hidden" name="amount" id="pdata2">
-                            <input type="hidden" name="quantity" value="3">
-                            <input type="hidden" name="subaccount" value="ACCT_2j004x9z6ufhhhy">
-                            <input type="hidden" name="metadata" value="{{json_encode($array = ['student_id' => $student->id, 'matric_no' => $student->matric_no, 'session' => $sess->value, 'payment_type'=> 'Portal'])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
+                            <input type="hidden" name="first_name" value="{{$user->first_name}}">
+                            <input type="hidden" name="last_name" value="{{$user->last_name}}">
+                          @if($student->department_id == 2)
+                            <input type="hidden" name="subaccount" value="ACCT_r4tbfc69hne489y">
+                          @else
+                            <input type="hidden" name="subaccount" value="ACCT_90wcdxusucx3hm0">
+                          @endif
+                            <input type="hidden" id="metadata" name="metadata" value="{{json_encode($array = ['student_id' => $student->id, 'matric_no' => $student->matric_no, 'session' => $sess->value, 'payment_type'=> 'Portal'])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
                             <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
                             <input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}
                             {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
@@ -113,12 +108,21 @@ $(document).ready(function(e){
             type:"GET",
             dataType: 'json',
             url: url.replace("type", valueP),
-            success: function(result){
+            success: function(results){
 
-              $('#pdata').val(result);
-              var result2 = result+""+0+""+0;
+              var result = results.amount;
+              $('#pdata').val(result + 300);
+              var result2 = (result +300)+""+0+""+0;
               $('#pdata2').val(result2);
-              $('#not_ify').html('You are about to make "'+valueP+'" payment');
+              $('#not_ify').html('You are about to make "'+valueP+'" payment with bank charges of 300');
+
+              var obj =$('#metadata').val();
+              obj = JSON.parse(obj);
+              obj.pay_status = results.pay_status;
+              obj.reg_status = results.reg_status;
+              obj.lvl = results.lvl
+              obj = JSON.stringify(obj);
+              $('#metadata').val(obj);
           }
         });
 

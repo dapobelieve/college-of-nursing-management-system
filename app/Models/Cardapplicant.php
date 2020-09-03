@@ -7,7 +7,7 @@ use App\Models\Studentapplicant;
 
 class Cardapplicant extends Model
 {
-
+  protected $fillable = ['reg_no', 'password', 'pin'];
 
   public function studentapplicant()
   {

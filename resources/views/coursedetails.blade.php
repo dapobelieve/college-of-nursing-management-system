@@ -1,6 +1,6 @@
 @extends('welcome')
 
-@section('title', strtoupper(config('site.name.short'))." "." | Event")
+@section('title', strtoupper(config('site.name.short'))." "." | Course details")
 
 
 @section('pagename')
@@ -62,7 +62,7 @@ Events
                       </ul>
                       <div class="admission_insruction">
                           <h4>HOD</h4>
-                          <img src="{{asset('images/admission-detail/instruction-img.jpg')}}" class="img-fluid" alt="#">
+                          <img src="{{asset('images/'.$dept->name)}}.jpg" class="img-fluid" alt="#">
                           <p>{{$dept->hod}}
                               <br>
                               <span>Head of Department</span></p>

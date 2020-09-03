@@ -1,4 +1,6 @@
 <?php
+
+
 Auth::routes();
 
 
@@ -8,6 +10,24 @@ Route::get('login', 'LoginController@index')->name('admission.login');
 Route::post('login', 'LoginController@check')->name('admission.login');
 
 Route::get('/',function () {return view('admission.index');});
+
+//register for form
+Route::get('appform', 'InvoiceController@index')->name('invoice.activate');
+
+Route::post('appform', 'InvoiceController@store')->name('invoice.store');
+
+Route::get('appformlogin', 'InvoiceController@indexLogin')->name('invoice.activateLogin');
+
+Route::post('appformlogin', 'InvoiceController@storeLogin')->name('invoice.storeLogin');
+
+//pay for form
+Route::get('appformfee', 'ActivateController@index')->name('appformfee.activate');
+
+Route::post('appformfee', 'ActivateController@redirectToGateway')->name('appformfee.pay');
+
+Route::get('appformPDF/{cardapplicant}', 'ActivateController@downloadPDF')->name('appformfee.PDF');
+
+Route::get('appformfee/logout', 'ActivateController@logout')->name('appformfee.logout');
 });
 
 Route::group(['prefix' => '/admission', 'namespace' => 'Admission', 'middleware' => 'checkAuth'], function () {
@@ -18,11 +38,11 @@ Route::get('dashboard/logout', 'DashboardController@logout')->name('admission.lo
 
 Route::get('application', 'ApplicationController@index')->name('application.index');
 
-Route::post('application', 'ApplicationController@store')->name('application.store');
+Route::get('application/{studentapplicant}', 'ApplicationController@update')->name('application.store');
 
-Route::get('application/steptwo', 'ApplicationtwoController@index')->name('application.steptwo');
+Route::get('applicationtwo/steptwo', 'ApplicationtwoController@index')->name('application.steptwo');
 
-Route::put('application/steptwo/{studentapplicant}', 'ApplicationtwoController@update')->name('application.update');
+Route::put('applicationtwo/steptwo/{studentapplicant}', 'ApplicationtwoController@update')->name('application.update');
 
 Route::get('upload', 'UploadController@index')->name('upload.index');
 
@@ -34,8 +54,15 @@ Route::post('payapplication', 'PayapplicationController@index')->name('payapplic
 
 Route::post('/pay', 'Payment2Controller@redirectToGateway')->name('payadmission');
 
+Route::get('printout', 'PrintformController@index')->name('printout.index');
+
 Route::get('printform', 'PrintformController@downloadPDF')->name('printform.downloadPDF');
 
+Route::get('printreceipt', 'PrintformController@receiptPDF')->name('printform.receiptPDF');
+
+Route::get('printacceptance', 'DashboardController@acceptancePDF')->name('printform.acceptance');
+
+Route::post('/pay', 'Payment2Controller@redirectToGateway')->name('payacceptance');
 });
 
 
@@ -48,9 +75,11 @@ Route::get('/', 'Frontpages\WelcomeController@index')->name('welcome');
 
 Route::get('about', 'Frontpages\AboutController@index')->name('about');
 
-Route::get('latest-news/{id}/{info}', 'Frontpages\latestNewsController@index')->name('latestNews');
+Route::get('latest-news/{id}/{info}', 'Frontpages\LatestNewsController@index')->name('latestNews');
 
 Route::get('/speech',function () {return view('speech');});
+
+Route::get('/sitemap',function () {return view('sitemap');});
 
 Route::get('/contact', 'Frontpages\ContactController@index')->name('contact');
 
@@ -64,9 +93,17 @@ Route::get('/campus-life',function () {return view('campus-life');});
 
 Route::get('/coursedetails/{id}', 'Frontpages\CoursedetailsController@index')->name('coursedetails');
 
+Route::get('/job-application', 'Job\EmploymentController@index')->name('employment.index');
+
+Route::post('/job-application', 'Job\EmploymentController@store')->name('employment.store');
+
+Route::post('/job-application-pdf', 'Job\EmploymentController@PDF')->name('employment.pdf');
+
+Route::get('/job-guide',function () {return view('employment/index');});
 
 
-Route::group(['middleware' => ['role:STUDENT','check']], function(){
+
+Route::group(['middleware' => ['role:STUDENT']], function(){
 
       Route::get('portal/home', 'HomeController@index')->name('portal.home');
 
@@ -99,11 +136,14 @@ Route::group(['middleware' => ['role:STUDENT','check']], function(){
     });
     Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 
+    Route::post('/payment/webhook', 'PaymentController@handleGatewayWebhook')->name('webhook');
 
 
-Route::get('/guide',function () {
-return view('applicationguide');
-});
+
+Route::get('/shortlist',[
+'uses' => 'Frontpages\ShortlistController@index',
+'as' => 'shortlist'
+]);
 
 
 Route::get('/registerSearch/{id}', [
@@ -157,21 +197,18 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
     Route::post('/index3', 'CardapplicantController@exportcsv')->name('cardapplicants.exportcsv');
     Route::post('cardapplicants/index', 'CardapplicantController@deleteall')->name('cardapplicants.deleteall');
 
+
     // Applicants
     Route::put('applicants/index', 'ApplicantController@deleteall')->name('applicants.deleteall');
     Route::delete('applicants/destroy/{studentapplicant}', 'ApplicantController@delete')->name('applicants.destroy');
     Route::get('applicants/confirmteller/{studentapplicant}', 'ApplicantController@tellerindex')->name('applicants.addtelleredit');
     Route::put('applicants/confirmteller/{studentapplicant}', 'ApplicantController@addteller')->name('applicants.addteller');
+    Route::get('applicants/downloadpdf', 'ApplicantController@pdfApplicants')->name('applicants.downloadPDF');
+    Route::get('applicants/addresult', 'ApplicantController@showresultpage')->name('applicants.addresult');
+    Route::post('applicants/addresult', 'ApplicantController@importresult')->name('applicants.addresultfile');
 
     // Admins section
-    Route::resource('admins', 'AdminController',  [
-      'only' => [
-        'index', 'create', 'store', 'edit', 'update', 'show'
-      ],
-      'parameters' => [
-        'admins' => 'admin'
-      ]
-    ]);
+    Route::resource('admins', 'AdminController',  ['parameters' => ['admins' => 'admin']]);
 
     // Roles section
     Route::get('roles', 'RoleController@index');
@@ -183,6 +220,8 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
 
   // Dashboard
   Route::get('', 'DashboardController@index')->name('dashboard.home');
+
+  Route::post('', 'DashboardController@pdfRecruiment')->name('dashboard.downloadPDF');
 
   // Courses
   Route::resource('courses', 'CourseController');

@@ -32,28 +32,73 @@
                             <h5>Create New Admin</h5>
                         </div>
                         <div class="widget-content">
-                            <form class="form-horizontal ajax-form" action="{{route('admins.store')}}" method="post">
-                                {{ csrf_field() }}
-                                {{ method_field('POST') }}
-
-                                <div class="row">
-                                    <div class="form-group col-sm-4">
-                                        <input type="text" name="first_name" class="form-control" placeholder="First Name" required>
+                            <span>
+                                @foreach($errors->all() as $error)
+                                    <strong style="color: red">*{{ $error }}</strong> <br>
+                                @endforeach
+                                @if(Session::has('error'))
+                                    <strong style="color: red">* {{ Session::get('error') }}</strong> <br>
+                                @endif
+                            </span>
+                            <div class="row">
+                                @if(Session::has('success'))
+                                    <strong style="color: green">* {{ Session::get('success') }}</strong>
+                                @endif
+                                <form method="post" action="{{route('cards.store')}}" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">First Name:</label>
+                                        <div class="col-sm-9 col-md-6 col-lg-6">
+                                            <input id="name" value="{{ old('first_name') }}" type="text" placeholder="First Name" name="first_name" class="form-control input-sm" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Middle Name:</label>
+                                        <div class="col-sm-9 col-md-6 col-lg-6">
+                                            <input id="name" value="{{ old('middle_name') }}" type="text" placeholder="Middle Name" name="middle_name" class="form-control input-sm" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Last Name:</label>
+                                        <div class="col-sm-9 col-md-6 col-lg-6">
+                                            <input id="name" value="{{ old('last_name') }}" type="text" placeholder="Last Name" name="last_name" class="form-control input-sm" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Email:</label>
+                                        <div class="col-sm-9 col-md-6 col-lg-6">
+                                            <input id="name" value="{{ old('email') }}" type="email" placeholder="Email" name="email" class="form-control input-sm" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Password:</label>
+                                        <div class="col-sm-9 col-md-6 col-lg-6">
+                                            <input id="name" type="password" placeholder="Password" name="password" class="form-control input-sm" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Retype Password:</label>
+                                        <div class="col-sm-9 col-md-6 col-lg-6">
+                                            <input id="name" type="password" placeholder="Retype Password" name="c_password" class="form-control input-sm" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Permission Level:</label>
+                                        <div class="col-sm-9 col-md-6 col-lg-6">
+                                            <select class="form-control" name="permission_level" id="" required>
+                                                <option selected value="">Select a permission level for the admin</option>
+                                                <option value="basic">Basic</option>
+                                                <option value="intermediate">Intermediate</option>
+                                                <option value="super">Super</option>
+                                            </select>
+                                        </div>
                                     </div>
 
-                                    <div class="form-group col-sm-4">
-                                        <input type="text" name="middle_name" class="form-control" placeholder="Middle Name" required>
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
                                     </div>
-
-                                    <div class="form-group col-sm-4">
-                                        <input type="text" name="last_name" class="form-control" placeholder="Last Name" required>
-                                    </div>
-                                </div>
-
-                                <div class="form-actions">
-                                    <button type="submit" class="btn btn-primary">Save</button>
-                                </div>
-                            </form>
+                                    {{ csrf_field() }}{{ method_field('POST') }}
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

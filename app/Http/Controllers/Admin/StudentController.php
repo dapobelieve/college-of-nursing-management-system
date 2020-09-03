@@ -25,7 +25,7 @@ class StudentController extends Controller
     {
       $this->middleware('checkAdminPermissions:super,intermediate')->except(['create', 'store']);
     }
-  
+
     /**
      * Shows all students
      *
@@ -121,7 +121,6 @@ class StudentController extends Controller
         $this->validate($request, [
           'last_name' => 'required|string|max:255',
           'first_name' => 'required|string|max:255',
-          'middle_name' => 'required|string|max:255',
           'dob' => 'required|before:15 years ago',
           'sex' => 'required',
           'email' => 'required|string|email|max:255|unique:users',
@@ -137,6 +136,7 @@ class StudentController extends Controller
           'marital_status' =>'required|string',
           'sponsors_name' => 'required|string|max:50',
           'sponsors_phone' => 'required|string|min:11',
+          'level' => 'required',
           //'dob_upload' => 'required|image|max:150',
           'pport_upload' => 'required|image|max:150',
           //'lga_upload' => 'required|image|max:150',
@@ -169,7 +169,8 @@ class StudentController extends Controller
             'marital_status' => $request->marital_status,
             'admission_no' => $request->admission_no,
             'sponsors_name' => $request->sponsors_name,
-            'sponsors_phone' => $request->sponsors_phone
+            'sponsors_phone' => $request->sponsors_phone,
+            'level' => $request->level,
         ]);
 
 
@@ -208,11 +209,11 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-      $students = $student->with('user', 'department')->first();
-      $state = State::find($students->user->state_id);
-      $lga = Location::find($students->user->location_id);
+      //$students = $student->with('user', 'department')->first();
+      $state = State::find($student->user->state_id);
+      $lga = Location::find($student->user->location_id);
       $results = Result::where('student_id', $student->id)->first();
-      return View('admin.students.edit', ['section' => 'students', 'student' => $students, 'lga' =>$lga, 'state' =>$state, 'result'=>$results]);
+      return View('admin.students.edit', ['section' => 'students', 'student' => $student, 'lga' =>$lga, 'state' =>$state, 'result'=>$results]);
     }
     /**
      * Update the specified resource in storage.

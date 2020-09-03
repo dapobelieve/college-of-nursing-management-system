@@ -1,7 +1,9 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
+       <meta name="google-site-verification" content="BjSsMqORFlJjFvcLoTXTEVMshXUPrZODIXtxe_aQ9O0" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{{asset('images/Oysconmetrans.png')}}" type="image/png" sizes="16x16">
     <title>
         @yield('title')
     </title>

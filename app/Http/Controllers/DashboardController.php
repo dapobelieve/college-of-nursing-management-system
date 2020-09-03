@@ -27,7 +27,8 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $student = Student::find(session()->has('st_id'));
+        $student = Student::find(session()->get('st_id'));
+        //dd($student);
        $user = User::find(Auth::id());
 
        $session = SystemSetting::where('name','current_session')->first();
@@ -59,7 +60,8 @@ class DashboardController extends Controller
         $dept = Department::find(session()->get('dept_id'));
         $payment = Payment::where('student_id', session()->get('st_id'))->orderByDESC('created_at')->first();
         //dd($payment);
-        return view('portal.dashboard')->with('user', $user)
+        return view('portal.dashboard', ['section' => 'dashboard'])
+                                      ->with('user', $user)
                                        ->with('student', $student)
                                        ->with('dept', $dept)
                                        ->with('state', State::find($user->state_id))

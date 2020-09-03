@@ -19,7 +19,7 @@
             <div class="col-sm-2">
               <label for="inputState">Sort by department</label>
               <div class="dropdown">
-                  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Select by clicking
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -65,7 +65,7 @@
                                                   <td><label class="badge badge-danger">{{ $student->user->is_active}}</label></td>
                                                 @endif
                                                 <td class="text-center">
-                                                    <a href="{{route('students.edit', ['students' => $student->id])}}" class="btn btn-primary btn-sm">Details</a>
+                                                    <a href="{{route('students.edit', ['student' => $student->id])}}" class="btn btn-primary btn-sm">Details</a>
 
                                                     <a href="{{route('students.showresult', ['id' => $student->id])}}" class="btn btn-info btn-sm">Add Result</a>
                                                 </td>

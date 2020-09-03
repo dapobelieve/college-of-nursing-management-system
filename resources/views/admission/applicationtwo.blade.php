@@ -50,7 +50,7 @@ Admission - Form two
                                             Sponsor's Name</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='text' name='sponsor_name' class='form-control' required>
+                                        <input type='text' name='sponsor_name'  value="{{ old('sponsor_name') }}" class='form-control' required>
                                     </div>
                                 </div>
                                 <div class='row form-group'>
@@ -59,7 +59,7 @@ Admission - Form two
                                             Sponsor's Phone number</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='text' name='sponsor_phone' class='form-control' required>
+                                        <input type='text' name='sponsor_phone'  value="{{ old('sponsor_phone') }}" class='form-control' required>
                                     </div>
                                 </div>
                                 <div class='row form-group'>
@@ -68,7 +68,7 @@ Admission - Form two
                                             Sponsor's Email</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='email' name='sponsor_email' class='form-control' required>
+                                        <input type='email' name='sponsor_email'  value="{{ old('sponsor_email') }}" class='form-control' required>
                                     </div>
                                 </div>
                                 <div class='row form-group'>
@@ -114,7 +114,7 @@ Admission - Form two
                                             Exam Number</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='text' name='exam_no' class='form-control' required>
+                                        <input type='text' name='exam_no'  value="{{ old('exam_no') }}" class='form-control' required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -197,7 +197,18 @@ Admission - Form two
                         </div>
                         <div class='row'>
                             <div class='col-md-12 text-center'>
-                                <button type='submit' class='btn btn-default btn-courses mt-4' id='js-admission-btn'>Save</button>
+                              <button type='submit' onclick="myFunction()" class='btn btn-default btn-courses mt-4' id='js-admission-btn'>Save</button>
+                              <script>
+                                  function myFunction() {
+                                    var txt;
+                                    if (confirm("You are about to save, Are you sure?")) {
+                                      return true;
+                                    } else {
+                                      return false;
+                                    }
+
+                                  }
+                                  </script>
                             </div>
                             <div class='col-md-12'>
                                 <div id='js-admission-result' data-success-msg='Success, Your application has been sent' data-error-msg='Oops! Something went wrong'></div>

@@ -5,8 +5,8 @@
             if (!isset($sub_section)) $sub_section = '';
             $permission_level = ['super' => 3, 'intermediate' => 2, 'basic' => 1][Auth::user()->admin->permission_level];
         @endphp
-    
-            
+
+
         <li @if ($section == 'dashboard') class="active" @endif><a href="/admin">
             <i class="fa fa-home"></i> <span>Dashboard</span></a>
         </li>
@@ -21,10 +21,13 @@
         </li>
         @endif
 
-        <li class="submenu @if ($section == 'applicants') active @endif @if (collect(['all', 'all2', 'create'])->contains($sub_section) & $section == 'applicants') open @endif">
+        <li class="submenu @if ($section == 'applicants') active @endif @if (collect(['all', 'all2', 'create', 'add'])->contains($sub_section) & $section == 'applicants') open @endif">
             <a href="#"><i class="fa fa-group"></i> <span>Applicants</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>
                 <li @if ($sub_section == 'all') class="active" @endif><a href="{{route('applicants.index')}}">View Applicants</a></li>
+                @if ($permission_level >= 3)
+                  <li @if ($sub_section == 'add') class="active" @endif><a href="{{route('applicants.addresult')}}">Applicant's Result</a></li>
+                  @endif
             </ul>
         </li>
 
@@ -47,7 +50,7 @@
 
             </ul>
         </li>
-        
+
         @if ($permission_level >= 2)
         <li class="submenu @if ($section == 'events') active @endif @if (collect(['all', 'create'])->contains($sub_section) & $section == 'events') open @endif">
             <a href="#"><i class="fa fa-bullhorn"></i> <span>Events</span> <i class="arrow fa fa-chevron-right"></i></a>

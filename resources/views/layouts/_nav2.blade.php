@@ -45,6 +45,7 @@
                                         <li><a class="dropdown-item" href="{{route('events')}}">Events</a></li>
                                         <li><a class="dropdown-item" href="#">Our Lecturers</a></li>
                                         <li><a class="dropdown-item" href="#">Gallery</a></li>
+                                        <li><a class="dropdown-item" href="{{asset('/job-guide')}}">Job Application</a></li>
                                             <li><a class="dropdown-item" href="{{asset('/speech')}}">Provost's Speech</a></li>
                                             <li><a class="dropdown-item" href="{{route('dashboard.login')}}">Login</a></li>
                                             <li><a class="dropdown-item" href="#">Coming Soon</a></li>

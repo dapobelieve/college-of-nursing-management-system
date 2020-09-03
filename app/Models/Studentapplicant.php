@@ -11,7 +11,7 @@ class Studentapplicant extends Model
       'phone', 'home_address', 'state', 'state_id', 'lga', 'state_of_origin', 'pic_url',
       'sponsor_add', 'sponsor_name', 'sponsor_type', 'sponsor_email', 'sponsor_phone', 'religion',
       'reg_step', 'marital_status','exam_no', 'exam_type', 'mathematics', 'english','physics',
-      'chemistry', 'biology', 'score', 'admission_status'
+      'chemistry', 'biology', 'score', 'admission_status', 'department_id', 'date_exam'
   ];
 
 
@@ -23,6 +23,6 @@ class Studentapplicant extends Model
 
   public function paymentapplicant()
   {
-      return $this->hasOne('App\Models\Paymentapplicant');
+      return $this->hasMany('App\Models\Paymentapplicant');
   }
 }

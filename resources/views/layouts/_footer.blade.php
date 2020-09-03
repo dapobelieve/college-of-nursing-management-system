@@ -52,7 +52,7 @@
             <div class="col-md-4">
                 <div class="address">
                     <h3>Contact us</h3>
-                    <p><span>Address: </span> Oyo State College of nursing, Eleyele Ibadan. PMB 5081 Eleyele Ibadan, Oyo State, Nigeria. </p>
+                    <p><span>Address: </span> Oyo State College of Nursing and Midwifery, Eleyele Ibadan. PMB 5081 Eleyele Ibadan, Nigeria.  </p>
                     <p>Email : info@oysconme.edu.ng
                         <br> Phone : +2347036924010</p>
                     <ul class="footer-social-icons">

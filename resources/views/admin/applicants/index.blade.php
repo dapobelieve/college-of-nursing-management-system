@@ -104,7 +104,7 @@
                   <div class="col-xs-12">
                     <label class="text text-danger">*Do not delete until admission process is finished*</labe>
                   </div>
-                  <div class="col-xs-10">
+                  <div class="col-xs-8">
                     <form class="form-inline" method="post" action="{{ route('applicants.deleteall') }}" enctype="multipart/form-data">
                       @csrf
                       <div class="form-group mx-sm-3 mb-2">
@@ -126,7 +126,16 @@
                   <form class="form-inline" method="post" action="{{route('applicants.exportcsv')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group mb-4">
-                    <button type="submit" class="btn btn-success mb-2" title="Export approved applicants information">Export excel file</button>
+                    <button type="submit" class="btn btn-success btn-xs mb-2" title="Export approved applicants information">Export excel file</button>
+                  </form>
+                </div>
+            </div>
+
+                <div class="col-xs-2">
+                  <form class="form-inline" method="get" action="{{route('applicants.downloadPDF')}}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group mb-4">
+                    <button type="submit" class="btn btn-success btn-xs mb-2" title="Generate applicant's examination list">Generate PDF</button>
                   </form>
                 </div>
             </div>

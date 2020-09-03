@@ -41,7 +41,7 @@ class CheckCard
         if ($card == null)
             {
               $notification = Alert::alertMe('you need to get a scratch card to access your portal!!!', 'info');
-              return response(view('portal.checkpage')->with($notification));
+              return response(view('portal.checkpage', ['section' => ""])->with($notification));
             }
             return $next($request);
     }

@@ -28,6 +28,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{url('/admission')}}">Application Requirement</a></li>
                                     <li><a class="dropdown-item" href="{{route('admission.login')}}">Application form</a></li>
+                                    <li><a class="dropdown-item" href="{{route('invoice.activate')}}">Generate Form Pin</a></li>
                                 </ul>
                             </li>
                             <li class="js-navbar-collapse">
@@ -57,10 +58,10 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{route('events')}}">Events</a></li>
-                                    <li><a class="dropdown-item" href="campus-life.html">Campus Life</a></li>
-                                    <li><a class="dropdown-item" href="teachers-single.html">Our teachers</a></li>
-                                    <li><a class="dropdown-item" href="gallery.html">Gallery</a></li>
-                                    <li><a class="dropdown-item" href="chairman-speech.html">Provost's Speech</a></li>
+                                    <li><a class="dropdown-item" href="{{asset('/campus-life')}}">Campus Life</a></li>
+                                    <li><a class="dropdown-item" href="#">Our teachers</a></li>
+                                    <li><a class="dropdown-item" href="{{asset('/job-guide')}}">Job Application</a></li>
+                                    <li><a class="dropdown-item" href="{{asset('/speech')}}">Provost's Speech</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item">

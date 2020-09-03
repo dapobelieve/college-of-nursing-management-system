@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Admin;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -48,6 +49,13 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('delete-department', function ($user) {
             return collect(['super'])->contains($user->admin->permission_level);
+        });
+
+        Gate::define('delete-admin', function ($user, Admin $admin) {
+            if ($user->admin->permission_level != 'super') {
+                return false;
+            }
+            return $admin->permission_level != 'super';
         });
     }
 }

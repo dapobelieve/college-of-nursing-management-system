@@ -36,9 +36,11 @@ class PayTuitionController extends Controller
 
       //check for session
       $session = SystemSetting::where('name','current_session')->first();
+      $student =  Student::find(session()->get('st_id'));
 
       //check to know what level has been paid through reference field in payment model
-      $payment = Payment::where('student_id', session()->get('st_id'))->latest('created_at')->select('reference', 'status')->first();
+      $payment = $student->payment()->latest('created_at')->first();
+      //$payment = Payment::where('student_id', session()->get('st_id'))->latest('created_at')->select('reference', 'status')->first();
         $lvl = 100;
       //declare an object to allow choosing full or half payment
       $payType = [
@@ -59,8 +61,10 @@ class PayTuitionController extends Controller
         if ($lvl > 300) {
           $lvl = "";
         }
+      }else {
+        $lvl = $student->level;
       }
-      return view('portal.paytuition')->with('session', Fee::all()->first())
+      return view('portal.paytuition',  ['section' => 'tuition'])->with('session', Fee::all()->first())
                                       ->with('user', User::find(Auth::id()))
                                       ->with('student', Student::find(session()->get('st_id')))
                                       ->with('level', $lvl)
@@ -91,14 +95,12 @@ class PayTuitionController extends Controller
             switch ($state->name) {
               case 'Oyo':
                   $total = $amount->indigene;
-                  $result= $this->verifyAmount($type, $total, $latepayment->value);
-                  return $result;
-                break;
+                  return $this->verifyAmount($type, $total, $latepayment->value);
+                  break;
 
                 default:
                 $total = $amount->non_indigene;
-                $result= $this->verifyAmount($type, $total, $latepayment->value);
-                return $result;
+                return $this->verifyAmount($type, $total, $latepayment->value);
                 break;
             }
       }
@@ -108,16 +110,14 @@ class PayTuitionController extends Controller
               case 'Oyo':
                 $total = $amount->indigene;
                 $late = 0;
-                $result= $this->verifyAmount($type, $total, $late);
-                return $result;
+                return $this->verifyAmount($type, $total, $late);
                 break;
 
               default:
               $total = $amount->non_indigene;
               $late = 0;
-              $result= $this->verifyAmount($type, $total, $late);
-              return $result;
-                break;
+              return $this->verifyAmount($type, $total, $late);
+              break;
         }
       }
     }
@@ -129,10 +129,20 @@ class PayTuitionController extends Controller
         if(session()->has('pay_full')){
           session()->put('pay_status', 'PAID');
         }
-        return ($amount/2)+ $late;
+        return json_encode($obj = [
+          "amount" =>($amount/2)+ $late,
+          "pay_status" => session()->get('pay_status'),
+          "reg_status" => session()->get('regStatus'),
+          "lvl" => session()->get('lvl')
+        ]);
       }else{
         session()->put('pay_status', 'PAID');
-        return $amount;
+        return json_encode($obj = [
+          "amount" => $amount + $late,
+          "pay_status" => session()->get('pay_status'),
+          "reg_status" => session()->get('regStatus'),
+          "lvl" => session()->get('lvl')
+        ]);
       }
     }
 
@@ -146,7 +156,7 @@ class PayTuitionController extends Controller
           $notification = Alert::alertMe('No payment history available!!!','info');
           return redirect()->route('portal.dashboard')->with($notification);
         }
-        return view('portal.tuitionhistory')->with('user', User::find(Auth::id()))
+        return view('portal.tuitionhistory', ['section' => 'tuitionhistory'])->with('user', User::find(Auth::id()))
                                             ->with('registered', $payment)
                                             ->with('department', session()->get('dept_id'));
       }
@@ -165,7 +175,7 @@ class PayTuitionController extends Controller
         $dated = $date;
         $pdf = PDF::loadView('portal/pdfPayReceipt', compact('payment','student', 'user', 'dated', 'origin', 'session', 'late'));
 
-        return $pdf->download('invoice.pdf');
+        return $pdf->download('receipt.pdf');
 
       }
 

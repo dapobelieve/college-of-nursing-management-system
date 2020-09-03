@@ -21,7 +21,7 @@ Admission - Form one
                         <strong style="color: red">* {{ Session::get('error') }}</strong> <br>
                     @endif
                 </span>
-                <form class="form-horizontal" action="{{route('application.store')}}" method="post">
+                <form class="form-horizontal" action="{{route('application.store', ['studentapplicant' => $student->id])}}" method="get">
                   @csrf
                         <div class='row'>
                             <div class='col-md-6'>
@@ -31,7 +31,7 @@ Admission - Form one
                                           Surname</label>
                                   </div>
                                   <div class='col-lg-8'>
-                                      <input type='text' name='surname' class='form-control' required>
+                                      <input type='text' name='surname'  value="{{$student->surname }}" class='form-control' required readonly>
                                   </div>
                               </div>
 
@@ -41,7 +41,7 @@ Admission - Form one
                                             First name</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='text' name='first_name' class='form-control' required>
+                                        <input type='text' name='first_name'  value="{{$student->first_name }}" class='form-control' required readonly>
                                     </div>
                                 </div>
                                 <div class='row form-group'>
@@ -50,7 +50,7 @@ Admission - Form one
                                             Middle name</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='text' name='middle_name' class='form-control' required>
+                                        <input type='text' name='middle_name'  value="" class='form-control'>
                                     </div>
                                 </div>
                                 <div class='row form-group'>
@@ -59,7 +59,7 @@ Admission - Form one
                                             Email address</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='email' name='email' placeholder="email address" class='form-control' required>
+                                        <input type='email' name='email' placeholder="email address"  value="{{$student->email}}" class='form-control' readonly required>
                                     </div>
                                 </div>
 
@@ -69,7 +69,7 @@ Admission - Form one
                                             Phone</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='text' name='phone' placeholder="phone number" class='form-control'>
+                                        <input type='text' name='phone' placeholder="phone number" class='form-control'  value="{{ $student->phone }}" required>
                                     </div>
                                 </div>
 
@@ -79,7 +79,7 @@ Admission - Form one
                                             Date of birth </label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='date' name='dob' class='form-control' required>
+                                        <input type='date' name='dob' class='form-control'  value="{{date("Y-m-d", strtotime($student->dob))}}" required>
                                     </div>
                                 </div>
                                 <div class='row form-group'>
@@ -89,7 +89,7 @@ Admission - Form one
                                     </div>
                                     <div class='col-lg-8'>
                                         <div class='form-group'>
-                                          <textarea class="form-control" name="home_address" rows="3" required></textarea>
+                                          <textarea class="form-control" name="home_address" rows="3"  value="{{ old('home_address') }}" required></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -100,27 +100,17 @@ Admission - Form one
                               <div class='row form-group'>
                                   <div class='col-lg-4'>
                                       <label>
-                                          state of residence</label>
+                                          city of residence</label>
                                   </div>
                                   <div class='col-lg-8'>
                                       <div class='form-group'>
-                                          <input type='text' name='state' class='form-control' placeholder='Your present state' required>
+                                          <input type='text' name='state' class='form-control'  value="{{ old('state') }}" placeholder='Your present city' required>
                                       </div>
                                   </div>
                               </div>
 
 
-                              <div class='row form-group'>
-                                    <div class='col-lg-4'>
-                                        <label>
-                                            LGA</label>
-                                    </div>
-                                    <div class='col-lg-8'>
-                                        <div class='form-group'>
-                                            <input type='text' name='lga' class='form-control' placeholder='Local Government Area' required>
-                                        </div>
-                                    </div>
-                                </div>
+
 
                                 <div class='row form-group'>
                                     <div class='col-lg-4'>
@@ -128,9 +118,48 @@ Admission - Form one
                                             State of Origin</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='text' name='state_of_origin' class='form-control' required>
+
+                                        <select onchange="getLga(event)" class="form-control input-sm" name="state_of_origin" id="" required>
+                                            <option selected value="">Select</option>
+                                            @foreach($states as $dep)
+                                                <option value="{{$dep->id}}">{{$dep->name}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
+
+                                <div class='row form-group'>
+                                      <div class='col-lg-4'>
+                                          <label>
+                                              LGA</label>
+                                      </div>
+                                      <div class='col-lg-8'>
+                                          <div class='form-group'>
+                                              <select class="form-control input-sm" required placeholder="local government area" name="lga" id="lga"></select>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <script>
+                                      function getLga(event)
+                                      {
+                                          event.preventDefault();
+                                          let stateId = event.target.value;
+                                          fetch(`/api/get-location/${stateId}`, {
+                                              method: 'GET'
+                                          })
+                                              .then(response => response.json())
+                                              .then(data => {
+                                                  let select = document.getElementById('lga');
+                                                  select.innerHTML = "";
+                                                  data.forEach((ele) => {
+                                                      let op = document.createElement('option');
+                                                      op.appendChild(document.createTextNode(ele.lga));
+                                                      op.setAttribute('value', ele.id);
+                                                      select.insertAdjacentElement('beforeend', op);
+                                                  })
+                                              });
+                                      }
+                                  </script>
 
                                 <div class='row form-group'>
                                     <div class='col-lg-4'>
@@ -179,7 +208,18 @@ Admission - Form one
                         </div>
                         <div class='row'>
                             <div class='col-md-12 text-center'>
-                                <button type='submit' class='btn btn-default btn-courses mt-4' id='js-admission-btn'>Save</button>
+                                <button type='submit' onclick="myFunction()" class='btn btn-default btn-courses mt-4' id='js-admission-btn'>Save</button>
+                                <script>
+                                function myFunction() {
+                                  var txt;
+                                  if (confirm("You are about to save, Are you sure?")) {
+                                    return true;
+                                  } else {
+                                    return false;
+                                  }
+
+                                }
+                                    </script>
                             </div>
                         </div>
                     </form>
