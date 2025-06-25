@@ -26,7 +26,7 @@ class ApplicationtwoController extends Controller
         $students = $student->where('reg_step', $reg_step)->first();
         if ($students == null) {
           $notification = Alert::alertMe('Step one and two has been completed!!!', 'info');
-          return redirect()->route('payapplication.index')->with($notification);
+          return redirect()->route('upload.index')->with($notification);
         }
 
         session()->put('studapp_id', $student->id);
@@ -47,6 +47,8 @@ class ApplicationtwoController extends Controller
         'sponsor_add' => 'required|string',
         'exam_type' => 'required',
         'exam_no' => 'required',
+        'jamb_score' => 'required',
+        'jamb_no' => 'required',
         'mathematics' => 'required',
         'english' => 'required',
         'biology' => 'required',
@@ -59,11 +61,13 @@ class ApplicationtwoController extends Controller
 
     $reg_step = 'Second';
     $studentapplicant->update([
-        'sponsor_type' => $request->sponsor_type,
-        'sponsor_name' => $request->sponsor_name,
+        'sponsor_type' => strtoupper($request->sponsor_type),
+        'sponsor_name' => strtoupper($request->sponsor_name),
         'sponsor_phone' => $request->sponsor_phone,
         'sponsor_email' => $request->sponsor_email,
-        'sponsor_add' => $request->sponsor_add,
+        'sponsor_add' => strtoupper($request->sponsor_add),
+        'jamb_score' => $request->jamb_score,
+        'jamb_no' => $request->jamb_no,
         'exam_type' => $request->exam_type,
         'exam_no' => $request->exam_no,
         'mathematics' => $request->mathematics,
@@ -74,7 +78,7 @@ class ApplicationtwoController extends Controller
         'reg_step' => $reg_step
     ]);
     $notification = Alert::alertMe('Step two completed successfully!!!', 'success');
-    return redirect()->route('payapplication.index')->with($notification);
+    return redirect()->route('upload.index')->with($notification);
   }
 
 }

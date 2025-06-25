@@ -51,10 +51,9 @@ NEWS
                                        </div>
                                        <div class="row">
                                            <div class="col-md-10">
-                                               <div class="event-highlight-discription">
-                                                   <p class="text-justify">{{$latestNews->rich_body}}</p>
+                                               
+                                                   <div class="text-justify">{!!$latestNews->rich_body!!}</div>
                                                </div>
-                                           </div>
                                        </div>
                                    </div>
                                </div>

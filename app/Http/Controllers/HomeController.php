@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('portal.home')->with('department', Department::all());
+        return view('portal.home', ['section' => ''])->with('department', Department::all());
     }
 
     public function store(Request $request)

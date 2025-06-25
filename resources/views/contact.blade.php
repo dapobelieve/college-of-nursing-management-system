@@ -96,7 +96,7 @@ Contact Us
                                     <div class="contact-details">
                                         <i class="fa fa-phone" aria-hidden="true"></i>
                                         <h6>phone</h6>
-                                        <p>+2347036924010</p>
+                                        <p>+23409138766976 | +2348156903399</p>
                                     </div>
                                 </div>
                             </div>

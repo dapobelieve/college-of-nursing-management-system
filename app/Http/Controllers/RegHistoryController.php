@@ -52,7 +52,7 @@ class RegHistoryController extends Controller
                     $arraydata = $getRes;
            }
 
-        return view('portal.reghistory')->with('user', $user)
+        return view('portal.reghistory',  ['section' => 'reghistory'])->with('user', $user)
                                       ->with('dept', Department::find(session()->get('dept_id')))
                                       ->with('registered', $arraydata);
     }
@@ -72,7 +72,7 @@ class RegHistoryController extends Controller
       $dated = $date;
       $pdf = PDF::loadView('portal/pdfRegHistory', compact('course','student', 'user', 'dated', 'sem'));
 
-      return $pdf->download('invoice.pdf');
+      return $pdf->download('Courseregistration.pdf');
 
     }
 

@@ -35,7 +35,7 @@ class CardapplicantController extends Controller
    */
   public function create()
   {
-      return view('admin.cardapplicants.create',['section' =>'cards','sub_section' => 'create']);
+      return view('admin.cardapplicants.create',['section' =>'cardapplicants','sub_section' => 'create']);
   }
 
   /**
@@ -69,7 +69,7 @@ class CardapplicantController extends Controller
             // check to know if the pin already exist in the database
             $result = Cardapplicant::where('reg_no', $reg_no)->first();
             if ($result != null) {
-                $msg.= $serial_no." already exists in the database at row ".$i."\n";
+                $msg.= $reg_no." already exists in the database at row ".$i."\n";
             }
             else{
             Cardapplicant::create(['reg_no' => $reg_no,

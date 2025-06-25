@@ -26,10 +26,12 @@ Admission - Payment Dashboard
           <div class="col-md-4"></div>
           <div class="text-danger col-md-5"><strong id="not_ify"></strong></div>
         </div>
-
+          <div class="col-md-12">
+            <p class="text-success">Note: (Bank Charges = N300)</p>
+          </div>
           <div class="form-group row">
             <label class="col-md-3"><strong>Amount to be paid :</strong></label>
-            <input class="form-control col-md-6 @error('amount') is-invalid @enderror" id="pdata" value="{{ $amount }}" readonly required>
+            <input class="form-control col-md-6 @error('amount') is-invalid @enderror" id="pdata" value="{{ $amount/100 }}" readonly required>
             @error('amount')
                 <span class="invalid-feedback col-md-3" role="alert">
                     <strong>{{ $message }}</strong>
@@ -38,9 +40,9 @@ Admission - Payment Dashboard
 
             <input type="hidden" name="email" value="{{$student->email}}"> {{-- required --}}
             <input type="hidden" name="orderID" value="">
-            <input type="hidden" name="amount" value="{{$amount.'00'}}">
+            <input type="hidden" name="amount" value='{{$amount + $charges}}'>
             <input type="hidden" name="quantity" value="">
-            <input type="hidden" name="subaccount" value="ACCT_arzfl9hyn18yce6">
+            <input type="hidden" name="subaccount" value="ACCT_oi8hw5t7cfm0ib6">
             <input type="hidden" name="metadata" value="{{json_encode($array = ['student_id' => $student->id, 'payment_type'=> 'Admission'])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
             <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
             <input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}

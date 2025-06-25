@@ -12,7 +12,7 @@ class CheckpageController extends Controller
 {
   public function index()
   {
-        return view('portal.checkpage');
+        return view('portal.checkpage', ['section' => '']);
   }
 
   public function store(Request $request)

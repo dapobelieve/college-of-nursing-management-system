@@ -8,7 +8,7 @@
 
     <div id="content">
         <div id="content-header">
-            <h1>Cards</h1>
+            <h1>Applicant's Cards</h1>
         </div>
         <div id="breadcrumb">
             <a href="#" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i> Home</a>

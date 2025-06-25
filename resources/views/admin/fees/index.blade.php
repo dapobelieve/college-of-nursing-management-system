@@ -34,6 +34,7 @@
                             <th>Level</th>
                             <th>Indigene</th>
                             <th>Non-Indigene</th>
+                            <th>Expiry Date</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -45,6 +46,7 @@
                                     <td>{{$data->level}}</td>
                                     <td>N{{$data->indigene}}</td>
                                     <td>N{{$data->non_indigene}}</td>
+                                    <td>{{date("Y-m-d", strtotime($data->expiry_date))}}</td>
                                     <td>
                                         <a href="{{route('fees.edit', ['fee' => $data->id])}}">Edit</a> |
                                         <form style="display: inline" id="fee-{{$data->id}}" method="post"

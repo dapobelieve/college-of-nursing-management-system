@@ -46,6 +46,10 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        'invoice' => [
+            'driver' => 'session',
+            'provider' => 'invoices',
+        ],
     ],
 
     /*
@@ -69,6 +73,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+        'invoices' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Invoice::class,
         ],
 
         // 'users' => [
@@ -95,6 +103,11 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'invoices' => [
+            'provider' => 'invoices',
             'table' => 'password_resets',
             'expire' => 60,
         ],

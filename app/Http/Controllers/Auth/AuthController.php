@@ -15,6 +15,11 @@ class AuthController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
+
+        if (Auth::check()) {
+          session()->flush();
+        }
+
         if(!Auth::attempt(
             [
                 'email' => $request->input('email'),
@@ -31,8 +36,14 @@ class AuthController extends Controller
             }
             //check roles
             $userrole = $request->user()->roles->first();
-            if ($userrole->name == "Student") {
+
+            if ($userrole == NULL) {
+               session()->flush();
+              return redirect()->back()->with('error', 'Role issue, Contact the Administrator');
+            }else{
+                if ($userrole->name == "Student") {
               return redirect()->route('portal.dashboard');
+            }
             }
           }
             return redirect()->route('dashboard.home');
@@ -41,13 +52,14 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
     }
 
     public function logout()
     {
         Auth::logout();
         //delete all sessions here
+        session()->flush();
         return redirect()->route('welcome');
     }
 }

@@ -50,7 +50,7 @@
                                                 <td class="text-center">{{ $post->created_at->format('M d, Y') }}</td>
                                                 <td class="text-center">
                                                     <a href="/admin/news/{{ $post->id }}/edit" class="btn btn-default btn-sm">Edit</a>
-                                                    <button class="btn @if ($post->status == 'active') btn-danger @else btn-success @endif btn-sm">@if ($post->status == 'active') Mute @else Unmute @endif</button>
+                                                    <a href="{{ route('news.destroy', $post->id)}}" class="btn @if ($post->status == 'active') btn-danger @else btn-success @endif btn-sm">@if ($post->status == 'active') Delete @else Unmute @endif</button>
                                                 </td>
                                             </tr>
                                         @endforeach

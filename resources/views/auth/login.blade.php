@@ -21,6 +21,7 @@
     </div>
     <div id="loginbox">
       <form method="post"  action="{{ route('dashboard.login') }}">
+          @csrf
             <p>Login</p>
             <div class="input-group input-sm">
                 <span class="input-group-addon">
@@ -35,14 +36,13 @@
             </div>
             <div class="form-actions clearfix">
                 <div class="pull-left">
-                    <a href="#registerform" class="flip-link to-register blue">Create new account</a>
+                    <a href="#registerform" class="flip-link to-register blue"></a>
                 </div>
                 <div class="pull-right">
-                    <a href="#recoverform" class="flip-link to-recover grey">Forgot password?</a>
+                    <a href="{{ route('password.request') }}" class="flip-link to-recover grey">Forgot password?</a>
                 </div>
                 <input type="submit" class="btn btn-block btn-primary btn-default" value="Login" />
             </div>
-            {{csrf_field()}}
         </form>
     </div>
 </div>

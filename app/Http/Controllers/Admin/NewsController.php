@@ -80,7 +80,7 @@ class NewsController extends Controller
             ]);
 
             if ($request->image != 'undefined'){
-                $imageData = $this->upload($request->image, 'news', 3600, '', 'auto');
+                $imageData = $this->upload($request->image, 'news', 800, '', 'auto');
                 $post->images()->create([
                     'url' => $imageData['secure_url']
                 ]);
@@ -114,14 +114,15 @@ class NewsController extends Controller
         // validate input
         $validator = Validator::make($request->input(), [
             'title' => "required|max:255",
-            'content' => 'required',
+            'body' => 'required',
         ]);
 
         if ($validator->fails()) { // If validation fails
             $this->response['message'] = $validator->messages()->first();
         } else { // If validation is successful
             $post->title = $request->input('title');
-            $post->body = $request->input('content');
+            $post->body = $request->input('body');
+            $post->rich_body = $request->input('richBody');
             $post->save();
 
             $this->response['ok'] = true;
@@ -130,5 +131,19 @@ class NewsController extends Controller
 
         // Response
         return $this->response;
+    }
+    
+    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Post $post)
+    {
+        $post->delete();
+        $notification = Alert::alertMe('Post deleted!', 'success');
+        return redirect()->route('news.index')->with($notification);
     }
 }

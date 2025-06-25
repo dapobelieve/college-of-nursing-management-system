@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Fee extends Model
 {
-    protected $dates = ['created_at', 'updated_at', 'expiry_date'];
-    protected $fillable = ['level', 'department_id', 'indigene', 'non_indigene'];
+    protected $dates = ['created_at', 'updated_at'];
+    protected $fillable = ['level', 'department_id', 'indigene', 'non_indigene', 'expiry_date'];
 
     /**
      * Get the department the fee belongs to

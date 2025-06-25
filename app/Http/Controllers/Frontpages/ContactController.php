@@ -5,12 +5,20 @@ namespace App\Http\Controllers\Frontpages;
 use App\Alert;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EMessage;
+use App\Models\SystemSetting;
 
 class ContactController extends Controller
 {
     public function index()
     {
       return view('contact');
+    }
+    
+    public function eMessage()
+    {
+      return view('contactMessage');
     }
 
     public function sendMail(Request $request)
@@ -23,18 +31,16 @@ class ContactController extends Controller
           'message' => 'required|string'
       ]);
 
-      $toEmail = "info@oysconme.edu.ng";
-      $subject = $request->subject;
-    	$mailHeaders = "From: " . $request->name . "<". $request->email .">\r\n";
-      $content = $request->message;
-    	if(mail($toEmail, $subject, $content, $mailHeaders)) {
+      $supportEmail = SystemSetting::where('name','Support_Email')->select('value')->first();
+      try {
+        Mail::to($supportEmail->value)->send(new EMessage($request));
         session()->flash('status-contact', 'Message sent successfully!');
-        return redirect()->back();
-    	}
-      else {
-        session()->flash('status-contact', 'Message not sent!');
-        return redirect()->back();
-      }
+    } catch (\Exception $e) {
+        \Log::error('Contact form error: ' . $e->getMessage());
+        session()->flash('status-contact', 'Message could not be sent. Please try again.');
+    }
+
+    return redirect()->back();
 
     }
 }

@@ -25,7 +25,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{asset('images/oysconmelogo2.png')}}" alt="logo">
+                    <img src="{{asset('images/oysconmelogo.jpg')}}" alt="logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -56,7 +56,7 @@
                         @if($section == 'applicationtwo')<a class="list-group-item list-group-item-action @if ($section == 'applicationtwo') active @endif"   href="{{route('application.steptwo')}}" role="tab" aria-controls="messages">Application- Step two</a>@endif
                         @if($section == 'payment')<a class="list-group-item list-group-item-action @if ($section == 'payment') active @endif"   href="{{route('payapplication.index')}}" role="tab" aria-controls="settings">Pay Application Form</a>@endif
                         @if($section == 'upload')<a class="list-group-item list-group-item-action @if ($section == 'upload') active @endif"   href="{{route('upload.index')}}" role="tab" aria-controls="settings">Upload Passport</a>@endif
-                        @if($section == 'dashboard')<a class="list-group-item list-group-item-action"  href="{{route('printform.downloadPDF')}}" role="tab" aria-controls="settings">Print Form</a>@endif
+                        @if($section == 'dashboard' or $section == 'printout')<a class="list-group-item list-group-item-action @if ($section == 'printout') active @endif"  href="{{route('printout.index')}}" role="tab" aria-controls="settings">Print Form</a>@endif
                       </div>
                 </div>
                 <div class="col-md-9">

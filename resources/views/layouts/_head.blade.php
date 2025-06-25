@@ -1,7 +1,9 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
+       <meta name="google-site-verification" content="BjSsMqORFlJjFvcLoTXTEVMshXUPrZODIXtxe_aQ9O0" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{{asset('images/Oysconmetrans.png')}}" type="image/png" sizes="16x16">
     <title>
         @yield('title')
     </title>
@@ -19,4 +21,15 @@
     <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
     <!-- Main CSS -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
+      <link href="{{asset('css/larastyle.css')}}" rel="stylesheet">
+      <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Oyo State College of Nursing and Midwifery",
+              "url": "https://oysconme.edu.ng",
+              "logo": "https://oysconme.edu.ng/images/Oysconmetrans.png"
+            }
+            </script>
+      @yield('site.styles')
 </head>

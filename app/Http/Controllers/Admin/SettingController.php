@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\SystemSetting;
 use App\Http\Controllers\Controller;
+use App\Alert;
 
 class SettingController extends Controller
 {
     /**
      * Show all system settings
-     * 
+     *
      * @return View
      */
     public function index()
@@ -40,12 +41,36 @@ class SettingController extends Controller
             'late_payment_fee' => 'required|numeric',
             'admission_payment_fee' => 'required|numeric',
             'acceptance_payment_fee' => 'required|numeric',
+            'admission_exam_date_nursing' => 'required|date_format:Y-m-d',
+            'admission_exam_date_midwifery' => 'required|date_format:Y-m-d',
+            'registration_number' => 'required',
+            'Support_Email' => 'required|email',
+            'Domain_Email' => [
+                                'required',
+                                'email',
+                                'regex:/^[\w\.\-]+@oysconme\.edu\.ng$/i'
+                            ],
         ]);
+
+//dd($request->maintenance);
+//dd($request->all());
+
+        switch ($request->maintenance) {
+
+          case "on":
+            $request['maintenance'] = 'YES';
+            break;
+
+          default:
+              $request['maintenance'] = 'NO';
+            break;
+        }
+       //dd($request->all());
 
         foreach ($request->post() as $name => $value) {
             SystemSetting::where('name', $name)->update(['value' => $value]);
         }
-
-        return redirect()->route('settings.index')->with('success', 'Settings updated');
+        $notification = Alert::alertMe('Settings updated!!!', 'success');
+          return redirect()->back()->with($notification);
     }
 }

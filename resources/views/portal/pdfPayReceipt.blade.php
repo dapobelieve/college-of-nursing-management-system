@@ -8,9 +8,10 @@
 
     <div>
       <div>
-        <div style="float:left; "><img src="images/oysconmelogo.png" height="100" width ="100" alt="logo"></div>
-      <h3 style="text-align: center; float:right; margin-right:65px;">OYO STATE COLLEGE OF NURSING AND MIDWIFERY,<br> ELEYELE IBADAN
+        <div style="float:left; "><img src="images/Oysconmetrans.png" height="100" width ="100" alt="logo"></div>
+      <h3 style="text-align: center; margin-right:45px;padding:0 100px;">OYO STATE COLLEGE OF NURSING AND MIDWIFERY,<br> ELEYELE IBADAN
                 OYO STATE.</h3>
+        <div style="float:right; margin-top:-100px;"><img src="{{$user->images[0]->url}}" height="100" width ="100" alt="logo"></div>
       </div>
                 <br>
                 <br>
@@ -38,6 +39,14 @@
         </div>
         <div style="float:right; margin-right:105px; margin-bottom: 15px; ">
             <label>{{substr($payment->reference,8)}}</label>
+        </div>
+        
+        <div style="clear:both"></div>
+        <div style="float:left; margin-left:85px; margin-bottom: 15px; ">
+          <label><strong>Email address :</strong></label>
+        </div>
+        <div style="float:right; margin-right:105px; margin-bottom: 15px; ">
+            <label>{{$user->email}}</label>
         </div>
 
         <div style="clear:both"></div>

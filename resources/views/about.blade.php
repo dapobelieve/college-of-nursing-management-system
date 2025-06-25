@@ -150,10 +150,10 @@ About US
                 <div class="single-item">
                     <div class="quote">
                         <i class="fa fa-quote-left" aria-hidden="true"></i>
-                        <p class="quote_text">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Printing and typesetting industry. It has survived not only five centuries.</p>
+                        <p class="quote_text">The College of Nursing has been a life-changing experience for me. The faculty is incredibly supportive, and the practical training we receive prepares us thoroughly for real-world challenges. I’ve grown both personally and professionally, gaining confidence and skills that I know will make a difference in my future nursing career. The sense of community and the cutting-edge facilities make learning enjoyable and effective. I’m proud to be part of such a dynamic institution that truly shapes future healthcare professionals.</p>
                         <div class="testi-img_block">
                             <img src="images/testi-img.jpg" class="img-fluid" alt="#">
-                            <p><span>Student Name</span> Top rank holder</p>
+                            <p><span>Akin Abraham</span> Top rank holder</p>
                         </div>
                     </div>
                 </div>

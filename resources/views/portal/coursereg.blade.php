@@ -4,18 +4,7 @@
 Portal - Course Registration
 @endsection
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
 
-      <div class="col-md-3">
-        <div class="list-group" id="list-tab" role="tablist">
-          <a class="list-group-item list-group-item-action" id="list-home-list"  href="{{route('portal.dashboard')}}" role="tab" aria-controls="home">Home</a>
-          <a class="list-group-item list-group-item-action" id="list-profile-list"  href="{{route('portal.tuition')}}" role="tab" aria-controls="profile">Pay Tuition</a>
-          <a class="list-group-item list-group-item-action active" id="list-messages-list"  href="{{route('portal.coursereg')}}" role="tab" aria-controls="messages">Course Registration</a>
-          <a class="list-group-item list-group-item-action" id="list-settings-list"  href="{{route('portal.tuitionhistory')}}" role="tab" aria-controls="settings">Payment History</a>
-          <a class="list-group-item list-group-item-action" id="list-settings-list"  href="{{route('portal.reghistory')}}" role="tab" aria-controls="settings">Registration History</a>
-        </div>
-      </div>
         <div class="col-md-9">
             <div class="card">
               <div class="card-header bg-success text-center">Dashboard - Course Registration <span class="text-uppercase"> ({{$user->last_name." ".$user->first_name}})</span></div>
@@ -33,10 +22,12 @@ Portal - Course Registration
                           <select class="form-control" id="reg_session" name="reg_session" required>
                             <option value=""> </option>
                             @if($level['first'] == $level['second'])
-                            <option value="{{$level['first']}}">{{$level['first']}}</option>
+                              <option value="{{$level['first']}}">{{$level['first']}}</option>
                             @else
-                            <option value="{{$level['first']}}">{{$level['first']}}</option>
-                            <option value="{{$level['second']}}">{{$level['second']}}</option>
+                              <option value="{{$level['first']}}">{{$level['first']}}</option>
+                              @if($timed == "elapsed")
+                                <option value="{{$level['second']}}">{{$level['second']}}</option>
+                              @endif
                             @endif
                           </select>
                         </div>

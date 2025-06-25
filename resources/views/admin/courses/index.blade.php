@@ -66,6 +66,7 @@
                                 </tr>
                             @endforeach
                             </tbody>
+                            {{$courses->links()}}
                         </table>
                     @else
                         <p>No Courses yet</p>

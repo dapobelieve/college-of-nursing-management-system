@@ -30,7 +30,6 @@ class Session4portal
                 session()->put('origin', $user->state_id);
               }
             }
-
           return $next($request);
       }
       return $next($request);

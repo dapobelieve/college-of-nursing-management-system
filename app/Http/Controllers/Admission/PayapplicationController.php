@@ -33,16 +33,17 @@ class PayapplicationController extends Controller
       //amout to pay, which will be fetch from the settings mysql_list_table
       $amount = SystemSetting::where('name','admission_payment_fee')->select('value')->first();
 
-
-
+      //Paystack format
+      $amounted = $amount->value * 100;
+      $charges = 30000;
     if (Session::has('studapp_id')) {
         $students = $student->where('reg_step',$reg_step)->first();
         if ($students == null) {
           $notification = Alert::alertMe('Complete step two', 'info');
           return redirect()->route('application.steptwo')->with($notification);
         }
-        return View('admission.payapplication', ['section' => 'payment', 'amount' => $amount->value, 'student' => $student]);
+        return View('admission.payapplication', ['section' => 'payment', 'amount' => $amounted, 'student' => $student, 'charges' => $charges]);
     }
-    return View('admission.payapplication', ['section' => 'payment', 'amount' => $amount->value, 'student' => $student]);
+    return View('admission.payapplication', ['section' => 'payment', 'amount' => $amounted, 'student' => $student, 'charges' => $charges]);
   }
 }

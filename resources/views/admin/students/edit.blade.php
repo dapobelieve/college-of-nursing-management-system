@@ -42,19 +42,25 @@
                                                 <div class="form-group">
                                                     <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Full Name:</label>
                                                     <div class="col-sm-9 col-md-6 col-lg-6">
-                                                        <input readonly id="first_name" value="{{ $student->user->last_name.', '.$student->user->first_name.' '.$student->user->last_name }}" type="text" class="form-control input-sm" readonly />
+                                                        <input readonly id="first_name" value="{{ $student->user->last_name.', '.$student->user->first_name.' '.$student->user->middle_name }}" type="text" class="form-control input-sm" readonly />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Matric No.:</label>
                                                     <div class="col-sm-9 col-md-6 col-lg-6">
-                                                        <input readonly value="{{$student->matric_no}}" type="text"  class="form-control input-sm" />
+                                                        <input name="matric_no" value="{{$student->matric_no}}" type="text"  class="form-control input-sm" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Department:</label>
                                                     <div class="col-sm-9 col-md-6 col-lg-6">
                                                         <input readonly  value="{{ $student->department->name}}" type="text" class="form-control input-sm" />
+                                                    </div>
+                                                </div>
+                                                 <div class="form-group">
+                                                    <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Level:</label>
+                                                    <div class="col-sm-9 col-md-6 col-lg-6">
+                                                        <input name="level" value="{{ $student->level}}" type="text" class="form-control input-sm" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -80,7 +86,7 @@
                                                 <div class="form-group">
                                                     <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Email:</label>
                                                     <div class="col-sm-9 col-md-6 col-lg-6">
-                                                        <input readonly  value="{{ $student->user->email}}" type="text" class="form-control input-sm" />
+                                                        <input  name="email" value="{{ $student->user->email}}" type="text" class="form-control input-sm" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -99,7 +105,7 @@
 
                                             </div>
                                             <div class="">
-
+                                              <div class="row">
                                                 <div class="form-group">
                                                     <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">State of origin</label>
                                                     <div class="col-sm-9 col-md-6 col-lg-6">
@@ -139,39 +145,61 @@
                                                         <label class="badge badge-danger">DISABLED</label><span> click to enable student</span>
                                                         @endif
                                                     </div>
+                                                  </div>
                                                 </div>
                                                 <br>
+                                                <div class="row">
+                                                <div class="col-md-9 col-lg-9">
                                                 @if($result !== null)
-                                                <div class="row">
-                                                    <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">Exam type:</label>
-                                                      <p class="col-sm-9 col-md-6 col-lg-6">{{$result->exam_type}}</p>
-                                                </div>
-                                                <div class="row">
-                                                    <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">Exam number:</label>
-                                                      <p class="col-sm-9 col-md-6 col-lg-6">{{$result->exam_no}}</p>
-                                                </div>
-                                                <div class="row">
-                                                    <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">Mathematics:</label>
-                                                      <p class="col-sm-9 col-md-6 col-lg-6">{{$result->mathematics}}</p>
-                                                </div>
-                                                <div class="row">
-                                                    <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">English:</label>
-                                                      <p class="col-sm-9 col-md-6 col-lg-6">{{$result->english}}</p>
-                                                </div>
-                                                <div class="row">
-                                                    <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">Physics:</label>
-                                                      <p class="col-sm-9 col-md-6 col-lg-6">{{$result->physics}}</p>
-                                                </div>
-                                                <div class="row">
-                                                    <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">Chemistry:</label>
-                                                      <p class="col-sm-9 col-md-6 col-lg-6">{{$result->chemistry}}</p>
-                                                </div>
-                                                <div class="row">
-                                                    <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">Biology:</label>
-                                                      <p class="col-sm-9 col-md-6 col-lg-6">{{$result->biology}}</p>
-                                                </div>
+                                                    <div class="row">
+                                                        <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">Exam type:</label>
+                                                          <p class="col-sm-9 col-md-6 col-lg-6">{{$result->exam_type}}</p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">Exam number:</label>
+                                                          <p class="col-sm-9 col-md-6 col-lg-6">{{$result->exam_no}}</p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">Mathematics:</label>
+                                                          <p class="col-sm-9 col-md-6 col-lg-6">{{$result->mathematics}}</p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">English:</label>
+                                                          <p class="col-sm-9 col-md-6 col-lg-6">{{$result->english}}</p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">Physics:</label>
+                                                          <p class="col-sm-9 col-md-6 col-lg-6">{{$result->physics}}</p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">Chemistry:</label>
+                                                          <p class="col-sm-9 col-md-6 col-lg-6">{{$result->chemistry}}</p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <label for="name" class="col-sm-4 col-md-4 col-lg-3 control-label">Biology:</label>
+                                                          <p class="col-sm-9 col-md-6 col-lg-6">{{$result->biology}}</p>
+                                                    </div>
                                                 @endif
-
+                                                </div>
+                                                <div class="col-md-3 col-lg-3">
+                                                  <label for="name" class="col-sm-12 col-md-12 col-lg-12 control-label"><strong><i class="text-primary">Passport Section</i></storng></label>
+                                                    <div id="jstrefresh">
+                                                  @if(isset($student->user->images[0]->url))
+                                                    @if(date("Y-m-d", strtotime($student->user->images[0]->updated_at)) > '2021-08-10')
+                                                      <img class="ml-2 img-thumbnail rounded" src="{{$student->user->images[0]->url}}" height="80" width="120" alt="Generic placeholder image">
+                                                      @else
+                                                      <input type="file" name="pport" class="form-control col-md-12" id="pdata">
+                                                      <input type="hidden" name="stid" value="{{$student->id}}">
+                                                      <button class="btn-info" type="uploadpp" id="uploadpp">Upload</button>
+                                                      @endif
+                                                  @else
+                                                    <input type="file" name="pport" class="form-control col-md-12" id="pdata">
+                                                    <input type="hidden" name="stid" value="{{$student->id}}">
+                                                    <button class="btn-info" type="uploadpp" id="uploadpp">Upload</button>
+                                                  @endif
+                                                </div>
+                                                </div>
+                                              </div>
                                             </div>
 
                                             <div class="form-actions">
@@ -191,3 +219,46 @@
             </div>
 
 @stop
+
+@section('admin.scripts')
+  $("#uploadpp").click(function(e){
+    e.preventDefault();
+    var file = $("input[name=pport]").prop('files')[0];
+    if(file == undefined){
+    var mark='<p class="text-center text-danger jstref">You need to upload a jpeg/jpg file</p>'
+            $('.jstref').empty();
+            $('#jstrefresh').append(mark);
+    }else{
+    var form = new FormData();
+            form.append('media', file);
+            form.append('stid', $('input[name=stid]').val());
+            form.append("_token", "{{ csrf_token() }}");
+    var url = "{{ route('students.upload')}}";
+    $(this).prop("disabled", true);
+    $.ajax({
+      type: "POST",
+      url: url,
+      cache: false,
+      contentType: false,
+      processData: false,
+      data:form,
+      success: function(data){
+
+        if(data != 'false'){
+        $('#jstrefresh').empty();
+            var newurl= data;
+            var mark= '<img class="ml-2 img-thumbnail rounded" src='+newurl+' height="80" width="120" alt="Generic placeholder image">';
+              $('#jstrefresh').append(mark);
+        }else{
+            var mark='<p class="text-center text-danger">Passport Upload failed!! </p>'
+            $('#jstrefresh').append(mark);
+        }
+
+      }
+      }); $(this).prop("disabled", false);
+      }
+  });
+
+
+
+@endsection

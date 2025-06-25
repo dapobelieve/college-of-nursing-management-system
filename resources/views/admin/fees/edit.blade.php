@@ -69,6 +69,12 @@
                                                     <input value="{{ old('non_indigene', $fee->non_indigene) }}" id="amount" name="non_indigene" placeholder="Non indigene Fee" type="number" class="form-control input-sm" />
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <label for="Description" class="col-sm-3 col-md-3 col-lg-2 control-label">Expiry_date</label>
+                                                <div class="col-sm-9 col-md-6 col-lg-6">
+                                                    <input value="{{ date("Y-m-d", strtotime($fee->expiry_date)) }}" id="expiry" name="expiry_date" placeholder="expiry date" type="date" class="form-control input-sm" />
+                                                </div>
+                                            </div>
                                             <div class="form-actions">
                                                 <button type="submit" class="btn btn-primary btn-sm">Submit</button>
                                             </div>

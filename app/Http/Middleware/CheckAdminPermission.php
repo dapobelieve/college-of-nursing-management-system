@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Support\Facades\Auth;
+use App\Alert;
 use Closure;
 
 class CheckAdminPermission
@@ -18,9 +19,9 @@ class CheckAdminPermission
     {
         if (Auth::check()) {
             if (!in_array(Auth::user()->admin->permission_level, $permission)) {
-                return redirect()->route('dashboard.home');
+                $notification = Alert::alertMe('you are not permitted to make this change', 'error');
+                return redirect()->route('dashboard.home')->with($notification);
             }
-
             return $next($request);
         }
 

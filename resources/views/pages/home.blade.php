@@ -104,12 +104,12 @@
                             <div class="event-img2">
                             <div class="row">
                               @if($latestNews[$i + $k]->images->isEmpty())
-                                <div class="col-sm-4"> <img src="images/upcoming-event-img.jpg" height="80" width="130" class="img-fluid" alt="event-img"></div>
+                                <div class="col-sm-4"> <img src="images/departments.jpg" height="80" width="130" class="img-fluid" alt="event-img"></div>
                               @else
                                 <div class="col-sm-4"> <img src="{{$latestNews[$i + $k]->images[0]->url}}" height="80" width="130" class="img-fluid" alt="event-img"></div><!-- // end .col-sm-3 -->
                               @endif
                                 <div class="col-sm-8"> <h3>{{$latestNews[$i + $k]->title}} </h3>
-                                <span>{{$latestNews[$i + $k]->updated_at}}</span>
+                                <span>{{$latestNews[$i + $k]->created_at}}</span>
                                 <p>{{substr($latestNews[$i + $k]->body,0,100)}}..</p>
                                 <a href="{{route('latestNews', ['id'=>$latestNews[$i + $k]->id, 'info'=>$latestNews[$i + $k]->title])}}">Read More</a>
                               </div><!-- // end .col-sm-7 -->
@@ -117,12 +117,12 @@
                             @if(($i+$j) < $leng)
                             <div class="row">
                               @if($latestNews[$i + $j]->images->isEmpty())
-                                <div class="col-sm-4"> <img src="images/upcoming-event-img.jpg" height="80" width="130"  class="img-fluid" alt="event-img"></div>
+                                <div class="col-sm-4"> <img src="images/departments.jpg" height="80" width="130"  class="img-fluid" alt="event-img"></div>
                               @else
                                 <div class="col-sm-4"> <img src="{{$latestNews[$i + $j]->images[0]->url}}" height="80" width="130" class="img-fluid" alt="event-img"></div><!-- // end .col-sm-3 -->
                               @endif<!-- // end .col-sm-3 -->
                                 <div class="col-sm-8"> <h3>{{$latestNews[$i + $j]->title}}</h3>
-                                <span>{{$latestNews[$i + $k]->updated_at}}</span>
+                                <span>{{$latestNews[$i + $j]->created_at}}</span>
                                 <p>{{substr($latestNews[$i + $j]->body,0,100)}}..</p>
                                 <a href="{{route('latestNews', ['id'=>$latestNews[$i + $j]->id, 'info'=>$latestNews[$i + $j]->title])}}">Read More</a>
                               </div><!-- // end .col-sm-7 -->

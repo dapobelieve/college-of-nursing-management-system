@@ -18,8 +18,8 @@ Principal Officers
                 <div class="our-teachers-block">
                     <img src="images/provost.jpg" class="img-fluid teachers-img" alt="#">
                     <div class="teachers-description">
-                        <p><strong>Mrs G.O Owolabi</strong>
-                            <br> Msc, Bsc Nursing RN, RM, FWACN
+                        <p><strong>Dr Mrs G.O Owolabi</strong>
+                            <br> PhD, Msc, Bsc Nursing RN, RM, FWACN
                         </p>
                         <hr>
                         <p><span>PROVOST</span></p>
@@ -61,7 +61,7 @@ Principal Officers
               <div class="our-teachers-block">
                   <img src="images/registrar.jpg" class="img-fluid teachers-img" alt="#">
                   <div class="teachers-description">
-                      <p><strong>Mr Z.O Jayeola</strong>
+                      <p><strong>Mrs F. A. Yusuf</strong>
                           <br> MPA, BA, NCE
                       </p>
                       <hr>
@@ -83,7 +83,7 @@ Principal Officers
               <div class="our-teachers-block">
                   <img src="images/bursar.jpg" class="img-fluid teachers-img" alt="#">
                   <div class="teachers-description">
-                      <p><strong>Mrs E.O Odidi</strong>
+                      <p><strong>Mrs I.A Bello</strong>
                           <br> Bsc, HND Accts, ACA
                       </p>
                       <hr>

@@ -5,10 +5,10 @@
                 <div class="chart-img">
                     <img src="{{asset('images/chart-icon_1.png')}}" class="img-fluid" alt="chart_icon">
                 </div>
-                <div class="chart-text">
+              <!--  <div class="chart-text">
                     <p><span class="counter">{{$lecturer}}</span> Lecturers
                     </p>
-                </div>
+                </div>-->
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 chart_bottom chart_top">
                 <div class="chart-img">
@@ -33,7 +33,7 @@
                     <img src="{{asset('images/chart-icon_4.png')}}" class="img-fluid" alt="chart_icon">
                 </div>
                 <div class="chart-text">
-                    <p><span class="counter">70</span> Years Exp.</p>
+                    <p><span class="counter">74</span> Years Exp.</p>
                 </div>
             </div>
         </div>

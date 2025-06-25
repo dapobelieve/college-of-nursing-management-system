@@ -62,6 +62,18 @@
                                                     </select>
                                                 </div>
                                             </div>
+
+                                            <div class="form-group">
+                                                <label for="hod" class="col-sm-3 col-md-3 col-lg-2 control-label">Level</label>
+                                                <div class="col-sm-9 col-md-6 col-lg-6">
+                                                    <select class="form-control input-sm" name="level" id="">
+                                                        <option selected value="">Select Level</option>
+                                                        <option value="100">100</option>
+                                                        <option value="200">200</option>
+                                                        <option value="300">300</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Phone Number:</label>
                                                 <div class="col-sm-9 col-md-6 col-lg-6">
